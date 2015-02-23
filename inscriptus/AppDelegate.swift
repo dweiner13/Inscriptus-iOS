@@ -8,11 +8,25 @@
 
 import UIKit
 
+extension String {
+    subscript (r: Range<Int>) -> String {
+        get {
+            let startIndex = advance(self.startIndex, r.startIndex)
+            let endIndex = advance(startIndex, r.endIndex - r.startIndex)
+            
+            return self[Range(start: startIndex, end: endIndex)]
+        }
+    }
+    
+    func lastCharacterAsString() -> String {
+        return self[countElements(self)-1..<countElements(self)]
+    }
+}
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate {
 
     var window: UIWindow?
-
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.

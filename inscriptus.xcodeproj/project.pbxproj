@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E028AC431A98344F0058D9A1 /* AbbreviationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E028AC421A98344F0058D9A1 /* AbbreviationCell.swift */; };
+		E028AC4B1A99244A0058D9A1 /* UnsearchablesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E028AC4A1A99244A0058D9A1 /* UnsearchablesViewController.swift */; };
+		E028AC4D1A99251D0058D9A1 /* AbbreviationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E028AC4C1A99251D0058D9A1 /* AbbreviationCell.xib */; };
 		E0FDFA1A1A9545CC00659871 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0FDFA191A9545CC00659871 /* AppDelegate.swift */; };
 		E0FDFA1C1A9545CC00659871 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0FDFA1B1A9545CC00659871 /* MasterViewController.swift */; };
 		E0FDFA1E1A9545CC00659871 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0FDFA1D1A9545CC00659871 /* DetailViewController.swift */; };
@@ -14,6 +17,9 @@
 		E0FDFA231A9545CC00659871 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E0FDFA221A9545CC00659871 /* Images.xcassets */; };
 		E0FDFA261A9545CC00659871 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = E0FDFA241A9545CC00659871 /* LaunchScreen.xib */; };
 		E0FDFA321A9545CC00659871 /* inscriptusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0FDFA311A9545CC00659871 /* inscriptusTests.swift */; };
+		E0FDFA3C1A9546D200659871 /* Abbreviation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0FDFA3B1A9546D200659871 /* Abbreviation.swift */; };
+		E0FDFA431A95475D00659871 /* abbs-combined.json in Resources */ = {isa = PBXBuildFile; fileRef = E0FDFA411A95475D00659871 /* abbs-combined.json */; };
+		E0FDFA441A95475D00659871 /* abbs-specialchars.json in Resources */ = {isa = PBXBuildFile; fileRef = E0FDFA421A95475D00659871 /* abbs-specialchars.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,6 +33,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E028AC421A98344F0058D9A1 /* AbbreviationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbbreviationCell.swift; sourceTree = "<group>"; };
+		E028AC4A1A99244A0058D9A1 /* UnsearchablesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UnsearchablesViewController.swift; path = ../UnsearchablesViewController.swift; sourceTree = "<group>"; };
+		E028AC4C1A99251D0058D9A1 /* AbbreviationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AbbreviationCell.xib; sourceTree = "<group>"; };
 		E0FDFA141A9545CC00659871 /* inscriptus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = inscriptus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0FDFA181A9545CC00659871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E0FDFA191A9545CC00659871 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -38,6 +47,9 @@
 		E0FDFA2B1A9545CC00659871 /* inscriptusTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = inscriptusTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0FDFA301A9545CC00659871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E0FDFA311A9545CC00659871 /* inscriptusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = inscriptusTests.swift; sourceTree = "<group>"; };
+		E0FDFA3B1A9546D200659871 /* Abbreviation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Abbreviation.swift; sourceTree = "<group>"; };
+		E0FDFA411A95475D00659871 /* abbs-combined.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "abbs-combined.json"; sourceTree = "<group>"; };
+		E0FDFA421A95475D00659871 /* abbs-specialchars.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "abbs-specialchars.json"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +70,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E028AC411A98342C0058D9A1 /* Interface Files */ = {
+			isa = PBXGroup;
+			children = (
+				E0FDFA1F1A9545CC00659871 /* Main.storyboard */,
+				E028AC4C1A99251D0058D9A1 /* AbbreviationCell.xib */,
+				E0FDFA241A9545CC00659871 /* LaunchScreen.xib */,
+				E028AC421A98344F0058D9A1 /* AbbreviationCell.swift */,
+			);
+			name = "Interface Files";
+			sourceTree = "<group>";
+		};
 		E0FDFA0B1A9545CC00659871 = {
 			isa = PBXGroup;
 			children = (
@@ -79,12 +102,15 @@
 		E0FDFA161A9545CC00659871 /* inscriptus */ = {
 			isa = PBXGroup;
 			children = (
+				E028AC4A1A99244A0058D9A1 /* UnsearchablesViewController.swift */,
 				E0FDFA191A9545CC00659871 /* AppDelegate.swift */,
 				E0FDFA1B1A9545CC00659871 /* MasterViewController.swift */,
 				E0FDFA1D1A9545CC00659871 /* DetailViewController.swift */,
-				E0FDFA1F1A9545CC00659871 /* Main.storyboard */,
+				E0FDFA3B1A9546D200659871 /* Abbreviation.swift */,
+				E028AC411A98342C0058D9A1 /* Interface Files */,
 				E0FDFA221A9545CC00659871 /* Images.xcassets */,
-				E0FDFA241A9545CC00659871 /* LaunchScreen.xib */,
+				E0FDFA411A95475D00659871 /* abbs-combined.json */,
+				E0FDFA421A95475D00659871 /* abbs-specialchars.json */,
 				E0FDFA171A9545CC00659871 /* Supporting Files */,
 			);
 			path = inscriptus;
@@ -124,6 +150,7 @@
 			buildPhases = (
 				E0FDFA101A9545CC00659871 /* Sources */,
 				E0FDFA111A9545CC00659871 /* Frameworks */,
+				E028AC401A97EC3E0058D9A1 /* ShellScript */,
 				E0FDFA121A9545CC00659871 /* Resources */,
 			);
 			buildRules = (
@@ -164,9 +191,11 @@
 				TargetAttributes = {
 					E0FDFA131A9545CC00659871 = {
 						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = 5TSNJUMDQY;
 					};
 					E0FDFA2A1A9545CC00659871 = {
 						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = 5TSNJUMDQY;
 						TestTargetID = E0FDFA131A9545CC00659871;
 					};
 				};
@@ -195,9 +224,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E0FDFA431A95475D00659871 /* abbs-combined.json in Resources */,
+				E0FDFA441A95475D00659871 /* abbs-specialchars.json in Resources */,
 				E0FDFA211A9545CC00659871 /* Main.storyboard in Resources */,
 				E0FDFA261A9545CC00659871 /* LaunchScreen.xib in Resources */,
 				E0FDFA231A9545CC00659871 /* Images.xcassets in Resources */,
+				E028AC4D1A99251D0058D9A1 /* AbbreviationCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,6 +242,22 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		E028AC401A97EC3E0058D9A1 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"$INFOPLIST_FILE\"";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		E0FDFA101A9545CC00659871 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -218,6 +266,9 @@
 				E0FDFA1E1A9545CC00659871 /* DetailViewController.swift in Sources */,
 				E0FDFA1C1A9545CC00659871 /* MasterViewController.swift in Sources */,
 				E0FDFA1A1A9545CC00659871 /* AppDelegate.swift in Sources */,
+				E028AC4B1A99244A0058D9A1 /* UnsearchablesViewController.swift in Sources */,
+				E028AC431A98344F0058D9A1 /* AbbreviationCell.swift in Sources */,
+				E0FDFA3C1A9546D200659871 /* Abbreviation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -342,9 +393,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_OPTIMIZATION_LEVEL = s;
 				INFOPLIST_FILE = inscriptus/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 			};
 			name = Debug;
 		};
@@ -352,6 +405,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_OPTIMIZATION_LEVEL = s;
 				INFOPLIST_FILE = inscriptus/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -362,6 +416,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -373,6 +429,7 @@
 				INFOPLIST_FILE = inscriptusTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/inscriptus.app/inscriptus";
 			};
 			name = Debug;
@@ -381,6 +438,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -388,6 +447,7 @@
 				INFOPLIST_FILE = inscriptusTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/inscriptus.app/inscriptus";
 			};
 			name = Release;
@@ -411,6 +471,7 @@
 				E0FDFA371A9545CC00659871 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E0FDFA381A9545CC00659871 /* Build configuration list for PBXNativeTarget "inscriptusTests" */ = {
 			isa = XCConfigurationList;
@@ -419,6 +480,7 @@
 				E0FDFA3A1A9545CC00659871 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

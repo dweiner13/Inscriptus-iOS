@@ -12,8 +12,7 @@ class DetailViewController: UIViewController {
 
     @IBOutlet weak var detailDescriptionLabel: UILabel!
 
-
-    var detailItem: AnyObject? {
+    var detailItem: Abbreviation? {
         didSet {
             // Update the view.
             self.configureView()
@@ -22,9 +21,13 @@ class DetailViewController: UIViewController {
 
     func configureView() {
         // Update the user interface for the detail item.
-        if let detail: AnyObject = self.detailItem {
+        if let abb: Abbreviation = self.detailItem {
             if let label = self.detailDescriptionLabel {
-                label.text = detail.description
+                label.text = abb.longText
+            }
+            
+            if let displayText = abb.displayText {
+                self.navigationItem.title = abb.displayText
             }
         }
     }
@@ -42,4 +45,3 @@ class DetailViewController: UIViewController {
 
 
 }
-

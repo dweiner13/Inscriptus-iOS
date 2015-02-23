@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AbbreviationCell" rowHeight="60" id="Elc-4N-omq" customClass="AbbreviationCell" customModule="inscriptus" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="60"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Elc-4N-omq" id="2gd-UO-Szn">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="C [fix this]" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fXF-LG-SW3">
+                        <rect key="frame" x="15" y="8" width="544" height="28"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="28" id="ATo-lu-uew"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="AcademyEngravedLetPlain" family="Academy Engraved LET" pointSize="20"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="clarissima puella" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xfg-xv-Thn">
+                        <rect key="frame" x="15" y="31" width="544" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Xfg-xv-Thn" firstAttribute="leading" secondItem="2gd-UO-Szn" secondAttribute="leadingMargin" id="5NB-yj-yXE"/>
+                    <constraint firstItem="Xfg-xv-Thn" firstAttribute="trailing" secondItem="2gd-UO-Szn" secondAttribute="trailingMargin" id="Nmt-9U-A5l"/>
+                    <constraint firstItem="fXF-LG-SW3" firstAttribute="leading" secondItem="Xfg-xv-Thn" secondAttribute="leading" id="PXz-xN-lRe"/>
+                    <constraint firstItem="fXF-LG-SW3" firstAttribute="leading" secondItem="2gd-UO-Szn" secondAttribute="leadingMargin" constant="7" id="RUh-zi-vYH"/>
+                    <constraint firstItem="fXF-LG-SW3" firstAttribute="top" secondItem="2gd-UO-Szn" secondAttribute="topMargin" id="cSM-YD-Wgy"/>
+                    <constraint firstItem="Xfg-xv-Thn" firstAttribute="bottom" secondItem="2gd-UO-Szn" secondAttribute="bottomMargin" id="dMf-hv-5Fa"/>
+                    <constraint firstItem="fXF-LG-SW3" firstAttribute="trailing" secondItem="2gd-UO-Szn" secondAttribute="trailingMargin" id="uEC-HI-kI5"/>
+                    <constraint firstItem="Xfg-xv-Thn" firstAttribute="top" secondItem="fXF-LG-SW3" secondAttribute="bottom" constant="-5" id="yjj-YS-slh"/>
+                </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="5NB-yj-yXE"/>
+                    </mask>
+                </variation>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <connections>
+                <outlet property="primaryLabel" destination="fXF-LG-SW3" id="rwY-jq-kzI"/>
+                <outlet property="secondaryLabel" destination="Xfg-xv-Thn" id="IBu-9A-tTo"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+</document>
