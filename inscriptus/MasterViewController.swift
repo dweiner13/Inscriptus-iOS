@@ -18,6 +18,9 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
     var detailViewController: DetailViewController? = nil
     var allAbbreviations = Array<Abbreviation>()
     var abbreviationsGrouped = [String: Array<Abbreviation>]()
+    
+    var specialAbbreviations = Array<Abbreviation>()
+    
     var searchController: UISearchController?
     
     var filteredAbbreviations = Array<Abbreviation>()
@@ -56,39 +59,15 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
             searchController.dimsBackgroundDuringPresentation = false
         }
         
-        // Load abbreviations array
-        let path: String = NSBundle.mainBundle().pathForResource("abbs-combined", ofType: "json")!
-        let jsonData: NSData = NSData.dataWithContentsOfMappedFile(path) as NSData;
-        var err: NSError?;
-        let combinedAbbreviations: NSArray = NSJSONSerialization.JSONObjectWithData(jsonData, options: NSJSONReadingOptions.allZeros, error: &err) as NSArray
+        // Load abbreviations arrays
+        let combinedPath: String = NSBundle.mainBundle().pathForResource("abbs-combined", ofType: "json")!
+        let combinedData = NSData(contentsOfFile: combinedPath)!
+        var err: NSError?
+        let combinedAbbreviations: NSArray = NSJSONSerialization.JSONObjectWithData(combinedData, options: .allZeros, error: &err) as! NSArray
         
         var abbreviations = Array<Abbreviation>()
-        var i = 0
         for abbreviation in combinedAbbreviations {
-            let abb = abbreviation as NSDictionary
-            
-            var searchableText = abb["abbrSearch"] as NSString
-            
-            var displayText: String?
-            if let display = abb["abbrDisplay"] as? NSString {
-                displayText = display
-            }
-            else {
-                displayText = nil
-            }
-            
-            let id = (abb["id"] as String?)!.toInt()!
-            let longText = abb["phrase"] as NSString
-            
-            var displayImageName: String?
-            if let imageName = abb["displayImage"] as? NSString {
-                displayImageName = imageName
-            }
-            else {
-                displayImageName = nil;
-            }
-            
-            let newAbbreviation = Abbreviation(searchableText: searchableText, displayText: displayText, id: id, longText: longText, displayImageName: displayImageName)
+            let newAbbreviation = Abbreviation(JSONDict: abbreviation as! NSDictionary)
             abbreviations.append(newAbbreviation)
             
             if self.abbreviationsGrouped[newAbbreviation.searchableText] != nil {
@@ -98,9 +77,18 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
                 self.abbreviationsGrouped[newAbbreviation.searchableText] = [newAbbreviation]
             }
         }
-        self.allAbbreviations = abbreviations.sorted({abb1, abb2 in
-            return abb1.searchableText < abb2.searchableText
-        });
+        
+        self.allAbbreviations = abbreviations
+        
+        // Special character abbreviations
+        
+        let specialcharsPath: String = NSBundle.mainBundle().pathForResource("abbs-specialchars", ofType: "json")!
+        let specialcharData = NSData(contentsOfFile: specialcharsPath)!
+        let specialcharAbbreviations: NSArray = NSJSONSerialization.JSONObjectWithData(specialcharData, options: .allZeros, error: &err) as! NSArray
+        for abbreviation in specialcharAbbreviations {
+            let newAbbreviation = Abbreviation(JSONDict: abbreviation as! NSDictionary)
+            self.specialAbbreviations.append(newAbbreviation)
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -115,18 +103,22 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
             if let indexPath = self.tableView.indexPathForSelectedRow() {
                 var abbreviation: Abbreviation
                 
-                if self.searchController!.active && countElements(self.searchController!.searchBar.text) != 0 {
+                if self.searchController!.active && count(self.searchController!.searchBar.text) != 0 {
                     abbreviation = self.filteredAbbreviations[indexPath.row]
                 }
                 else {
                     abbreviation = self.allAbbreviations[indexPath.row]
                 }
                 
-                let controller = (segue.destinationViewController as UINavigationController).topViewController as DetailViewController
+                let controller = (segue.destinationViewController as! UINavigationController).topViewController as! DetailViewController
                 controller.detailItem = abbreviation
                 controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
                 controller.navigationItem.leftItemsSupplementBackButton = true
             }
+        } // Handle transition to special character view
+        else if segue.destinationViewController is UnsearchablesViewController {
+            (segue.destinationViewController as! UnsearchablesViewController).specialAbbreviations = self.specialAbbreviations
+            print((segue.destinationViewController as! UnsearchablesViewController).specialAbbreviations)
         }
     }
 
@@ -141,7 +133,7 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
             return 1
         }
         else {
-            if self.searchController!.active && countElements(self.searchController!.searchBar.text) != 0 {
+            if self.searchController!.active && count(self.searchController!.searchBar.text) != 0 {
                 return self.filteredAbbreviations.count
             }
             else {
@@ -152,14 +144,14 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.section==0 {
-            let cell = tableView.dequeueReusableCellWithIdentifier("SpecialCharsCell", forIndexPath: indexPath) as AbbreviationCell
+            let cell = tableView.dequeueReusableCellWithIdentifier("SpecialCharsCell", forIndexPath: indexPath) as! AbbreviationCell
             return cell
         }
         else {
-            let cell = tableView.dequeueReusableCellWithIdentifier("AbbreviationCell", forIndexPath: indexPath) as AbbreviationCell
+            let cell = tableView.dequeueReusableCellWithIdentifier("AbbreviationCell", forIndexPath: indexPath) as! AbbreviationCell
             
             var abbreviation: Abbreviation
-            if self.searchController!.active && countElements(self.searchController!.searchBar.text) != 0 {
+            if self.searchController!.active && count(self.searchController!.searchBar.text) != 0 {
                 abbreviation = self.filteredAbbreviations[indexPath.row]
             }
             else {
@@ -177,6 +169,12 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
         }
     }
     
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.section == 1 {
+            self.performSegueWithIdentifier("showDetail", sender: self)
+        }
+    }
+    
     // MARK: - UISearchResultsUpdating
     
     func updateSearchResultsForSearchController(searchController: UISearchController) {
@@ -184,14 +182,8 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
         
         var scopeIndex = searchController.searchBar.selectedScopeButtonIndex;
         
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
-            var results = self.searchForString(searchString, scopeIndex: scopeIndex)
-            
-            dispatch_async(dispatch_get_main_queue(), {
-                self.filteredAbbreviations = results
-                self.tableView.reloadData()
-            })
-        }
+        self.filteredAbbreviations = self.searchForString(searchString, scopeIndex: scopeIndex)
+        self.tableView.reloadData()
     }
     
     func searchForString(searchString: String, scopeIndex: Int) -> [Abbreviation] {
@@ -206,7 +198,7 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
             }
             var i = 0
             for key: String in self.abbreviationsGrouped.keys {
-                if countElements(key)>countElements(searchString) && key[0..<countElements(searchString)].lowercaseString == searchString.lowercaseString {
+                if count(key)>count(searchString) && key[0..<count(searchString)].lowercaseString == searchString.lowercaseString {
                     if let matchingAbbreviations: [Abbreviation] = self.abbreviationsGrouped[key] {
                         resultAbbreviations.extend(matchingAbbreviations)
                     }
@@ -220,6 +212,8 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
                 }
             }
         }
+        
+        println("\(searchString) \(scopeIndex)")
         
         return resultAbbreviations
     }

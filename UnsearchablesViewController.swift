@@ -10,10 +10,14 @@ import UIKit
 
 class UnsearchablesViewController: UITableViewController {
     
-    var unsearchableAbbreviations: [Abbreviation] = [Abbreviation]()
+    var specialAbbreviations: [Abbreviation] = [Abbreviation]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.tableView.rowHeight = 60
+        
+        self.tableView.registerNib(UINib(nibName: "AbbreviationCell", bundle: nil), forCellReuseIdentifier: "AbbreviationCell")
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -30,26 +34,33 @@ class UnsearchablesViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Potentially incomplete method implementation.
-        // Return the number of sections.
         return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete method implementation.
-        // Return the number of rows in the section.
-        return 
+        if section == 0 {
+            return count(specialAbbreviations)
+        }
+        else {
+            return 0
+        }
     }
 
-    /*
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("AbbreviationCell", forIndexPath: indexPath) as! AbbreviationCell
 
-        // Configure the cell...
-
+        var abbreviation = self.specialAbbreviations[indexPath.row]
+        
+        if let displayText = abbreviation.displayText {
+            cell.primaryLabel.text = abbreviation.displayText;
+        }
+        else {
+            cell.primaryLabel.text = "[symbol: \(abbreviation.searchableText)]"
+        }
+        cell.secondaryLabel.text = abbreviation.longText;
+        
         return cell
     }
-    */
 
     /*
     // Override to support conditional editing of the table view.
@@ -86,14 +97,24 @@ class UnsearchablesViewController: UITableViewController {
     }
     */
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "showDetail" {
+            if let indexPath = self.tableView.indexPathForSelectedRow() {
+                var abbreviation = self.specialAbbreviations[indexPath.row]
+                
+                let controller = (segue.destinationViewController as! UINavigationController).topViewController as! DetailViewController
+                controller.detailItem = abbreviation
+                controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
+                controller.navigationItem.leftItemsSupplementBackButton = true
+            }
+        }
     }
-    */
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.performSegueWithIdentifier("showDetail", sender: self)
+    }
 
 }
