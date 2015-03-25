@@ -9,11 +9,12 @@
 import UIKit
 
 let useDictionaryForSearch = true
+let searchMatchHighlightColor = UIColor(red:0.984, green:0.969, blue:0.787, alpha:1)
 
 class MasterViewController: UITableViewController, UISearchBarDelegate, UISearchResultsUpdating {
     
-    let searchScopeIndexAbbreviation = 0
-    let searchScopeIndexFulltext = 1
+    static let searchScopeIndexAbbreviation = 0
+    static let searchScopeIndexFulltext = 1
 
     var detailViewController: DetailViewController? = nil
     var allAbbreviations = Array<Abbreviation>()
@@ -118,7 +119,6 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
         } // Handle transition to special character view
         else if segue.destinationViewController is UnsearchablesViewController {
             (segue.destinationViewController as! UnsearchablesViewController).specialAbbreviations = self.specialAbbreviations
-            print((segue.destinationViewController as! UnsearchablesViewController).specialAbbreviations)
         }
     }
 
@@ -130,7 +130,12 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section==0 {
-            return 1
+            if !self.searchController!.active || count(self.searchController!.searchBar.text) == 0 {
+                return 1
+            }
+            else {
+                return 0
+            }
         }
         else {
             if self.searchController!.active && count(self.searchController!.searchBar.text) != 0 {
@@ -158,13 +163,8 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
                 abbreviation = self.allAbbreviations[indexPath.row]
             }
             
-            if let displayText = abbreviation.displayText {
-                cell.primaryLabel.text = abbreviation.displayText;
-            }
-            else {
-                cell.primaryLabel.text = "[symbol: \(abbreviation.searchableText)]"
-            }
-            cell.secondaryLabel.text = abbreviation.longText;
+            cell.setAbbreviation(abbreviation, searchController: self.searchController!)
+            
             return cell
         }
     }
@@ -189,7 +189,7 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
     func searchForString(searchString: String, scopeIndex: Int) -> [Abbreviation] {
         var resultAbbreviations = [Abbreviation]()
         
-        if scopeIndex == self.searchScopeIndexAbbreviation {
+        if scopeIndex == MasterViewController.searchScopeIndexAbbreviation {
             if let matchingAbbreviations = self.abbreviationsGrouped[searchString] {
                 resultAbbreviations = matchingAbbreviations
             }
@@ -205,15 +205,13 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
                 }
             }
         }
-        else if scopeIndex == self.searchScopeIndexFulltext {
+        else if scopeIndex == MasterViewController.searchScopeIndexFulltext {
             for abbreviation: Abbreviation in allAbbreviations {
                 if abbreviation.longText.rangeOfString(searchString, options: .CaseInsensitiveSearch) != nil {
                     resultAbbreviations.append(abbreviation)
                 }
             }
         }
-        
-        println("\(searchString) \(scopeIndex)")
         
         return resultAbbreviations
     }

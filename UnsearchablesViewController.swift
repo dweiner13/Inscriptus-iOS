@@ -51,13 +51,7 @@ class UnsearchablesViewController: UITableViewController {
 
         var abbreviation = self.specialAbbreviations[indexPath.row]
         
-        if let displayText = abbreviation.displayText {
-            cell.primaryLabel.text = abbreviation.displayText;
-        }
-        else {
-            cell.primaryLabel.text = "[symbol: \(abbreviation.searchableText)]"
-        }
-        cell.secondaryLabel.text = abbreviation.longText;
+        cell.setAbbreviation(abbreviation, searchController: nil)
         
         return cell
     }
