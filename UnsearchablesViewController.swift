@@ -10,7 +10,7 @@ import UIKit
 
 class UnsearchablesViewController: UITableViewController {
     
-    var specialAbbreviations: [Abbreviation] = [Abbreviation]()
+    var specialAbbreviations = [Abbreviation]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,12 +18,6 @@ class UnsearchablesViewController: UITableViewController {
         self.tableView.rowHeight = 60
         
         self.tableView.registerNib(UINib(nibName: "AbbreviationCell", bundle: nil), forCellReuseIdentifier: "AbbreviationCell")
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
     override func didReceiveMemoryWarning() {
@@ -39,7 +33,7 @@ class UnsearchablesViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return count(specialAbbreviations)
+            return count(self.specialAbbreviations)
         }
         else {
             return 0

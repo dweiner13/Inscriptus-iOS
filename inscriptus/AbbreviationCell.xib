@@ -14,24 +14,25 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fXF-LG-SW3">
-                        <rect key="frame" x="8" y="8" width="551" height="28"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="C [fix this]" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fXF-LG-SW3">
+                        <rect key="frame" x="8" y="4" width="551" height="32"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="28" id="ATo-lu-uew"/>
                         </constraints>
-                        <attributedString key="attributedText">
-                            <fragment content="C [fix this]">
-                                <attributes>
-                                    <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
-                                    <font key="NSFont" size="20" name="AcademyEngravedLetPlain"/>
-                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                </attributes>
-                            </fragment>
-                        </attributedString>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="23"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="ATo-lu-uew"/>
+                            </mask>
+                        </variation>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xfg-xv-Thn">
                         <rect key="frame" x="8" y="31" width="551" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="jBe-bB-1aQ"/>
+                        </constraints>
                         <attributedString key="attributedText">
                             <fragment content="clarissima puella">
                                 <attributes>
@@ -44,7 +45,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OSI-Iq-9Ds">
-                        <rect key="frame" x="8" y="8" width="551" height="23"/>
+                        <rect key="frame" x="8" y="8" width="551" height="19"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="43" id="32J-n7-kCS"/>
                             <constraint firstAttribute="height" constant="43" id="6gP-gg-5fs"/>
@@ -72,11 +73,13 @@
                     <constraint firstItem="fXF-LG-SW3" firstAttribute="leading" secondItem="2gd-UO-Szn" secondAttribute="leadingMargin" id="RUh-zi-vYH"/>
                     <constraint firstAttribute="trailingMargin" secondItem="OSI-Iq-9Ds" secondAttribute="trailing" id="TM8-cg-R92"/>
                     <constraint firstItem="OSI-Iq-9Ds" firstAttribute="top" secondItem="2gd-UO-Szn" secondAttribute="topMargin" id="Uz7-OK-Jzd"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="fXF-LG-SW3" secondAttribute="bottom" constant="18" id="XZy-jD-DPx"/>
                     <constraint firstItem="fXF-LG-SW3" firstAttribute="top" secondItem="2gd-UO-Szn" secondAttribute="topMargin" id="cSM-YD-Wgy"/>
                     <constraint firstItem="Xfg-xv-Thn" firstAttribute="bottom" secondItem="2gd-UO-Szn" secondAttribute="bottomMargin" id="dMf-hv-5Fa"/>
-                    <constraint firstItem="Xfg-xv-Thn" firstAttribute="top" secondItem="OSI-Iq-9Ds" secondAttribute="bottom" id="tr5-AZ-VZG"/>
+                    <constraint firstItem="Xfg-xv-Thn" firstAttribute="top" secondItem="OSI-Iq-9Ds" secondAttribute="bottom" constant="4" id="tr5-AZ-VZG"/>
                     <constraint firstItem="fXF-LG-SW3" firstAttribute="trailing" secondItem="2gd-UO-Szn" secondAttribute="trailingMargin" id="uEC-HI-kI5"/>
                     <constraint firstItem="Xfg-xv-Thn" firstAttribute="top" secondItem="fXF-LG-SW3" secondAttribute="bottom" constant="-5" id="yjj-YS-slh"/>
+                    <constraint firstItem="fXF-LG-SW3" firstAttribute="top" secondItem="2gd-UO-Szn" secondAttribute="top" constant="4" id="yyX-nP-gMT"/>
                 </constraints>
                 <variation key="default">
                     <mask key="constraints">
@@ -85,6 +88,8 @@
                         <exclude reference="GLo-fZ-Wd5"/>
                         <exclude reference="TM8-cg-R92"/>
                         <exclude reference="Uz7-OK-Jzd"/>
+                        <exclude reference="XZy-jD-DPx"/>
+                        <exclude reference="cSM-YD-Wgy"/>
                         <exclude reference="5NB-yj-yXE"/>
                     </mask>
                 </variation>

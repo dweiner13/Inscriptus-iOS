@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>3C30CA7B-08B8-4470-B1C8-A2FC636E1646</string>
+	<key>IDESourceControlProjectName</key>
+	<string>project</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>C25741DCD56D6C6772437E526A42F4C299A57F3F</key>
+		<string>https://github.com/danw13335/Inscriptus.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>inscriptus.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>C25741DCD56D6C6772437E526A42F4C299A57F3F</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/danw13335/Inscriptus.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>C25741DCD56D6C6772437E526A42F4C299A57F3F</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>C25741DCD56D6C6772437E526A42F4C299A57F3F</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Inscriptus%20iOS</string>
+		</dict>
+	</array>
+</dict>
+</plist>

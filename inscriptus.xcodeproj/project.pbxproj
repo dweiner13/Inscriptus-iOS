@@ -7,9 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E023FBE81AE5AABF00E8DBAC /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E023FBE71AE5AABF00E8DBAC /* UIFont+.swift */; };
 		E028AC431A98344F0058D9A1 /* AbbreviationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E028AC421A98344F0058D9A1 /* AbbreviationCell.swift */; };
 		E028AC4B1A99244A0058D9A1 /* UnsearchablesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E028AC4A1A99244A0058D9A1 /* UnsearchablesViewController.swift */; };
 		E028AC4D1A99251D0058D9A1 /* AbbreviationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E028AC4C1A99251D0058D9A1 /* AbbreviationCell.xib */; };
+		E0846DB41AC6658F0004E1B0 /* AbbreviationCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0846DB31AC6658F0004E1B0 /* AbbreviationCollection.swift */; };
 		E0A49C131AC34AD5008DF28C /* b-strikethrough.png in Resources */ = {isa = PBXBuildFile; fileRef = E0A49BD31AC34AD5008DF28C /* b-strikethrough.png */; };
 		E0A49C141AC34AD5008DF28C /* bb-strikethrough.png in Resources */ = {isa = PBXBuildFile; fileRef = E0A49BD41AC34AD5008DF28C /* bb-strikethrough.png */; };
 		E0A49C151AC34AD5008DF28C /* bf-ligature.png in Resources */ = {isa = PBXBuildFile; fileRef = E0A49BD51AC34AD5008DF28C /* bf-ligature.png */; };
@@ -24,7 +26,6 @@
 		E0A49C1E1AC34AD5008DF28C /* cc-reversed.png in Resources */ = {isa = PBXBuildFile; fileRef = E0A49BDE1AC34AD5008DF28C /* cc-reversed.png */; };
 		E0A49C1F1AC34AD5008DF28C /* ccc-reversed.png in Resources */ = {isa = PBXBuildFile; fileRef = E0A49BDF1AC34AD5008DF28C /* ccc-reversed.png */; };
 		E0A49C201AC34AD5008DF28C /* cccc-overline.png in Resources */ = {isa = PBXBuildFile; fileRef = E0A49BE01AC34AD5008DF28C /* cccc-overline.png */; };
-		E0A49C211AC34AD5008DF28C /* ccexserc-reversed.png in Resources */ = {isa = PBXBuildFile; fileRef = E0A49BE11AC34AD5008DF28C /* ccexserc-reversed.png */; };
 		E0A49C221AC34AD5008DF28C /* ccl-reversed.png in Resources */ = {isa = PBXBuildFile; fileRef = E0A49BE21AC34AD5008DF28C /* ccl-reversed.png */; };
 		E0A49C231AC34AD5008DF28C /* chevron-right.png in Resources */ = {isa = PBXBuildFile; fileRef = E0A49BE31AC34AD5008DF28C /* chevron-right.png */; };
 		E0A49C241AC34AD5008DF28C /* circle-dotted.png in Resources */ = {isa = PBXBuildFile; fileRef = E0A49BE41AC34AD5008DF28C /* circle-dotted.png */; };
@@ -74,6 +75,8 @@
 		E0A49C501AC34AD5008DF28C /* wavy-vertical-line.png in Resources */ = {isa = PBXBuildFile; fileRef = E0A49C101AC34AD5008DF28C /* wavy-vertical-line.png */; };
 		E0A49C511AC34AD5008DF28C /* xv-overline.png in Resources */ = {isa = PBXBuildFile; fileRef = E0A49C111AC34AD5008DF28C /* xv-overline.png */; };
 		E0A49C521AC34AD5008DF28C /* z-strikethrough.png in Resources */ = {isa = PBXBuildFile; fileRef = E0A49C121AC34AD5008DF28C /* z-strikethrough.png */; };
+		E0B7B4CF1ADF127500D6F5B8 /* HeaderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B7B4CE1ADF127500D6F5B8 /* HeaderCollectionViewCell.swift */; };
+		E0DDEEF71ACC9AC200E1034D /* TextCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0DDEEF61ACC9AC200E1034D /* TextCollectionViewCell.swift */; };
 		E0FDFA1A1A9545CC00659871 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0FDFA191A9545CC00659871 /* AppDelegate.swift */; };
 		E0FDFA1C1A9545CC00659871 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0FDFA1B1A9545CC00659871 /* MasterViewController.swift */; };
 		E0FDFA1E1A9545CC00659871 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0FDFA1D1A9545CC00659871 /* DetailViewController.swift */; };
@@ -97,9 +100,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E023FBE71AE5AABF00E8DBAC /* UIFont+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+.swift"; sourceTree = "<group>"; };
 		E028AC421A98344F0058D9A1 /* AbbreviationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbbreviationCell.swift; sourceTree = "<group>"; };
 		E028AC4A1A99244A0058D9A1 /* UnsearchablesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UnsearchablesViewController.swift; path = ../UnsearchablesViewController.swift; sourceTree = "<group>"; };
 		E028AC4C1A99251D0058D9A1 /* AbbreviationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AbbreviationCell.xib; sourceTree = "<group>"; };
+		E0846DB31AC6658F0004E1B0 /* AbbreviationCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbbreviationCollection.swift; sourceTree = "<group>"; };
 		E0A49BD31AC34AD5008DF28C /* b-strikethrough.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "b-strikethrough.png"; sourceTree = "<group>"; };
 		E0A49BD41AC34AD5008DF28C /* bb-strikethrough.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bb-strikethrough.png"; sourceTree = "<group>"; };
 		E0A49BD51AC34AD5008DF28C /* bf-ligature.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bf-ligature.png"; sourceTree = "<group>"; };
@@ -114,7 +119,6 @@
 		E0A49BDE1AC34AD5008DF28C /* cc-reversed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cc-reversed.png"; sourceTree = "<group>"; };
 		E0A49BDF1AC34AD5008DF28C /* ccc-reversed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ccc-reversed.png"; sourceTree = "<group>"; };
 		E0A49BE01AC34AD5008DF28C /* cccc-overline.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cccc-overline.png"; sourceTree = "<group>"; };
-		E0A49BE11AC34AD5008DF28C /* ccexserc-reversed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ccexserc-reversed.png"; sourceTree = "<group>"; };
 		E0A49BE21AC34AD5008DF28C /* ccl-reversed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ccl-reversed.png"; sourceTree = "<group>"; };
 		E0A49BE31AC34AD5008DF28C /* chevron-right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chevron-right.png"; sourceTree = "<group>"; };
 		E0A49BE41AC34AD5008DF28C /* circle-dotted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circle-dotted.png"; sourceTree = "<group>"; };
@@ -164,6 +168,8 @@
 		E0A49C101AC34AD5008DF28C /* wavy-vertical-line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wavy-vertical-line.png"; sourceTree = "<group>"; };
 		E0A49C111AC34AD5008DF28C /* xv-overline.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xv-overline.png"; sourceTree = "<group>"; };
 		E0A49C121AC34AD5008DF28C /* z-strikethrough.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "z-strikethrough.png"; sourceTree = "<group>"; };
+		E0B7B4CE1ADF127500D6F5B8 /* HeaderCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderCollectionViewCell.swift; sourceTree = "<group>"; };
+		E0DDEEF61ACC9AC200E1034D /* TextCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextCollectionViewCell.swift; sourceTree = "<group>"; };
 		E0FDFA141A9545CC00659871 /* inscriptus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = inscriptus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0FDFA181A9545CC00659871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E0FDFA191A9545CC00659871 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -205,6 +211,9 @@
 				E0FDFA1F1A9545CC00659871 /* Main.storyboard */,
 				E028AC4C1A99251D0058D9A1 /* AbbreviationCell.xib */,
 				E028AC421A98344F0058D9A1 /* AbbreviationCell.swift */,
+				E0DDEEF61ACC9AC200E1034D /* TextCollectionViewCell.swift */,
+				E0B7B4CE1ADF127500D6F5B8 /* HeaderCollectionViewCell.swift */,
+				E023FBE71AE5AABF00E8DBAC /* UIFont+.swift */,
 			);
 			name = "Interface Files";
 			sourceTree = "<group>";
@@ -226,7 +235,6 @@
 				E0A49BDE1AC34AD5008DF28C /* cc-reversed.png */,
 				E0A49BDF1AC34AD5008DF28C /* ccc-reversed.png */,
 				E0A49BE01AC34AD5008DF28C /* cccc-overline.png */,
-				E0A49BE11AC34AD5008DF28C /* ccexserc-reversed.png */,
 				E0A49BE21AC34AD5008DF28C /* ccl-reversed.png */,
 				E0A49BE31AC34AD5008DF28C /* chevron-right.png */,
 				E0A49BE41AC34AD5008DF28C /* circle-dotted.png */,
@@ -301,6 +309,7 @@
 		E0FDFA161A9545CC00659871 /* inscriptus */ = {
 			isa = PBXGroup;
 			children = (
+				E0846DB31AC6658F0004E1B0 /* AbbreviationCollection.swift */,
 				E0FDFA191A9545CC00659871 /* AppDelegate.swift */,
 				E0FDFA1B1A9545CC00659871 /* MasterViewController.swift */,
 				E0FDFA1D1A9545CC00659871 /* DetailViewController.swift */,
@@ -437,7 +446,6 @@
 				E0FDFA441A95475D00659871 /* abbs-specialchars.json in Resources */,
 				E0A49C491AC34AD5008DF28C /* q-reversed.png in Resources */,
 				E0A49C3B1AC34AD5008DF28C /* m-half.png in Resources */,
-				E0A49C211AC34AD5008DF28C /* ccexserc-reversed.png in Resources */,
 				E0A49C511AC34AD5008DF28C /* xv-overline.png in Resources */,
 				E0A49C1F1AC34AD5008DF28C /* ccc-reversed.png in Resources */,
 				E0A49C191AC34AD5008DF28C /* c-double-vertical.png in Resources */,
@@ -527,10 +535,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E0B7B4CF1ADF127500D6F5B8 /* HeaderCollectionViewCell.swift in Sources */,
 				E0FDFA1E1A9545CC00659871 /* DetailViewController.swift in Sources */,
+				E023FBE81AE5AABF00E8DBAC /* UIFont+.swift in Sources */,
 				E0FDFA1C1A9545CC00659871 /* MasterViewController.swift in Sources */,
 				E0FDFA1A1A9545CC00659871 /* AppDelegate.swift in Sources */,
+				E0DDEEF71ACC9AC200E1034D /* TextCollectionViewCell.swift in Sources */,
 				E028AC4B1A99244A0058D9A1 /* UnsearchablesViewController.swift in Sources */,
+				E0846DB41AC6658F0004E1B0 /* AbbreviationCollection.swift in Sources */,
 				E028AC431A98344F0058D9A1 /* AbbreviationCell.swift in Sources */,
 				E0FDFA3C1A9546D200659871 /* Abbreviation.swift in Sources */,
 			);
@@ -657,10 +669,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_OPTIMIZATION_LEVEL = s;
 				INFOPLIST_FILE = inscriptus/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 			};
 			name = Debug;
@@ -669,10 +685,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_OPTIMIZATION_LEVEL = s;
 				INFOPLIST_FILE = inscriptus/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

@@ -8,6 +8,9 @@
 
 import UIKit
 
+let searchMatchBackgroundColor = UIColor(red:0.984, green:0.969, blue:0.787, alpha:1)
+let searchMatchUnderlineColor = UIColor(red:0.93, green:0.801, blue:0, alpha:1)
+
 class AbbreviationCell: UITableViewCell {
     
     @IBOutlet weak var rightImageViewWidthConstraint: NSLayoutConstraint!
@@ -26,35 +29,18 @@ class AbbreviationCell: UITableViewCell {
     }
     
     func setAbbreviation(abbreviation: Abbreviation, searchController: UISearchController?) {
-        let inSearch = searchController != nil && searchController!.active && count(searchController!.searchBar.text) != 0
+        var inSearch = false
+        if searchController != nil {
+            inSearch = searchController!.active && count(searchController!.searchBar.text) != 0
+        }
         if let displayText = abbreviation.displayText {
-            // highlight match if searching abbreviation text
-            if inSearch && searchController!.searchBar.selectedScopeButtonIndex == MasterViewController.searchScopeIndexAbbreviation {
-                let displayTextNS = displayText as NSString
-                // Done to get an NSRange instead of Swift Range. Attributed strings need NSRange.
-                var matchedRange = displayTextNS.rangeOfString(searchController!.searchBar.text, options: .CaseInsensitiveSearch)
-                
-                // If not found, then it's because display text has interpuncts
-                if matchedRange.location == NSNotFound {
-                    println(displayTextNS)
-                    println(searchController!.searchBar.text)
-                    matchedRange = abbreviation.rangeOfDisplayTextMatchingSearchText(searchController!.searchBar.text)!
-                }
-                let attrString = NSMutableAttributedString(string: displayText)
-                attrString.addAttribute(NSBackgroundColorAttributeName, value: searchMatchHighlightColor, range:matchedRange)
-                
-                self.primaryLabel.attributedText = NSAttributedString(attributedString: attrString)
-            }
-            else {
-                self.primaryLabel.text = displayText
-            }
+            self.primaryLabel.text = displayText
             self.rightImageView.image = nil
         }
         else {
-//            self.primaryLabel.text = "[searchableText: \(abbreviation.searchableText)]"
             self.primaryLabel.text = nil
             if let displayImage = abbreviation.displayImage {
-                let image = UIImage(contentsOfFile: displayImage)!
+                let image = UIImage(contentsOfFile: NSBundle.mainBundle().pathForResource(displayImage, ofType: ".png")!)!
                 let scalingFactor = self.rightImageView.frame.height / image.size.height
                 self.rightImageViewWidthConstraint.constant = image.size.width * scalingFactor
                 self.rightImageView.image = image
@@ -64,10 +50,15 @@ class AbbreviationCell: UITableViewCell {
         if inSearch && searchController!.searchBar.selectedScopeButtonIndex == MasterViewController.searchScopeIndexFulltext {
             // Done to get an NSRange instead of Swift Range. Attributed strings need NSRange.
             let longTextNS = abbreviation.longText as NSString
-            let matchedRange = longTextNS.rangeOfString(searchController!.searchBar.text)
+            let matchedRange = longTextNS.rangeOfString(searchController!.searchBar.text, options: .CaseInsensitiveSearch)
             
             let attrString = NSMutableAttributedString(string: abbreviation.longText)
-            attrString.addAttribute(NSBackgroundColorAttributeName, value: searchMatchHighlightColor, range: matchedRange)
+            let attrs: [NSObject: AnyObject] = [
+                NSBackgroundColorAttributeName: searchMatchBackgroundColor,
+                NSUnderlineStyleAttributeName:  NSUnderlineStyle.StyleThick.rawValue,
+                NSUnderlineColorAttributeName:  searchMatchUnderlineColor,
+            ]
+            attrString.addAttributes(attrs, range: matchedRange)
             
             self.secondaryLabel.attributedText = NSAttributedString(attributedString: attrString);
         }
