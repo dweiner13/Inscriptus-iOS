@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:../DetailHeaderView.swift">
+   </FileRef>
+   <FileRef
       location = "self:inscriptus.xcodeproj">
    </FileRef>
 </Workspace>

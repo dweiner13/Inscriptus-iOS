@@ -76,6 +76,8 @@
 		E0A49C511AC34AD5008DF28C /* xv-overline.png in Resources */ = {isa = PBXBuildFile; fileRef = E0A49C111AC34AD5008DF28C /* xv-overline.png */; };
 		E0A49C521AC34AD5008DF28C /* z-strikethrough.png in Resources */ = {isa = PBXBuildFile; fileRef = E0A49C121AC34AD5008DF28C /* z-strikethrough.png */; };
 		E0B7B4CF1ADF127500D6F5B8 /* HeaderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B7B4CE1ADF127500D6F5B8 /* HeaderCollectionViewCell.swift */; };
+		E0CA91161AF5A4D40071579B /* DetailHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E0CA91151AF5A4D40071579B /* DetailHeaderView.xib */; };
+		E0CA91181AF5A5AF0071579B /* DetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0CA91171AF5A5AF0071579B /* DetailHeaderView.swift */; };
 		E0DDEEF71ACC9AC200E1034D /* TextCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0DDEEF61ACC9AC200E1034D /* TextCollectionViewCell.swift */; };
 		E0FDFA1A1A9545CC00659871 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0FDFA191A9545CC00659871 /* AppDelegate.swift */; };
 		E0FDFA1C1A9545CC00659871 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0FDFA1B1A9545CC00659871 /* MasterViewController.swift */; };
@@ -169,6 +171,8 @@
 		E0A49C111AC34AD5008DF28C /* xv-overline.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xv-overline.png"; sourceTree = "<group>"; };
 		E0A49C121AC34AD5008DF28C /* z-strikethrough.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "z-strikethrough.png"; sourceTree = "<group>"; };
 		E0B7B4CE1ADF127500D6F5B8 /* HeaderCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderCollectionViewCell.swift; sourceTree = "<group>"; };
+		E0CA91151AF5A4D40071579B /* DetailHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailHeaderView.xib; sourceTree = "<group>"; };
+		E0CA91171AF5A5AF0071579B /* DetailHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailHeaderView.swift; sourceTree = "<group>"; };
 		E0DDEEF61ACC9AC200E1034D /* TextCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextCollectionViewCell.swift; sourceTree = "<group>"; };
 		E0FDFA141A9545CC00659871 /* inscriptus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = inscriptus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0FDFA181A9545CC00659871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -211,6 +215,8 @@
 				E0FDFA1F1A9545CC00659871 /* Main.storyboard */,
 				E028AC4C1A99251D0058D9A1 /* AbbreviationCell.xib */,
 				E028AC421A98344F0058D9A1 /* AbbreviationCell.swift */,
+				E0CA91151AF5A4D40071579B /* DetailHeaderView.xib */,
+				E0CA91171AF5A5AF0071579B /* DetailHeaderView.swift */,
 				E0DDEEF61ACC9AC200E1034D /* TextCollectionViewCell.swift */,
 				E0B7B4CE1ADF127500D6F5B8 /* HeaderCollectionViewCell.swift */,
 				E023FBE71AE5AABF00E8DBAC /* UIFont+.swift */,
@@ -435,6 +441,7 @@
 			files = (
 				E0A49C3F1AC34AD5008DF28C /* ml-tail-after.png in Resources */,
 				E0A49C291AC34AD5008DF28C /* cscr-reversed.png in Resources */,
+				E0CA91161AF5A4D40071579B /* DetailHeaderView.xib in Resources */,
 				E0A49C1A1AC34AD5008DF28C /* c-reversed-double-vertical.png in Resources */,
 				E0A49C281AC34AD5008DF28C /* csc-reversed.png in Resources */,
 				E0A49C1C1AC34AD5008DF28C /* c-reversed.png in Resources */,
@@ -536,6 +543,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E0B7B4CF1ADF127500D6F5B8 /* HeaderCollectionViewCell.swift in Sources */,
+				E0CA91181AF5A5AF0071579B /* DetailHeaderView.swift in Sources */,
 				E0FDFA1E1A9545CC00659871 /* DetailViewController.swift in Sources */,
 				E023FBE81AE5AABF00E8DBAC /* UIFont+.swift in Sources */,
 				E0FDFA1C1A9545CC00659871 /* MasterViewController.swift in Sources */,

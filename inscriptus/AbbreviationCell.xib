@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7525" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7703" systemVersion="14E7f" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7516"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6711"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
@@ -20,7 +20,7 @@
                             <constraint firstAttribute="height" constant="28" id="ATo-lu-uew"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="23"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                         <variation key="default">
                             <mask key="constraints">
@@ -36,7 +36,7 @@
                         <attributedString key="attributedText">
                             <fragment content="clarissima puella">
                                 <attributes>
-                                    <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <font key="NSFont" size="17" name="HelveticaNeue"/>
                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
                                 </attributes>
@@ -83,13 +83,13 @@
                 </constraints>
                 <variation key="default">
                     <mask key="constraints">
+                        <exclude reference="XZy-jD-DPx"/>
+                        <exclude reference="cSM-YD-Wgy"/>
                         <exclude reference="01A-di-eHN"/>
                         <exclude reference="1bR-xh-MX5"/>
                         <exclude reference="GLo-fZ-Wd5"/>
                         <exclude reference="TM8-cg-R92"/>
                         <exclude reference="Uz7-OK-Jzd"/>
-                        <exclude reference="XZy-jD-DPx"/>
-                        <exclude reference="cSM-YD-Wgy"/>
                         <exclude reference="5NB-yj-yXE"/>
                     </mask>
                 </variation>

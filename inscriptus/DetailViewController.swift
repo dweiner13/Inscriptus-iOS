@@ -8,40 +8,27 @@
 
 import UIKit
 
-class DetailViewController: UIViewController {
+class DetailViewController: UITableViewController {
+    @IBOutlet weak var abbreviationCell: UITableViewCell!
+    @IBOutlet weak var fulltextCell: UITableViewCell!
+    @IBOutlet weak var searchforCell: UITableViewCell!
+    @IBOutlet var detailHeaderView: DetailHeaderView!
     
-    @IBOutlet weak var contentView: UIView!
-    
-    
-    var detailItem: Abbreviation? {
+    var detailItem: Abbreviation! {
         didSet {
             // Update the view.
             self.configureView()
         }
     }
     
-    var sections: [[String: String]]!
+    var sections: [(header:String, content:String)]!
 
     func configureView() {
-        // Update the user interface for the detail item
-//        if let abb: Abbreviation = self.detailItem {
-//            self.sections = [
-//                [
-//                    "header": "Abbreviation",
-//                    "content": abb.displayText!
-//                ],
-//                [
-//                    "header": "Long text",
-//                    "content": abb.longText
-//                ]
-//            ]
-//            if let readableSearchStrings = abb.searchStringsAsReadableString() {
-//                self.sections.append([
-//                    "header": "Search for with",
-//                    "content": readableSearchStrings
-//                ]);
-//            }
-//        }
+        self.sections = [
+            (header:"Abbreviation", content:self.detailItem.displayText!),
+            (header:"Full text", content:self.detailItem.longText),
+            (header:"Search for with", content:self.detailItem.searchStrings!.first!)
+        ]
     }
 
     override func viewDidLoad() {
@@ -49,26 +36,39 @@ class DetailViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         self.configureView()
         
-//        let leftConstraint = NSLayoutConstraint(item: self.contentView,
-//                                           attribute: NSLayoutAttribute.Leading,
-//                                           relatedBy: NSLayoutRelation.Equal,
-//                                              toItem: self.view,
-//                                           attribute: NSLayoutAttribute.Left,
-//                                          multiplier: 1.0,
-//                                            constant: 0)
-//        let rightConstraint = NSLayoutConstraint(item: self.contentView,
-//                                            attribute: NSLayoutAttribute.Trailing,
-//                                            relatedBy: NSLayoutRelation.Equal,
-//                                               toItem: self.view,
-//                                            attribute: NSLayoutAttribute.Right,
-//                                           multiplier: 1.0,
-//                                             constant: 0)
-//        self.view.addConstraint(leftConstraint)
-//        self.view.addConstraint(rightConstraint)
+        NSLog("Hi")
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    //MARK: - UITableViewController
+    
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return self.sections.count
+    }
+    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        var cell = UITableViewCell(style: .Default, reuseIdentifier: "defaultCell")
+        cell.textLabel!.text = self.sections[indexPath.section].content
+        return cell
+    }
+    
+    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        NSBundle.mainBundle().loadNibNamed("DetailHeaderView", owner: self, options: nil)
+        
+        self.detailHeaderView.textLabel.text = self.sections[section].header
+        
+        return self.detailHeaderView
+    }
+    
+    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 37.0
     }
 }
