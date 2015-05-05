@@ -11,5 +11,9 @@ import UIKit
 class DetailHeaderView: UIView {
     
     @IBOutlet weak var textLabel: UILabel!
+    
+    override func awakeFromNib() {
+        self.textLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline, scaleFactor: 1.15)
+    }
 
 }

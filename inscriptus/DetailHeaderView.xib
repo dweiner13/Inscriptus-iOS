@@ -11,27 +11,27 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="mHK-Hm-dZY" customClass="DetailHeaderView" customModule="inscriptus" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="360" height="37"/>
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WwL-Fv-X6L">
-                    <rect key="frame" x="8" y="8" width="42" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <rect key="frame" x="8" y="8" width="584" height="20"/>
+                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="WwL-Fv-X6L" firstAttribute="top" secondItem="mHK-Hm-dZY" secondAttribute="top" constant="8" id="3MW-vc-4kA"/>
-                <constraint firstItem="WwL-Fv-X6L" firstAttribute="leading" secondItem="mHK-Hm-dZY" secondAttribute="leading" constant="8" id="PlU-88-0OF"/>
+                <constraint firstAttribute="trailing" secondItem="WwL-Fv-X6L" secondAttribute="trailing" constant="8" id="9PC-Nh-B3e"/>
+                <constraint firstItem="WwL-Fv-X6L" firstAttribute="leading" secondItem="mHK-Hm-dZY" secondAttribute="leading" constant="8" id="mQN-RI-keU"/>
+                <constraint firstItem="WwL-Fv-X6L" firstAttribute="top" secondItem="mHK-Hm-dZY" secondAttribute="top" constant="8" id="rBN-Cz-55l"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
-            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="textLabel" destination="WwL-Fv-X6L" id="DGT-t7-0bF"/>
             </connections>
-            <point key="canvasLocation" x="576" y="382.5"/>
+            <point key="canvasLocation" x="576" y="378"/>
         </view>
     </objects>
 </document>

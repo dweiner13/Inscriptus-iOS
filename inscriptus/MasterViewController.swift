@@ -41,6 +41,7 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
         self.tableView.rowHeight = 60
         
         self.tableView.registerNib(UINib(nibName: "AbbreviationCell", bundle: nil), forCellReuseIdentifier: "AbbreviationCell")
+        self.tableView.registerNib(UINib(nibName: "BasicCell", bundle: nil), forCellReuseIdentifier: "BasicCell")
         
         // Set up search controller
         self.searchController = UISearchController(searchResultsController: nil)
@@ -113,7 +114,8 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.section==0 {
-            let cell = tableView.dequeueReusableCellWithIdentifier("SpecialCharsCell", forIndexPath: indexPath) as! AbbreviationCell
+            let cell = tableView.dequeueReusableCellWithIdentifier("BasicCell", forIndexPath: indexPath) as! BasicCell
+            cell.textLabel!.text = "Special character abbreviations"
             return cell
         }
         else {

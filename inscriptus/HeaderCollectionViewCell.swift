@@ -12,7 +12,7 @@ class HeaderCollectionViewCell: TextCollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.font = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline, scaleFactor: 1.18)
+        self.font = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline, scaleFactor: 1.2)
     }
    
     override var text: NSString {

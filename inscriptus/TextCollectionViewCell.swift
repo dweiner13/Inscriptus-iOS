@@ -57,8 +57,6 @@ class TextCollectionViewCell: UICollectionViewCell {
     }
     
     static func sizeForContentString(string: NSString, forMaxWidth maxWidth: CGFloat, forFont font: UIFont) -> CGSize {
-        println(font)
-        
         let maxSize = CGSize(width: maxWidth, height: 1000);
         
         let opts: NSStringDrawingOptions = .UsesLineFragmentOrigin | .UsesFontLeading
