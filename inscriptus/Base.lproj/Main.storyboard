@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7703" systemVersion="14E7f" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="H1p-Uh-vWS">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6711"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Master-->
@@ -109,6 +110,125 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bif-PB-aqh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="703" y="329"/>
+        </scene>
+        <!--Definition View Controller-->
+        <scene sceneID="b63-ez-ZaD">
+            <objects>
+                <viewController storyboardIdentifier="definitionViewController" id="q4q-4u-9YR" customClass="DefinitionViewController" customModule="inscriptus" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="4hE-Xk-8hV"/>
+                        <viewControllerLayoutGuide type="bottom" id="bII-gR-VWM"/>
+                    </layoutGuides>
+                    <view key="view" opaque="NO" contentMode="scaleToFill" id="zHI-av-1YF">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="101" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="FfE-7F-NeU">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="530"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="definitionCell" id="Rmf-ho-6cG" customClass="DefinitionCell" customModule="inscriptus" customModuleProvider="target">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Rmf-ho-6cG" id="Abg-KO-3DG">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" scrollEnabled="NO" editable="NO" text="Lorem ipsum" translatesAutoresizingMaskIntoConstraints="NO" id="Yul-qj-Ih5" userLabel="Definition view">
+                                                    <rect key="frame" x="0.0" y="12" width="278" height="44"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="44" id="mzL-XK-l5M"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                </textView>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" scrollEnabled="NO" editable="NO" text="Dolor sit amet" translatesAutoresizingMaskIntoConstraints="NO" id="dpA-0p-G7Z" userLabel="Meanings view">
+                                                    <rect key="frame" x="0.0" y="56" width="278" height="45"/>
+                                                    <color key="backgroundColor" red="0.050899621210000003" green="0.050899621210000003" blue="0.050899621210000003" alpha="0.19" colorSpace="calibratedRGB"/>
+                                                    <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="15"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                </textView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="dpA-0p-G7Z" secondAttribute="trailing" id="63J-EN-hgD"/>
+                                                <constraint firstItem="dpA-0p-G7Z" firstAttribute="leading" secondItem="Abg-KO-3DG" secondAttribute="leadingMargin" id="76T-Ey-pop"/>
+                                                <constraint firstItem="dpA-0p-G7Z" firstAttribute="top" secondItem="Yul-qj-Ih5" secondAttribute="bottom" id="7n7-Xl-3ue"/>
+                                                <constraint firstItem="Yul-qj-Ih5" firstAttribute="trailing" secondItem="Abg-KO-3DG" secondAttribute="trailingMargin" id="9Q0-g9-TNr"/>
+                                                <constraint firstAttribute="trailing" secondItem="Yul-qj-Ih5" secondAttribute="trailing" id="9Rz-Pb-DfA"/>
+                                                <constraint firstItem="dpA-0p-G7Z" firstAttribute="bottom" secondItem="Abg-KO-3DG" secondAttribute="bottomMargin" id="RsR-gd-Aef"/>
+                                                <constraint firstItem="dpA-0p-G7Z" firstAttribute="leading" secondItem="Abg-KO-3DG" secondAttribute="leading" id="Vlu-wI-Fbe"/>
+                                                <constraint firstItem="Yul-qj-Ih5" firstAttribute="top" secondItem="Abg-KO-3DG" secondAttribute="top" constant="12" id="Vng-re-ydo"/>
+                                                <constraint firstItem="Yul-qj-Ih5" firstAttribute="top" secondItem="Abg-KO-3DG" secondAttribute="topMargin" id="b51-bk-HZr"/>
+                                                <constraint firstItem="Yul-qj-Ih5" firstAttribute="leading" secondItem="Abg-KO-3DG" secondAttribute="leading" id="hkb-Kd-bR3"/>
+                                                <constraint firstItem="Yul-qj-Ih5" firstAttribute="leading" secondItem="Abg-KO-3DG" secondAttribute="leadingMargin" id="i3l-Sv-fHO"/>
+                                                <constraint firstItem="dpA-0p-G7Z" firstAttribute="trailing" secondItem="Abg-KO-3DG" secondAttribute="trailingMargin" id="jqN-DB-YgL"/>
+                                                <constraint firstAttribute="bottom" secondItem="dpA-0p-G7Z" secondAttribute="bottom" id="pde-LT-cDa"/>
+                                            </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="9Q0-g9-TNr"/>
+                                                    <exclude reference="b51-bk-HZr"/>
+                                                    <exclude reference="i3l-Sv-fHO"/>
+                                                    <exclude reference="76T-Ey-pop"/>
+                                                    <exclude reference="RsR-gd-Aef"/>
+                                                    <exclude reference="jqN-DB-YgL"/>
+                                                </mask>
+                                            </variation>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="definitionHeightConstraint" destination="mzL-XK-l5M" id="5t0-j6-VAZ"/>
+                                            <outlet property="definitionTextView" destination="Yul-qj-Ih5" id="bHI-kO-lnH"/>
+                                            <outlet property="meaningsTextView" destination="dpA-0p-G7Z" id="JHe-L9-Xd9"/>
+                                            <outlet property="topMarginConstraint" destination="Vng-re-ydo" id="4RU-ix-cNc"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="q4q-4u-9YR" id="lk4-8O-JHj"/>
+                                    <outlet property="delegate" destination="q4q-4u-9YR" id="uzC-mP-dS5"/>
+                                </connections>
+                            </tableView>
+                            <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Fyc-43-Xqj">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="530"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <color key="textColor" red="0.68730271460000003" green="0.0063718944280000004" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p17-sM-ZNh">
+                                <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                                <items>
+                                    <barButtonItem enabled="NO" systemItem="action" id="MGh-li-Ojv">
+                                        <connections>
+                                            <action selector="actionButtonPressed:" destination="q4q-4u-9YR" id="iP4-im-ShM"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="bII-gR-VWM" firstAttribute="top" secondItem="Fyc-43-Xqj" secondAttribute="bottom" id="202-hJ-zjh"/>
+                            <constraint firstItem="bII-gR-VWM" firstAttribute="top" secondItem="FfE-7F-NeU" secondAttribute="bottom" id="Ass-EG-88d"/>
+                            <constraint firstItem="p17-sM-ZNh" firstAttribute="leading" secondItem="zHI-av-1YF" secondAttribute="leading" id="C8Y-Rd-BgZ"/>
+                            <constraint firstItem="Fyc-43-Xqj" firstAttribute="top" secondItem="4hE-Xk-8hV" secondAttribute="bottom" id="Egl-F8-gq0"/>
+                            <constraint firstItem="bII-gR-VWM" firstAttribute="top" secondItem="p17-sM-ZNh" secondAttribute="bottom" id="Hoc-So-teN"/>
+                            <constraint firstAttribute="trailing" secondItem="FfE-7F-NeU" secondAttribute="trailing" id="XU5-OZ-tLR"/>
+                            <constraint firstItem="Fyc-43-Xqj" firstAttribute="leading" secondItem="zHI-av-1YF" secondAttribute="leading" id="Zrh-DW-Wfj"/>
+                            <constraint firstItem="FfE-7F-NeU" firstAttribute="top" secondItem="4hE-Xk-8hV" secondAttribute="bottom" id="axo-TD-ctj"/>
+                            <constraint firstAttribute="trailing" secondItem="Fyc-43-Xqj" secondAttribute="trailing" id="is3-Xp-Bel"/>
+                            <constraint firstItem="FfE-7F-NeU" firstAttribute="leading" secondItem="zHI-av-1YF" secondAttribute="leading" id="wlN-bc-Rmh"/>
+                            <constraint firstAttribute="trailing" secondItem="p17-sM-ZNh" secondAttribute="trailing" id="xub-6X-SU6"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="actionButton" destination="MGh-li-Ojv" id="dZg-zV-REK"/>
+                        <outlet property="errorTextView" destination="Fyc-43-Xqj" id="qEZ-Jx-FNR"/>
+                        <outlet property="tableView" destination="FfE-7F-NeU" id="eur-js-85e"/>
+                        <outlet property="toolbar" destination="p17-sM-ZNh" id="WGZ-YI-mju"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hPX-0M-sHL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1490" y="329"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

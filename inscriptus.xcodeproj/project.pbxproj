@@ -12,9 +12,19 @@
 		E028AC431A98344F0058D9A1 /* AbbreviationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E028AC421A98344F0058D9A1 /* AbbreviationCell.swift */; };
 		E028AC4B1A99244A0058D9A1 /* UnsearchablesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E028AC4A1A99244A0058D9A1 /* UnsearchablesViewController.swift */; };
 		E028AC4D1A99251D0058D9A1 /* AbbreviationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E028AC4C1A99251D0058D9A1 /* AbbreviationCell.xib */; };
-		E03ADFEC1AF6CC67002CFD5C /* BasicCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E03ADFEB1AF6CC67002CFD5C /* BasicCell.xib */; };
 		E03ADFEE1AF6CD41002CFD5C /* BasicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E03ADFED1AF6CD41002CFD5C /* BasicCell.swift */; };
+		E04B6F281AF9549900FA668F /* WhitakerDefinition.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04B6F251AF9549900FA668F /* WhitakerDefinition.swift */; };
+		E04B6F291AF9549900FA668F /* WhitakerScraper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04B6F261AF9549900FA668F /* WhitakerScraper.swift */; };
+		E04B6F2A1AF9549900FA668F /* WhitakerScraperDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04B6F271AF9549900FA668F /* WhitakerScraperDelegate.swift */; };
+		E04B6F2D1AF9558800FA668F /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04B6F2C1AF9558800FA668F /* String+.swift */; };
+		E04B6F381AF95B2100FA668F /* TFHpple.m in Sources */ = {isa = PBXBuildFile; fileRef = E04B6F351AF95B2100FA668F /* TFHpple.m */; };
+		E04B6F391AF95B2100FA668F /* TFHppleElement.m in Sources */ = {isa = PBXBuildFile; fileRef = E04B6F361AF95B2100FA668F /* TFHppleElement.m */; };
+		E04B6F3A1AF95B2100FA668F /* XPathQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = E04B6F371AF95B2100FA668F /* XPathQuery.m */; };
+		E04B6F3F1AF95BAF00FA668F /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E04B6F3E1AF95BAF00FA668F /* libxml2.dylib */; };
+		E04B6F421AF95E9000FA668F /* DefinitionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04B6F411AF95E9000FA668F /* DefinitionViewController.swift */; };
+		E04B6F441AF95EA900FA668F /* DefinitionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04B6F431AF95EA900FA668F /* DefinitionCell.swift */; };
 		E0846DB41AC6658F0004E1B0 /* AbbreviationCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0846DB31AC6658F0004E1B0 /* AbbreviationCollection.swift */; };
+		E096AFCC1AFABCAE002D6E5D /* BasicCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E096AFCB1AFABCAE002D6E5D /* BasicCell.xib */; };
 		E0A49C131AC34AD5008DF28C /* b-strikethrough.png in Resources */ = {isa = PBXBuildFile; fileRef = E0A49BD31AC34AD5008DF28C /* b-strikethrough.png */; };
 		E0A49C141AC34AD5008DF28C /* bb-strikethrough.png in Resources */ = {isa = PBXBuildFile; fileRef = E0A49BD41AC34AD5008DF28C /* bb-strikethrough.png */; };
 		E0A49C151AC34AD5008DF28C /* bf-ligature.png in Resources */ = {isa = PBXBuildFile; fileRef = E0A49BD51AC34AD5008DF28C /* bf-ligature.png */; };
@@ -108,9 +118,24 @@
 		E028AC421A98344F0058D9A1 /* AbbreviationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbbreviationCell.swift; sourceTree = "<group>"; };
 		E028AC4A1A99244A0058D9A1 /* UnsearchablesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UnsearchablesViewController.swift; path = ../UnsearchablesViewController.swift; sourceTree = "<group>"; };
 		E028AC4C1A99251D0058D9A1 /* AbbreviationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AbbreviationCell.xib; sourceTree = "<group>"; };
-		E03ADFEB1AF6CC67002CFD5C /* BasicCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BasicCell.xib; sourceTree = "<group>"; };
 		E03ADFED1AF6CD41002CFD5C /* BasicCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicCell.swift; sourceTree = "<group>"; };
+		E04B6F251AF9549900FA668F /* WhitakerDefinition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhitakerDefinition.swift; sourceTree = "<group>"; };
+		E04B6F261AF9549900FA668F /* WhitakerScraper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhitakerScraper.swift; sourceTree = "<group>"; };
+		E04B6F271AF9549900FA668F /* WhitakerScraperDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhitakerScraperDelegate.swift; sourceTree = "<group>"; };
+		E04B6F2C1AF9558800FA668F /* String+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
+		E04B6F2F1AF95B2100FA668F /* inscriptus-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "inscriptus-Bridging-Header.h"; sourceTree = "<group>"; };
+		E04B6F321AF95B2100FA668F /* TFHpple.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFHpple.h; sourceTree = "<group>"; };
+		E04B6F331AF95B2100FA668F /* TFHppleElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFHppleElement.h; sourceTree = "<group>"; };
+		E04B6F341AF95B2100FA668F /* XPathQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XPathQuery.h; sourceTree = "<group>"; };
+		E04B6F351AF95B2100FA668F /* TFHpple.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFHpple.m; sourceTree = "<group>"; };
+		E04B6F361AF95B2100FA668F /* TFHppleElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFHppleElement.m; sourceTree = "<group>"; };
+		E04B6F371AF95B2100FA668F /* XPathQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XPathQuery.m; sourceTree = "<group>"; };
+		E04B6F3B1AF95B6400FA668F /* inscriptus-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "inscriptus-Bridging-Header.h"; sourceTree = "<group>"; };
+		E04B6F3E1AF95BAF00FA668F /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		E04B6F411AF95E9000FA668F /* DefinitionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefinitionViewController.swift; sourceTree = "<group>"; };
+		E04B6F431AF95EA900FA668F /* DefinitionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefinitionCell.swift; sourceTree = "<group>"; };
 		E0846DB31AC6658F0004E1B0 /* AbbreviationCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbbreviationCollection.swift; sourceTree = "<group>"; };
+		E096AFCB1AFABCAE002D6E5D /* BasicCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BasicCell.xib; sourceTree = "<group>"; };
 		E0A49BD31AC34AD5008DF28C /* b-strikethrough.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "b-strikethrough.png"; sourceTree = "<group>"; };
 		E0A49BD41AC34AD5008DF28C /* bb-strikethrough.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bb-strikethrough.png"; sourceTree = "<group>"; };
 		E0A49BD51AC34AD5008DF28C /* bf-ligature.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bf-ligature.png"; sourceTree = "<group>"; };
@@ -197,6 +222,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E04B6F3F1AF95BAF00FA668F /* libxml2.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -213,18 +239,44 @@
 		E028AC411A98342C0058D9A1 /* Interface Files */ = {
 			isa = PBXGroup;
 			children = (
-				E0FDFA241A9545CC00659871 /* LaunchScreen.xib */,
 				E0FDFA1F1A9545CC00659871 /* Main.storyboard */,
+				E0FDFA241A9545CC00659871 /* LaunchScreen.xib */,
 				E028AC4C1A99251D0058D9A1 /* AbbreviationCell.xib */,
 				E028AC421A98344F0058D9A1 /* AbbreviationCell.swift */,
-				E03ADFEB1AF6CC67002CFD5C /* BasicCell.xib */,
+				E096AFCB1AFABCAE002D6E5D /* BasicCell.xib */,
 				E03ADFED1AF6CD41002CFD5C /* BasicCell.swift */,
 				E0CA91151AF5A4D40071579B /* DetailHeaderView.xib */,
 				E0CA91171AF5A5AF0071579B /* DetailHeaderView.swift */,
-				E023FBE71AE5AABF00E8DBAC /* UIFont+.swift */,
 				E00CBAD01AF6C0FD00DAD03B /* DefaultDetailView.xib */,
+				E04B6F431AF95EA900FA668F /* DefinitionCell.swift */,
 			);
 			name = "Interface Files";
+			sourceTree = "<group>";
+		};
+		E04B6F2B1AF954A700FA668F /* WhitakerScraper */ = {
+			isa = PBXGroup;
+			children = (
+				E04B6F2E1AF95B1300FA668F /* TFHpple */,
+				E04B6F251AF9549900FA668F /* WhitakerDefinition.swift */,
+				E04B6F261AF9549900FA668F /* WhitakerScraper.swift */,
+				E04B6F271AF9549900FA668F /* WhitakerScraperDelegate.swift */,
+			);
+			name = WhitakerScraper;
+			sourceTree = "<group>";
+		};
+		E04B6F2E1AF95B1300FA668F /* TFHpple */ = {
+			isa = PBXGroup;
+			children = (
+				E04B6F3B1AF95B6400FA668F /* inscriptus-Bridging-Header.h */,
+				E04B6F321AF95B2100FA668F /* TFHpple.h */,
+				E04B6F331AF95B2100FA668F /* TFHppleElement.h */,
+				E04B6F341AF95B2100FA668F /* XPathQuery.h */,
+				E04B6F351AF95B2100FA668F /* TFHpple.m */,
+				E04B6F361AF95B2100FA668F /* TFHppleElement.m */,
+				E04B6F371AF95B2100FA668F /* XPathQuery.m */,
+				E04B6F2F1AF95B2100FA668F /* inscriptus-Bridging-Header.h */,
+			);
+			name = TFHpple;
 			sourceTree = "<group>";
 		};
 		E0A49BD21AC34AD5008DF28C /* specialchars */ = {
@@ -300,6 +352,7 @@
 		E0FDFA0B1A9545CC00659871 = {
 			isa = PBXGroup;
 			children = (
+				E04B6F3E1AF95BAF00FA668F /* libxml2.dylib */,
 				E0FDFA161A9545CC00659871 /* inscriptus */,
 				E0FDFA2E1A9545CC00659871 /* inscriptusTests */,
 				E0FDFA151A9545CC00659871 /* Products */,
@@ -318,16 +371,16 @@
 		E0FDFA161A9545CC00659871 /* inscriptus */ = {
 			isa = PBXGroup;
 			children = (
+				E04B6F2B1AF954A700FA668F /* WhitakerScraper */,
 				E0846DB31AC6658F0004E1B0 /* AbbreviationCollection.swift */,
 				E0FDFA191A9545CC00659871 /* AppDelegate.swift */,
 				E0FDFA1B1A9545CC00659871 /* MasterViewController.swift */,
 				E0FDFA1D1A9545CC00659871 /* DetailViewController.swift */,
 				E0FDFA3B1A9546D200659871 /* Abbreviation.swift */,
 				E028AC4A1A99244A0058D9A1 /* UnsearchablesViewController.swift */,
+				E04B6F411AF95E9000FA668F /* DefinitionViewController.swift */,
 				E028AC411A98342C0058D9A1 /* Interface Files */,
 				E0FDFA221A9545CC00659871 /* Images.xcassets */,
-				E0FDFA411A95475D00659871 /* abbs-combined.json */,
-				E0FDFA421A95475D00659871 /* abbs-specialchars.json */,
 				E0A49BD21AC34AD5008DF28C /* specialchars */,
 				E0FDFA171A9545CC00659871 /* Supporting Files */,
 			);
@@ -337,6 +390,10 @@
 		E0FDFA171A9545CC00659871 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				E023FBE71AE5AABF00E8DBAC /* UIFont+.swift */,
+				E04B6F2C1AF9558800FA668F /* String+.swift */,
+				E0FDFA411A95475D00659871 /* abbs-combined.json */,
+				E0FDFA421A95475D00659871 /* abbs-specialchars.json */,
 				E0FDFA181A9545CC00659871 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -442,6 +499,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E096AFCC1AFABCAE002D6E5D /* BasicCell.xib in Resources */,
 				E0A49C3F1AC34AD5008DF28C /* ml-tail-after.png in Resources */,
 				E0A49C291AC34AD5008DF28C /* cscr-reversed.png in Resources */,
 				E0CA91161AF5A4D40071579B /* DetailHeaderView.xib in Resources */,
@@ -482,7 +540,6 @@
 				E0A49C481AC34AD5008DF28C /* pp-cc-rotated.png in Resources */,
 				E0A49C461AC34AD5008DF28C /* o-overline.png in Resources */,
 				E0A49C331AC34AD5008DF28C /* iis-connected.png in Resources */,
-				E03ADFEC1AF6CC67002CFD5C /* BasicCell.xib in Resources */,
 				E0A49C4F1AC34AD5008DF28C /* vp-reversed.png in Resources */,
 				E0A49C401AC34AD5008DF28C /* ml-tail-before.png in Resources */,
 				E0A49C3D1AC34AD5008DF28C /* m-tail-after.png in Resources */,
@@ -550,13 +607,22 @@
 				E0CA91181AF5A5AF0071579B /* DetailHeaderView.swift in Sources */,
 				E0FDFA1E1A9545CC00659871 /* DetailViewController.swift in Sources */,
 				E023FBE81AE5AABF00E8DBAC /* UIFont+.swift in Sources */,
+				E04B6F2A1AF9549900FA668F /* WhitakerScraperDelegate.swift in Sources */,
 				E03ADFEE1AF6CD41002CFD5C /* BasicCell.swift in Sources */,
+				E04B6F281AF9549900FA668F /* WhitakerDefinition.swift in Sources */,
 				E0FDFA1C1A9545CC00659871 /* MasterViewController.swift in Sources */,
 				E0FDFA1A1A9545CC00659871 /* AppDelegate.swift in Sources */,
+				E04B6F391AF95B2100FA668F /* TFHppleElement.m in Sources */,
 				E028AC4B1A99244A0058D9A1 /* UnsearchablesViewController.swift in Sources */,
 				E0846DB41AC6658F0004E1B0 /* AbbreviationCollection.swift in Sources */,
+				E04B6F381AF95B2100FA668F /* TFHpple.m in Sources */,
 				E028AC431A98344F0058D9A1 /* AbbreviationCell.swift in Sources */,
+				E04B6F421AF95E9000FA668F /* DefinitionViewController.swift in Sources */,
 				E0FDFA3C1A9546D200659871 /* Abbreviation.swift in Sources */,
+				E04B6F2D1AF9558800FA668F /* String+.swift in Sources */,
+				E04B6F291AF9549900FA668F /* WhitakerScraper.swift in Sources */,
+				E04B6F441AF95EA900FA668F /* DefinitionCell.swift in Sources */,
+				E04B6F3A1AF95B2100FA668F /* XPathQuery.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -681,14 +747,21 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_OPTIMIZATION_LEVEL = s;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include",
+					"$(SDKROOT)/usr/include/libxml2",
+				);
 				INFOPLIST_FILE = inscriptus/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "inscriptus/inscriptus-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 			};
 			name = Debug;
@@ -697,14 +770,21 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_OPTIMIZATION_LEVEL = s;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include",
+					"$(SDKROOT)/usr/include/libxml2",
+				);
 				INFOPLIST_FILE = inscriptus/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "inscriptus/inscriptus-Bridging-Header.h";
 			};
 			name = Release;
 		};
