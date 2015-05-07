@@ -15,25 +15,52 @@ class DefinitionViewController: UIViewController {
     @IBOutlet weak var errorTextView: UITextView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var actionButton: UIBarButtonItem!
-    @IBOutlet weak var toolbar: UIToolbar!
-    
-    var definitions = [WhitakerDefinition]()
     weak var popoverController: UIPopoverController?
-    var rawText: String?
+    
+    @IBOutlet weak var navigationBarHeightConstraint: NSLayoutConstraint!
+    
+    var result: WhitakerResult!
+    
+    override func viewWillAppear(animated: Bool) {
+        UIDevice.currentDevice().beginGeneratingDeviceOrientationNotifications()
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "orientationChanged:", name: UIDeviceOrientationDidChangeNotification, object: nil)
+    }
+    
+    func orientationChanged(notification: NSNotification) {
+        self.adjustViewsForOrientation()
+    }
+    
+    func adjustViewsForOrientation() {
+        var topInset = CGFloat()
+        if UIApplication.sharedApplication().statusBarHidden || UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
+            topInset = 44
+        }
+        else {
+            topInset = 64
+        }
+        self.navigationBarHeightConstraint.constant = topInset
+        self.tableView.contentInset           = UIEdgeInsets(top: topInset, left: 0, bottom: 0, right:0);
+        self.tableView.scrollIndicatorInsets  = UIEdgeInsets(top: topInset, left: 0, bottom: 0,  right: 0)
+        self.errorTextView.textContainerInset = UIEdgeInsets(top: topInset, left: 8, bottom: 4, right: 8)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardDidShow:", name: UIKeyboardDidShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
-        
         self.tableView.rowHeight = UITableViewAutomaticDimension;
         self.tableView.estimatedRowHeight = 130.0; // set to whatever your "average" cell height is
         
-        self.tableView.contentInset          = UIEdgeInsets(top: 0, left: 0, bottom: 44 + 12, right:0);
-        self.tableView.scrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: 44,  right: 0)
+        var topInset: CGFloat = 64
         
-        self.errorTextView.textContainerInset = UIEdgeInsets(top: 8, left: 8, bottom: 4, right: 8)
+        self.adjustViewsForOrientation()
+        if self.result != nil {
+            updateResult(self.result)
+        }
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIDeviceOrientationDidChangeNotification, object: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -41,14 +68,16 @@ class DefinitionViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func updateDefinitions(definitions: [WhitakerDefinition], rawText: String) {
+    func updateResult(result: WhitakerResult) {
         self.tableView.hidden = false
         self.errorTextView.hidden = true
-        self.rawText = rawText
+        self.result = result
         
         self.actionButton.enabled = true;
         
-        self.definitions = definitions
+        self.title = self.result.word
+        self.navigationItem.title = self.result.word
+            
         self.tableView.reloadData()
     }
     
@@ -100,25 +129,28 @@ class DefinitionViewController: UIViewController {
     }
     
     @IBAction func actionButtonPressed(sender: UIBarButtonItem) {
-        if let raw = self.rawText {
-            var activityController: UIActivityViewController = UIActivityViewController(activityItems: [raw], applicationActivities: nil)
-            activityController.popoverPresentationController?.barButtonItem = sender;
-            
-            self.showViewController(activityController, sender: self)
-        }
+        var activityController: UIActivityViewController = UIActivityViewController(activityItems: [result.rawResult], applicationActivities: nil)
+        activityController.popoverPresentationController?.barButtonItem = sender;
+        
+        self.showViewController(activityController, sender: self)
     }
+    
+    @IBAction func doneButtonPressed(sender: UIBarButtonItem) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
 }
 
 extension DefinitionViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.definitions.count
+        return self.result.definitions.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell: DefinitionCell = self.tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! DefinitionCell
         
-        var definition = self.definitions[indexPath.row]
+        var definition = self.result.definitions[indexPath.row]
         
         cell.definitionTextView!.text = definition.textWithoutMeanings
         

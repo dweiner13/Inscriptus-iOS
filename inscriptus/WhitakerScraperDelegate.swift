@@ -10,7 +10,7 @@ import Foundation
 
 protocol WhitakerScraperDelegate: class {
     
-    func whitakerScraper(scraper: WhitakerScraper, didLoadDefinitions definitions: [WhitakerDefinition], forWord word: String, withTargetLanguage targetLanguage: WhitakerScraper.TargetLanguage, rawResult result: String)
+    func whitakerScraper(scraper: WhitakerScraper, didLoadResult: WhitakerResult)
     
     func whitakerScraper(scraper: WhitakerScraper, didFailWithError error: NSError)
     

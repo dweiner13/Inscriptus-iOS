@@ -25,6 +25,7 @@
 		E04B6F441AF95EA900FA668F /* DefinitionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04B6F431AF95EA900FA668F /* DefinitionCell.swift */; };
 		E0846DB41AC6658F0004E1B0 /* AbbreviationCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0846DB31AC6658F0004E1B0 /* AbbreviationCollection.swift */; };
 		E096AFCC1AFABCAE002D6E5D /* BasicCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E096AFCB1AFABCAE002D6E5D /* BasicCell.xib */; };
+		E096AFCE1AFAC041002D6E5D /* WhitakerResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = E096AFCD1AFAC041002D6E5D /* WhitakerResult.swift */; };
 		E0A49C131AC34AD5008DF28C /* b-strikethrough.png in Resources */ = {isa = PBXBuildFile; fileRef = E0A49BD31AC34AD5008DF28C /* b-strikethrough.png */; };
 		E0A49C141AC34AD5008DF28C /* bb-strikethrough.png in Resources */ = {isa = PBXBuildFile; fileRef = E0A49BD41AC34AD5008DF28C /* bb-strikethrough.png */; };
 		E0A49C151AC34AD5008DF28C /* bf-ligature.png in Resources */ = {isa = PBXBuildFile; fileRef = E0A49BD51AC34AD5008DF28C /* bf-ligature.png */; };
@@ -136,6 +137,7 @@
 		E04B6F431AF95EA900FA668F /* DefinitionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefinitionCell.swift; sourceTree = "<group>"; };
 		E0846DB31AC6658F0004E1B0 /* AbbreviationCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbbreviationCollection.swift; sourceTree = "<group>"; };
 		E096AFCB1AFABCAE002D6E5D /* BasicCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BasicCell.xib; sourceTree = "<group>"; };
+		E096AFCD1AFAC041002D6E5D /* WhitakerResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhitakerResult.swift; sourceTree = "<group>"; };
 		E0A49BD31AC34AD5008DF28C /* b-strikethrough.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "b-strikethrough.png"; sourceTree = "<group>"; };
 		E0A49BD41AC34AD5008DF28C /* bb-strikethrough.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bb-strikethrough.png"; sourceTree = "<group>"; };
 		E0A49BD51AC34AD5008DF28C /* bf-ligature.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bf-ligature.png"; sourceTree = "<group>"; };
@@ -257,8 +259,9 @@
 			isa = PBXGroup;
 			children = (
 				E04B6F2E1AF95B1300FA668F /* TFHpple */,
-				E04B6F251AF9549900FA668F /* WhitakerDefinition.swift */,
 				E04B6F261AF9549900FA668F /* WhitakerScraper.swift */,
+				E04B6F251AF9549900FA668F /* WhitakerDefinition.swift */,
+				E096AFCD1AFAC041002D6E5D /* WhitakerResult.swift */,
 				E04B6F271AF9549900FA668F /* WhitakerScraperDelegate.swift */,
 			);
 			name = WhitakerScraper;
@@ -605,6 +608,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E0CA91181AF5A5AF0071579B /* DetailHeaderView.swift in Sources */,
+				E096AFCE1AFAC041002D6E5D /* WhitakerResult.swift in Sources */,
 				E0FDFA1E1A9545CC00659871 /* DetailViewController.swift in Sources */,
 				E023FBE81AE5AABF00E8DBAC /* UIFont+.swift in Sources */,
 				E04B6F2A1AF9549900FA668F /* WhitakerScraperDelegate.swift in Sources */,

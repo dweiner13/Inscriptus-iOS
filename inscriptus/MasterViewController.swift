@@ -28,6 +28,12 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
             self.preferredContentSize = CGSize(width: 320.0, height: 600.0)
         }
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        if let selectedIndexPath = self.tableView.indexPathForSelectedRow() {
+            self.tableView.deselectRowAtIndexPath(selectedIndexPath, animated: true)
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -138,6 +144,7 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.section == 1 {
             self.performSegueWithIdentifier("showDetail", sender: self)
+//            self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
         }
     }
     

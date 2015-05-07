@@ -61,6 +61,8 @@ class WhitakerScraper: NSObject {
     internal var currentConnection: NSURLConnection?
     
     func beginDefinitionRequestForWord(word: String, targetLanguage: TargetLanguage) {
+        println("began definition request for word \(word)")
+        
         if let connection = self.currentConnection {
             connection.cancel()
             self.currentConnection = nil
@@ -233,12 +235,13 @@ extension WhitakerScraper: NSURLConnectionDataDelegate {
         var resultXpathQueryString = "//pre"
         var resultNodes = resultParser.searchWithXPathQuery(resultXpathQueryString)
         var resultElement: TFHppleElement = resultNodes.first! as! TFHppleElement
-        var result = resultElement.content.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        var rawResult = resultElement.content.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
 
-        var definitions = WhitakerScraper.definitionsInResult(result, forWord: self.word!)
+        var definitions = WhitakerScraper.definitionsInResult(rawResult, forWord: self.word!)
+        let result = WhitakerResult(definitions: definitions, targetLanguage: self.targetLanguage!, rawResult: rawResult, word: self.word!)
         
         if let delegate = self.delegate {
-            delegate.whitakerScraper(self, didLoadDefinitions: definitions, forWord: self.word!, withTargetLanguage: self.targetLanguage!, rawResult: result)
+            delegate.whitakerScraper(self, didLoadResult: result)
         }
         
         self.receivedData = nil

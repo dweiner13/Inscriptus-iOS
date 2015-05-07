@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DetailViewController: UITableViewController, WhitakerScraperDelegate, UIPopoverPresentationControllerDelegate {
+class DetailViewController: UITableViewController, WhitakerScraperDelegate, DetailHeaderViewDelegate {
     @IBOutlet weak var abbreviationCell: UITableViewCell!
     @IBOutlet weak var fulltextCell: UITableViewCell!
     @IBOutlet weak var searchforCell: UITableViewCell!
@@ -16,6 +16,7 @@ class DetailViewController: UITableViewController, WhitakerScraperDelegate, UIPo
     @IBOutlet var detailHeaderView: DetailHeaderView!
     
     var whitakers = WhitakerScraper()
+    var fullTextHeader: DetailHeaderView!
     
     var lastSelectedIndexPath: NSIndexPath?
     
@@ -64,12 +65,22 @@ class DetailViewController: UITableViewController, WhitakerScraperDelegate, UIPo
             self.tableView.registerNib(UINib(nibName: "BasicCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "basicCell")
             
             self.whitakers.delegate = self
+            
+            self.definesPresentationContext = true
         }
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showDefinitions" {
+            let def = segue.destinationViewController as! DefinitionViewController
+            
+            def.result = sender as! WhitakerResult
+        }
     }
     
     //MARK: - UITableViewController
@@ -94,6 +105,12 @@ class DetailViewController: UITableViewController, WhitakerScraperDelegate, UIPo
         
         self.detailHeaderView.textLabel.text = self.sections[section].header
         
+        if section == FULLTEXT_SECTION_INDEX {
+            self.detailHeaderView.button.hidden = false
+            self.detailHeaderView.buttonDelegate = self
+            self.fullTextHeader = detailHeaderView
+        }
+        
         return self.detailHeaderView
     }
     
@@ -105,14 +122,6 @@ class DetailViewController: UITableViewController, WhitakerScraperDelegate, UIPo
         if self.becomeFirstResponder() {
             self.lastSelectedIndexPath = indexPath
             var menuController = UIMenuController.sharedMenuController()
-            
-            if self.lastSelectedIndexPath?.section == FULLTEXT_SECTION_INDEX {
-                let lookupItem = UIMenuItem(title: "Define", action: "lookupDefinitions:")
-                menuController.menuItems = [lookupItem]
-            }
-            else {
-                menuController.menuItems = nil
-            }
             
             menuController.setTargetRect(self.tableView.rectForRowAtIndexPath(indexPath), inView: self.tableView)
             menuController.setMenuVisible(true, animated: true)
@@ -130,19 +139,33 @@ class DetailViewController: UITableViewController, WhitakerScraperDelegate, UIPo
         }
     }
     
-    func lookupDefinitions(sender: AnyObject?) {
-        if let indexPath = self.lastSelectedIndexPath {
-            var alert = UIAlertController(title: "Select a word", message: nil, preferredStyle: .ActionSheet)
-            let longText = self.sections[indexPath.section].content
-            for word in longText.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()) {
+    func lookupDefinitions(button: UIButton) {
+        var alert = UIAlertController(title: "Select a word", message: nil, preferredStyle: .ActionSheet)
+        let longText = self.sections[FULLTEXT_SECTION_INDEX].content
+        
+        let words = longText.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        
+        if count(words) == 1 {
+            self.whitakers.beginDefinitionRequestForWord(words[0], targetLanguage: .English)
+            self.fullTextHeader.activityIndicator.startAnimating()
+            fullTextHeader.activityIndicator.hidden = false
+            fullTextHeader.button.hidden = true
+        }
+        else {
+            for word in words {
                 let action = UIAlertAction(title: word, style: .Default) {
                     action -> Void in
                     self.whitakers.beginDefinitionRequestForWord(word, targetLanguage: .English)
+                    self.fullTextHeader.activityIndicator.startAnimating()
+                    self.fullTextHeader.activityIndicator.hidden = false
+                    self.fullTextHeader.button.hidden = true
                 }
                 alert.addAction(action)
             }
             let action = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
             alert.addAction(action)
+            alert.popoverPresentationController?.sourceView = self.fullTextHeader
+            alert.popoverPresentationController?.sourceRect = button.frame
             self.presentViewController(alert, animated: true, completion: nil)
         }
     }
@@ -162,17 +185,28 @@ class DetailViewController: UITableViewController, WhitakerScraperDelegate, UIPo
     
     //MARK: - WhitakerScraperDelegate
     
-    func whitakerScraper(scraper: WhitakerScraper, didLoadDefinitions definitions: [WhitakerDefinition], forWord word: String, withTargetLanguage targetLanguage: WhitakerScraper.TargetLanguage, rawResult result: String) {
-        var alert = UIAlertController(title: word, message: definitions[0].meanings!, preferredStyle: .Alert)
+    func whitakerScraper(scraper: WhitakerScraper, didLoadResult result: WhitakerResult) {
+        self.fullTextHeader.activityIndicator.stopAnimating()
+        self.fullTextHeader.activityIndicator.hidden = true
+        self.fullTextHeader.button.hidden = false
+        self.performSegueWithIdentifier("showDefinitions", sender: result)
+    }
+    
+    func whitakerScraper(scraper: WhitakerScraper, didFailWithError error: NSError) {
+        self.fullTextHeader.activityIndicator.stopAnimating()
+        self.fullTextHeader.activityIndicator.hidden = true
+        self.fullTextHeader.button.hidden = false
+        
+        var alert = UIAlertController(title: "Oops!", message: error.description, preferredStyle: .Alert)
         let action = UIAlertAction(title: "OK", style: .Default, handler: nil)
         alert.addAction(action)
         self.presentViewController(alert, animated: true, completion: nil)
     }
     
-    func whitakerScraper(scraper: WhitakerScraper, didFailWithError error: NSError) {1
-        var alert = UIAlertController(title: "Oops!", message: error.description, preferredStyle: .Alert)
-        let action = UIAlertAction(title: "OK", style: .Default, handler: nil)
-        alert.addAction(action)
-        self.presentViewController(alert, animated: true, completion: nil)
+    //MARK: - DetailHeaderViewDelegate
+    
+    func detailHeaderView(headerView: DetailHeaderView, buttonPressed button: UIButton, label: UILabel) {
+        println("Button press in delegate")
+        self.lookupDefinitions(button)
     }
 }
