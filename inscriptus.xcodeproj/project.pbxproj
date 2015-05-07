@@ -91,6 +91,8 @@
 		E0A49C521AC34AD5008DF28C /* z-strikethrough.png in Resources */ = {isa = PBXBuildFile; fileRef = E0A49C121AC34AD5008DF28C /* z-strikethrough.png */; };
 		E0CA91161AF5A4D40071579B /* DetailHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E0CA91151AF5A4D40071579B /* DetailHeaderView.xib */; };
 		E0CA91181AF5A5AF0071579B /* DetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0CA91171AF5A5AF0071579B /* DetailHeaderView.swift */; };
+		E0F031581AFC07C700BC32BA /* abbs-combined.json in Resources */ = {isa = PBXBuildFile; fileRef = E0F031561AFC07C700BC32BA /* abbs-combined.json */; };
+		E0F031591AFC07C700BC32BA /* abbs-specialchars.json in Resources */ = {isa = PBXBuildFile; fileRef = E0F031571AFC07C700BC32BA /* abbs-specialchars.json */; };
 		E0FDFA1A1A9545CC00659871 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0FDFA191A9545CC00659871 /* AppDelegate.swift */; };
 		E0FDFA1C1A9545CC00659871 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0FDFA1B1A9545CC00659871 /* MasterViewController.swift */; };
 		E0FDFA1E1A9545CC00659871 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0FDFA1D1A9545CC00659871 /* DetailViewController.swift */; };
@@ -99,8 +101,6 @@
 		E0FDFA261A9545CC00659871 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = E0FDFA241A9545CC00659871 /* LaunchScreen.xib */; };
 		E0FDFA321A9545CC00659871 /* inscriptusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0FDFA311A9545CC00659871 /* inscriptusTests.swift */; };
 		E0FDFA3C1A9546D200659871 /* Abbreviation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0FDFA3B1A9546D200659871 /* Abbreviation.swift */; };
-		E0FDFA431A95475D00659871 /* abbs-combined.json in Resources */ = {isa = PBXBuildFile; fileRef = E0FDFA411A95475D00659871 /* abbs-combined.json */; };
-		E0FDFA441A95475D00659871 /* abbs-specialchars.json in Resources */ = {isa = PBXBuildFile; fileRef = E0FDFA421A95475D00659871 /* abbs-specialchars.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -203,6 +203,8 @@
 		E0A49C121AC34AD5008DF28C /* z-strikethrough.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "z-strikethrough.png"; sourceTree = "<group>"; };
 		E0CA91151AF5A4D40071579B /* DetailHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailHeaderView.xib; sourceTree = "<group>"; };
 		E0CA91171AF5A5AF0071579B /* DetailHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailHeaderView.swift; sourceTree = "<group>"; };
+		E0F031561AFC07C700BC32BA /* abbs-combined.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "abbs-combined.json"; sourceTree = "<group>"; };
+		E0F031571AFC07C700BC32BA /* abbs-specialchars.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "abbs-specialchars.json"; sourceTree = "<group>"; };
 		E0FDFA141A9545CC00659871 /* inscriptus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = inscriptus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0FDFA181A9545CC00659871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E0FDFA191A9545CC00659871 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -215,8 +217,6 @@
 		E0FDFA301A9545CC00659871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E0FDFA311A9545CC00659871 /* inscriptusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = inscriptusTests.swift; sourceTree = "<group>"; };
 		E0FDFA3B1A9546D200659871 /* Abbreviation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Abbreviation.swift; sourceTree = "<group>"; wrapsLines = 0; };
-		E0FDFA411A95475D00659871 /* abbs-combined.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "abbs-combined.json"; sourceTree = "<group>"; };
-		E0FDFA421A95475D00659871 /* abbs-specialchars.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "abbs-specialchars.json"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -393,10 +393,10 @@
 		E0FDFA171A9545CC00659871 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				E0F031561AFC07C700BC32BA /* abbs-combined.json */,
+				E0F031571AFC07C700BC32BA /* abbs-specialchars.json */,
 				E023FBE71AE5AABF00E8DBAC /* UIFont+.swift */,
 				E04B6F2C1AF9558800FA668F /* String+.swift */,
-				E0FDFA411A95475D00659871 /* abbs-combined.json */,
-				E0FDFA421A95475D00659871 /* abbs-specialchars.json */,
 				E0FDFA181A9545CC00659871 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -509,13 +509,11 @@
 				E0A49C1A1AC34AD5008DF28C /* c-reversed-double-vertical.png in Resources */,
 				E0A49C281AC34AD5008DF28C /* csc-reversed.png in Resources */,
 				E0A49C1C1AC34AD5008DF28C /* c-reversed.png in Resources */,
-				E0FDFA431A95475D00659871 /* abbs-combined.json in Resources */,
 				E0A49C2E1AC34AD5008DF28C /* ii-overline.png in Resources */,
 				E0A49C411AC34AD5008DF28C /* n-overline.png in Resources */,
 				E00CBAD11AF6C0FD00DAD03B /* DefaultDetailView.xib in Resources */,
 				E0A49C2F1AC34AD5008DF28C /* iiicl-reversed.png in Resources */,
 				E0A49C4A1AC34AD5008DF28C /* q-slash.png in Resources */,
-				E0FDFA441A95475D00659871 /* abbs-specialchars.json in Resources */,
 				E0A49C491AC34AD5008DF28C /* q-reversed.png in Resources */,
 				E0A49C3B1AC34AD5008DF28C /* m-half.png in Resources */,
 				E0A49C511AC34AD5008DF28C /* xv-overline.png in Resources */,
@@ -558,12 +556,14 @@
 				E0A49C381AC34AD5008DF28C /* l-rotated-tail.png in Resources */,
 				E0A49C3C1AC34AD5008DF28C /* m-strikethrough.png in Resources */,
 				E0A49C341AC34AD5008DF28C /* infinity-half.png in Resources */,
+				E0F031581AFC07C700BC32BA /* abbs-combined.json in Resources */,
 				E0A49C321AC34AD5008DF28C /* iiiiii.png in Resources */,
 				E0A49C261AC34AD5008DF28C /* cross.png in Resources */,
 				E0A49C4E1AC34AD5008DF28C /* star.png in Resources */,
 				E0A49C181AC34AD5008DF28C /* brace-right-mid.png in Resources */,
 				E0A49C521AC34AD5008DF28C /* z-strikethrough.png in Resources */,
 				E0A49C351AC34AD5008DF28C /* is-connected.png in Resources */,
+				E0F031591AFC07C700BC32BA /* abbs-specialchars.json in Resources */,
 				E0A49C201AC34AD5008DF28C /* cccc-overline.png in Resources */,
 				E0A49C431AC34AD5008DF28C /* nf-ligature.png in Resources */,
 				E0A49C311AC34AD5008DF28C /* iiiiii-vir.png in Resources */,

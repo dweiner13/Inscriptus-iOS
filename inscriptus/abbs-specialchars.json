@@ -1,1 +1,892 @@
-[{"abbrDisplayImage": "b-strikethrough", "isSpecial": true, "phrase": "beneficiarius", "abbrDisplay": -1, "id": "4518", "abbrSearchList": ["B"]}, {"abbrDisplayImage": "bb-strikethrough", "isSpecial": true, "phrase": "beneficiarii", "abbrDisplay": -1, "id": "4519", "abbrSearchList": ["BB"]}, {"abbrDisplayImage": "bf-ligature", "isSpecial": true, "phrase": "beneficiarius", "abbrDisplay": -1, "id": "4520", "abbrSearchList": ["BF"]}, {"abbrDisplayImage": "bf-strikethrough", "isSpecial": true, "phrase": "beneficiarius", "abbrDisplay": -1, "id": "4521", "abbrSearchList": ["BF"]}, {"abbrDisplayImage": "brace-right-mid", "isSpecial": true, "phrase": "centurio", "abbrDisplay": -1, "id": "4522", "abbrSearchList": [""]}, {"abbrDisplayImage": "c-double-vertical", "isSpecial": true, "phrase": "Gaiae (= feminae) duae", "abbrDisplay": -1, "id": "4523", "abbrSearchList": ["CC", "3"]}, {"abbrDisplayImage": "c-double-vertical", "isSpecial": true, "phrase": "centurio", "abbrDisplay": -1, "id": "4525", "abbrSearchList": ["CC", "3"]}, {"abbrDisplayImage": "c-reversed-double-vertical", "isSpecial": true, "phrase": "Gaiae (= feminae) duae", "abbrDisplay": -1, "id": "4527", "abbrSearchList": ["CC", "3"]}, {"abbrDisplayImage": "c-reversed-strikethrough", "isSpecial": true, "phrase": "centurio", "abbrDisplay": -1, "id": "4530", "abbrSearchList": ["C"]}, {"abbrDisplayImage": "c-tiny", "isSpecial": true, "phrase": "Gaia = femina", "abbrDisplay": -1, "id": "4531", "abbrSearchList": ["C"]}, {"iosDisplay": "\u2183\u2183\u2183\u2183", "abbrDisplayImage": "cccc-overline", "isSpecial": true, "phrase": "quadringenarius", "abbrDisplay": -1, "id": "4532", "abbrSearchList": ["CCCC"]}, {"abbrDisplayImage": "chevron-right", "isSpecial": true, "phrase": "centurio", "abbrDisplay": -1, "id": "4533", "abbrSearchList": [">"]}, {"abbrDisplayImage": "circle-dotted", "isSpecial": true, "phrase": "obiit, obitus", "abbrDisplay": -1, "id": "4534", "abbrSearchList": ["O"]}, {"abbrDisplayImage": "cross", "isSpecial": true, "phrase": "as", "abbrDisplay": -1, "id": "4535", "abbrSearchList": ["T"]}, {"abbrDisplayImage": "cuns-ns-overline", "isSpecial": true, "phrase": "consul", "abbrDisplay": -1, "id": "4536", "abbrSearchList": ["CVNS"]}, {"abbrDisplayImage": "cvr-star-fl", "isSpecial": true, "phrase": "curator denariis flandis", "abbrDisplay": -1, "id": "4537", "abbrSearchList": ["CVR*FL"]}, {"abbrDisplayImage": "d-strikethrough", "isSpecial": true, "phrase": "defunctus, dicit, dies, domo", "abbrDisplay": -1, "id": "4538", "abbrSearchList": ["D"]}, {"abbrDisplayImage": "d-strikethrough", "isSpecial": true, "phrase": "quingentaria (ala <i>or</i> cohors)", "abbrDisplay": -1, "id": "4539", "abbrSearchList": ["D"]}, {"abbrDisplayImage": "ii-overline", "isSpecial": true, "phrase": "duumvir", "abbrDisplay": -1, "id": "4540", "abbrSearchList": ["II"]}, {"abbrDisplayImage": "iiiiii", "isSpecial": true, "phrase": "sevir", "abbrDisplay": -1, "id": "4541", "abbrSearchList": ["IIIIII"]}, {"abbrDisplayImage": "iiiiii-vir", "isSpecial": true, "phrase": "sevir, seviratus", "abbrDisplay": -1, "id": "4542", "abbrSearchList": ["IIIIIIVIR"]}, {"abbrDisplayImage": "iiiiii-vir-aug", "isSpecial": true, "phrase": "sevir Augustalis", "abbrDisplay": -1, "id": "4543", "abbrSearchList": ["IIIIIIVIRAVG"]}, {"abbrDisplayImage": "iis-connected", "isSpecial": true, "phrase": "sestertius", "abbrDisplay": -1, "id": "4544", "abbrSearchList": ["HS", "IIS"]}, {"abbrDisplayImage": "infinity-half", "isSpecial": true, "phrase": "miliaria (ala <i>or</i> cohors)", "abbrDisplay": -1, "id": "4545", "abbrSearchList": [""]}, {"abbrDisplayImage": "is-connected", "isSpecial": true, "phrase": "sestertius", "abbrDisplay": -1, "id": "4546", "abbrSearchList": ["IS"]}, {"abbrDisplayImage": "k-inverted", "isSpecial": true, "phrase": "castra", "abbrDisplay": -1, "id": "4547", "abbrSearchList": ["K"]}, {"abbrDisplayImage": "l-rotated-strikethrough", "isSpecial": true, "phrase": "sestertius", "abbrDisplay": -1, "id": "4548", "abbrSearchList": [""]}, {"abbrDisplayImage": "l-rotated-tail", "isSpecial": true, "phrase": "dupondius", "abbrDisplay": -1, "id": "4549", "abbrSearchList": [""]}, {"abbrDisplayImage": "m-half", "isSpecial": true, "phrase": "mortuus?", "abbrDisplay": -1, "id": "4550", "abbrSearchList": ["M", "N"]}, {"abbrDisplayImage": "m-strikethrough", "isSpecial": true, "phrase": "menses", "abbrDisplay": -1, "id": "4552", "abbrSearchList": ["M"]}, {"abbrDisplayImage": "m-tail-after", "isSpecial": true, "phrase": "Manius", "abbrDisplay": -1, "id": "4553", "abbrSearchList": ["M"]}, {"abbrDisplayImage": "ml-rotated", "isSpecial": true, "phrase": "mulieris libertus, liberta", "abbrDisplay": -1, "id": "4554", "abbrSearchList": ["ML"]}, {"abbrDisplayImage": "ml-tail-after", "isSpecial": true, "phrase": "mulieris libertus, liberta", "abbrDisplay": -1, "id": "4555", "abbrSearchList": ["ML"]}, {"abbrDisplayImage": "ml-tail-before", "isSpecial": true, "phrase": "mulieris libertus, liberta", "abbrDisplay": -1, "id": "4556", "abbrSearchList": ["ML"]}, {"abbrDisplayImage": "n-overline", "isSpecial": true, "phrase": "nummi", "abbrDisplay": -1, "id": "4557", "abbrSearchList": ["N"]}, {"abbrDisplayImage": "n-strikethrough", "isSpecial": true, "phrase": "nummi", "abbrDisplay": -1, "id": "4558", "abbrSearchList": ["N"]}, {"abbrDisplayImage": "nf-ligature", "isSpecial": true, "phrase": "nefastus (hilaris)", "abbrDisplay": -1, "id": "4559", "abbrSearchList": ["NF"]}, {"abbrDisplayImage": "np-ligature", "isSpecial": true, "phrase": "nefastus (hilaris)", "abbrDisplay": -1, "id": "4560", "abbrSearchList": ["NP"]}, {"abbrDisplayImage": "o-overline", "isSpecial": true, "phrase": "obiit, obitus", "abbrDisplay": -1, "id": "4561", "abbrSearchList": ["O"]}, {"abbrDisplayImage": "pp-cc-rotated", "isSpecial": true, "phrase": "pro parte tertia", "abbrDisplay": -1, "id": "4562", "abbrSearchList": ["PPCCCC", "PP(((("]}, {"abbrDisplayImage": "q-reversed", "isSpecial": true, "phrase": "horae", "abbrDisplay": -1, "id": "4564", "abbrSearchList": ["Q"]}, {"abbrDisplayImage": "q-slash", "isSpecial": true, "phrase": "quondam", "abbrDisplay": -1, "id": "4565", "abbrSearchList": ["Q"]}, {"abbrDisplayImage": "r-strikethrough", "isSpecial": true, "phrase": "ratio, Romanus (eques), rubrica", "abbrDisplay": -1, "id": "4566", "abbrSearchList": ["R"]}, {"abbrDisplayImage": "s-strikethrough", "isSpecial": true, "phrase": "servus, Sextus, scriba?", "abbrDisplay": -1, "id": "4567", "abbrSearchList": ["S"]}, {"abbrDisplayImage": "ss-strikethrough", "isSpecial": true, "phrase": "sestertii, sextarii", "abbrDisplay": -1, "id": "4568", "abbrSearchList": ["SS"]}, {"abbrDisplayImage": "star", "isSpecial": true, "phrase": "denarius", "abbrDisplay": -1, "id": "4569", "abbrSearchList": ["*"]}, {"abbrDisplayImage": "wavy-vertical-line", "isSpecial": true, "phrase": "centurio", "abbrDisplay": -1, "id": "4570", "abbrSearchList": ["CC"]}, {"abbrDisplayImage": "xv-overline", "isSpecial": true, "phrase": "quindecimvir", "abbrDisplay": -1, "id": "4571", "abbrSearchList": ["XV"]}, {"abbrDisplayImage": "z-strikethrough", "isSpecial": true, "phrase": "centurio", "abbrDisplay": -1, "id": "4572", "abbrSearchList": ["Z"]}, {"iosDisplay": "\u2183", "abbrDisplayImage": "c-reversed", "isSpecial": true, "phrase": "caput ?", "abbrDisplay": -1, "id": "4573", "abbrSearchList": ["C"]}, {"iosDisplay": "\u2183", "abbrDisplayImage": "c-reversed", "isSpecial": true, "phrase": "Gaia = femina", "abbrDisplay": -1, "id": "4574", "abbrSearchList": ["C"]}, {"isSpecial": true, "phrase": "Gaia = femina", "abbrDisplay": "7", "id": "4575", "abbrSearchList": ["C", "7"]}, {"iosDisplay": "\u2183", "abbrDisplayImage": "c-reversed", "isSpecial": true, "phrase": "conductor", "abbrDisplay": -1, "id": "4577", "abbrSearchList": ["C"]}, {"isSpecial": true, "phrase": "contra (legem, retiarius, etc.)", "abbrDisplay": "7", "id": "4578", "abbrSearchList": ["C", "7"]}, {"iosDisplay": "\u2183", "abbrDisplayImage": "c-reversed", "isSpecial": true, "phrase": "contrascriptor", "abbrDisplay": -1, "id": "4580", "abbrSearchList": ["C"]}, {"isSpecial": true, "phrase": "contrascriptor", "abbrDisplay": "7", "id": "4581", "abbrSearchList": ["C", "7"]}, {"isSpecial": true, "phrase": "conventus", "abbrDisplay": "7", "id": "4583", "abbrSearchList": ["C", "7"]}, {"iosDisplay": "\u2183", "abbrDisplayImage": "c-reversed", "isSpecial": true, "phrase": "coronarum <i>in inscriptions of gladiators</i>", "abbrDisplay": -1, "id": "4585", "abbrSearchList": ["C"]}, {"iosDisplay": "\u2183\u2183", "abbrDisplayImage": "cc-reversed", "isSpecial": true, "phrase": "Gaiae (= feminae) duae", "abbrDisplay": -1, "id": "4586", "abbrSearchList": ["CC"]}, {"iosDisplay": "\u2183\u2183\u2183", "abbrDisplayImage": "ccc-reversed", "isSpecial": true, "phrase": "Gaiae (= feminae) tres", "abbrDisplay": -1, "id": "4587", "abbrSearchList": ["CCC"]}, {"iosDisplay": "\u2183\u2183 \u00b7 EXSERC", "abbrDisplayImage": "ccexserc-reversed", "isSpecial": true, "phrase": "centuriones (duo) exercitatores", "abbrDisplay": -1, "id": "4588", "abbrSearchList": ["CCEXSERC"]}, {"iosDisplay": "\u2183 \u00b7 L", "abbrDisplayImage": "cl-reversed", "isSpecial": true, "phrase": "mulieris libertus, liberta", "abbrDisplay": -1, "id": "4589", "abbrSearchList": ["CL"]}, {"iosDisplay": "L \u00b7 \u2183", "abbrDisplayImage": "lc-reversed", "isSpecial": true, "phrase": "mulieris liberta", "abbrDisplay": -1, "id": "4590", "abbrSearchList": ["LC"]}, {"isSpecial": true, "phrase": "cohors equitata miliaria", "abbrDisplay": "COH EQ \u221e", "id": "4591", "abbrSearchList": ["COHEQ"]}, {"isSpecial": true, "phrase": "coh. I Flavia miliaria equitata sagittariorum", "abbrDisplay": "COH I FL \u221e EQ SAG", "id": "4592", "abbrSearchList": ["COHIFLEQSAG"]}, {"isSpecial": true, "phrase": "cohors praetoria", "abbrDisplay": "COH .. PR", "id": "4593", "abbrSearchList": ["COHPR"]}, {"isSpecial": true, "phrase": "cohors vigilum", "abbrDisplay": "COH .. VIG", "id": "4594", "abbrSearchList": ["COHVIG"]}, {"isSpecial": true, "phrase": "cohors I Ulpia\u2026Antoniana", "abbrDisplay": "COH I VLP .. ANT", "id": "4595", "abbrSearchList": ["COHIVLPANT"]}, {"isSpecial": true, "phrase": "contraretiarius", "abbrDisplay": "7 RET", "id": "4596", "abbrSearchList": ["CRET", "7RET5CRET"]}, {"iosDisplay": "\u2183 \u00b7 S", "abbrDisplayImage": "cs-reversed", "isSpecial": true, "phrase": "contrascriptor", "abbrDisplay": -1, "id": "4598", "abbrSearchList": ["CS"]}, {"iosDisplay": "\u2183S\u2183", "abbrDisplayImage": "csc-reversed", "isSpecial": true, "phrase": "contra scriptor", "abbrDisplay": -1, "id": "4599", "abbrSearchList": ["CSC"]}, {"isSpecial": true, "phrase": "contra scriptor", "abbrDisplay": "7SC", "id": "4600", "abbrSearchList": ["7SC", "CSC"]}, {"iosDisplay": "\u2183S\u2183R", "abbrDisplayImage": "cscr-reversed", "isSpecial": true, "phrase": "contra scriptor", "abbrDisplay": -1, "id": "4602", "abbrSearchList": ["CSCR"]}, {"isSpecial": true, "phrase": "contra scriptor", "abbrDisplay": "7SCR", "id": "4603", "abbrSearchList": ["CSCR", "7SCR"]}, {"iosDisplay": "\u2183 \u00b7 TRA", "abbrDisplayImage": "ctra-reversed", "isSpecial": true, "phrase": "contra", "abbrDisplay": -1, "id": "4605", "abbrSearchList": ["CTRA"]}, {"iosDisplay": "L \u00b7 \u2183 \u00b7 IX", "abbrDisplayImage": "lcix-reversed", "isSpecial": true, "phrase": "liberatus coronarum novem", "abbrDisplay": -1, "id": "4606", "abbrSearchList": ["LCIX"]}, {"isSpecial": true, "phrase": "mulieris libertus, liberta", "abbrDisplay": "W L", "id": "4607", "abbrSearchList": ["WL"]}, {"abbrDisplayImage": "p-reversed", "isSpecial": true, "phrase": "puella", "abbrDisplay": -1, "id": "4608", "abbrSearchList": ["P"]}, {"abbrDisplayImage": "vp-reversed", "isSpecial": true, "phrase": "pupilla", "abbrDisplay": -1, "id": "4609", "abbrSearchList": ["VP", "PV"]}, {"iosDisplay": "III \u00b7 \u2183 \u00b7 L", "abbrDisplayImage": "iiicl-reversed", "isSpecial": true, "phrase": "trium mulierum libertus, liberta", "abbrDisplay": -1, "id": "4611", "abbrSearchList": ["IIICL"]}, {"iosDisplay": "\u2183", "abbrDisplayImage": "c-reversed", "isSpecial": true, "phrase": "centesima", "abbrDisplay": -1, "id": "4612", "abbrSearchList": ["C"]}, {"iosDisplay": "\u2183", "abbrDisplayImage": "c-reversed", "isSpecial": true, "phrase": "centurio", "abbrDisplay": -1, "id": "4613", "abbrSearchList": ["C"]}, {"abbrDisplayImage": "vp-reversed", "isSpecial": true, "phrase": "sextarius", "abbrDisplay": -1, "id": "4614", "abbrSearchList": ["C"]}, {"abbrDisplayImage": "chevron-right", "isSpecial": true, "phrase": "conventus", "abbrDisplay": -1, "id": "4615", "abbrSearchList": [">"]}, {"iosDisplay": "\u2183\u2183 \u00b7 L", "abbrDisplayImage": "ccl-reversed", "isSpecial": true, "phrase": "duarum mulierum libertus", "abbrDisplay": -1, "id": "4616", "abbrSearchList": ["CCL"]}, {"isSpecial": true, "phrase": "obiit, obitus", "abbrDisplay": "\u03f4", "id": "4617", "abbrSearchList": ["O"]}, {"abbrDisplayImage": "c-reversed-double-vertical", "isSpecial": true, "phrase": "feminae duae", "abbrDisplay": -1, "id": "4648", "abbrSearchList": ["CC"]}]
+[
+  {
+    "abbrDisplayImage": "b-strikethrough",
+    "isSpecial": true,
+    "phrase": "beneficiarius",
+    "abbrDisplay": -1,
+    "id": "4518",
+    "abbrSearchList": [
+      "B"
+    ]
+  },
+  {
+    "abbrDisplayImage": "bb-strikethrough",
+    "isSpecial": true,
+    "phrase": "beneficiarii",
+    "abbrDisplay": -1,
+    "id": "4519",
+    "abbrSearchList": [
+      "BB"
+    ]
+  },
+  {
+    "abbrDisplayImage": "bf-ligature",
+    "isSpecial": true,
+    "phrase": "beneficiarius",
+    "abbrDisplay": -1,
+    "id": "4520",
+    "abbrSearchList": [
+      "BF"
+    ]
+  },
+  {
+    "abbrDisplayImage": "bf-strikethrough",
+    "isSpecial": true,
+    "phrase": "beneficiarius",
+    "abbrDisplay": -1,
+    "id": "4521",
+    "abbrSearchList": [
+      "BF"
+    ]
+  },
+  {
+    "abbrDisplayImage": "brace-right-mid",
+    "isSpecial": true,
+    "phrase": "centurio",
+    "abbrDisplay": -1,
+    "id": "4522",
+    "abbrSearchList": [
+      ""
+    ]
+  },
+  {
+    "abbrDisplayImage": "c-double-vertical",
+    "isSpecial": true,
+    "phrase": "Gaiae (= feminae) duae",
+    "abbrDisplay": -1,
+    "id": "4523",
+    "abbrSearchList": [
+      "CC",
+      "3"
+    ]
+  },
+  {
+    "abbrDisplayImage": "c-double-vertical",
+    "isSpecial": true,
+    "phrase": "centurio",
+    "abbrDisplay": -1,
+    "id": "4525",
+    "abbrSearchList": [
+      "CC",
+      "3"
+    ]
+  },
+  {
+    "abbrDisplayImage": "c-reversed-double-vertical",
+    "isSpecial": true,
+    "phrase": "Gaiae (= feminae) duae",
+    "abbrDisplay": -1,
+    "id": "4527",
+    "abbrSearchList": [
+      "CC",
+      "3"
+    ]
+  },
+  {
+    "abbrDisplayImage": "c-reversed-strikethrough",
+    "isSpecial": true,
+    "phrase": "centurio",
+    "abbrDisplay": -1,
+    "id": "4530",
+    "abbrSearchList": [
+      "C"
+    ]
+  },
+  {
+    "abbrDisplayImage": "c-tiny",
+    "isSpecial": true,
+    "phrase": "Gaia = femina",
+    "abbrDisplay": -1,
+    "id": "4531",
+    "abbrSearchList": [
+      "C"
+    ]
+  },
+  {
+    "iosDisplay": "ↃↃↃↃ",
+    "abbrDisplayImage": "cccc-overline",
+    "isSpecial": true,
+    "phrase": "quadringenarius",
+    "abbrDisplay": -1,
+    "id": "4532",
+    "abbrSearchList": [
+      "CCCC"
+    ]
+  },
+  {
+    "abbrDisplayImage": "chevron-right",
+    "isSpecial": true,
+    "phrase": "centurio",
+    "abbrDisplay": -1,
+    "id": "4533",
+    "abbrSearchList": [
+      ">"
+    ]
+  },
+  {
+    "abbrDisplayImage": "circle-dotted",
+    "isSpecial": true,
+    "phrase": "obiit, obitus",
+    "abbrDisplay": -1,
+    "id": "4534",
+    "abbrSearchList": [
+      "O"
+    ]
+  },
+  {
+    "abbrDisplayImage": "cross",
+    "isSpecial": true,
+    "phrase": "as",
+    "abbrDisplay": -1,
+    "id": "4535",
+    "abbrSearchList": [
+      "T"
+    ]
+  },
+  {
+    "abbrDisplayImage": "cuns-ns-overline",
+    "isSpecial": true,
+    "phrase": "consul",
+    "abbrDisplay": -1,
+    "id": "4536",
+    "abbrSearchList": [
+      "CVNS"
+    ]
+  },
+  {
+    "abbrDisplayImage": "cvr-star-fl",
+    "isSpecial": true,
+    "phrase": "curator denariis flandis",
+    "abbrDisplay": -1,
+    "id": "4537",
+    "abbrSearchList": [
+      "CVR*FL"
+    ]
+  },
+  {
+    "abbrDisplayImage": "d-strikethrough",
+    "isSpecial": true,
+    "phrase": "defunctus, dicit, dies, domo",
+    "abbrDisplay": -1,
+    "id": "4538",
+    "abbrSearchList": [
+      "D"
+    ]
+  },
+  {
+    "abbrDisplayImage": "d-strikethrough",
+    "isSpecial": true,
+    "phrase": "quingentaria (ala or cohors)",
+    "abbrDisplay": -1,
+    "id": "4539",
+    "abbrSearchList": [
+      "D"
+    ]
+  },
+  {
+    "abbrDisplayImage": "ii-overline",
+    "isSpecial": true,
+    "phrase": "duumvir",
+    "abbrDisplay": -1,
+    "id": "4540",
+    "abbrSearchList": [
+      "II"
+    ]
+  },
+  {
+    "abbrDisplayImage": "iiiiii",
+    "isSpecial": true,
+    "phrase": "sevir",
+    "abbrDisplay": -1,
+    "id": "4541",
+    "abbrSearchList": [
+      "IIIIII"
+    ]
+  },
+  {
+    "abbrDisplayImage": "iiiiii-vir",
+    "isSpecial": true,
+    "phrase": "sevir, seviratus",
+    "abbrDisplay": -1,
+    "id": "4542",
+    "abbrSearchList": [
+      "IIIIIIVIR"
+    ]
+  },
+  {
+    "abbrDisplayImage": "iiiiii-vir-aug",
+    "isSpecial": true,
+    "phrase": "sevir Augustalis",
+    "abbrDisplay": -1,
+    "id": "4543",
+    "abbrSearchList": [
+      "IIIIIIVIRAVG"
+    ]
+  },
+  {
+    "abbrDisplayImage": "iis-connected",
+    "isSpecial": true,
+    "phrase": "sestertius",
+    "abbrDisplay": -1,
+    "id": "4544",
+    "abbrSearchList": [
+      "HS",
+      "IIS"
+    ]
+  },
+  {
+    "abbrDisplayImage": "infinity-half",
+    "isSpecial": true,
+    "phrase": "miliaria (ala or cohors)",
+    "abbrDisplay": -1,
+    "id": "4545",
+    "abbrSearchList": [
+      ""
+    ]
+  },
+  {
+    "abbrDisplayImage": "is-connected",
+    "isSpecial": true,
+    "phrase": "sestertius",
+    "abbrDisplay": -1,
+    "id": "4546",
+    "abbrSearchList": [
+      "IS"
+    ]
+  },
+  {
+    "abbrDisplayImage": "k-inverted",
+    "isSpecial": true,
+    "phrase": "castra",
+    "abbrDisplay": -1,
+    "id": "4547",
+    "abbrSearchList": [
+      "K"
+    ]
+  },
+  {
+    "abbrDisplayImage": "l-rotated-strikethrough",
+    "isSpecial": true,
+    "phrase": "sestertius",
+    "abbrDisplay": -1,
+    "id": "4548",
+    "abbrSearchList": [
+      ""
+    ]
+  },
+  {
+    "abbrDisplayImage": "l-rotated-tail",
+    "isSpecial": true,
+    "phrase": "dupondius",
+    "abbrDisplay": -1,
+    "id": "4549",
+    "abbrSearchList": [
+      ""
+    ]
+  },
+  {
+    "abbrDisplayImage": "m-half",
+    "isSpecial": true,
+    "phrase": "mortuus?",
+    "abbrDisplay": -1,
+    "id": "4550",
+    "abbrSearchList": [
+      "M",
+      "N"
+    ]
+  },
+  {
+    "abbrDisplayImage": "m-strikethrough",
+    "isSpecial": true,
+    "phrase": "menses",
+    "abbrDisplay": -1,
+    "id": "4552",
+    "abbrSearchList": [
+      "M"
+    ]
+  },
+  {
+    "abbrDisplayImage": "m-tail-after",
+    "isSpecial": true,
+    "phrase": "Manius",
+    "abbrDisplay": -1,
+    "id": "4553",
+    "abbrSearchList": [
+      "M"
+    ]
+  },
+  {
+    "abbrDisplayImage": "ml-rotated",
+    "isSpecial": true,
+    "phrase": "mulieris libertus, liberta",
+    "abbrDisplay": -1,
+    "id": "4554",
+    "abbrSearchList": [
+      "ML"
+    ]
+  },
+  {
+    "abbrDisplayImage": "ml-tail-after",
+    "isSpecial": true,
+    "phrase": "mulieris libertus, liberta",
+    "abbrDisplay": -1,
+    "id": "4555",
+    "abbrSearchList": [
+      "ML"
+    ]
+  },
+  {
+    "abbrDisplayImage": "ml-tail-before",
+    "isSpecial": true,
+    "phrase": "mulieris libertus, liberta",
+    "abbrDisplay": -1,
+    "id": "4556",
+    "abbrSearchList": [
+      "ML"
+    ]
+  },
+  {
+    "abbrDisplayImage": "n-overline",
+    "isSpecial": true,
+    "phrase": "nummi",
+    "abbrDisplay": -1,
+    "id": "4557",
+    "abbrSearchList": [
+      "N"
+    ]
+  },
+  {
+    "abbrDisplayImage": "n-strikethrough",
+    "isSpecial": true,
+    "phrase": "nummi",
+    "abbrDisplay": -1,
+    "id": "4558",
+    "abbrSearchList": [
+      "N"
+    ]
+  },
+  {
+    "abbrDisplayImage": "nf-ligature",
+    "isSpecial": true,
+    "phrase": "nefastus (hilaris)",
+    "abbrDisplay": -1,
+    "id": "4559",
+    "abbrSearchList": [
+      "NF"
+    ]
+  },
+  {
+    "abbrDisplayImage": "np-ligature",
+    "isSpecial": true,
+    "phrase": "nefastus (hilaris)",
+    "abbrDisplay": -1,
+    "id": "4560",
+    "abbrSearchList": [
+      "NP"
+    ]
+  },
+  {
+    "abbrDisplayImage": "o-overline",
+    "isSpecial": true,
+    "phrase": "obiit, obitus",
+    "abbrDisplay": -1,
+    "id": "4561",
+    "abbrSearchList": [
+      "O"
+    ]
+  },
+  {
+    "abbrDisplayImage": "pp-cc-rotated",
+    "isSpecial": true,
+    "phrase": "pro parte tertia",
+    "abbrDisplay": -1,
+    "id": "4562",
+    "abbrSearchList": [
+      "PPCCCC",
+      "PP(((("
+    ]
+  },
+  {
+    "abbrDisplayImage": "q-reversed",
+    "isSpecial": true,
+    "phrase": "horae",
+    "abbrDisplay": -1,
+    "id": "4564",
+    "abbrSearchList": [
+      "Q"
+    ]
+  },
+  {
+    "abbrDisplayImage": "q-slash",
+    "isSpecial": true,
+    "phrase": "quondam",
+    "abbrDisplay": -1,
+    "id": "4565",
+    "abbrSearchList": [
+      "Q"
+    ]
+  },
+  {
+    "abbrDisplayImage": "r-strikethrough",
+    "isSpecial": true,
+    "phrase": "ratio, Romanus (eques), rubrica",
+    "abbrDisplay": -1,
+    "id": "4566",
+    "abbrSearchList": [
+      "R"
+    ]
+  },
+  {
+    "abbrDisplayImage": "s-strikethrough",
+    "isSpecial": true,
+    "phrase": "servus, Sextus, scriba?",
+    "abbrDisplay": -1,
+    "id": "4567",
+    "abbrSearchList": [
+      "S"
+    ]
+  },
+  {
+    "abbrDisplayImage": "ss-strikethrough",
+    "isSpecial": true,
+    "phrase": "sestertii, sextarii",
+    "abbrDisplay": -1,
+    "id": "4568",
+    "abbrSearchList": [
+      "SS"
+    ]
+  },
+  {
+    "abbrDisplayImage": "star",
+    "isSpecial": true,
+    "phrase": "denarius",
+    "abbrDisplay": -1,
+    "id": "4569",
+    "abbrSearchList": [
+      "*"
+    ]
+  },
+  {
+    "abbrDisplayImage": "wavy-vertical-line",
+    "isSpecial": true,
+    "phrase": "centurio",
+    "abbrDisplay": -1,
+    "id": "4570",
+    "abbrSearchList": [
+      "CC"
+    ]
+  },
+  {
+    "abbrDisplayImage": "xv-overline",
+    "isSpecial": true,
+    "phrase": "quindecimvir",
+    "abbrDisplay": -1,
+    "id": "4571",
+    "abbrSearchList": [
+      "XV"
+    ]
+  },
+  {
+    "abbrDisplayImage": "z-strikethrough",
+    "isSpecial": true,
+    "phrase": "centurio",
+    "abbrDisplay": -1,
+    "id": "4572",
+    "abbrSearchList": [
+      "Z"
+    ]
+  },
+  {
+    "iosDisplay": "Ↄ",
+    "abbrDisplayImage": "c-reversed",
+    "isSpecial": true,
+    "phrase": "caput ?",
+    "abbrDisplay": -1,
+    "id": "4573",
+    "abbrSearchList": [
+      "C"
+    ]
+  },
+  {
+    "iosDisplay": "Ↄ",
+    "abbrDisplayImage": "c-reversed",
+    "isSpecial": true,
+    "phrase": "Gaia = femina",
+    "abbrDisplay": -1,
+    "id": "4574",
+    "abbrSearchList": [
+      "C"
+    ]
+  },
+  {
+    "isSpecial": true,
+    "phrase": "Gaia = femina",
+    "abbrDisplay": "7",
+    "id": "4575",
+    "abbrSearchList": [
+      "C",
+      "7"
+    ]
+  },
+  {
+    "iosDisplay": "Ↄ",
+    "abbrDisplayImage": "c-reversed",
+    "isSpecial": true,
+    "phrase": "conductor",
+    "abbrDisplay": -1,
+    "id": "4577",
+    "abbrSearchList": [
+      "C"
+    ]
+  },
+  {
+    "isSpecial": true,
+    "phrase": "contra (legem, retiarius, etc.)",
+    "abbrDisplay": "7",
+    "id": "4578",
+    "abbrSearchList": [
+      "C",
+      "7"
+    ]
+  },
+  {
+    "iosDisplay": "Ↄ",
+    "abbrDisplayImage": "c-reversed",
+    "isSpecial": true,
+    "phrase": "contrascriptor",
+    "abbrDisplay": -1,
+    "id": "4580",
+    "abbrSearchList": [
+      "C"
+    ]
+  },
+  {
+    "isSpecial": true,
+    "phrase": "contrascriptor",
+    "abbrDisplay": "7",
+    "id": "4581",
+    "abbrSearchList": [
+      "C",
+      "7"
+    ]
+  },
+  {
+    "isSpecial": true,
+    "phrase": "conventus",
+    "abbrDisplay": "7",
+    "id": "4583",
+    "abbrSearchList": [
+      "C",
+      "7"
+    ]
+  },
+  {
+    "iosDisplay": "Ↄ",
+    "abbrDisplayImage": "c-reversed",
+    "isSpecial": true,
+    "phrase": "coronarum in inscriptions of gladiators",
+    "abbrDisplay": -1,
+    "id": "4585",
+    "abbrSearchList": [
+      "C"
+    ]
+  },
+  {
+    "iosDisplay": "ↃↃ",
+    "abbrDisplayImage": "cc-reversed",
+    "isSpecial": true,
+    "phrase": "Gaiae (= feminae) duae",
+    "abbrDisplay": -1,
+    "id": "4586",
+    "abbrSearchList": [
+      "CC"
+    ]
+  },
+  {
+    "iosDisplay": "ↃↃↃ",
+    "abbrDisplayImage": "ccc-reversed",
+    "isSpecial": true,
+    "phrase": "Gaiae (= feminae) tres",
+    "abbrDisplay": -1,
+    "id": "4587",
+    "abbrSearchList": [
+      "CCC"
+    ]
+  },
+  {
+    "iosDisplay": "ↃↃ · EXSERC",
+    "abbrDisplayImage": "ccexserc-reversed",
+    "isSpecial": true,
+    "phrase": "centuriones (duo) exercitatores",
+    "abbrDisplay": -1,
+    "id": "4588",
+    "abbrSearchList": [
+      "CCEXSERC"
+    ]
+  },
+  {
+    "iosDisplay": "Ↄ · L",
+    "abbrDisplayImage": "cl-reversed",
+    "isSpecial": true,
+    "phrase": "mulieris libertus, liberta",
+    "abbrDisplay": -1,
+    "id": "4589",
+    "abbrSearchList": [
+      "CL"
+    ]
+  },
+  {
+    "iosDisplay": "L · Ↄ",
+    "abbrDisplayImage": "lc-reversed",
+    "isSpecial": true,
+    "phrase": "mulieris liberta",
+    "abbrDisplay": -1,
+    "id": "4590",
+    "abbrSearchList": [
+      "LC"
+    ]
+  },
+  {
+    "isSpecial": true,
+    "phrase": "cohors equitata miliaria",
+    "abbrDisplay": "COH EQ ∞",
+    "id": "4591",
+    "abbrSearchList": [
+      "COHEQ"
+    ]
+  },
+  {
+    "isSpecial": true,
+    "phrase": "coh. I Flavia miliaria equitata sagittariorum",
+    "abbrDisplay": "COH I FL ∞ EQ SAG",
+    "id": "4592",
+    "abbrSearchList": [
+      "COHIFLEQSAG"
+    ]
+  },
+  {
+    "isSpecial": true,
+    "phrase": "cohors praetoria",
+    "abbrDisplay": "COH .. PR",
+    "id": "4593",
+    "abbrSearchList": [
+      "COHPR"
+    ]
+  },
+  {
+    "isSpecial": true,
+    "phrase": "cohors vigilum",
+    "abbrDisplay": "COH .. VIG",
+    "id": "4594",
+    "abbrSearchList": [
+      "COHVIG"
+    ]
+  },
+  {
+    "isSpecial": true,
+    "phrase": "cohors I Ulpia…Antoniana",
+    "abbrDisplay": "COH I VLP .. ANT",
+    "id": "4595",
+    "abbrSearchList": [
+      "COHIVLPANT"
+    ]
+  },
+  {
+    "isSpecial": true,
+    "phrase": "contraretiarius",
+    "abbrDisplay": "7 RET",
+    "id": "4596",
+    "abbrSearchList": [
+      "CRET",
+      "7RET5CRET"
+    ]
+  },
+  {
+    "iosDisplay": "Ↄ · S",
+    "abbrDisplayImage": "cs-reversed",
+    "isSpecial": true,
+    "phrase": "contrascriptor",
+    "abbrDisplay": -1,
+    "id": "4598",
+    "abbrSearchList": [
+      "CS"
+    ]
+  },
+  {
+    "iosDisplay": "ↃSↃ",
+    "abbrDisplayImage": "csc-reversed",
+    "isSpecial": true,
+    "phrase": "contra scriptor",
+    "abbrDisplay": -1,
+    "id": "4599",
+    "abbrSearchList": [
+      "CSC"
+    ]
+  },
+  {
+    "isSpecial": true,
+    "phrase": "contra scriptor",
+    "abbrDisplay": "7SC",
+    "id": "4600",
+    "abbrSearchList": [
+      "7SC",
+      "CSC"
+    ]
+  },
+  {
+    "iosDisplay": "ↃSↃR",
+    "abbrDisplayImage": "cscr-reversed",
+    "isSpecial": true,
+    "phrase": "contra scriptor",
+    "abbrDisplay": -1,
+    "id": "4602",
+    "abbrSearchList": [
+      "CSCR"
+    ]
+  },
+  {
+    "isSpecial": true,
+    "phrase": "contra scriptor",
+    "abbrDisplay": "7SCR",
+    "id": "4603",
+    "abbrSearchList": [
+      "CSCR",
+      "7SCR"
+    ]
+  },
+  {
+    "iosDisplay": "Ↄ · TRA",
+    "abbrDisplayImage": "ctra-reversed",
+    "isSpecial": true,
+    "phrase": "contra",
+    "abbrDisplay": -1,
+    "id": "4605",
+    "abbrSearchList": [
+      "CTRA"
+    ]
+  },
+  {
+    "iosDisplay": "L · Ↄ · IX",
+    "abbrDisplayImage": "lcix-reversed",
+    "isSpecial": true,
+    "phrase": "liberatus coronarum novem",
+    "abbrDisplay": -1,
+    "id": "4606",
+    "abbrSearchList": [
+      "LCIX"
+    ]
+  },
+  {
+    "isSpecial": true,
+    "phrase": "mulieris libertus, liberta",
+    "abbrDisplay": "W L",
+    "id": "4607",
+    "abbrSearchList": [
+      "WL"
+    ]
+  },
+  {
+    "abbrDisplayImage": "p-reversed",
+    "isSpecial": true,
+    "phrase": "puella",
+    "abbrDisplay": -1,
+    "id": "4608",
+    "abbrSearchList": [
+      "P"
+    ]
+  },
+  {
+    "abbrDisplayImage": "vp-reversed",
+    "isSpecial": true,
+    "phrase": "pupilla",
+    "abbrDisplay": -1,
+    "id": "4609",
+    "abbrSearchList": [
+      "VP",
+      "PV"
+    ]
+  },
+  {
+    "iosDisplay": "III · Ↄ · L",
+    "abbrDisplayImage": "iiicl-reversed",
+    "isSpecial": true,
+    "phrase": "trium mulierum libertus, liberta",
+    "abbrDisplay": -1,
+    "id": "4611",
+    "abbrSearchList": [
+      "IIICL"
+    ]
+  },
+  {
+    "iosDisplay": "Ↄ",
+    "abbrDisplayImage": "c-reversed",
+    "isSpecial": true,
+    "phrase": "centesima",
+    "abbrDisplay": -1,
+    "id": "4612",
+    "abbrSearchList": [
+      "C"
+    ]
+  },
+  {
+    "iosDisplay": "Ↄ",
+    "abbrDisplayImage": "c-reversed",
+    "isSpecial": true,
+    "phrase": "centurio",
+    "abbrDisplay": -1,
+    "id": "4613",
+    "abbrSearchList": [
+      "C"
+    ]
+  },
+  {
+    "abbrDisplayImage": "vp-reversed",
+    "isSpecial": true,
+    "phrase": "sextarius",
+    "abbrDisplay": -1,
+    "id": "4614",
+    "abbrSearchList": [
+      "C"
+    ]
+  },
+  {
+    "abbrDisplayImage": "chevron-right",
+    "isSpecial": true,
+    "phrase": "conventus",
+    "abbrDisplay": -1,
+    "id": "4615",
+    "abbrSearchList": [
+      ">"
+    ]
+  },
+  {
+    "iosDisplay": "ↃↃ · L",
+    "abbrDisplayImage": "ccl-reversed",
+    "isSpecial": true,
+    "phrase": "duarum mulierum libertus",
+    "abbrDisplay": -1,
+    "id": "4616",
+    "abbrSearchList": [
+      "CCL"
+    ]
+  },
+  {
+    "isSpecial": true,
+    "phrase": "obiit, obitus",
+    "abbrDisplay": "ϴ",
+    "id": "4617",
+    "abbrSearchList": [
+      "O"
+    ]
+  },
+  {
+    "abbrDisplayImage": "c-reversed-double-vertical",
+    "isSpecial": true,
+    "phrase": "feminae duae",
+    "abbrDisplay": -1,
+    "id": "4648",
+    "abbrSearchList": [
+      "CC"
+    ]
+  }
+]
