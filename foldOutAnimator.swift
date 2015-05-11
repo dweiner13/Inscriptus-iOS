@@ -23,35 +23,40 @@ class foldOutAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     }
     
     func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
-        var fromVC = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)!
-        var toVC = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)!
+        var presenting: UIViewController = self.presenting ? transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)! : transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)!
+        var presented: UIViewController = self.presenting ? transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)! : transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)!
         
         // Extra margin above the presented view
-        let extraTopMargin: CGFloat = 10
+        let topMargin: CGFloat = 20
         
-        let appFrame = UIScreen.mainScreen().applicationFrame
-        let appWidth = appFrame.width
-        let appHeight = appFrame.height
-        
+//        let appFrame = UIScreen.mainScreen().applicationFrame
+//        let appWidth = appFrame.width
+//        let appHeight = appFrame.height
+//        
         let screenFrame = UIScreen.mainScreen().bounds
-        let screenWidth = screenFrame.width
-        let screenHeight = screenFrame.height
+//        let screenWidth = screenFrame.width
+//        let screenHeight = screenFrame.height
         
-        var startFrame = CGRect(x: 0, y: screenHeight, width: appWidth, height: appHeight - foldOutBelowRect.height - extraTopMargin)
+        let viewFrame = presenting.view.frame
+        let viewWidth = viewFrame.width
+        let viewHeight = viewFrame.height
         
-        var statusBarBackground = UIView(frame: CGRect(x: 0, y: -20, width: appWidth, height: 20))
+        var startFrame = CGRect(x: 0, y: viewHeight, width: viewWidth, height: viewHeight - foldOutBelowRect.height - topMargin)
+        
+        println("screenFrame\t\t \(screenFrame)")
+        println("startFrame\t\t\t \(startFrame)")
+        println("viewFrame\t\t\t \(viewFrame)")
+        println("foldOutBelowRect\t \(foldOutBelowRect)")
+        
+        var statusBarBackground = UIView(frame: CGRect(x: 0, y: -20, width: viewWidth, height: 20))
         statusBarBackground.backgroundColor = UIColor.whiteColor()
         statusBarBackground.alpha = 0
         
-        // Displays over the presenting view controller
-//        var transparentDismissButton = UIButton(frame: foldOutBelowRect)
-//        transparentDismissButton.alpha = 0
-        
         if (self.presenting) {
-            toVC.view.frame = startFrame
+            presented.view.frame = startFrame
             
-            let shadowPath = UIBezierPath(rect: toVC.view.bounds)
-            var layer = toVC.view.layer
+            let shadowPath = UIBezierPath(rect: presented.view.bounds)
+            var layer = presented.view.layer
             layer.masksToBounds = false
             layer.shadowColor = UIColor.blackColor().CGColor
             layer.shadowOffset = CGSize(width: 0, height: 0)
@@ -59,7 +64,7 @@ class foldOutAnimator: NSObject, UIViewControllerAnimatedTransitioning {
             layer.shadowPath = shadowPath.CGPath
             layer.shadowRadius = 5
             
-            transitionContext.containerView().addSubview(toVC.view)
+            transitionContext.containerView().addSubview(presented.view)
             transitionContext.containerView().addSubview(statusBarBackground)
             
             UIView.animateWithDuration(self.transitionDuration(transitionContext),
@@ -67,8 +72,8 @@ class foldOutAnimator: NSObject, UIViewControllerAnimatedTransitioning {
                 options: .CurveEaseInOut,
                 animations: {
                     () in
-                    fromVC.view.transform = CGAffineTransformMakeTranslation(0, -self.foldOutBelowRect.minY)
-                    toVC.view.transform = CGAffineTransformMakeTranslation(0, -(appHeight - self.foldOutBelowRect.height - extraTopMargin))
+                    presenting.view.transform = CGAffineTransformMakeTranslation(0, -self.foldOutBelowRect.minY - topMargin)
+                    presented.view.transform = CGAffineTransformMakeTranslation(0, -(viewHeight - self.foldOutBelowRect.height - topMargin))
                     statusBarBackground.transform = CGAffineTransformMakeTranslation(0, 20)
                     statusBarBackground.alpha = 1
                 }, completion: {
@@ -86,8 +91,8 @@ class foldOutAnimator: NSObject, UIViewControllerAnimatedTransitioning {
                     () in
                     statusBarBackground.transform = CGAffineTransformMakeTranslation(0, 0)
                     statusBarBackground.alpha = 0
-                    fromVC.view.transform = CGAffineTransformMakeTranslation(0, 0)
-                    toVC.view.transform = CGAffineTransformMakeTranslation(0, 0)
+                    presented.view.transform = CGAffineTransformMakeTranslation(0, 0)
+                    presenting.view.transform = CGAffineTransformMakeTranslation(0, 0)
                 }, completion: {
                    (b) in
                     transitionContext.completeTransition(true)

@@ -159,7 +159,7 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
         self.tableView.reloadData()
     }
     
-    // updateSearchResultsForSearchController() should be called when scope changed but isnt
+    // updateSearchResultsForSearchController() should be called when scope changed but isn't
     func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
         updateSearchResultsForSearchController(self.searchController!)
     }

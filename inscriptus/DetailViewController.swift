@@ -8,15 +8,15 @@
 
 import UIKit
 
-class DetailViewController: UITableViewController, WhitakerScraperDelegate, DetailHeaderViewDelegate, UIViewControllerTransitioningDelegate {
+class DetailViewController: UITableViewController, WhitakerScraperDelegate, ButtonFooterViewDelegate, UIViewControllerTransitioningDelegate {
     @IBOutlet weak var abbreviationCell: UITableViewCell!
     @IBOutlet weak var fulltextCell: UITableViewCell!
     @IBOutlet weak var searchforCell: UITableViewCell!
     
-    @IBOutlet var detailHeaderView: DetailHeaderView!
+    @IBOutlet var buttonFooterView: ButtonFooterView!
     
     var whitakers = WhitakerScraper()
-    var fullTextHeader: DetailHeaderView!
+    var fulltextFooterView: ButtonFooterView!
     
     var lastSelectedIndexPath: NSIndexPath?
     
@@ -40,8 +40,8 @@ class DetailViewController: UITableViewController, WhitakerScraperDelegate, Deta
         }
         else {
             self.sections = [
-                (header:nil, content:self.detailItem.displayText!),
-                (header:nil, content:self.detailItem.longText),
+                (header:nil, content:self.detailItem.displayText!.stringByReplacingOccurrencesOfString("·", withString: "", options: .allZeros)),
+                (header:nil, content:self.detailItem.longText)
 //                (header:"Search for with", content:self.detailItem.searchStrings!.first!)
             ]
         }
@@ -113,7 +113,6 @@ class DetailViewController: UITableViewController, WhitakerScraperDelegate, Deta
         var cell = self.tableView.dequeueReusableCellWithIdentifier("basicCell") as! BasicCell
         cell.mainLabel!.text = self.sections[indexPath.section].content
         if indexPath.section == ABBREVIATION_SECTION_INDEX {
-//            cell.mainLabel!.font = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline, scaleFactor: 1.45)
             cell.mainLabel!.font = UIFont.preferredFontForFontName("Academy Engraved LET", scaleFactor: 2)
             cell.mainLabel!.textAlignment = NSTextAlignment.Center
         }
@@ -124,29 +123,25 @@ class DetailViewController: UITableViewController, WhitakerScraperDelegate, Deta
         return cell
     }
     
-    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if self.sections[section].header == nil {
-            return nil
-        }
-        
-        NSBundle.mainBundle().loadNibNamed("DetailHeaderView", owner: self, options: nil)
-        
-        self.detailHeaderView.textLabel.text = self.sections[section].header
-        
+    override func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         if section == FULLTEXT_SECTION_INDEX {
-            self.detailHeaderView.lookupButton.hidden = false
-            self.detailHeaderView.buttonDelegate = self
-            self.fullTextHeader = detailHeaderView
+            NSBundle.mainBundle().loadNibNamed("ButtonFooterView", owner: self, options: nil)
+            
+            self.buttonFooterView.buttonDelegate = self
+            self.fulltextFooterView = self.buttonFooterView
+            
+            return self.buttonFooterView
         }
         
-        return self.detailHeaderView
+        return nil
     }
     
-    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if self.sections[section].header == nil {
-            return 0
+    override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if section == FULLTEXT_SECTION_INDEX {
+            return 30
         }
-        return 34
+        
+        return 0
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -172,7 +167,7 @@ class DetailViewController: UITableViewController, WhitakerScraperDelegate, Deta
     
     func lookupDefinitions(button: UIButton) {
         self.whitakers.beginDefinitionRequestForWord(self.sections[FULLTEXT_SECTION_INDEX].content, targetLanguage: .English)
-        self.fullTextHeader.currentState = .Loading
+        self.fulltextFooterView.currentState = .Loading
     }
     
     override func canPerformAction(action: Selector, withSender sender: AnyObject?) -> Bool {
@@ -191,12 +186,12 @@ class DetailViewController: UITableViewController, WhitakerScraperDelegate, Deta
     //MARK: - WhitakerScraperDelegate
     
     func whitakerScraper(scraper: WhitakerScraper, didLoadResult result: WhitakerResult) {
-        self.fullTextHeader.currentState = .Default
+        self.fulltextFooterView.currentState = .Default
         self.performSegueWithIdentifier("showWords", sender: result)
     }
     
     func whitakerScraper(scraper: WhitakerScraper, didFailWithError error: NSError) {
-        self.fullTextHeader.currentState = .Default
+        self.fulltextFooterView.currentState = .Default
         
         var alert = UIAlertController(title: "Oops!", message: error.description, preferredStyle: .Alert)
         let action = UIAlertAction(title: "OK", style: .Default, handler: nil)
@@ -204,9 +199,9 @@ class DetailViewController: UITableViewController, WhitakerScraperDelegate, Deta
         self.presentViewController(alert, animated: true, completion: nil)
     }
     
-    //MARK: - DetailHeaderViewDelegate
+    //MARK: - ButtonFooterViewDelegate
     
-    func detailHeaderView(headerView: DetailHeaderView, lookupButtonPressed button: UIButton, label: UILabel) {
+    func buttonFooterView(footerView: ButtonFooterView, buttonPressed button: UIButton) {
         self.lookupDefinitions(button)
     }
     
