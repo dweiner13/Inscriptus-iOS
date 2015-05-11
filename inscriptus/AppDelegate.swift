@@ -45,13 +45,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
     }
     
     func application(application: UIApplication, supportedInterfaceOrientationsForWindow window: UIWindow?) -> Int {
-        if let presentedViewController = window?.rootViewController?.presentedViewController {
-            if presentedViewController is DefinitionViewController {
-                return Int(UIInterfaceOrientationMask.Portrait.rawValue)
-            }
+        if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
+            return Int(UIInterfaceOrientationMask.Portrait.rawValue)
         }
         
-        return Int(UIInterfaceOrientationMask.AllButUpsideDown.rawValue)
+        return Int(UIInterfaceOrientationMask.All.rawValue)
     }
 
     // MARK: - Split view

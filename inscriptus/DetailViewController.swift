@@ -63,6 +63,7 @@ class DetailViewController: UITableViewController, WhitakerScraperDelegate, Butt
             self.tableView.contentInset = UIEdgeInsetsMake(-dummyViewHeight + 10, 0, 0, 0);
             
             self.tableView.registerNib(UINib(nibName: "BasicCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "basicCell")
+            self.tableView.registerNib(UINib(nibName: "InscribedCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "inscribedCell")
             
             self.whitakers.delegate = self
             
@@ -110,17 +111,20 @@ class DetailViewController: UITableViewController, WhitakerScraperDelegate, Butt
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = self.tableView.dequeueReusableCellWithIdentifier("basicCell") as! BasicCell
-        cell.mainLabel!.text = self.sections[indexPath.section].content
         if indexPath.section == ABBREVIATION_SECTION_INDEX {
+            var cell = self.tableView.dequeueReusableCellWithIdentifier("inscribedCell") as! InscribedCell
+            cell.mainLabel!.text = self.sections[indexPath.section].content
             cell.mainLabel!.font = UIFont.preferredFontForFontName("Academy Engraved LET", scaleFactor: 2)
             cell.mainLabel!.textAlignment = NSTextAlignment.Center
+            return cell
         }
         else {
+            var cell = self.tableView.dequeueReusableCellWithIdentifier("basicCell") as! BasicCell
+            cell.mainLabel!.text = self.sections[indexPath.section].content
             cell.mainLabel!.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody, scaleFactor: 1.1)
             cell.mainLabel!.textAlignment = NSTextAlignment.Center
+            return cell
         }
-        return cell
     }
     
     override func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {

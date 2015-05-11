@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7703" systemVersion="14E7f" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6711"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DetailViewController" customModule="inscriptus" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" restorationIdentifier="inscribedCell" selectionStyle="default" indentationWidth="10" rowHeight="69" id="2nV-3J-NgX" customClass="InscribedCell" customModule="inscriptus" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="321" height="69"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2nV-3J-NgX" id="UL2-OA-bah">
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Test" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g5K-IJ-mNA">
+                        <rect key="frame" x="8" y="25" width="305" height="31"/>
+                        <fontDescription key="fontDescription" name="AcademyEngravedLetPlain" family="Academy Engraved LET" pointSize="24"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="g5K-IJ-mNA" firstAttribute="top" secondItem="UL2-OA-bah" secondAttribute="topMargin" constant="4" id="4OR-qr-n5w"/>
+                    <constraint firstItem="g5K-IJ-mNA" firstAttribute="leading" secondItem="UL2-OA-bah" secondAttribute="leadingMargin" id="6BX-tB-KCu"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="g5K-IJ-mNA" secondAttribute="bottom" id="V7L-6u-BGb"/>
+                    <constraint firstItem="g5K-IJ-mNA" firstAttribute="top" secondItem="UL2-OA-bah" secondAttribute="topMargin" constant="15" id="X0h-aF-sTJ"/>
+                    <constraint firstItem="g5K-IJ-mNA" firstAttribute="trailing" secondItem="UL2-OA-bah" secondAttribute="trailingMargin" id="ZNQ-ly-OeH"/>
+                    <constraint firstItem="g5K-IJ-mNA" firstAttribute="top" secondItem="UL2-OA-bah" secondAttribute="topMargin" constant="17" id="Zxk-zf-BvF"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="g5K-IJ-mNA" secondAttribute="bottom" constant="6" id="dTB-dQ-RLQ"/>
+                    <constraint firstAttribute="bottom" secondItem="g5K-IJ-mNA" secondAttribute="bottom" id="mC6-7V-0wH"/>
+                    <constraint firstAttribute="centerY" secondItem="g5K-IJ-mNA" secondAttribute="centerY" id="nNR-t0-anf"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="g5K-IJ-mNA" secondAttribute="bottom" constant="4" id="qCh-55-fBl"/>
+                </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="4OR-qr-n5w"/>
+                        <exclude reference="V7L-6u-BGb"/>
+                        <exclude reference="X0h-aF-sTJ"/>
+                        <exclude reference="dTB-dQ-RLQ"/>
+                        <exclude reference="mC6-7V-0wH"/>
+                        <exclude reference="nNR-t0-anf"/>
+                    </mask>
+                </variation>
+            </tableViewCellContentView>
+            <color key="backgroundColor" red="0.95554131269454956" green="0.95570486783981323" blue="0.95553117990493774" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <connections>
+                <outlet property="mainLabel" destination="g5K-IJ-mNA" id="jUH-9e-OA9"/>
+            </connections>
+            <point key="canvasLocation" x="476.5" y="385.5"/>
+        </tableViewCell>
+    </objects>
+</document>

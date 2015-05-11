@@ -67,16 +67,14 @@ class AbbreviationCollection: NSObject {
         
         if scopeIndex == MasterViewController.searchScopeIndexAbbreviation {
             // Try to do an exact match
-            if let matchingAbbreviations = self.abbreviationsGrouped[searchString] {
+            if let matchingAbbreviations = self.abbreviationsGrouped[searchString.uppercaseString] {
                 resultAbbreviations = matchingAbbreviations
             }
-            else if let matchingAbbreviations = self.abbreviationsGrouped[searchString.uppercaseString] {
-                resultAbbreviations = matchingAbbreviations
-            }
-            var i = 0
+            
             // Do a partial match too
+            var i = 0
             for key: String in self.abbreviationsGrouped.keys {
-                if count(key) > count(searchString) && key.rangeOfString(searchString.lowercaseString, options: .CaseInsensitiveSearch) != nil {
+                if key.rangeOfString(searchString.lowercaseString, options: .CaseInsensitiveSearch) != nil || key.rangeOfString(searchString.lowercaseString.stringByReplacingOccurrencesOfString(" ", withString: "", options: NSStringCompareOptions.allZeros), options: .CaseInsensitiveSearch) != nil {
                     if let matchingAbbreviations: [Abbreviation] = self.abbreviationsGrouped[key] {
                         resultAbbreviations.extend(matchingAbbreviations)
                     }

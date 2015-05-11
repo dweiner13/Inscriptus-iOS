@@ -14,7 +14,6 @@ class DefinitionViewController: UIViewController, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var errorTextView: UITextView!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var actionButton: UIBarButtonItem!
     weak var popoverController: UIPopoverController?
     
     @IBOutlet weak var doneButton: UIBarButtonItem!
@@ -78,8 +77,6 @@ class DefinitionViewController: UIViewController, UIGestureRecognizerDelegate {
         self.errorTextView.hidden = true
         self.result = result
         
-        self.actionButton.enabled = true;
-        
         self.title = self.result.word
         self.navigationItem.title = self.result.word
             
@@ -131,13 +128,6 @@ class DefinitionViewController: UIViewController, UIGestureRecognizerDelegate {
         if let PC = self.popoverController {
             PC.popoverContentSize = CGSize(width: 400.0, height: self.tableView.rectForSection(0).size.height)
         }
-    }
-    
-    @IBAction func actionButtonPressed(sender: UIBarButtonItem) {
-        var activityController: UIActivityViewController = UIActivityViewController(activityItems: [result.rawResult], applicationActivities: nil)
-        activityController.popoverPresentationController?.barButtonItem = sender;
-        
-        self.showViewController(activityController, sender: self)
     }
     
     @IBAction func doneButtonPressed(sender: UIBarButtonItem) {

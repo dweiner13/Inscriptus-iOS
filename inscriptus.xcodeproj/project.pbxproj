@@ -10,6 +10,8 @@
 		E00CBAD11AF6C0FD00DAD03B /* DefaultDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E00CBAD01AF6C0FD00DAD03B /* DefaultDetailView.xib */; };
 		E01786A81B01295B0022F8E2 /* ButtonFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01786A71B01295B0022F8E2 /* ButtonFooterView.swift */; };
 		E01786AA1B0129B00022F8E2 /* ButtonFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E01786A91B0129B00022F8E2 /* ButtonFooterView.xib */; };
+		E01786AC1B0139ED0022F8E2 /* InscribedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E01786AB1B0139ED0022F8E2 /* InscribedCell.xib */; };
+		E01786AE1B0139F70022F8E2 /* InscribedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01786AD1B0139F70022F8E2 /* InscribedCell.swift */; };
 		E01D1D021B00503200ABB9DF /* foldOutAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01D1D011B00503200ABB9DF /* foldOutAnimator.swift */; };
 		E023FBE81AE5AABF00E8DBAC /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E023FBE71AE5AABF00E8DBAC /* UIFont+.swift */; };
 		E028AC431A98344F0058D9A1 /* AbbreviationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E028AC421A98344F0058D9A1 /* AbbreviationCell.swift */; };
@@ -122,6 +124,8 @@
 		E00CBAD01AF6C0FD00DAD03B /* DefaultDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DefaultDetailView.xib; sourceTree = "<group>"; };
 		E01786A71B01295B0022F8E2 /* ButtonFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonFooterView.swift; sourceTree = "<group>"; };
 		E01786A91B0129B00022F8E2 /* ButtonFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ButtonFooterView.xib; sourceTree = "<group>"; };
+		E01786AB1B0139ED0022F8E2 /* InscribedCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InscribedCell.xib; sourceTree = "<group>"; };
+		E01786AD1B0139F70022F8E2 /* InscribedCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InscribedCell.swift; sourceTree = "<group>"; };
 		E01D1D011B00503200ABB9DF /* foldOutAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = foldOutAnimator.swift; sourceTree = SOURCE_ROOT; };
 		E023FBE71AE5AABF00E8DBAC /* UIFont+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+.swift"; sourceTree = "<group>"; };
 		E028AC421A98344F0058D9A1 /* AbbreviationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbbreviationCell.swift; sourceTree = "<group>"; };
@@ -260,6 +264,8 @@
 				E028AC421A98344F0058D9A1 /* AbbreviationCell.swift */,
 				E096AFCB1AFABCAE002D6E5D /* BasicCell.xib */,
 				E03ADFED1AF6CD41002CFD5C /* BasicCell.swift */,
+				E01786AB1B0139ED0022F8E2 /* InscribedCell.xib */,
+				E01786AD1B0139F70022F8E2 /* InscribedCell.swift */,
 				E0CA91151AF5A4D40071579B /* DetailHeaderView.xib */,
 				E0CA91171AF5A5AF0071579B /* DetailHeaderView.swift */,
 				E01786A91B0129B00022F8E2 /* ButtonFooterView.xib */,
@@ -548,6 +554,7 @@
 				E0A49C161AC34AD5008DF28C /* bf-strikethrough 3.png in Resources */,
 				E0FDFA211A9545CC00659871 /* Main.storyboard in Resources */,
 				E0A49C221AC34AD5008DF28C /* ccl-reversed.png in Resources */,
+				E01786AC1B0139ED0022F8E2 /* InscribedCell.xib in Resources */,
 				E0A49C151AC34AD5008DF28C /* bf-ligature.png in Resources */,
 				E0A49C2C1AC34AD5008DF28C /* cvr-star-fl.png in Resources */,
 				E0A49C3A1AC34AD5008DF28C /* lcix-reversed.png in Resources */,
@@ -623,6 +630,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E01786AE1B0139F70022F8E2 /* InscribedCell.swift in Sources */,
 				E0CA91181AF5A5AF0071579B /* DetailHeaderView.swift in Sources */,
 				E096AFCE1AFAC041002D6E5D /* WhitakerResult.swift in Sources */,
 				E0FDFA1E1A9545CC00659871 /* DetailViewController.swift in Sources */,
@@ -787,6 +795,7 @@
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "inscriptus/inscriptus-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -809,6 +818,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "inscriptus/inscriptus-Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
