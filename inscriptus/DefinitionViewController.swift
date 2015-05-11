@@ -20,6 +20,21 @@ class DefinitionViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var doneButton: UIBarButtonItem!
     var result: WhitakerResult!
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.tableView.rowHeight = UITableViewAutomaticDimension;
+        self.tableView.estimatedRowHeight = 130.0; // set to whatever your "average" cell height is
+        
+        var topInset: CGFloat = 64
+        
+        self.adjustViewsForOrientation()
+        if self.result != nil {
+            updateResult(self.result)
+        }
+    }
+
+    
     override func viewWillAppear(animated: Bool) {
         UIDevice.currentDevice().beginGeneratingDeviceOrientationNotifications()
         
@@ -47,26 +62,6 @@ class DefinitionViewController: UIViewController, UIGestureRecognizerDelegate {
         self.tableView.scrollIndicatorInsets  = UIEdgeInsets(top: topInset, left: 0, bottom: 44,  right: 0)
         self.errorTextView.textContainerInset = UIEdgeInsets(top: topInset, left: 8, bottom: 44, right: 8)
         
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        self.tableView.rowHeight = UITableViewAutomaticDimension;
-        self.tableView.estimatedRowHeight = 130.0; // set to whatever your "average" cell height is
-        
-        var topInset: CGFloat = 64
-        
-        self.adjustViewsForOrientation()
-        if self.result != nil {
-            updateResult(self.result)
-        }
-        
-        var recognizer = UITapGestureRecognizer(target: self, action: "didRecognizeTap:")
-        recognizer.numberOfTapsRequired = 1
-        recognizer.cancelsTouchesInView = false
-        self.view.window?.addGestureRecognizer(recognizer)
-        recognizer.delegate = self
     }
     
     override func viewDidDisappear(animated: Bool) {
@@ -147,26 +142,6 @@ class DefinitionViewController: UIViewController, UIGestureRecognizerDelegate {
     
     @IBAction func doneButtonPressed(sender: UIBarButtonItem) {
         self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
-    }
-    
-    func didRecognizeTap(sender: UITapGestureRecognizer) {
-        
-        println("Did recognize tap")
-        
-        if sender.state == UIGestureRecognizerState.Ended {
-            let rootView = self.view.window?.rootViewController!.view
-            let tapLocation = sender.locationInView(rootView)
-            if !self.view.pointInside(self.view.convertPoint(tapLocation, fromView: rootView), withEvent: nil) {
-                self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
-                self.view.window?.removeGestureRecognizer(sender)
-            }
-        }
-    }
-    
-    //MARK: - UIGestureRecognizerDelegate
-    
-    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return true
     }
 }
 
