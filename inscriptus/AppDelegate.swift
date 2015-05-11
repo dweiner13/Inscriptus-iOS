@@ -43,6 +43,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
+    
+    func application(application: UIApplication, supportedInterfaceOrientationsForWindow window: UIWindow?) -> Int {
+        if let presentedViewController = window?.rootViewController?.presentedViewController {
+            if presentedViewController is DefinitionViewController {
+                return Int(UIInterfaceOrientationMask.Portrait.rawValue)
+            }
+        }
+        
+        return Int(UIInterfaceOrientationMask.AllButUpsideDown.rawValue)
+    }
 
     // MARK: - Split view
 

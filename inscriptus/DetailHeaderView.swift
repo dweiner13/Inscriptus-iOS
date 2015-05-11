@@ -8,11 +8,30 @@
 
 import UIKit
 
+enum DetailHeaderViewState {
+    case Default, Loading
+}
+
 class DetailHeaderView: UIView {
     
     @IBOutlet weak var textLabel: UILabel!
-    @IBOutlet weak var button: UIButton!
+    @IBOutlet weak var lookupButton: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
+    var currentState: DetailHeaderViewState = .Default {
+        didSet {
+            switch self.currentState {
+            case .Default:
+                self.activityIndicator.hidden = true
+                self.activityIndicator.stopAnimating()
+                self.lookupButton.hidden = false
+            case .Loading:
+                self.activityIndicator.hidden = false
+                self.activityIndicator.startAnimating()
+                self.lookupButton.hidden = true
+            }
+        }
+    }
     
     weak var buttonDelegate: DetailHeaderViewDelegate?
     
@@ -22,14 +41,15 @@ class DetailHeaderView: UIView {
         self.activityIndicator.hidden = true
     }
     
-    @IBAction func buttonPressed(sender: UIButton) {
+    @IBAction func lookupButtonPressed(sender: UIButton) {
         println("Button press in DetailHeaderView")
-        self.buttonDelegate?.detailHeaderView(self, buttonPressed: button, label: self.textLabel)
+        self.buttonDelegate?.detailHeaderView(self,
+            lookupButtonPressed: sender, label: self.textLabel)
     }
 }
 
 protocol DetailHeaderViewDelegate: class {
     
-    func detailHeaderView(headerView: DetailHeaderView, buttonPressed button: UIButton, label: UILabel)
+    func detailHeaderView(headerView: DetailHeaderView, lookupButtonPressed button: UIButton, label: UILabel)
     
 }

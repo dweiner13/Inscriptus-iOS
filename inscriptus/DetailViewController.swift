@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DetailViewController: UITableViewController, WhitakerScraperDelegate, DetailHeaderViewDelegate {
+class DetailViewController: UITableViewController, WhitakerScraperDelegate, DetailHeaderViewDelegate, UIViewControllerTransitioningDelegate {
     @IBOutlet weak var abbreviationCell: UITableViewCell!
     @IBOutlet weak var fulltextCell: UITableViewCell!
     @IBOutlet weak var searchforCell: UITableViewCell!
@@ -76,10 +76,26 @@ class DetailViewController: UITableViewController, WhitakerScraperDelegate, Deta
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "showDefinitions" {
+//        if segue.identifier == "showDefinitions" {
+//            let def = segue.destinationViewController as! DefinitionViewController
+//            
+//            def.result = sender as! WhitakerResult
+//        }
+        if segue.identifier == "showWords" {
             let def = segue.destinationViewController as! DefinitionViewController
-            
             def.result = sender as! WhitakerResult
+            def.transitioningDelegate = self
+            def.modalPresentationStyle = .Custom
+        }
+    }
+    
+    override func shouldAutorotate() -> Bool {
+        println("Calling shouldAutorotate() in DetialViewController")
+        if self.presentedViewController != nil {
+            return false
+        }
+        else {
+            return true
         }
     }
     
@@ -106,7 +122,7 @@ class DetailViewController: UITableViewController, WhitakerScraperDelegate, Deta
         self.detailHeaderView.textLabel.text = self.sections[section].header
         
         if section == FULLTEXT_SECTION_INDEX {
-            self.detailHeaderView.button.hidden = false
+            self.detailHeaderView.lookupButton.hidden = false
             self.detailHeaderView.buttonDelegate = self
             self.fullTextHeader = detailHeaderView
         }
@@ -140,34 +156,8 @@ class DetailViewController: UITableViewController, WhitakerScraperDelegate, Deta
     }
     
     func lookupDefinitions(button: UIButton) {
-        var alert = UIAlertController(title: "Select a word", message: nil, preferredStyle: .ActionSheet)
-        let longText = self.sections[FULLTEXT_SECTION_INDEX].content
-        
-        let words = longText.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
-        
-        if count(words) == 1 {
-            self.whitakers.beginDefinitionRequestForWord(words[0], targetLanguage: .English)
-            self.fullTextHeader.activityIndicator.startAnimating()
-            fullTextHeader.activityIndicator.hidden = false
-            fullTextHeader.button.hidden = true
-        }
-        else {
-            for word in words {
-                let action = UIAlertAction(title: word, style: .Default) {
-                    action -> Void in
-                    self.whitakers.beginDefinitionRequestForWord(word, targetLanguage: .English)
-                    self.fullTextHeader.activityIndicator.startAnimating()
-                    self.fullTextHeader.activityIndicator.hidden = false
-                    self.fullTextHeader.button.hidden = true
-                }
-                alert.addAction(action)
-            }
-            let action = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
-            alert.addAction(action)
-            alert.popoverPresentationController?.sourceView = self.fullTextHeader
-            alert.popoverPresentationController?.sourceRect = button.frame
-            self.presentViewController(alert, animated: true, completion: nil)
-        }
+        self.whitakers.beginDefinitionRequestForWord(self.sections[FULLTEXT_SECTION_INDEX].content, targetLanguage: .English)
+        self.fullTextHeader.currentState = .Loading
     }
     
     override func canPerformAction(action: Selector, withSender sender: AnyObject?) -> Bool {
@@ -186,16 +176,12 @@ class DetailViewController: UITableViewController, WhitakerScraperDelegate, Deta
     //MARK: - WhitakerScraperDelegate
     
     func whitakerScraper(scraper: WhitakerScraper, didLoadResult result: WhitakerResult) {
-        self.fullTextHeader.activityIndicator.stopAnimating()
-        self.fullTextHeader.activityIndicator.hidden = true
-        self.fullTextHeader.button.hidden = false
-        self.performSegueWithIdentifier("showDefinitions", sender: result)
+        self.fullTextHeader.currentState = .Default
+        self.performSegueWithIdentifier("showWords", sender: result)
     }
     
     func whitakerScraper(scraper: WhitakerScraper, didFailWithError error: NSError) {
-        self.fullTextHeader.activityIndicator.stopAnimating()
-        self.fullTextHeader.activityIndicator.hidden = true
-        self.fullTextHeader.button.hidden = false
+        self.fullTextHeader.currentState = .Default
         
         var alert = UIAlertController(title: "Oops!", message: error.description, preferredStyle: .Alert)
         let action = UIAlertAction(title: "OK", style: .Default, handler: nil)
@@ -205,8 +191,24 @@ class DetailViewController: UITableViewController, WhitakerScraperDelegate, Deta
     
     //MARK: - DetailHeaderViewDelegate
     
-    func detailHeaderView(headerView: DetailHeaderView, buttonPressed button: UIButton, label: UILabel) {
-        println("Button press in delegate")
+    func detailHeaderView(headerView: DetailHeaderView, lookupButtonPressed button: UIButton, label: UILabel) {
         self.lookupDefinitions(button)
+    }
+    
+    //MARK: - UIViewControllerTransitioningDelegate
+    func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        let headerRect = self.tableView.rectForHeaderInSection(FULLTEXT_SECTION_INDEX)
+        let cellRect = self.tableView.rectForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: FULLTEXT_SECTION_INDEX))
+        let bothRect = CGRectUnion(headerRect, cellRect)
+        var animator = foldOutAnimator(presenting: true, foldOutBelowRect: cellRect)
+        return animator
+    }
+    
+    func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        let headerRect = self.tableView.rectForHeaderInSection(FULLTEXT_SECTION_INDEX)
+        let cellRect = self.tableView.rectForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: FULLTEXT_SECTION_INDEX))
+        let bothRect = CGRectUnion(headerRect, cellRect)
+        var animator = foldOutAnimator(presenting: false, foldOutBelowRect: cellRect)
+        return animator
     }
 }

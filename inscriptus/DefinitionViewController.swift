@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DefinitionViewController: UIViewController {
+class DefinitionViewController: UIViewController, UIGestureRecognizerDelegate {
     
     private let cellIdentifier = "definitionCell"
     
@@ -17,8 +17,7 @@ class DefinitionViewController: UIViewController {
     @IBOutlet weak var actionButton: UIBarButtonItem!
     weak var popoverController: UIPopoverController?
     
-    @IBOutlet weak var navigationBarHeightConstraint: NSLayoutConstraint!
-    
+    @IBOutlet weak var doneButton: UIBarButtonItem!
     var result: WhitakerResult!
     
     override func viewWillAppear(animated: Bool) {
@@ -31,18 +30,23 @@ class DefinitionViewController: UIViewController {
         self.adjustViewsForOrientation()
     }
     
+    override func shouldAutorotate() -> Bool {
+        println("calling shouldAutorotate() in DefinitionViewController")
+        return false
+    }
+    
+    override func supportedInterfaceOrientations() -> Int {
+        println("Calling supportedInterfaceOrientations()")
+        return Int(UIInterfaceOrientationMask.Portrait.rawValue)
+    }
+    
     func adjustViewsForOrientation() {
         var topInset = CGFloat()
-        if UIApplication.sharedApplication().statusBarHidden || UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad {
-            topInset = 44
-        }
-        else {
-            topInset = 64
-        }
-        self.navigationBarHeightConstraint.constant = topInset
-        self.tableView.contentInset           = UIEdgeInsets(top: topInset, left: 0, bottom: 0, right:0);
-        self.tableView.scrollIndicatorInsets  = UIEdgeInsets(top: topInset, left: 0, bottom: 0,  right: 0)
-        self.errorTextView.textContainerInset = UIEdgeInsets(top: topInset, left: 8, bottom: 4, right: 8)
+        topInset = -12
+        self.tableView.contentInset           = UIEdgeInsets(top: topInset, left: 0, bottom: 44, right:0);
+        self.tableView.scrollIndicatorInsets  = UIEdgeInsets(top: topInset, left: 0, bottom: 44,  right: 0)
+        self.errorTextView.textContainerInset = UIEdgeInsets(top: topInset, left: 8, bottom: 44, right: 8)
+        
     }
 
     override func viewDidLoad() {
@@ -57,6 +61,12 @@ class DefinitionViewController: UIViewController {
         if self.result != nil {
             updateResult(self.result)
         }
+        
+        var recognizer = UITapGestureRecognizer(target: self, action: "didRecognizeTap:")
+        recognizer.numberOfTapsRequired = 1
+        recognizer.cancelsTouchesInView = false
+        self.view.window?.addGestureRecognizer(recognizer)
+        recognizer.delegate = self
     }
     
     override func viewDidDisappear(animated: Bool) {
@@ -136,9 +146,28 @@ class DefinitionViewController: UIViewController {
     }
     
     @IBAction func doneButtonPressed(sender: UIBarButtonItem) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
     }
     
+    func didRecognizeTap(sender: UITapGestureRecognizer) {
+        
+        println("Did recognize tap")
+        
+        if sender.state == UIGestureRecognizerState.Ended {
+            let rootView = self.view.window?.rootViewController!.view
+            let tapLocation = sender.locationInView(rootView)
+            if !self.view.pointInside(self.view.convertPoint(tapLocation, fromView: rootView), withEvent: nil) {
+                self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+                self.view.window?.removeGestureRecognizer(sender)
+            }
+        }
+    }
+    
+    //MARK: - UIGestureRecognizerDelegate
+    
+    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
 }
 
 extension DefinitionViewController: UITableViewDataSource, UITableViewDelegate {
