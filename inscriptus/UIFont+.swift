@@ -16,4 +16,12 @@ extension UIFont {
         let pointSize = descriptor.pointSize * scale
         return UIFont(descriptor: descriptor, size: pointSize)
     }
+    
+    // Lets us use Dynamic Type font sizes for custom fonts. Uses UIFontTextStyleBody for
+    // point size calculation.
+    static func preferredFontForFontName(name: String, scaleFactor scale: CGFloat) -> UIFont {
+        let descriptor = UIFontDescriptor.preferredFontDescriptorWithTextStyle(UIFontTextStyleBody)
+        let pointSize = descriptor.pointSize * scale
+        return UIFont(name: name, size: pointSize)!
+    }
 }

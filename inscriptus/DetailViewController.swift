@@ -27,7 +27,7 @@ class DetailViewController: UITableViewController, WhitakerScraperDelegate, Deta
         }
     }
     
-    var sections: [(header:String, content:String)]!
+    var sections: [(header:String?, content:String)]!
     
     let ABBREVIATION_SECTION_INDEX = 0
     let FULLTEXT_SECTION_INDEX = 1
@@ -40,9 +40,9 @@ class DetailViewController: UITableViewController, WhitakerScraperDelegate, Deta
         }
         else {
             self.sections = [
-                (header:"Abbreviation", content:self.detailItem.displayText!),
-                (header:"Full text", content:self.detailItem.longText),
-                (header:"Search for with", content:self.detailItem.searchStrings!.first!)
+                (header:nil, content:self.detailItem.displayText!),
+                (header:nil, content:self.detailItem.longText),
+//                (header:"Search for with", content:self.detailItem.searchStrings!.first!)
             ]
         }
     }
@@ -60,7 +60,7 @@ class DetailViewController: UITableViewController, WhitakerScraperDelegate, Deta
             let dummyViewHeight: CGFloat = 40.0
             var dummyView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.bounds.size.width, height: dummyViewHeight))
             self.tableView.tableHeaderView = dummyView;
-            self.tableView.contentInset = UIEdgeInsetsMake(-dummyViewHeight, 0, 0, 0);
+            self.tableView.contentInset = UIEdgeInsetsMake(-dummyViewHeight + 10, 0, 0, 0);
             
             self.tableView.registerNib(UINib(nibName: "BasicCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "basicCell")
             
@@ -112,11 +112,23 @@ class DetailViewController: UITableViewController, WhitakerScraperDelegate, Deta
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = self.tableView.dequeueReusableCellWithIdentifier("basicCell") as! BasicCell
         cell.mainLabel!.text = self.sections[indexPath.section].content
-        cell.mainLabel!.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody, scaleFactor: 1.1)
+        if indexPath.section == ABBREVIATION_SECTION_INDEX {
+//            cell.mainLabel!.font = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline, scaleFactor: 1.45)
+            cell.mainLabel!.font = UIFont.preferredFontForFontName("Academy Engraved LET", scaleFactor: 2)
+            cell.mainLabel!.textAlignment = NSTextAlignment.Center
+        }
+        else {
+            cell.mainLabel!.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody, scaleFactor: 1.1)
+            cell.mainLabel!.textAlignment = NSTextAlignment.Center
+        }
         return cell
     }
     
     override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if self.sections[section].header == nil {
+            return nil
+        }
+        
         NSBundle.mainBundle().loadNibNamed("DetailHeaderView", owner: self, options: nil)
         
         self.detailHeaderView.textLabel.text = self.sections[section].header
@@ -131,6 +143,9 @@ class DetailViewController: UITableViewController, WhitakerScraperDelegate, Deta
     }
     
     override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if self.sections[section].header == nil {
+            return 0
+        }
         return 34
     }
     
