@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		E00CBAD11AF6C0FD00DAD03B /* DefaultDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E00CBAD01AF6C0FD00DAD03B /* DefaultDetailView.xib */; };
-		E01786A81B01295B0022F8E2 /* ButtonFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01786A71B01295B0022F8E2 /* ButtonFooterView.swift */; };
-		E01786AA1B0129B00022F8E2 /* ButtonFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E01786A91B0129B00022F8E2 /* ButtonFooterView.xib */; };
 		E01786AC1B0139ED0022F8E2 /* InscribedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E01786AB1B0139ED0022F8E2 /* InscribedCell.xib */; };
 		E01786AE1B0139F70022F8E2 /* InscribedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01786AD1B0139F70022F8E2 /* InscribedCell.swift */; };
 		E01D1D021B00503200ABB9DF /* foldOutAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01D1D011B00503200ABB9DF /* foldOutAnimator.swift */; };
@@ -17,7 +15,6 @@
 		E028AC431A98344F0058D9A1 /* AbbreviationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E028AC421A98344F0058D9A1 /* AbbreviationCell.swift */; };
 		E028AC4B1A99244A0058D9A1 /* UnsearchablesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E028AC4A1A99244A0058D9A1 /* UnsearchablesViewController.swift */; };
 		E028AC4D1A99251D0058D9A1 /* AbbreviationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E028AC4C1A99251D0058D9A1 /* AbbreviationCell.xib */; };
-		E031F1181B0041D6003403EB /* wordSelectController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E031F1171B0041D6003403EB /* wordSelectController.swift */; };
 		E03ADFEE1AF6CD41002CFD5C /* BasicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E03ADFED1AF6CD41002CFD5C /* BasicCell.swift */; };
 		E04B6F281AF9549900FA668F /* WhitakerDefinition.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04B6F251AF9549900FA668F /* WhitakerDefinition.swift */; };
 		E04B6F291AF9549900FA668F /* WhitakerScraper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04B6F261AF9549900FA668F /* WhitakerScraper.swift */; };
@@ -95,11 +92,8 @@
 		E0A49C501AC34AD5008DF28C /* wavy-vertical-line.png in Resources */ = {isa = PBXBuildFile; fileRef = E0A49C101AC34AD5008DF28C /* wavy-vertical-line.png */; };
 		E0A49C511AC34AD5008DF28C /* xv-overline.png in Resources */ = {isa = PBXBuildFile; fileRef = E0A49C111AC34AD5008DF28C /* xv-overline.png */; };
 		E0A49C521AC34AD5008DF28C /* z-strikethrough.png in Resources */ = {isa = PBXBuildFile; fileRef = E0A49C121AC34AD5008DF28C /* z-strikethrough.png */; };
-		E0CA91161AF5A4D40071579B /* DetailHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E0CA91151AF5A4D40071579B /* DetailHeaderView.xib */; };
-		E0CA91181AF5A5AF0071579B /* DetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0CA91171AF5A5AF0071579B /* DetailHeaderView.swift */; };
 		E0F031581AFC07C700BC32BA /* abbs-combined.json in Resources */ = {isa = PBXBuildFile; fileRef = E0F031561AFC07C700BC32BA /* abbs-combined.json */; };
 		E0F031591AFC07C700BC32BA /* abbs-specialchars.json in Resources */ = {isa = PBXBuildFile; fileRef = E0F031571AFC07C700BC32BA /* abbs-specialchars.json */; };
-		E0F0315D1AFC105400BC32BA /* smallModalAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F0315C1AFC105400BC32BA /* smallModalAnimator.swift */; };
 		E0FDFA1A1A9545CC00659871 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0FDFA191A9545CC00659871 /* AppDelegate.swift */; };
 		E0FDFA1C1A9545CC00659871 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0FDFA1B1A9545CC00659871 /* MasterViewController.swift */; };
 		E0FDFA1E1A9545CC00659871 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0FDFA1D1A9545CC00659871 /* DetailViewController.swift */; };
@@ -122,8 +116,6 @@
 
 /* Begin PBXFileReference section */
 		E00CBAD01AF6C0FD00DAD03B /* DefaultDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DefaultDetailView.xib; sourceTree = "<group>"; };
-		E01786A71B01295B0022F8E2 /* ButtonFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonFooterView.swift; sourceTree = "<group>"; };
-		E01786A91B0129B00022F8E2 /* ButtonFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ButtonFooterView.xib; sourceTree = "<group>"; };
 		E01786AB1B0139ED0022F8E2 /* InscribedCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InscribedCell.xib; sourceTree = "<group>"; };
 		E01786AD1B0139F70022F8E2 /* InscribedCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InscribedCell.swift; sourceTree = "<group>"; };
 		E01D1D011B00503200ABB9DF /* foldOutAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = foldOutAnimator.swift; sourceTree = SOURCE_ROOT; };
@@ -131,7 +123,6 @@
 		E028AC421A98344F0058D9A1 /* AbbreviationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbbreviationCell.swift; sourceTree = "<group>"; };
 		E028AC4A1A99244A0058D9A1 /* UnsearchablesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UnsearchablesViewController.swift; path = ../UnsearchablesViewController.swift; sourceTree = "<group>"; };
 		E028AC4C1A99251D0058D9A1 /* AbbreviationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AbbreviationCell.xib; sourceTree = "<group>"; };
-		E031F1171B0041D6003403EB /* wordSelectController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = wordSelectController.swift; sourceTree = "<group>"; };
 		E03ADFED1AF6CD41002CFD5C /* BasicCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicCell.swift; sourceTree = "<group>"; };
 		E04B6F251AF9549900FA668F /* WhitakerDefinition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhitakerDefinition.swift; sourceTree = "<group>"; };
 		E04B6F261AF9549900FA668F /* WhitakerScraper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhitakerScraper.swift; sourceTree = "<group>"; };
@@ -214,11 +205,8 @@
 		E0A49C101AC34AD5008DF28C /* wavy-vertical-line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wavy-vertical-line.png"; sourceTree = "<group>"; };
 		E0A49C111AC34AD5008DF28C /* xv-overline.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xv-overline.png"; sourceTree = "<group>"; };
 		E0A49C121AC34AD5008DF28C /* z-strikethrough.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "z-strikethrough.png"; sourceTree = "<group>"; };
-		E0CA91151AF5A4D40071579B /* DetailHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailHeaderView.xib; sourceTree = "<group>"; };
-		E0CA91171AF5A5AF0071579B /* DetailHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailHeaderView.swift; sourceTree = "<group>"; };
 		E0F031561AFC07C700BC32BA /* abbs-combined.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "abbs-combined.json"; sourceTree = "<group>"; };
 		E0F031571AFC07C700BC32BA /* abbs-specialchars.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "abbs-specialchars.json"; sourceTree = "<group>"; };
-		E0F0315C1AFC105400BC32BA /* smallModalAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = smallModalAnimator.swift; path = ../smallModalAnimator.swift; sourceTree = "<group>"; };
 		E0FDFA141A9545CC00659871 /* inscriptus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = inscriptus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0FDFA181A9545CC00659871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E0FDFA191A9545CC00659871 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -255,8 +243,6 @@
 		E028AC411A98342C0058D9A1 /* Interface Files */ = {
 			isa = PBXGroup;
 			children = (
-				E031F1171B0041D6003403EB /* wordSelectController.swift */,
-				E0F0315C1AFC105400BC32BA /* smallModalAnimator.swift */,
 				E01D1D011B00503200ABB9DF /* foldOutAnimator.swift */,
 				E0FDFA1F1A9545CC00659871 /* Main.storyboard */,
 				E0FDFA241A9545CC00659871 /* LaunchScreen.xib */,
@@ -266,10 +252,6 @@
 				E03ADFED1AF6CD41002CFD5C /* BasicCell.swift */,
 				E01786AB1B0139ED0022F8E2 /* InscribedCell.xib */,
 				E01786AD1B0139F70022F8E2 /* InscribedCell.swift */,
-				E0CA91151AF5A4D40071579B /* DetailHeaderView.xib */,
-				E0CA91171AF5A5AF0071579B /* DetailHeaderView.swift */,
-				E01786A91B0129B00022F8E2 /* ButtonFooterView.xib */,
-				E01786A71B01295B0022F8E2 /* ButtonFooterView.swift */,
 				E00CBAD01AF6C0FD00DAD03B /* DefaultDetailView.xib */,
 				E04B6F431AF95EA900FA668F /* DefinitionCell.swift */,
 			);
@@ -526,12 +508,10 @@
 				E096AFCC1AFABCAE002D6E5D /* BasicCell.xib in Resources */,
 				E0A49C3F1AC34AD5008DF28C /* ml-tail-after.png in Resources */,
 				E0A49C291AC34AD5008DF28C /* cscr-reversed.png in Resources */,
-				E0CA91161AF5A4D40071579B /* DetailHeaderView.xib in Resources */,
 				E0A49C1A1AC34AD5008DF28C /* c-reversed-double-vertical.png in Resources */,
 				E0A49C281AC34AD5008DF28C /* csc-reversed.png in Resources */,
 				E0A49C1C1AC34AD5008DF28C /* c-reversed.png in Resources */,
 				E0A49C2E1AC34AD5008DF28C /* ii-overline.png in Resources */,
-				E01786AA1B0129B00022F8E2 /* ButtonFooterView.xib in Resources */,
 				E0A49C411AC34AD5008DF28C /* n-overline.png in Resources */,
 				E00CBAD11AF6C0FD00DAD03B /* DefaultDetailView.xib in Resources */,
 				E0A49C2F1AC34AD5008DF28C /* iiicl-reversed.png in Resources */,
@@ -631,18 +611,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				E01786AE1B0139F70022F8E2 /* InscribedCell.swift in Sources */,
-				E0CA91181AF5A5AF0071579B /* DetailHeaderView.swift in Sources */,
 				E096AFCE1AFAC041002D6E5D /* WhitakerResult.swift in Sources */,
 				E0FDFA1E1A9545CC00659871 /* DetailViewController.swift in Sources */,
-				E031F1181B0041D6003403EB /* wordSelectController.swift in Sources */,
 				E023FBE81AE5AABF00E8DBAC /* UIFont+.swift in Sources */,
 				E04B6F2A1AF9549900FA668F /* WhitakerScraperDelegate.swift in Sources */,
 				E03ADFEE1AF6CD41002CFD5C /* BasicCell.swift in Sources */,
-				E01786A81B01295B0022F8E2 /* ButtonFooterView.swift in Sources */,
 				E04B6F281AF9549900FA668F /* WhitakerDefinition.swift in Sources */,
 				E0FDFA1C1A9545CC00659871 /* MasterViewController.swift in Sources */,
 				E0FDFA1A1A9545CC00659871 /* AppDelegate.swift in Sources */,
-				E0F0315D1AFC105400BC32BA /* smallModalAnimator.swift in Sources */,
 				E04B6F391AF95B2100FA668F /* TFHppleElement.m in Sources */,
 				E028AC4B1A99244A0058D9A1 /* UnsearchablesViewController.swift in Sources */,
 				E0846DB41AC6658F0004E1B0 /* AbbreviationCollection.swift in Sources */,

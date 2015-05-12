@@ -72,7 +72,7 @@ class foldOutAnimator: NSObject, UIViewControllerAnimatedTransitioning {
                 options: .CurveEaseInOut,
                 animations: {
                     () in
-                    presenting.view.transform = CGAffineTransformMakeTranslation(0, -self.foldOutBelowRect.minY - topMargin)
+                    presenting.view.transform = CGAffineTransformMakeTranslation(0, -(self.foldOutBelowRect.minY - topMargin))
                     presented.view.transform = CGAffineTransformMakeTranslation(0, -(viewHeight - self.foldOutBelowRect.height - topMargin))
                     statusBarBackground.transform = CGAffineTransformMakeTranslation(0, 20)
                     statusBarBackground.alpha = 1
