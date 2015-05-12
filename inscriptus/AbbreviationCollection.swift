@@ -104,4 +104,13 @@ class AbbreviationCollection: NSObject {
             return a1Text.compare(a2Text) == .OrderedAscending
         })
     }
+    
+    func asyncSearchForString(searchString: String, scopeIndex: Int, onFinish: ([Abbreviation]) -> Void) -> Void {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+            let results = self.searchForString(searchString, scopeIndex: scopeIndex)
+            dispatch_async(dispatch_get_main_queue()) {
+                onFinish(results)
+            }
+        }
+    }
 }

@@ -177,8 +177,11 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
         
         var scopeIndex = searchController.searchBar.selectedScopeButtonIndex;
         
-        self.filteredAbbreviations = self.abbreviations.searchForString(searchString, scopeIndex: scopeIndex)
-        self.tableView.reloadData()
+        self.abbreviations.asyncSearchForString(searchString, scopeIndex: scopeIndex, onFinish: {
+            results in
+            self.filteredAbbreviations = results
+            self.tableView.reloadData()
+        })
     }
     
     // updateSearchResultsForSearchController() should be called when scope changed but isn't
