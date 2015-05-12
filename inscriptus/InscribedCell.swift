@@ -15,9 +15,13 @@ class InscribedCell: UITableViewCell {
     @IBOutlet weak var centerImageView: UIImageView!
     @IBOutlet weak var centerImageWidthConstraint: NSLayoutConstraint!
     
+    var gradientLayer: CAGradientLayer!
+    
     override func awakeFromNib() {
-        self.centerBackgroundView.layer.borderColor = UIColor(red:0.78, green:0.769, blue:0.769, alpha:1).CGColor
-        self.centerBackgroundView.layer.borderWidth = 2
+//        self.centerBackgroundView.layer.borderColor = UIColor(red:0.78, green:0.769, blue:0.769, alpha:1).CGColor
+        //        self.centerBackgroundView.layer.borderWidth = 2
+        
+        println("Bounds upon awakeFromNib: \(self.centerBackgroundView.bounds)")
         
         var gradient = CAGradientLayer()
         gradient.frame = self.centerBackgroundView.bounds
@@ -25,18 +29,24 @@ class InscribedCell: UITableViewCell {
             UIColor.whiteColor().CGColor,
             UIColor.grayColor().CGColor
         ]
+        gradient.cornerRadius = 5
+        gradient.masksToBounds = true
         self.centerBackgroundView.layer.insertSublayer(gradient, atIndex: 0)
-        
-//        self.centerBackgroundView.backgroundColor = UIColor(red:0.845, green:0.806, blue:0.806, alpha:1)
+        self.gradientLayer = gradient
+    }
+    
+    func updateBackgroundFrame() {
+        println("Bounds at updateBackgroundFrame: \(self.centerBackgroundView.bounds)")
+        self.gradientLayer.frame = self.centerBackgroundView.bounds
     }
     
     override func setHighlighted(highlighted: Bool, animated: Bool) {
+        println("Bounds at highlight time: \(self.centerBackgroundView.bounds)")
         if highlighted {
-            self.centerBackgroundView?.backgroundColor =  UIColor(red:0.862, green:0.849, blue:0.849, alpha:1)
-
+            self.gradientLayer.frame = self.centerBackgroundView.bounds
         }
         else {
-            self.centerBackgroundView?.backgroundColor = UIColor(red:0.925, green:0.906, blue:0.906, alpha:1)
+            self.gradientLayer.frame = self.centerBackgroundView.bounds
         }
     }
 }

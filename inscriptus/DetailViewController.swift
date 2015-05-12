@@ -83,11 +83,6 @@ class DetailViewController: UITableViewController, WhitakerScraperDelegate, Butt
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-//        if segue.identifier == "showDefinitions" {
-//            let def = segue.destinationViewController as! DefinitionViewController
-//            
-//            def.result = sender as! WhitakerResult
-//        }
         if segue.identifier == "showWords" {
             let def = segue.destinationViewController as! DefinitionViewController
             def.result = sender as! WhitakerResult
@@ -97,13 +92,20 @@ class DetailViewController: UITableViewController, WhitakerScraperDelegate, Butt
     }
     
     override func shouldAutorotate() -> Bool {
-        println("Calling shouldAutorotate() in DetialViewController")
+        println("Calling shouldAutorotate() in DetailViewController")
         if self.presentedViewController != nil {
             return false
         }
         else {
             return true
         }
+    }
+    
+    view
+    
+    override func viewDidAppear(animated: Bool) {
+        let inscribedCell = self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: ABBREVIATION_SECTION_INDEX)) as! InscribedCell
+        inscribedCell.updateBackgroundFrame()
     }
     
     //MARK: - UITableViewController
