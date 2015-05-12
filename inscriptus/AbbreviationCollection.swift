@@ -63,12 +63,12 @@ class AbbreviationCollection: NSObject {
     }
     
     func searchForString(searchString: String, scopeIndex: Int) -> [Abbreviation] {
-        var resultAbbreviations = [Abbreviation]()
+        var resultAbbreviations = Set<Abbreviation>()
         
         if scopeIndex == MasterViewController.searchScopeIndexAbbreviation {
             // Try to do an exact match
             if let matchingAbbreviations = self.abbreviationsGrouped[searchString.uppercaseString] {
-                resultAbbreviations = matchingAbbreviations
+                resultAbbreviations = Set(matchingAbbreviations)
             }
             
             // Do a partial match too
@@ -76,7 +76,7 @@ class AbbreviationCollection: NSObject {
             for key: String in self.abbreviationsGrouped.keys {
                 if key.rangeOfString(searchString.lowercaseString, options: .CaseInsensitiveSearch) != nil || key.rangeOfString(searchString.lowercaseString.stringByReplacingOccurrencesOfString(" ", withString: "", options: NSStringCompareOptions.allZeros), options: .CaseInsensitiveSearch) != nil {
                     if let matchingAbbreviations: [Abbreviation] = self.abbreviationsGrouped[key] {
-                        resultAbbreviations.extend(matchingAbbreviations)
+                        resultAbbreviations.unionInPlace(matchingAbbreviations)
                     }
                 }
             }
@@ -84,11 +84,13 @@ class AbbreviationCollection: NSObject {
         else if scopeIndex == MasterViewController.searchScopeIndexFulltext {
             for abbreviation: Abbreviation in allAbbreviations {
                 if abbreviation.longText.rangeOfString(searchString, options: .CaseInsensitiveSearch) != nil {
-                    resultAbbreviations.append(abbreviation)
+                    resultAbbreviations.insert(abbreviation)
                 }
             }
         }
         
-        return resultAbbreviations
+        return sorted(Array(resultAbbreviations), {
+            $0.longText.compare($1.longText) == .OrderedAscending
+        })
     }
 }

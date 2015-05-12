@@ -49,6 +49,9 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
         self.tableView.registerNib(UINib(nibName: "AbbreviationCell", bundle: nil), forCellReuseIdentifier: "AbbreviationCell")
         self.tableView.registerNib(UINib(nibName: "BasicCell", bundle: nil), forCellReuseIdentifier: "BasicCell")
         
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardDidShow:", name: UIKeyboardDidShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardDidHide:", name: UIKeyboardDidHideNotification, object: nil)
+        
         // Set up search controller
         self.searchController = UISearchController(searchResultsController: nil)
         if let searchController = self.searchController {
@@ -66,6 +69,23 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func keyboardDidShow(sender: NSNotification) {
+        let dict: NSDictionary = sender.userInfo! as NSDictionary
+        let height: CGFloat = dict.objectForKey(UIKeyboardFrameEndUserInfoKey)!.CGRectValue().height
+        
+        var insets = self.tableView.scrollIndicatorInsets
+        self.tableView.scrollIndicatorInsets = UIEdgeInsets(top: insets.top, left: insets.left, bottom: height, right: insets.right)
+        insets = self.tableView.contentInset
+        self.tableView.contentInset = UIEdgeInsets(top: insets.top, left: insets.left, bottom: height, right: insets.right)
+    }
+    
+    func keyboardDidHide(sender: NSNotification) {
+        var insets = self.tableView.scrollIndicatorInsets
+        self.tableView.scrollIndicatorInsets = UIEdgeInsets(top: insets.top, left: insets.left, bottom: 0, right: insets.right)
+        insets = self.tableView.contentInset
+        self.tableView.contentInset = UIEdgeInsets(top: insets.top, left: insets.left, bottom: 0, right: insets.right)
     }
 
     // MARK: - Segues
@@ -121,7 +141,7 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.section==0 {
             let cell = tableView.dequeueReusableCellWithIdentifier("BasicCell", forIndexPath: indexPath) as! BasicCell
-            cell.textLabel!.text = "Special character abbreviations"
+            cell.mainLabel!.text = "Special character abbreviations"
             return cell
         }
         else {
@@ -142,9 +162,11 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.section == 0 {
+            self.performSegueWithIdentifier("showUnsearchables", sender: self)
+        }
         if indexPath.section == 1 {
             self.performSegueWithIdentifier("showDetail", sender: self)
-//            self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
         }
     }
     

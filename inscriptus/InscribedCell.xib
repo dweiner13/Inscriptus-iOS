@@ -7,44 +7,85 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DetailViewController" customModule="inscriptus" customModuleProvider="target"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" restorationIdentifier="inscribedCell" selectionStyle="default" indentationWidth="10" rowHeight="69" id="2nV-3J-NgX" customClass="InscribedCell" customModule="inscriptus" customModuleProvider="target">
+        <tableViewCell contentMode="scaleToFill" restorationIdentifier="inscribedCell" selectionStyle="none" indentationWidth="10" rowHeight="69" id="2nV-3J-NgX" customClass="InscribedCell" customModule="inscriptus" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="321" height="69"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2nV-3J-NgX" id="UL2-OA-bah">
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Test" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g5K-IJ-mNA">
-                        <rect key="frame" x="8" y="25" width="305" height="31"/>
-                        <fontDescription key="fontDescription" name="AcademyEngravedLetPlain" family="Academy Engraved LET" pointSize="24"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4aR-C8-fot">
+                        <rect key="frame" x="10" y="0.0" width="301" height="68"/>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Test" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g5K-IJ-mNA">
+                        <rect key="frame" x="8" y="20" width="305" height="29"/>
+                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="30"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a7u-hP-VHz">
+                        <rect key="frame" x="70" y="14" width="180" height="42"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="25" id="K7I-Kk-Fx3"/>
+                            <constraint firstAttribute="width" constant="305" id="pX9-lA-5P9"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="pX9-lA-5P9"/>
+                            </mask>
+                        </variation>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="g5K-IJ-mNA" firstAttribute="top" secondItem="UL2-OA-bah" secondAttribute="topMargin" constant="4" id="4OR-qr-n5w"/>
                     <constraint firstItem="g5K-IJ-mNA" firstAttribute="leading" secondItem="UL2-OA-bah" secondAttribute="leadingMargin" id="6BX-tB-KCu"/>
+                    <constraint firstItem="a7u-hP-VHz" firstAttribute="trailing" secondItem="UL2-OA-bah" secondAttribute="trailingMargin" id="Db7-DT-rP1"/>
+                    <constraint firstItem="a7u-hP-VHz" firstAttribute="top" secondItem="UL2-OA-bah" secondAttribute="top" constant="14" id="IOF-YC-660"/>
+                    <constraint firstAttribute="centerY" secondItem="g5K-IJ-mNA" secondAttribute="centerY" id="Ir5-jZ-Xbh"/>
+                    <constraint firstItem="g5K-IJ-mNA" firstAttribute="top" secondItem="UL2-OA-bah" secondAttribute="top" constant="20" id="JsS-2q-e7H"/>
+                    <constraint firstItem="4aR-C8-fot" firstAttribute="top" secondItem="UL2-OA-bah" secondAttribute="top" id="M38-K7-RKJ"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="a7u-hP-VHz" secondAttribute="bottom" constant="4" id="TzI-cn-AKT"/>
                     <constraint firstAttribute="bottomMargin" secondItem="g5K-IJ-mNA" secondAttribute="bottom" id="V7L-6u-BGb"/>
+                    <constraint firstItem="a7u-hP-VHz" firstAttribute="top" secondItem="UL2-OA-bah" secondAttribute="topMargin" constant="6" id="WP1-Gk-qcV"/>
                     <constraint firstItem="g5K-IJ-mNA" firstAttribute="top" secondItem="UL2-OA-bah" secondAttribute="topMargin" constant="15" id="X0h-aF-sTJ"/>
                     <constraint firstItem="g5K-IJ-mNA" firstAttribute="trailing" secondItem="UL2-OA-bah" secondAttribute="trailingMargin" id="ZNQ-ly-OeH"/>
                     <constraint firstItem="g5K-IJ-mNA" firstAttribute="top" secondItem="UL2-OA-bah" secondAttribute="topMargin" constant="17" id="Zxk-zf-BvF"/>
+                    <constraint firstAttribute="centerY" secondItem="a7u-hP-VHz" secondAttribute="centerY" constant="-1" id="aEP-Be-bAD"/>
                     <constraint firstAttribute="bottomMargin" secondItem="g5K-IJ-mNA" secondAttribute="bottom" constant="6" id="dTB-dQ-RLQ"/>
+                    <constraint firstItem="a7u-hP-VHz" firstAttribute="leading" secondItem="UL2-OA-bah" secondAttribute="leadingMargin" id="gyK-aZ-iUY"/>
+                    <constraint firstAttribute="bottom" secondItem="a7u-hP-VHz" secondAttribute="bottom" constant="12" id="jiW-RT-AEc"/>
                     <constraint firstAttribute="bottom" secondItem="g5K-IJ-mNA" secondAttribute="bottom" id="mC6-7V-0wH"/>
                     <constraint firstAttribute="centerY" secondItem="g5K-IJ-mNA" secondAttribute="centerY" id="nNR-t0-anf"/>
+                    <constraint firstAttribute="bottom" secondItem="4aR-C8-fot" secondAttribute="bottom" id="o4l-Sa-gY4"/>
+                    <constraint firstAttribute="centerX" secondItem="a7u-hP-VHz" secondAttribute="centerX" id="ofB-HO-h1r"/>
+                    <constraint firstItem="4aR-C8-fot" firstAttribute="leading" secondItem="UL2-OA-bah" secondAttribute="leading" constant="10" id="pvj-ZZ-XiI"/>
                     <constraint firstAttribute="bottomMargin" secondItem="g5K-IJ-mNA" secondAttribute="bottom" constant="4" id="qCh-55-fBl"/>
+                    <constraint firstAttribute="trailing" secondItem="4aR-C8-fot" secondAttribute="trailing" constant="10" id="qg7-KY-15z"/>
+                    <constraint firstItem="g5K-IJ-mNA" firstAttribute="top" secondItem="UL2-OA-bah" secondAttribute="topMargin" constant="12" id="yXT-8B-tXf"/>
                 </constraints>
                 <variation key="default">
                     <mask key="constraints">
                         <exclude reference="4OR-qr-n5w"/>
                         <exclude reference="V7L-6u-BGb"/>
                         <exclude reference="X0h-aF-sTJ"/>
+                        <exclude reference="Zxk-zf-BvF"/>
                         <exclude reference="dTB-dQ-RLQ"/>
                         <exclude reference="mC6-7V-0wH"/>
                         <exclude reference="nNR-t0-anf"/>
+                        <exclude reference="qCh-55-fBl"/>
+                        <exclude reference="yXT-8B-tXf"/>
+                        <exclude reference="Db7-DT-rP1"/>
+                        <exclude reference="IOF-YC-660"/>
+                        <exclude reference="TzI-cn-AKT"/>
+                        <exclude reference="WP1-Gk-qcV"/>
+                        <exclude reference="gyK-aZ-iUY"/>
+                        <exclude reference="jiW-RT-AEc"/>
                     </mask>
                 </variation>
             </tableViewCellContentView>
-            <color key="backgroundColor" red="0.95554131269454956" green="0.95570486783981323" blue="0.95553117990493774" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <connections>
+                <outlet property="centerBackgroundView" destination="4aR-C8-fot" id="2RT-mN-sF7"/>
+                <outlet property="centerImageView" destination="a7u-hP-VHz" id="rv8-fU-fIu"/>
+                <outlet property="centerImageWidthConstraint" destination="pX9-lA-5P9" id="2Ge-KS-lA7"/>
                 <outlet property="mainLabel" destination="g5K-IJ-mNA" id="jUH-9e-OA9"/>
             </connections>
             <point key="canvasLocation" x="476.5" y="385.5"/>

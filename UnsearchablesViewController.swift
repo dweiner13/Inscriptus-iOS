@@ -24,6 +24,12 @@ class UnsearchablesViewController: UITableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        if let selectedIndexPath = self.tableView.indexPathForSelectedRow() {
+            self.tableView.deselectRowAtIndexPath(selectedIndexPath, animated: true)
+        }
+    }
 
     // MARK: - Table view data source
 

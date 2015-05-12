@@ -39,11 +39,17 @@ class DetailViewController: UITableViewController, WhitakerScraperDelegate, Butt
             self.view = defaultView
         }
         else {
-            self.sections = [
-                (header:nil, content:self.detailItem.displayText!.stringByReplacingOccurrencesOfString("·", withString: "", options: .allZeros)),
-                (header:nil, content:self.detailItem.longText)
-//                (header:"Search for with", content:self.detailItem.searchStrings!.first!)
-            ]
+            if let displayText = self.detailItem.displayText {
+                self.sections = [
+                    (header: nil, content: displayText.stringByReplacingOccurrencesOfString("·", withString: "", options: .allZeros))
+                ]
+            }
+            else {
+                self.sections = [
+                    (header: nil, content: self.detailItem.displayImage!)
+                ]
+            }
+            self.sections.append(header:nil, content:self.detailItem.longText)
         }
     }
 
@@ -113,9 +119,16 @@ class DetailViewController: UITableViewController, WhitakerScraperDelegate, Butt
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.section == ABBREVIATION_SECTION_INDEX {
             var cell = self.tableView.dequeueReusableCellWithIdentifier("inscribedCell") as! InscribedCell
-            cell.mainLabel!.text = self.sections[indexPath.section].content
-            cell.mainLabel!.font = UIFont.preferredFontForFontName("Academy Engraved LET", scaleFactor: 2)
-            cell.mainLabel!.textAlignment = NSTextAlignment.Center
+            if self.detailItem.displayText != nil {
+                cell.mainLabel!.text = self.sections[indexPath.section].content
+                cell.mainLabel!.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody, scaleFactor: 2)
+            }
+            else if let displayImage = self.detailItem.displayImage {
+                cell.centerImageView.image = UIImage(contentsOfFile: NSBundle.mainBundle().pathForResource(displayImage, ofType: ".png")!)!
+                cell.centerImageView.contentMode = UIViewContentMode.ScaleAspectFit
+                cell.mainLabel!.hidden = true
+                cell.userInteractionEnabled = false
+            }
             return cell
         }
         else {

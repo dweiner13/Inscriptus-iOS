@@ -396,12 +396,12 @@
 			isa = PBXGroup;
 			children = (
 				E04B6F2B1AF954A700FA668F /* WhitakerScraper */,
+				E0FDFA3B1A9546D200659871 /* Abbreviation.swift */,
 				E0846DB31AC6658F0004E1B0 /* AbbreviationCollection.swift */,
 				E0FDFA191A9545CC00659871 /* AppDelegate.swift */,
 				E0FDFA1B1A9545CC00659871 /* MasterViewController.swift */,
-				E0FDFA1D1A9545CC00659871 /* DetailViewController.swift */,
-				E0FDFA3B1A9546D200659871 /* Abbreviation.swift */,
 				E028AC4A1A99244A0058D9A1 /* UnsearchablesViewController.swift */,
+				E0FDFA1D1A9545CC00659871 /* DetailViewController.swift */,
 				E04B6F411AF95E9000FA668F /* DefinitionViewController.swift */,
 				E028AC411A98342C0058D9A1 /* Interface Files */,
 				E0FDFA221A9545CC00659871 /* Images.xcassets */,

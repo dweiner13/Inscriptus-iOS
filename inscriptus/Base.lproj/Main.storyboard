@@ -48,14 +48,15 @@
                             <outlet property="delegate" destination="7bK-jq-Zjz" id="RA6-mI-bju"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Abbreviations" id="Zdf-7t-Un8"/>
+                    <navigationItem key="navigationItem" title="All Abbreviations" id="Zdf-7t-Un8"/>
                     <connections>
                         <segue destination="vC3-pB-5Vb" kind="showDetail" identifier="showDetail" id="jXk-1v-irW"/>
+                        <segue destination="vqs-WB-ajp" kind="show" identifier="showUnsearchables" id="LPs-dL-e4k"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rux-fX-hf1" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="709" y="-630"/>
+            <point key="canvasLocation" x="713" y="-630"/>
         </scene>
         <!--Unsearchables View Controller-->
         <scene sceneID="lmi-CK-2ZE">
