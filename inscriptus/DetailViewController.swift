@@ -32,12 +32,14 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
         }
         else {
             if let displayText = self.detailItem.displayText {
-                self.abbreviationLabel.text = displayText
+                self.abbreviationLabel.text = displayText.stringByReplacingOccurrencesOfString("·", withString: "")
+                self.abbreviationLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody, scaleFactor: 1.9)
             }
             else {
                 self.abbreviationLabel.text = "[image]"
             }
             self.longTextLabel.text = self.detailItem.longText
+            self.longTextLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody, scaleFactor: 1.2)
         }
     }
 

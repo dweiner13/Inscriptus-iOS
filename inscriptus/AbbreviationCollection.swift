@@ -74,7 +74,7 @@ class AbbreviationCollection: NSObject {
             // Do a partial match too
             var i = 0
             for key: String in self.abbreviationsGrouped.keys {
-                if key.rangeOfString(searchString.lowercaseString, options: .CaseInsensitiveSearch) != nil || key.rangeOfString(searchString.lowercaseString.stringByReplacingOccurrencesOfString(" ", withString: "", options: NSStringCompareOptions.allZeros), options: .CaseInsensitiveSearch) != nil {
+                if key.rangeOfString(searchString.lowercaseString, options: .CaseInsensitiveSearch) != nil || key.rangeOfString(searchString.lowercaseString.stringByReplacingOccurrencesOfString(" ", withString: ""), options: .CaseInsensitiveSearch) != nil {
                     if let matchingAbbreviations: [Abbreviation] = self.abbreviationsGrouped[key] {
                         resultAbbreviations.unionInPlace(matchingAbbreviations)
                     }
@@ -90,7 +90,18 @@ class AbbreviationCollection: NSObject {
         }
         
         return sorted(Array(resultAbbreviations), {
-            $0.longText.compare($1.longText) == .OrderedAscending
+            (a1: Abbreviation, a2: Abbreviation) in
+            let a1Text = a1.displayText != nil ? a1.displayText! : a1.longText
+            let a2Text = a2.displayText != nil ? a2.displayText! : a2.longText
+            let a1SearchPos = a1Text.rangeOfString(searchString, options: .CaseInsensitiveSearch)?.startIndex
+            let a2SearchPos = a2Text.rangeOfString(searchString, options: .CaseInsensitiveSearch)?.startIndex
+            if a1SearchPos == a1Text.startIndex && a2SearchPos != a2Text.startIndex {
+                return true
+            }
+            if a2SearchPos == a2Text.startIndex && a1SearchPos != a1Text.startIndex {
+                return false
+            }
+            return a1Text.compare(a2Text) == .OrderedAscending
         })
     }
 }
