@@ -69,7 +69,7 @@ class foldOutAnimator: NSObject, UIViewControllerAnimatedTransitioning {
             
             UIView.animateWithDuration(self.transitionDuration(transitionContext),
                 delay: 0,
-                options: .CurveEaseInOut,
+                options: .CurveEaseOut,
                 animations: {
                     () in
                     presenting.view.transform = CGAffineTransformMakeTranslation(0, -(self.foldOutBelowRect.minY - topMargin))
@@ -86,7 +86,7 @@ class foldOutAnimator: NSObject, UIViewControllerAnimatedTransitioning {
             
             UIView.animateWithDuration(self.transitionDuration(transitionContext),
                 delay: 0,
-                options: .CurveEaseInOut,
+                options: .CurveEaseIn,
                 animations: {
                     () in
                     statusBarBackground.transform = CGAffineTransformMakeTranslation(0, 0)

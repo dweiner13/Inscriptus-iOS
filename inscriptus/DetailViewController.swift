@@ -15,6 +15,8 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
     @IBOutlet weak var abbreviationBackgroundView: UIView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
+    var mostRecentViewTapped: UIView?
+    
     var whitakers = WhitakerScraper()
     
     var detailItem: Abbreviation! {
@@ -24,7 +26,25 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
             }
         }
     }
+    
+    @IBAction func tappedAbbreviation(sender: AnyObject) {
+        var controller = UIMenuController.sharedMenuController()
+        if controller.menuVisible == false {
+            self.mostRecentViewTapped = self.abbreviationBackgroundView
+            controller.setTargetRect(self.abbreviationBackgroundView.frame, inView: self.view)
+            controller.setMenuVisible(true, animated: true)
+        }
+    }
 
+    @IBAction func tappedLongText(sender: AnyObject) {
+        var controller = UIMenuController.sharedMenuController()
+        if controller.menuVisible == false {
+            self.mostRecentViewTapped = self.longTextLabel
+            controller.setTargetRect(self.longTextLabel.frame, inView: self.view)
+            controller.setMenuVisible(true, animated: true)
+        }
+    }
+    
     func configureView() {
         if self.detailItem == nil {
             var defaultView = NSBundle.mainBundle().loadNibNamed("DefaultDetailView", owner: self, options: nil)[0] as! UIView
@@ -50,6 +70,8 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
             self.whitakers.delegate = self
             self.definesPresentationContext = true
             self.abbreviationBackgroundView.layer.cornerRadius = 5
+            self.abbreviationBackgroundView.layer.borderColor = UIColor(red:0.699, green:0.474, blue:1, alpha:1).CGColor
+            self.abbreviationBackgroundView.layer.borderWidth = 1
         }
     }
     
@@ -80,6 +102,32 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
         self.whitakers.beginDefinitionRequestForWord(self.detailItem.longText, targetLanguage: .English)
         self.defineButton.hidden = true
         self.activityIndicator.startAnimating()
+    }
+    
+    //MARK: - UIMenuController
+    
+    override func copy(sender: AnyObject?) {
+        if self.mostRecentViewTapped == self.abbreviationBackgroundView {
+            var pasteboard = UIPasteboard.generalPasteboard()
+            pasteboard.string = self.detailItem.displayText
+        }
+        else if self.mostRecentViewTapped == self.longTextLabel {
+            var pasteboard = UIPasteboard.generalPasteboard()
+            pasteboard.string = self.detailItem.longText
+        }
+    }
+    
+    override func canPerformAction(action: Selector, withSender sender: AnyObject?) -> Bool {
+        if action == "copy:" {
+            return true
+        }
+        else {
+            return super.canPerformAction(action, withSender: sender)
+        }
+    }
+    
+    override func canBecomeFirstResponder() -> Bool {
+        return true
     }
     
     //MARK: - WhitakerScraperDelegate
