@@ -12,6 +12,37 @@ private let _SingletonSharedInstance = AbbreviationCollection()
 
 class AbbreviationCollection: NSObject {
     
+    let favoritesKey = "favorites"
+    var favorites = NSMutableArray()
+    
+    var noFavorites: Bool {
+        get {
+            return favorites.count == 0
+        }
+    }
+    
+    func addFavorite(item: Abbreviation) {
+        if !self.favorites.containsObject(item) {
+            self.favorites.insertObject(item, atIndex: 0)
+        }
+//        println(self.favorites)
+    }
+    
+    func removeFavorite(item: Abbreviation) {
+        self.favorites.removeObject(item)
+    }
+    
+    func saveFavorites() {
+        var favoritesIDs = NSMutableArray()
+        for favorite: AnyObject in favorites {
+            let abb = favorite as! Abbreviation
+            favoritesIDs.insertObject(abb.id, atIndex: 0)
+        }
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setObject(favoritesIDs, forKey: favoritesKey)
+        defaults.synchronize()
+    }
+    
     // Abbreviations in a dictionary by their search text
     var abbreviationsGrouped = [String: Array<Abbreviation>]()
     
@@ -23,6 +54,8 @@ class AbbreviationCollection: NSObject {
     }
     
     override init() {
+        
+        
         // Load abbreviations arrays
         let combinedPath: String = NSBundle.mainBundle().pathForResource("abbs-combined", ofType: "json")!
         let combinedData = NSData(contentsOfFile: combinedPath)!
@@ -60,6 +93,23 @@ class AbbreviationCollection: NSObject {
         }
         
         super.init()
+        
+        let defaults = NSUserDefaults.standardUserDefaults()
+        if let storedFavorites: AnyObject = defaults.objectForKey(favoritesKey) {
+            for favorite: AnyObject in storedFavorites as! NSMutableArray {
+                println(favorite)
+                self.favorites.insertObject(abbreviationWithID(favorite as! NSInteger)!, atIndex: 0)
+            }
+        }
+    }
+    
+    func abbreviationWithID(id: Int) -> Abbreviation? {
+        var abb = self.allAbbreviations[id]
+        var i = id
+        while(abb.id != id) {
+            abb = self.allAbbreviations[--i]
+        }
+        return abb
     }
     
     func searchForString(searchString: String, scopeIndex: Int) -> [Abbreviation] {
@@ -145,6 +195,48 @@ class AbbreviationCollection: NSObject {
         })
     }
     
+    func searchFavoritesForString(searchString: String, scopeIndex: Int) -> [Abbreviation] {
+        var resultAbbreviations = Set<Abbreviation>()
+        
+        if scopeIndex == MasterViewController.searchScopeIndexAbbreviation {
+            // Do a partial match too
+            var i = 0
+            for favorite: AnyObject in self.favorites {
+                let abb = favorite as! Abbreviation
+                if let abbSearchableStrings = abb.searchStrings {
+                    for str: String in abbSearchableStrings {
+                        if str.rangeOfString(searchString.lowercaseString, options: .CaseInsensitiveSearch) != nil || str.rangeOfString(searchString.lowercaseString.stringByReplacingOccurrencesOfString(" ", withString: ""), options: .CaseInsensitiveSearch) != nil {
+                            resultAbbreviations.insert(abb)
+                        }
+                    }
+                }
+            }
+        }
+        else if scopeIndex == MasterViewController.searchScopeIndexFulltext {
+            for favorite: AnyObject in self.favorites {
+                let abbreviation = favorite as! Abbreviation
+                if abbreviation.longText.rangeOfString(searchString, options: .CaseInsensitiveSearch) != nil {
+                    resultAbbreviations.insert(abbreviation)
+                }
+            }
+        }
+        
+        return sorted(Array(resultAbbreviations), {
+            (a1: Abbreviation, a2: Abbreviation) in
+            let a1Text = a1.displayText != nil ? a1.displayText! : a1.longText
+            let a2Text = a2.displayText != nil ? a2.displayText! : a2.longText
+            let a1SearchPos = a1Text.rangeOfString(searchString, options: .CaseInsensitiveSearch)?.startIndex
+            let a2SearchPos = a2Text.rangeOfString(searchString, options: .CaseInsensitiveSearch)?.startIndex
+            if a1SearchPos == a1Text.startIndex && a2SearchPos != a2Text.startIndex {
+                return true
+            }
+            if a2SearchPos == a2Text.startIndex && a1SearchPos != a1Text.startIndex {
+                return false
+            }
+            return a1Text.compare(a2Text) == .OrderedAscending
+        })
+    }
+    
     func asyncSearchForString(searchString: String, scopeIndex: Int, onFinish: ([Abbreviation]) -> Void) -> Void {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
             let results = self.searchForString(searchString, scopeIndex: scopeIndex)
@@ -157,6 +249,15 @@ class AbbreviationCollection: NSObject {
     func asyncSearchSpecialsForString(searchString: String, scopeIndex: Int, onFinish: ([Abbreviation]) -> Void) -> Void {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
             let results = self.searchSpecialsForString(searchString, scopeIndex: scopeIndex)
+            dispatch_async(dispatch_get_main_queue()) {
+                onFinish(results)
+            }
+        }
+    }
+    
+    func asyncSearchFavoritesForString(searchString: String, scopeIndex: Int, onFinish: ([Abbreviation]) -> Void) -> Void {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+            let results = self.searchFavoritesForString(searchString, scopeIndex: scopeIndex)
             dispatch_async(dispatch_get_main_queue()) {
                 onFinish(results)
             }

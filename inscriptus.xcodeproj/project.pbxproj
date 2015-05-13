@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		E00CBAD11AF6C0FD00DAD03B /* DefaultDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E00CBAD01AF6C0FD00DAD03B /* DefaultDetailView.xib */; };
+		E01001D61B02ECB70049A3B9 /* ApplicationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01001D51B02ECB70049A3B9 /* ApplicationState.swift */; };
+		E01001D81B02EEEC0049A3B9 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01001D71B02EEEC0049A3B9 /* FavoritesViewController.swift */; };
 		E01786AC1B0139ED0022F8E2 /* InscribedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E01786AB1B0139ED0022F8E2 /* InscribedCell.xib */; };
 		E01786AE1B0139F70022F8E2 /* InscribedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01786AD1B0139F70022F8E2 /* InscribedCell.swift */; };
 		E01D1D021B00503200ABB9DF /* foldOutAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01D1D011B00503200ABB9DF /* foldOutAnimator.swift */; };
@@ -116,6 +118,8 @@
 
 /* Begin PBXFileReference section */
 		E00CBAD01AF6C0FD00DAD03B /* DefaultDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DefaultDetailView.xib; sourceTree = "<group>"; };
+		E01001D51B02ECB70049A3B9 /* ApplicationState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationState.swift; sourceTree = "<group>"; };
+		E01001D71B02EEEC0049A3B9 /* FavoritesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = SOURCE_ROOT; };
 		E01786AB1B0139ED0022F8E2 /* InscribedCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InscribedCell.xib; sourceTree = "<group>"; };
 		E01786AD1B0139F70022F8E2 /* InscribedCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InscribedCell.swift; sourceTree = "<group>"; };
 		E01D1D011B00503200ABB9DF /* foldOutAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = foldOutAnimator.swift; sourceTree = SOURCE_ROOT; };
@@ -378,11 +382,13 @@
 			isa = PBXGroup;
 			children = (
 				E0FDFA191A9545CC00659871 /* AppDelegate.swift */,
+				E01001D51B02ECB70049A3B9 /* ApplicationState.swift */,
 				E04B6F2B1AF954A700FA668F /* WhitakerScraper */,
 				E0FDFA3B1A9546D200659871 /* Abbreviation.swift */,
 				E0846DB31AC6658F0004E1B0 /* AbbreviationCollection.swift */,
 				E0FDFA1B1A9545CC00659871 /* MasterViewController.swift */,
 				E028AC4A1A99244A0058D9A1 /* UnsearchablesViewController.swift */,
+				E01001D71B02EEEC0049A3B9 /* FavoritesViewController.swift */,
 				E0FDFA1D1A9545CC00659871 /* DetailViewController.swift */,
 				E04B6F411AF95E9000FA668F /* DefinitionViewController.swift */,
 				E028AC411A98342C0058D9A1 /* Interface Files */,
@@ -620,11 +626,13 @@
 				E0FDFA1C1A9545CC00659871 /* MasterViewController.swift in Sources */,
 				E0FDFA1A1A9545CC00659871 /* AppDelegate.swift in Sources */,
 				E04B6F391AF95B2100FA668F /* TFHppleElement.m in Sources */,
+				E01001D81B02EEEC0049A3B9 /* FavoritesViewController.swift in Sources */,
 				E028AC4B1A99244A0058D9A1 /* UnsearchablesViewController.swift in Sources */,
 				E0846DB41AC6658F0004E1B0 /* AbbreviationCollection.swift in Sources */,
 				E01D1D021B00503200ABB9DF /* foldOutAnimator.swift in Sources */,
 				E04B6F381AF95B2100FA668F /* TFHpple.m in Sources */,
 				E028AC431A98344F0058D9A1 /* AbbreviationCell.swift in Sources */,
+				E01001D61B02ECB70049A3B9 /* ApplicationState.swift in Sources */,
 				E04B6F421AF95E9000FA668F /* DefinitionViewController.swift in Sources */,
 				E0FDFA3C1A9546D200659871 /* Abbreviation.swift in Sources */,
 				E04B6F2D1AF9558800FA668F /* String+.swift in Sources */,

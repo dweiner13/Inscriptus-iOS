@@ -14,6 +14,28 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
     
     static let searchScopeIndexAbbreviation = 0
     static let searchScopeIndexFulltext = 1
+    
+    let FAVORITES_SECTION_INDEX = 0
+    var SPECIAL_ABBREVIATIONS_SECTION_INDEX: Int {
+        get {
+            if AbbreviationCollection.sharedAbbreviationCollection.noFavorites {
+                return 0
+            }
+            else {
+                return 1
+            }
+        }
+    }
+    var ALL_ABBREVIATIONS_SECTION_INDEX: Int {
+        get {
+            if AbbreviationCollection.sharedAbbreviationCollection.noFavorites {
+                return 1
+            }
+            else {
+                return 2
+            }
+        }
+    }
 
     var detailViewController: DetailViewController? = nil
     var searchController: UISearchController?
@@ -31,6 +53,7 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
         if let selectedIndexPath = self.tableView.indexPathForSelectedRow() {
             self.tableView.deselectRowAtIndexPath(selectedIndexPath, animated: true)
         }
+        self.tableView.reloadData()
     }
 
     override func viewDidLoad() {
@@ -61,6 +84,8 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
             searchController.searchResultsUpdater = self
             searchBar.searchBarStyle = .Default
             searchController.dimsBackgroundDuringPresentation = false
+            
+            searchBar.selectedScopeButtonIndex = ApplicationState.sharedApplicationState().scopeIndex
         }
     }
     
@@ -106,11 +131,19 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
     // MARK: - Table View
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 2
+        if AbbreviationCollection.sharedAbbreviationCollection.noFavorites {
+            return 2
+        }
+        else {
+            return 3
+        }
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section==0 {
+        if section == FAVORITES_SECTION_INDEX && !AbbreviationCollection.sharedAbbreviationCollection.noFavorites {
+            return 1
+        }
+        if section == SPECIAL_ABBREVIATIONS_SECTION_INDEX {
             if !self.searchController!.active || count(self.searchController!.searchBar.text) == 0 {
                 return 1
             }
@@ -118,7 +151,7 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
                 return 0
             }
         }
-        else {
+        if section == ALL_ABBREVIATIONS_SECTION_INDEX {
             if self.searchController!.active && count(self.searchController!.searchBar.text) != 0 {
                 return self.filteredAbbreviations.count
             }
@@ -126,10 +159,18 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
                 return self.abbreviations.allAbbreviations.count
             }
         }
+        
+        return 0
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if indexPath.section==0 {
+        if indexPath.section == FAVORITES_SECTION_INDEX && !AbbreviationCollection.sharedAbbreviationCollection.noFavorites {
+            let cell = UITableViewCell(style: .Default, reuseIdentifier: "DefaultCell")
+            cell.textLabel?.text = "Favorites"
+            cell.accessoryType = .DisclosureIndicator
+            return cell
+        }
+        if indexPath.section == SPECIAL_ABBREVIATIONS_SECTION_INDEX {
             let cell = UITableViewCell(style: .Default, reuseIdentifier: "DefaultCell")
             cell.textLabel?.text = "Special character abbreviations"
             cell.accessoryType = .DisclosureIndicator
@@ -153,10 +194,13 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if indexPath.section == 0 {
+        if indexPath.section == FAVORITES_SECTION_INDEX && !AbbreviationCollection.sharedAbbreviationCollection.noFavorites {
+            self.performSegueWithIdentifier("showFavorites", sender: self)
+        }
+        if indexPath.section == SPECIAL_ABBREVIATIONS_SECTION_INDEX {
             self.performSegueWithIdentifier("showUnsearchables", sender: self)
         }
-        if indexPath.section == 1 {
+        if indexPath.section == ALL_ABBREVIATIONS_SECTION_INDEX {
             self.performSegueWithIdentifier("showDetail", sender: self)
         }
     }
@@ -178,6 +222,7 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
     // updateSearchResultsForSearchController() should be called when scope changed but isn't
     func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
         updateSearchResultsForSearchController(self.searchController!)
+        ApplicationState.sharedApplicationState().scopeIndex = selectedScope
     }
     
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {

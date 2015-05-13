@@ -15,9 +15,9 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
     @IBOutlet weak var abbreviationBackgroundView: UIView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var favoriteButton: UIButton!
     
     var mostRecentViewTapped: UIView?
-    
     var whitakers = WhitakerScraper()
     
     var detailItem: Abbreviation! {
@@ -46,6 +46,17 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
         }
     }
     
+    @IBAction func tappedFavoriteButton(sender: UIButton) {
+        if AbbreviationCollection.sharedAbbreviationCollection.favorites.containsObject(self.detailItem) {
+            AbbreviationCollection.sharedAbbreviationCollection.removeFavorite(self.detailItem)
+            self.favoriteButton.setTitle("Add back to favorites", forState: UIControlState.Normal)
+        }
+        else {
+            AbbreviationCollection.sharedAbbreviationCollection.addFavorite(self.detailItem)
+            self.favoriteButton.setTitle("Remove from favorites", forState: UIControlState.Normal)
+        }
+    }
+    
     func configureView() {
         if self.detailItem == nil {
             var defaultView = NSBundle.mainBundle().loadNibNamed("DefaultDetailView", owner: self, options: nil)[0] as! UIView
@@ -64,6 +75,12 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
             }
             self.longTextLabel.text = self.detailItem.longText
             self.longTextLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody, scaleFactor: 1.2)
+            if AbbreviationCollection.sharedAbbreviationCollection.favorites.containsObject(self.detailItem) {
+                self.favoriteButton.setTitle("Remove from favorites", forState: UIControlState.Normal)
+            }
+            else {
+                self.favoriteButton.setTitle("Add to favorites", forState: UIControlState.Normal)
+            }
         }
     }
 

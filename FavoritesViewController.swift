@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UnsearchablesViewController: UITableViewController, UISearchBarDelegate, UISearchResultsUpdating {
+class FavoritesViewController: UITableViewController, UISearchBarDelegate, UISearchResultsUpdating {
     
     static let searchScopeIndexAbbreviation = 0
     static let searchScopeIndexFulltext = 1
@@ -16,7 +16,6 @@ class UnsearchablesViewController: UITableViewController, UISearchBarDelegate, U
     var abbreviations = AbbreviationCollection.sharedAbbreviationCollection
     var filteredAbbreviations = Array<Abbreviation>()
     var searchController: UISearchController?
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,7 +77,7 @@ class UnsearchablesViewController: UITableViewController, UISearchBarDelegate, U
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             if !self.searchController!.active || count(self.searchController!.searchBar.text) == 0 {
-                return count(self.abbreviations.specialAbbreviations)
+                return self.abbreviations.favorites.count
             }
             else {
                 return count(self.filteredAbbreviations)
@@ -98,7 +97,7 @@ class UnsearchablesViewController: UITableViewController, UISearchBarDelegate, U
             abbreviation = self.filteredAbbreviations[indexPath.row]
         }
         else {
-            abbreviation = self.abbreviations.specialAbbreviations[indexPath.row]
+            abbreviation = self.abbreviations.favorites[indexPath.row] as! Abbreviation
         }
         
         cell.setAbbreviation(abbreviation, searchController: self.searchController)
@@ -112,7 +111,7 @@ class UnsearchablesViewController: UITableViewController, UISearchBarDelegate, U
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showDetail" {
             if let indexPath = self.tableView.indexPathForSelectedRow() {
-                var abbreviation = self.abbreviations.specialAbbreviations[indexPath.row]
+                var abbreviation = self.abbreviations.favorites[indexPath.row] as! Abbreviation
                 
                 let controller = (segue.destinationViewController as! UINavigationController).topViewController as! DetailViewController
                 controller.detailItem = abbreviation
@@ -133,7 +132,7 @@ class UnsearchablesViewController: UITableViewController, UISearchBarDelegate, U
         
         var scopeIndex = searchController.searchBar.selectedScopeButtonIndex;
         
-        self.abbreviations.asyncSearchSpecialsForString(searchString, scopeIndex: scopeIndex, onFinish: {
+        self.abbreviations.asyncSearchFavoritesForString(searchString, scopeIndex: scopeIndex, onFinish: {
             results in
             self.filteredAbbreviations = results
             self.tableView.reloadData()
