@@ -48,7 +48,9 @@
                             <outlet property="delegate" destination="7bK-jq-Zjz" id="RA6-mI-bju"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="All Abbreviations" id="Zdf-7t-Un8"/>
+                    <navigationItem key="navigationItem" title="All Abbreviations" id="Zdf-7t-Un8">
+                        <barButtonItem key="backBarButtonItem" title="Abbreviations" id="Jr7-RY-G7L"/>
+                    </navigationItem>
                     <connections>
                         <segue destination="vC3-pB-5Vb" kind="showDetail" identifier="showDetail" id="jXk-1v-irW"/>
                         <segue destination="vqs-WB-ajp" kind="show" identifier="showUnsearchables" id="LPs-dL-e4k"/>
@@ -58,7 +60,7 @@
             </objects>
             <point key="canvasLocation" x="713" y="-630"/>
         </scene>
-        <!--Unsearchables View Controller-->
+        <!--Special abbreviations-->
         <scene sceneID="lmi-CK-2ZE">
             <objects>
                 <tableViewController id="vqs-WB-ajp" customClass="UnsearchablesViewController" customModule="inscriptus" customModuleProvider="target" sceneMemberID="viewController">
@@ -71,6 +73,7 @@
                             <outlet property="delegate" destination="vqs-WB-ajp" id="h31-rS-FQ9"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="Special abbreviations" id="our-4L-MJQ"/>
                     <connections>
                         <segue destination="vC3-pB-5Vb" kind="showDetail" identifier="showDetail" id="Rsu-zq-IAi"/>
                     </connections>
@@ -106,23 +109,35 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="1000"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FX4-cT-3sG" userLabel="Abbreviation View">
-                                <rect key="frame" x="16" y="82" width="568" height="52"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FX4-cT-3sG" userLabel="Abbreviation View">
+                                <rect key="frame" x="16" y="82" width="568" height="75"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iS6-wl-5Oj">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iS6-wl-5Oj">
                                         <rect key="frame" x="25" y="15" width="518" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YIO-yc-Xcl">
+                                        <rect key="frame" x="59" y="8" width="450" height="36"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="45" id="Fbw-Ri-IS1"/>
+                                        </constraints>
+                                    </imageView>
                                 </subviews>
                                 <gestureRecognizers/>
                                 <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="YIO-yc-Xcl" secondAttribute="bottom" constant="15" id="60P-sy-sWS"/>
+                                    <constraint firstAttribute="centerY" secondItem="YIO-yc-Xcl" secondAttribute="centerY" id="H6r-k9-etr"/>
                                     <constraint firstAttribute="centerX" secondItem="iS6-wl-5Oj" secondAttribute="centerX" id="PXb-Pk-5E1"/>
                                     <constraint firstItem="iS6-wl-5Oj" firstAttribute="top" relation="greaterThanOrEqual" secondItem="FX4-cT-3sG" secondAttribute="top" constant="15" id="bqg-O2-Sj0"/>
+                                    <constraint firstItem="YIO-yc-Xcl" firstAttribute="leading" secondItem="FX4-cT-3sG" secondAttribute="leading" constant="59" id="em1-kR-j1o"/>
+                                    <constraint firstAttribute="trailing" secondItem="YIO-yc-Xcl" secondAttribute="trailing" constant="59" id="f3g-jE-MZc"/>
                                     <constraint firstAttribute="trailing" secondItem="iS6-wl-5Oj" secondAttribute="trailing" constant="25" id="g5g-Dr-Sx9"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="74" id="iwU-53-w52"/>
+                                    <constraint firstItem="YIO-yc-Xcl" firstAttribute="top" secondItem="FX4-cT-3sG" secondAttribute="top" constant="15" id="otL-cW-ocj"/>
                                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="iS6-wl-5Oj" secondAttribute="bottom" constant="15" id="pNz-5v-mMk"/>
+                                    <constraint firstAttribute="centerX" secondItem="YIO-yc-Xcl" secondAttribute="centerX" id="qrZ-WD-OCq"/>
                                     <constraint firstItem="iS6-wl-5Oj" firstAttribute="leading" secondItem="FX4-cT-3sG" secondAttribute="leading" constant="25" id="s9b-mP-6Sp"/>
                                     <constraint firstAttribute="centerY" secondItem="iS6-wl-5Oj" secondAttribute="centerY" id="vGB-j6-YEy"/>
                                 </constraints>
@@ -136,8 +151,8 @@
                                     <outletCollection property="gestureRecognizers" destination="te5-Mx-S6p" appends="YES" id="NKx-3l-Cqw"/>
                                 </connections>
                             </view>
-                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0xi-rM-Ixa">
-                                <rect key="frame" x="36" y="153" width="528" height="21"/>
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0xi-rM-Ixa">
+                                <rect key="frame" x="46" y="191" width="508" height="21"/>
                                 <gestureRecognizers/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -146,31 +161,31 @@
                                     <outletCollection property="gestureRecognizers" destination="JSO-1H-D5b" appends="YES" id="Oaz-lE-xJJ"/>
                                 </connections>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p6b-Lf-OG6">
-                                <rect key="frame" x="538" y="182" width="44" height="30"/>
-                                <state key="normal" title="Define">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AIR-Y6-WEG">
+                                <rect key="frame" x="562" y="191" width="22" height="22"/>
+                                <state key="normal">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="defineButtonPressed:" destination="8RS-BD-ibv" eventType="touchUpInside" id="wC9-UJ-8ae"/>
+                                    <action selector="defineButtonPressed:" destination="8RS-BD-ibv" eventType="touchUpInside" id="ONn-6O-TNO"/>
                                 </connections>
                             </button>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="oJf-1F-Gny">
-                                <rect key="frame" x="550" y="187" width="20" height="20"/>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="oJf-1F-Gny">
+                                <rect key="frame" x="563" y="192" width="20" height="20"/>
                             </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="0xi-rM-Ixa" firstAttribute="top" secondItem="FX4-cT-3sG" secondAttribute="bottom" constant="19" id="2nP-9C-ITm"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="p6b-Lf-OG6" secondAttribute="trailing" constant="2" id="8Bt-mP-zQH"/>
-                            <constraint firstItem="p6b-Lf-OG6" firstAttribute="top" secondItem="0xi-rM-Ixa" secondAttribute="bottom" constant="8" id="C08-rr-elh"/>
+                            <constraint firstItem="0xi-rM-Ixa" firstAttribute="top" secondItem="FX4-cT-3sG" secondAttribute="bottom" constant="34" id="2nP-9C-ITm"/>
+                            <constraint firstItem="AIR-Y6-WEG" firstAttribute="trailing" secondItem="1GF-fd-FWs" secondAttribute="trailingMargin" id="69E-md-jlP"/>
                             <constraint firstItem="FX4-cT-3sG" firstAttribute="leading" secondItem="1GF-fd-FWs" secondAttribute="leadingMargin" id="DZW-p0-Gqv"/>
+                            <constraint firstItem="oJf-1F-Gny" firstAttribute="centerY" secondItem="AIR-Y6-WEG" secondAttribute="centerY" id="Eqb-c7-gnx"/>
+                            <constraint firstItem="oJf-1F-Gny" firstAttribute="centerX" secondItem="AIR-Y6-WEG" secondAttribute="centerX" id="FcH-cl-bia"/>
+                            <constraint firstItem="0xi-rM-Ixa" firstAttribute="centerY" secondItem="AIR-Y6-WEG" secondAttribute="centerY" id="KlC-n6-O2O"/>
                             <constraint firstAttribute="trailingMargin" secondItem="FX4-cT-3sG" secondAttribute="trailing" id="RsR-gK-Nl2"/>
-                            <constraint firstItem="0xi-rM-Ixa" firstAttribute="leading" secondItem="1GF-fd-FWs" secondAttribute="leadingMargin" constant="20" id="Y2X-xc-u6E"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="0xi-rM-Ixa" secondAttribute="trailing" constant="20" id="Z8P-3e-KuC"/>
+                            <constraint firstItem="0xi-rM-Ixa" firstAttribute="leading" secondItem="1GF-fd-FWs" secondAttribute="leadingMargin" constant="30" id="Y2X-xc-u6E"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="0xi-rM-Ixa" secondAttribute="trailing" constant="30" id="Z8P-3e-KuC"/>
                             <constraint firstItem="FX4-cT-3sG" firstAttribute="top" secondItem="XYz-n2-X50" secondAttribute="bottom" constant="18" id="fvr-Le-1lm"/>
-                            <constraint firstItem="p6b-Lf-OG6" firstAttribute="centerY" secondItem="oJf-1F-Gny" secondAttribute="centerY" id="leh-oJ-KnN"/>
-                            <constraint firstItem="p6b-Lf-OG6" firstAttribute="centerX" secondItem="oJf-1F-Gny" secondAttribute="centerX" id="nOK-E5-orT"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="pQt-qP-NAZ"/>
@@ -180,7 +195,8 @@
                         <outlet property="abbreviationBackgroundView" destination="FX4-cT-3sG" id="ceF-qV-lYT"/>
                         <outlet property="abbreviationLabel" destination="iS6-wl-5Oj" id="ur3-rx-ddV"/>
                         <outlet property="activityIndicator" destination="oJf-1F-Gny" id="bYS-YM-OMK"/>
-                        <outlet property="defineButton" destination="p6b-Lf-OG6" id="GFl-dE-Ned"/>
+                        <outlet property="defineButton" destination="AIR-Y6-WEG" id="PsR-fN-Dvd"/>
+                        <outlet property="imageView" destination="YIO-yc-Xcl" id="7cq-Qa-xcf"/>
                         <outlet property="longTextLabel" destination="0xi-rM-Ixa" id="4Il-5A-GCu"/>
                         <segue destination="q4q-4u-9YR" kind="presentation" identifier="showWords" id="rDt-Bl-rSC"/>
                     </connections>
@@ -202,7 +218,7 @@
                     </connections>
                 </pongPressGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="703" y="329"/>
+            <point key="canvasLocation" x="728" y="316"/>
         </scene>
         <!--Definition View Controller-->
         <scene sceneID="b63-ez-ZaD">
@@ -348,6 +364,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="jXk-1v-irW"/>
+        <segue reference="Rsu-zq-IAi"/>
     </inferredMetricsTieBreakers>
 </document>

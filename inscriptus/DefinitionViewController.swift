@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol DefinitionViewControllerDelegate {
+    func didDismissDefinitionViewController(viewController: DefinitionViewController)
+}
+
 class DefinitionViewController: UIViewController, UIGestureRecognizerDelegate {
     
     private let cellIdentifier = "definitionCell"
@@ -19,6 +23,8 @@ class DefinitionViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var doneButton: UIBarButtonItem!
     var result: WhitakerResult!
     
+    var delegate: DefinitionViewControllerDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -27,40 +33,15 @@ class DefinitionViewController: UIViewController, UIGestureRecognizerDelegate {
         
         var topInset: CGFloat = 64
         
-        self.adjustViewsForOrientation()
         if self.result != nil {
             updateResult(self.result)
         }
     }
-
     
     override func viewWillAppear(animated: Bool) {
         UIDevice.currentDevice().beginGeneratingDeviceOrientationNotifications()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "orientationChanged:", name: UIDeviceOrientationDidChangeNotification, object: nil)
-    }
-    
-    func orientationChanged(notification: NSNotification) {
-        self.adjustViewsForOrientation()
-    }
-    
-    override func shouldAutorotate() -> Bool {
-        println("calling shouldAutorotate() in DefinitionViewController")
-        return false
-    }
-    
-    override func supportedInterfaceOrientations() -> Int {
-        println("Calling supportedInterfaceOrientations()")
-        return Int(UIInterfaceOrientationMask.Portrait.rawValue)
-    }
-    
-    func adjustViewsForOrientation() {
-        var topInset = CGFloat()
-        topInset = -12
-        self.tableView.contentInset           = UIEdgeInsets(top: topInset, left: 0, bottom: 44, right:0);
-        self.tableView.scrollIndicatorInsets  = UIEdgeInsets(top: topInset, left: 0, bottom: 44,  right: 0)
-        self.errorTextView.textContainerInset = UIEdgeInsets(top: topInset, left: 8, bottom: 44, right: 8)
-        
     }
     
     override func viewDidDisappear(animated: Bool) {
@@ -132,6 +113,9 @@ class DefinitionViewController: UIViewController, UIGestureRecognizerDelegate {
     
     @IBAction func doneButtonPressed(sender: UIBarButtonItem) {
         self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+        if let delegate = self.delegate {
+            delegate.didDismissDefinitionViewController(self)
+        }
     }
 }
 

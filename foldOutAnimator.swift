@@ -43,10 +43,10 @@ class foldOutAnimator: NSObject, UIViewControllerAnimatedTransitioning {
         
         var startFrame = CGRect(x: 0, y: viewHeight, width: viewWidth, height: viewHeight - foldOutBelowRect.height - topMargin)
         
-        println("screenFrame\t\t \(screenFrame)")
-        println("startFrame\t\t\t \(startFrame)")
-        println("viewFrame\t\t\t \(viewFrame)")
-        println("foldOutBelowRect\t \(foldOutBelowRect)")
+//        println("screenFrame\t\t \(screenFrame)")
+//        println("startFrame\t\t\t \(startFrame)")
+//        println("viewFrame\t\t\t \(viewFrame)")
+//        println("foldOutBelowRect\t \(foldOutBelowRect)")
         
         var statusBarBackground = UIView(frame: CGRect(x: 0, y: -20, width: viewWidth, height: 20))
         statusBarBackground.backgroundColor = UIColor.whiteColor()

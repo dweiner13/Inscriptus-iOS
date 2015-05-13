@@ -21,8 +21,6 @@ class InscribedCell: UITableViewCell {
 //        self.centerBackgroundView.layer.borderColor = UIColor(red:0.78, green:0.769, blue:0.769, alpha:1).CGColor
         //        self.centerBackgroundView.layer.borderWidth = 2
         
-        println("Bounds upon awakeFromNib: \(self.centerBackgroundView.bounds)")
-        
         var gradient = CAGradientLayer()
         gradient.frame = self.centerBackgroundView.bounds
         gradient.colors = [
@@ -36,12 +34,10 @@ class InscribedCell: UITableViewCell {
     }
     
     func updateBackgroundFrame() {
-        println("Bounds at updateBackgroundFrame: \(self.centerBackgroundView.bounds)")
         self.gradientLayer.frame = self.centerBackgroundView.bounds
     }
     
     override func setHighlighted(highlighted: Bool, animated: Bool) {
-        println("Bounds at highlight time: \(self.centerBackgroundView.bounds)")
         if highlighted {
             self.gradientLayer.frame = self.centerBackgroundView.bounds
         }

@@ -105,9 +105,58 @@ class AbbreviationCollection: NSObject {
         })
     }
     
+    func searchSpecialsForString(searchString: String, scopeIndex: Int) -> [Abbreviation] {
+        var resultAbbreviations = Set<Abbreviation>()
+        
+        if scopeIndex == MasterViewController.searchScopeIndexAbbreviation {
+            // Do a partial match too
+            var i = 0
+            for abb: Abbreviation in self.specialAbbreviations {
+                if let abbSearchableStrings = abb.searchStrings {
+                    for str: String in abbSearchableStrings {
+                        if str.rangeOfString(searchString.lowercaseString, options: .CaseInsensitiveSearch) != nil || str.rangeOfString(searchString.lowercaseString.stringByReplacingOccurrencesOfString(" ", withString: ""), options: .CaseInsensitiveSearch) != nil {
+                            resultAbbreviations.insert(abb)
+                        }
+                    }
+                }
+            }
+        }
+        else if scopeIndex == MasterViewController.searchScopeIndexFulltext {
+            for abbreviation: Abbreviation in self.specialAbbreviations {
+                if abbreviation.longText.rangeOfString(searchString, options: .CaseInsensitiveSearch) != nil {
+                    resultAbbreviations.insert(abbreviation)
+                }
+            }
+        }
+        
+        return sorted(Array(resultAbbreviations), {
+            (a1: Abbreviation, a2: Abbreviation) in
+            let a1Text = a1.displayText != nil ? a1.displayText! : a1.longText
+            let a2Text = a2.displayText != nil ? a2.displayText! : a2.longText
+            let a1SearchPos = a1Text.rangeOfString(searchString, options: .CaseInsensitiveSearch)?.startIndex
+            let a2SearchPos = a2Text.rangeOfString(searchString, options: .CaseInsensitiveSearch)?.startIndex
+            if a1SearchPos == a1Text.startIndex && a2SearchPos != a2Text.startIndex {
+                return true
+            }
+            if a2SearchPos == a2Text.startIndex && a1SearchPos != a1Text.startIndex {
+                return false
+            }
+            return a1Text.compare(a2Text) == .OrderedAscending
+        })
+    }
+    
     func asyncSearchForString(searchString: String, scopeIndex: Int, onFinish: ([Abbreviation]) -> Void) -> Void {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
             let results = self.searchForString(searchString, scopeIndex: scopeIndex)
+            dispatch_async(dispatch_get_main_queue()) {
+                onFinish(results)
+            }
+        }
+    }
+    
+    func asyncSearchSpecialsForString(searchString: String, scopeIndex: Int, onFinish: ([Abbreviation]) -> Void) -> Void {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+            let results = self.searchSpecialsForString(searchString, scopeIndex: scopeIndex)
             dispatch_async(dispatch_get_main_queue()) {
                 onFinish(results)
             }

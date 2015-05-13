@@ -14,6 +14,7 @@ class Abbreviation: NSObject, Printable, DebugPrintable {
     let longText: String
     let displayImage: String?
     let searchStrings: Set<String>?
+    let isSpecial: Bool
     
     // not really useful, in fact completely useless
     let id: Int
@@ -57,10 +58,11 @@ class Abbreviation: NSObject, Printable, DebugPrintable {
         }
     }
     
-    init(displayText: String?, id: Int, longText: String, displayImageName: String?, searchStrings: Array<String>) {
+    init(displayText: String?, id: Int, longText: String, displayImageName: String?, searchStrings: Array<String>, isSpecial: Bool) {
         self.displayText = displayText
         self.id = id
         self.longText = longText
+        self.isSpecial = isSpecial
         
         if let imageName = displayImageName {
             self.displayImage = imageName
@@ -91,11 +93,12 @@ class Abbreviation: NSObject, Printable, DebugPrintable {
         let id = (JSONDict["id"] as! String?)!.toInt()!
         let phrase = JSONDict["phrase"] as! NSString
         let displayImage = JSONDict["abbrDisplayImage"] as! NSString?
+        let isSpecial = JSONDict["isSpecial"] as! Bool
         
         // Get array from abbrSearchList
         let abbrSearchList = JSONDict["abbrSearchList"] as! NSArray
 
-        self.init(displayText: abbrDisplay as String?, id: id, longText: phrase as String, displayImageName: displayImage as String?, searchStrings: abbrSearchList as! Array<String>)
+        self.init(displayText: abbrDisplay as String?, id: id, longText: phrase as String, displayImageName: displayImage as String?, searchStrings: abbrSearchList as! Array<String>, isSpecial: isSpecial)
     }
     
     func searchStringsAsReadableString() -> String? {

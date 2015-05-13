@@ -61,7 +61,6 @@ class WhitakerScraper: NSObject {
     internal var currentConnection: NSURLConnection?
     
     func beginDefinitionRequestForWord(word: String, targetLanguage: TargetLanguage) {
-        println("began definition request for word \(word)")
         
         if let connection = self.currentConnection {
             connection.cancel()

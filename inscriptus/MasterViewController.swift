@@ -16,9 +16,7 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
     static let searchScopeIndexFulltext = 1
 
     var detailViewController: DetailViewController? = nil
-    
     var searchController: UISearchController?
-    
     var filteredAbbreviations = Array<Abbreviation>()
 
     override func awakeFromNib() {
@@ -65,11 +63,6 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
             searchController.dimsBackgroundDuringPresentation = false
         }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
     func keyboardDidShow(sender: NSNotification) {
         let dict: NSDictionary = sender.userInfo! as NSDictionary
@@ -107,9 +100,6 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
                 controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
                 controller.navigationItem.leftItemsSupplementBackButton = true
             }
-        } // Handle transition to special character view
-        else if segue.destinationViewController is UnsearchablesViewController {
-            (segue.destinationViewController as! UnsearchablesViewController).specialAbbreviations = self.abbreviations.specialAbbreviations
         }
     }
 
@@ -140,8 +130,9 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.section==0 {
-            let cell = tableView.dequeueReusableCellWithIdentifier("BasicCell", forIndexPath: indexPath) as! BasicCell
-            cell.mainLabel!.text = "Special character abbreviations"
+            let cell = UITableViewCell(style: .Default, reuseIdentifier: "DefaultCell")
+            cell.textLabel?.text = "Special character abbreviations"
+            cell.accessoryType = .DisclosureIndicator
             return cell
         }
         else {
