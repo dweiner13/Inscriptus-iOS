@@ -31,11 +31,15 @@ class DefinitionViewController: UIViewController, UIGestureRecognizerDelegate {
         self.tableView.rowHeight = UITableViewAutomaticDimension;
         self.tableView.estimatedRowHeight = 130.0; // set to whatever your "average" cell height is
         
-        var topInset: CGFloat = 64
-        
         if self.result != nil {
             updateResult(self.result)
         }
+        
+        var topInset = CGFloat()
+        topInset = -12
+        self.tableView.contentInset           = UIEdgeInsets(top: topInset, left: 0, bottom: 44, right:0);
+        self.tableView.scrollIndicatorInsets  = UIEdgeInsets(top: topInset, left: 0, bottom: 44,  right: 0)
+        self.errorTextView.textContainerInset = UIEdgeInsets(top: topInset, left: 8, bottom: 44, right: 8)
     }
     
     override func viewWillAppear(animated: Bool) {
