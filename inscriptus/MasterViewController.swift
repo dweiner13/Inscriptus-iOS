@@ -15,27 +15,8 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
     static let searchScopeIndexAbbreviation = 0
     static let searchScopeIndexFulltext = 1
     
-    let FAVORITES_SECTION_INDEX = 0
-    var SPECIAL_ABBREVIATIONS_SECTION_INDEX: Int {
-        get {
-            if AbbreviationCollection.sharedAbbreviationCollection.noFavorites {
-                return 0
-            }
-            else {
-                return 1
-            }
-        }
-    }
-    var ALL_ABBREVIATIONS_SECTION_INDEX: Int {
-        get {
-            if AbbreviationCollection.sharedAbbreviationCollection.noFavorites {
-                return 1
-            }
-            else {
-                return 2
-            }
-        }
-    }
+    let SPECIAL_ABBREVIATIONS_SECTION_INDEX = 0
+    let ALL_ABBREVIATIONS_SECTION_INDEX = 1
 
     var detailViewController: DetailViewController? = nil
     var searchController: UISearchController?
@@ -68,7 +49,6 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
         self.tableView.rowHeight = 60
         
         self.tableView.registerNib(UINib(nibName: "AbbreviationCell", bundle: nil), forCellReuseIdentifier: "AbbreviationCell")
-        self.tableView.registerNib(UINib(nibName: "BasicCell", bundle: nil), forCellReuseIdentifier: "BasicCell")
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardDidShow:", name: UIKeyboardDidShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardDidHide:", name: UIKeyboardDidHideNotification, object: nil)
@@ -131,18 +111,10 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
     // MARK: - Table View
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        if AbbreviationCollection.sharedAbbreviationCollection.noFavorites {
-            return 2
-        }
-        else {
-            return 3
-        }
+        return 2
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == FAVORITES_SECTION_INDEX && !AbbreviationCollection.sharedAbbreviationCollection.noFavorites {
-            return 1
-        }
         if section == SPECIAL_ABBREVIATIONS_SECTION_INDEX {
             if !self.searchController!.active || count(self.searchController!.searchBar.text) == 0 {
                 return 1
@@ -164,12 +136,6 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if indexPath.section == FAVORITES_SECTION_INDEX && !AbbreviationCollection.sharedAbbreviationCollection.noFavorites {
-            let cell = UITableViewCell(style: .Default, reuseIdentifier: "DefaultCell")
-            cell.textLabel?.text = "Favorites"
-            cell.accessoryType = .DisclosureIndicator
-            return cell
-        }
         if indexPath.section == SPECIAL_ABBREVIATIONS_SECTION_INDEX {
             let cell = UITableViewCell(style: .Default, reuseIdentifier: "DefaultCell")
             cell.textLabel?.text = "Special character abbreviations"
@@ -194,9 +160,6 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if indexPath.section == FAVORITES_SECTION_INDEX && !AbbreviationCollection.sharedAbbreviationCollection.noFavorites {
-            self.performSegueWithIdentifier("showFavorites", sender: self)
-        }
         if indexPath.section == SPECIAL_ABBREVIATIONS_SECTION_INDEX {
             self.performSegueWithIdentifier("showUnsearchables", sender: self)
         }

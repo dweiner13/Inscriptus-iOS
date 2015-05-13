@@ -50,11 +50,15 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="All Abbreviations" id="Zdf-7t-Un8">
                         <barButtonItem key="backBarButtonItem" title="Abbreviations" id="Jr7-RY-G7L"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="bookmarks" id="Dvl-80-hwN">
+                            <connections>
+                                <segue destination="fRj-gQ-BKZ" kind="show" id="V41-m2-6uj"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <segue destination="vC3-pB-5Vb" kind="showDetail" identifier="showDetail" id="jXk-1v-irW"/>
                         <segue destination="vqs-WB-ajp" kind="show" identifier="showUnsearchables" id="LPs-dL-e4k"/>
-                        <segue destination="fRj-gQ-BKZ" kind="show" identifier="showFavorites" id="ggc-bL-8Rp"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rux-fX-hf1" sceneMemberID="firstResponder"/>
@@ -69,14 +73,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="PXy-lV-bJ1">
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PXy-lV-bJ1" id="Imn-bi-RdA">
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="fRj-gQ-BKZ" id="Xr3-AT-IZA"/>
                             <outlet property="delegate" destination="fRj-gQ-BKZ" id="GYV-3a-CSa"/>
@@ -409,6 +405,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="IGm-0a-oSG"/>
+        <segue reference="jXk-1v-irW"/>
     </inferredMetricsTieBreakers>
 </document>

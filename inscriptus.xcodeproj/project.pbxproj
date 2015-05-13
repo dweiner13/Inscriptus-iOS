@@ -247,8 +247,8 @@
 		E028AC411A98342C0058D9A1 /* Interface Files */ = {
 			isa = PBXGroup;
 			children = (
-				E01D1D011B00503200ABB9DF /* foldOutAnimator.swift */,
 				E0FDFA1F1A9545CC00659871 /* Main.storyboard */,
+				E01D1D011B00503200ABB9DF /* foldOutAnimator.swift */,
 				E0FDFA241A9545CC00659871 /* LaunchScreen.xib */,
 				E028AC4C1A99251D0058D9A1 /* AbbreviationCell.xib */,
 				E028AC421A98344F0058D9A1 /* AbbreviationCell.swift */,
