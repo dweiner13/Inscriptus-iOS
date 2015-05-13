@@ -49,6 +49,8 @@ class FavoritesViewController: UITableViewController, UISearchBarDelegate, UISea
         if let selectedIndexPath = self.tableView.indexPathForSelectedRow() {
             self.tableView.deselectRowAtIndexPath(selectedIndexPath, animated: true)
         }
+        
+        self.tableView.reloadData()
     }
     
     // Handle scroll bar insets when search bar is active

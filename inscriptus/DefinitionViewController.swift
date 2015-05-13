@@ -35,8 +35,7 @@ class DefinitionViewController: UIViewController, UIGestureRecognizerDelegate {
             updateResult(self.result)
         }
         
-        var topInset = CGFloat()
-        topInset = -12
+        var topInset = CGFloat(-12)
         self.tableView.contentInset           = UIEdgeInsets(top: topInset, left: 0, bottom: 44, right:0);
         self.tableView.scrollIndicatorInsets  = UIEdgeInsets(top: topInset, left: 0, bottom: 44,  right: 0)
         self.errorTextView.textContainerInset = UIEdgeInsets(top: topInset, left: 8, bottom: 44, right: 8)
