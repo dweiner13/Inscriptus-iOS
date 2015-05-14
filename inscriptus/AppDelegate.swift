@@ -8,6 +8,8 @@
 
 import UIKit
 
+public let INSCRIPTUS_TINT_COLOR = UIColor(red:0.581, green:0.128, blue:0.574, alpha:1)
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate {
 
@@ -20,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         navigationController.topViewController.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem()
         splitViewController.delegate = self
         
-        self.window?.tintColor = UIColor(red:0.581, green:0.128, blue:0.574, alpha:1)
+        self.window?.tintColor = INSCRIPTUS_TINT_COLOR
         
         return true
     }

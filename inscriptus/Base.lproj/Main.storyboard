@@ -112,14 +112,14 @@
                             <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FX4-cT-3sG" userLabel="Abbreviation View">
                                 <rect key="frame" x="16" y="82" width="568" height="75"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iS6-wl-5Oj">
-                                        <rect key="frame" x="25" y="15" width="518" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iS6-wl-5Oj">
+                                        <rect key="frame" x="25" y="27" width="518" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YIO-yc-Xcl">
-                                        <rect key="frame" x="59" y="8" width="450" height="36"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YIO-yc-Xcl">
+                                        <rect key="frame" x="59" y="15" width="450" height="45"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="45" id="Fbw-Ri-IS1"/>
                                         </constraints>
@@ -173,8 +173,15 @@
                                     <action selector="defineButtonPressed:" destination="8RS-BD-ibv" eventType="touchUpInside" id="ONn-6O-TNO"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o23-oA-puk">
-                                <rect key="frame" x="246" y="246" width="109" height="30"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j5L-qG-zWV" userLabel="FavoritesButtonBGView">
+                                <rect key="frame" x="215" y="950" width="170" height="30"/>
+                                <color key="backgroundColor" red="0.6089245080947876" green="0.16408994793891907" blue="0.57938361167907715" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="170" id="piO-Ts-de5"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o23-oA-puk">
+                                <rect key="frame" x="246" y="950" width="109" height="30"/>
                                 <state key="normal" title="FavoritesButton">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -186,18 +193,31 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="0xi-rM-Ixa" firstAttribute="top" secondItem="FX4-cT-3sG" secondAttribute="bottom" constant="34" id="2nP-9C-ITm"/>
+                            <constraint firstItem="j5L-qG-zWV" firstAttribute="width" secondItem="o23-oA-puk" secondAttribute="width" constant="13" id="3ry-xy-dZw"/>
                             <constraint firstItem="AIR-Y6-WEG" firstAttribute="trailing" secondItem="1GF-fd-FWs" secondAttribute="trailingMargin" id="69E-md-jlP"/>
-                            <constraint firstAttribute="centerX" secondItem="o23-oA-puk" secondAttribute="centerX" id="CUK-cn-mYV"/>
+                            <constraint firstItem="1GV-Ty-oLK" firstAttribute="top" secondItem="j5L-qG-zWV" secondAttribute="bottom" constant="20" id="79e-1c-iKj"/>
                             <constraint firstItem="FX4-cT-3sG" firstAttribute="leading" secondItem="1GF-fd-FWs" secondAttribute="leadingMargin" id="DZW-p0-Gqv"/>
                             <constraint firstItem="oJf-1F-Gny" firstAttribute="centerY" secondItem="AIR-Y6-WEG" secondAttribute="centerY" id="Eqb-c7-gnx"/>
                             <constraint firstItem="oJf-1F-Gny" firstAttribute="centerX" secondItem="AIR-Y6-WEG" secondAttribute="centerX" id="FcH-cl-bia"/>
                             <constraint firstItem="0xi-rM-Ixa" firstAttribute="centerY" secondItem="AIR-Y6-WEG" secondAttribute="centerY" id="KlC-n6-O2O"/>
+                            <constraint firstItem="1GV-Ty-oLK" firstAttribute="top" secondItem="o23-oA-puk" secondAttribute="bottom" constant="20" id="MOy-Fh-dkB"/>
                             <constraint firstAttribute="trailingMargin" secondItem="FX4-cT-3sG" secondAttribute="trailing" id="RsR-gK-Nl2"/>
+                            <constraint firstItem="j5L-qG-zWV" firstAttribute="centerX" secondItem="o23-oA-puk" secondAttribute="centerX" constant="-0.5" id="WZV-5R-4FA"/>
                             <constraint firstItem="0xi-rM-Ixa" firstAttribute="leading" secondItem="1GF-fd-FWs" secondAttribute="leadingMargin" constant="30" id="Y2X-xc-u6E"/>
                             <constraint firstAttribute="trailingMargin" secondItem="0xi-rM-Ixa" secondAttribute="trailing" constant="30" id="Z8P-3e-KuC"/>
+                            <constraint firstItem="j5L-qG-zWV" firstAttribute="height" secondItem="o23-oA-puk" secondAttribute="height" id="byh-Vj-DZ3"/>
+                            <constraint firstAttribute="centerX" secondItem="o23-oA-puk" secondAttribute="centerX" constant="-0.5" id="d6t-fd-2h9"/>
+                            <constraint firstItem="j5L-qG-zWV" firstAttribute="centerY" secondItem="o23-oA-puk" secondAttribute="centerY" id="ehF-Ye-V53"/>
                             <constraint firstItem="FX4-cT-3sG" firstAttribute="top" secondItem="XYz-n2-X50" secondAttribute="bottom" constant="18" id="fvr-Le-1lm"/>
-                            <constraint firstItem="o23-oA-puk" firstAttribute="top" secondItem="0xi-rM-Ixa" secondAttribute="bottom" constant="34" id="wYI-QS-1VR"/>
+                            <constraint firstAttribute="centerX" secondItem="j5L-qG-zWV" secondAttribute="centerX" id="vXP-SD-zog"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="3ry-xy-dZw"/>
+                                <exclude reference="vXP-SD-zog"/>
+                                <exclude reference="79e-1c-iKj"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="pQt-qP-NAZ"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -208,6 +228,8 @@
                         <outlet property="activityIndicator" destination="oJf-1F-Gny" id="bYS-YM-OMK"/>
                         <outlet property="defineButton" destination="AIR-Y6-WEG" id="PsR-fN-Dvd"/>
                         <outlet property="favoriteButton" destination="o23-oA-puk" id="m6Q-6c-HS2"/>
+                        <outlet property="favoriteButtonBackgroundView" destination="j5L-qG-zWV" id="yNq-hW-B8f"/>
+                        <outlet property="favoriteButtonBackgroundViewWidthEqualToConstraint" destination="byh-Vj-DZ3" id="B5z-3N-jbV"/>
                         <outlet property="imageView" destination="YIO-yc-Xcl" id="7cq-Qa-xcf"/>
                         <outlet property="longTextLabel" destination="0xi-rM-Ixa" id="4Il-5A-GCu"/>
                         <segue destination="q4q-4u-9YR" kind="presentation" identifier="showWords" id="rDt-Bl-rSC"/>

@@ -12,6 +12,8 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
     
     let abbreviations = AbbreviationCollection.sharedAbbreviationCollection
     
+    var showFavoritesButton: UIBarButtonItem!
+    
     static let searchScopeIndexAbbreviation = 0
     static let searchScopeIndexFulltext = 1
     
@@ -32,8 +34,9 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
     func didPressBookmarksButton(sender: UIBarButtonItem) {
         if self.isShowingFavorites {
             sender.setBackgroundImage(nil, forState: UIControlState.Normal, barMetrics: UIBarMetrics.Default)
-            sender.tintColor = UIApplication.sharedApplication().delegate?.window??.tintColor
+            sender.tintColor = INSCRIPTUS_TINT_COLOR
             self.navigationItem.title = "All Abbreviations"
+            self.navigationItem.leftBarButtonItem = nil
             self.isShowingFavorites = !self.isShowingFavorites
         }
         else {
@@ -41,7 +44,23 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
             sender.tintColor = UIColor.whiteColor()
             self.navigationItem.title = "Favorites"
             self.navigationItem.backBarButtonItem!.title = "Favorites"
+            self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: "didPressEditButton:")
             self.isShowingFavorites = !self.isShowingFavorites
+        }
+    }
+    
+    func didPressEditButton(sender: UIBarButtonItem) {
+        if self.isShowingFavorites {
+            if self.tableView.editing {
+                self.tableView.setEditing(false, animated: true)
+                self.navigationItem.rightBarButtonItem = self.showFavoritesButton
+                self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: "didPressEditButton:")
+            }
+            else {
+                self.tableView.setEditing(true, animated: true)
+                self.navigationItem.rightBarButtonItem = nil
+                self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: "didPressEditButton:")
+            }
         }
     }
     
@@ -51,9 +70,8 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
             self.clearsSelectionOnViewWillAppear = false
             self.preferredContentSize = CGSize(width: 320.0, height: 600.0)
         }
-        
-        var buttonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Bookmarks, target: self, action: "didPressBookmarksButton:")
-        self.navigationItem.rightBarButtonItem = buttonItem
+        self.showFavoritesButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Bookmarks, target: self, action: "didPressBookmarksButton:")
+        self.navigationItem.rightBarButtonItem = self.showFavoritesButton
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -142,7 +160,7 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
         }
     }
 
-    // MARK: - Table View
+    // MARK: - Table View Delegate
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         if self.isShowingFavorites {
@@ -229,6 +247,24 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
         else if indexPath.section == ALL_ABBREVIATIONS_SECTION_INDEX {
             self.performSegueWithIdentifier("showDetail", sender: self)
         }
+    }
+    
+    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        if self.isShowingFavorites {
+            return true
+        }
+        return false
+    }
+    
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if self.isShowingFavorites && editingStyle == UITableViewCellEditingStyle.Delete {
+            self.abbreviations.removeFavorite(self.abbreviations.favorites[indexPath.row] as! Abbreviation)
+            self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+        }
+    }
+    
+    override func tableView(tableView: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
+        self.abbreviations.moveFavoriteFromIndex(sourceIndexPath.row, toIndex: destinationIndexPath.row)
     }
     
     // MARK: - UISearchResultsUpdating

@@ -16,6 +16,8 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var favoriteButton: UIButton!
+    @IBOutlet weak var favoriteButtonBackgroundView: UIView!
+    @IBOutlet weak var favoriteButtonBackgroundViewWidthEqualToConstraint: NSLayoutConstraint!
     
     var mostRecentViewTapped: UIView?
     var whitakers = WhitakerScraper()
@@ -50,10 +52,20 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
         if AbbreviationCollection.sharedAbbreviationCollection.favorites.containsObject(self.detailItem) {
             AbbreviationCollection.sharedAbbreviationCollection.removeFavorite(self.detailItem)
             self.favoriteButton.setTitle("Add back to favorites", forState: UIControlState.Normal)
+            self.favoriteButton.tintColor = INSCRIPTUS_TINT_COLOR
+            UIView.animateWithDuration(0.2, animations: {
+                () -> Void in
+                self.favoriteButtonBackgroundView.backgroundColor = UIColor.clearColor()
+            })
         }
         else {
             AbbreviationCollection.sharedAbbreviationCollection.addFavorite(self.detailItem)
             self.favoriteButton.setTitle("Remove from favorites", forState: UIControlState.Normal)
+            self.favoriteButton.tintColor = UIColor.whiteColor()
+            UIView.animateWithDuration(0.2, animations: {
+                () -> Void in
+                self.favoriteButtonBackgroundView.backgroundColor = INSCRIPTUS_TINT_COLOR
+            })
         }
     }
     
@@ -77,10 +89,14 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
             self.longTextLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody, scaleFactor: 1.2)
             if AbbreviationCollection.sharedAbbreviationCollection.favorites.containsObject(self.detailItem) {
                 self.favoriteButton.setTitle("Remove from favorites", forState: UIControlState.Normal)
+                self.favoriteButton.tintColor = UIColor.whiteColor()
+                self.favoriteButtonBackgroundView.backgroundColor = INSCRIPTUS_TINT_COLOR
             }
             else {
                 self.favoriteButton.setTitle("Add to favorites", forState: UIControlState.Normal)
+                self.favoriteButtonBackgroundView.backgroundColor = UIColor.clearColor()
             }
+            self.favoriteButtonBackgroundView.layer.cornerRadius = 7
         }
     }
 
@@ -91,7 +107,7 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
             self.whitakers.delegate = self
             self.definesPresentationContext = true
             self.abbreviationBackgroundView.layer.cornerRadius = 5
-            self.abbreviationBackgroundView.layer.borderColor = UIColor(red:0.581, green:0.128, blue:0.574, alpha:1).CGColor
+            self.abbreviationBackgroundView.layer.borderColor = INSCRIPTUS_TINT_COLOR.CGColor
             self.abbreviationBackgroundView.layer.borderWidth = 1
         }
     }

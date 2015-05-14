@@ -43,6 +43,12 @@ class AbbreviationCollection: NSObject {
         defaults.synchronize()
     }
     
+    func moveFavoriteFromIndex(fromIndex: Int, toIndex: Int) {
+        let fav: AnyObject = self.favorites[fromIndex]
+        self.favorites.removeObjectAtIndex(fromIndex)
+        self.favorites.insertObject(fav, atIndex: toIndex)
+    }
+    
     // Abbreviations in a dictionary by their search text
     var abbreviationsGrouped = [String: Array<Abbreviation>]()
     
