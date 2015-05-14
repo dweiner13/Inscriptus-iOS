@@ -19,6 +19,7 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
     
     // Saves the scroll offset while in favorites list
     var allListOffset: CGFloat?
+    var favoritesListOffset: CGFloat?
     
     // Only valid if self.isShowingFavorites is false
     let SPECIAL_ABBREVIATIONS_SECTION_INDEX = 0
@@ -41,6 +42,7 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
             self.navigationItem.title = "All Abbreviations"
             self.navigationItem.leftBarButtonItem = nil
             self.searchController.searchBar.placeholder = "Search all"
+            self.favoritesListOffset = self.tableView.contentOffset.y
             if let offset = self.allListOffset {
                 self.tableView.contentOffset.y = offset
             }
@@ -54,6 +56,9 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
             self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: "didPressEditButton:")
             self.searchController.searchBar.placeholder = "Search favorites"
             self.allListOffset = self.tableView.contentOffset.y
+            if let offset = self.favoritesListOffset {
+                self.tableView.contentOffset.y = offset
+            }
             self.isShowingFavorites = !self.isShowingFavorites
         }
     }
