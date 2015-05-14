@@ -15,19 +15,56 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
     static let searchScopeIndexAbbreviation = 0
     static let searchScopeIndexFulltext = 1
     
+    // Only valid if self.isShowingFavorites is false
     let SPECIAL_ABBREVIATIONS_SECTION_INDEX = 0
     let ALL_ABBREVIATIONS_SECTION_INDEX = 1
+    
+    var isShowingFavorites: Bool = false {
+        didSet {
+            let range = NSMakeRange(0, 2)
+            if self.isShowingFavorites {
+                self.tableView.reloadData()
+//                self.tableView.beginUpdates()
+//                self.tableView.deleteSections(NSIndexSet(indexesInRange: range), withRowAnimation: .Fade)
+//                self.tableView.insertSections(NSIndexSet(index: 0), withRowAnimation: .Fade)
+//                self.tableView.endUpdates()
+            }
+            else {
+                self.tableView.reloadData()
+//                self.tableView.beginUpdates()
+//                self.tableView.deleteSections(NSIndexSet(index: 0), withRowAnimation: .Fade)
+//                self.tableView.insertSections(NSIndexSet(indexesInRange: range), withRowAnimation: .Fade)
+//                self.tableView.endUpdates()
+            }
+        }
+    }
 
     var detailViewController: DetailViewController? = nil
     var searchController: UISearchController?
     var filteredAbbreviations = Array<Abbreviation>()
-
+    
+    func didPressBookmarksButton(sender: UIBarButtonItem) {
+        if self.isShowingFavorites {
+            sender.setBackgroundImage(nil, forState: UIControlState.Normal, barMetrics: UIBarMetrics.Default)
+            sender.tintColor = UIApplication.sharedApplication().delegate?.window??.tintColor
+            self.isShowingFavorites = !self.isShowingFavorites
+        }
+        else {
+            sender.setBackgroundImage(UIImage(named: "bookmarks-bg.png"), forState: UIControlState.Normal, barMetrics: UIBarMetrics.Default)
+            sender.tintColor = UIColor.whiteColor()
+            self.isShowingFavorites = !self.isShowingFavorites
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
             self.clearsSelectionOnViewWillAppear = false
             self.preferredContentSize = CGSize(width: 320.0, height: 600.0)
         }
+        
+        var buttonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Bookmarks, target: self, action: "didPressBookmarksButton:")
+        self.navigationItem.rightBarButtonItem = buttonItem
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -111,10 +148,16 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
     // MARK: - Table View
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        if self.isShowingFavorites {
+            return 1
+        }
         return 2
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if self.isShowingFavorites {
+            return self.abbreviations.favorites.count
+        }
         if section == SPECIAL_ABBREVIATIONS_SECTION_INDEX {
             if !self.searchController!.active || count(self.searchController!.searchBar.text) == 0 {
                 return 1
@@ -136,6 +179,21 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        if self.isShowingFavorites {
+            let cell = tableView.dequeueReusableCellWithIdentifier("AbbreviationCell", forIndexPath: indexPath) as! AbbreviationCell
+            
+            var abbreviation: Abbreviation
+            if self.searchController!.active && count(self.searchController!.searchBar.text) != 0 {
+                abbreviation = self.filteredAbbreviations[indexPath.row]
+            }
+            else {
+                abbreviation = self.abbreviations.favorites[indexPath.row] as! Abbreviation
+            }
+            
+            cell.setAbbreviation(abbreviation, searchController: self.searchController!)
+            
+            return cell
+        }
         if indexPath.section == SPECIAL_ABBREVIATIONS_SECTION_INDEX {
             let cell = UITableViewCell(style: .Default, reuseIdentifier: "DefaultCell")
             cell.textLabel?.text = "Special character abbreviations"
@@ -160,10 +218,13 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if indexPath.section == SPECIAL_ABBREVIATIONS_SECTION_INDEX {
+        if self.isShowingFavorites {
+            self.performSegueWithIdentifier("showDetail", sender: self)
+        }
+        else if indexPath.section == SPECIAL_ABBREVIATIONS_SECTION_INDEX {
             self.performSegueWithIdentifier("showUnsearchables", sender: self)
         }
-        if indexPath.section == ALL_ABBREVIATIONS_SECTION_INDEX {
+        else if indexPath.section == ALL_ABBREVIATIONS_SECTION_INDEX {
             self.performSegueWithIdentifier("showDetail", sender: self)
         }
     }
@@ -175,11 +236,20 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
         
         var scopeIndex = searchController.searchBar.selectedScopeButtonIndex;
         
-        self.abbreviations.asyncSearchForString(searchString, scopeIndex: scopeIndex, onFinish: {
-            results in
-            self.filteredAbbreviations = results
-            self.tableView.reloadData()
-        })
+        if self.isShowingFavorites {
+            self.abbreviations.asyncSearchFavoritesForString(searchString, scopeIndex: scopeIndex, onFinish: {
+                results in
+                self.filteredAbbreviations = results
+                self.tableView.reloadData()
+            })
+        }
+        else {
+            self.abbreviations.asyncSearchForString(searchString, scopeIndex: scopeIndex, onFinish: {
+                results in
+                self.filteredAbbreviations = results
+                self.tableView.reloadData()
+            })
+        }
     }
     
     // updateSearchResultsForSearchController() should be called when scope changed but isn't
