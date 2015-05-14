@@ -17,6 +17,7 @@ class AbbreviationCell: UITableViewCell {
     @IBOutlet weak var primaryLabel: UILabel!
     @IBOutlet weak var secondaryLabel: UILabel!
     @IBOutlet weak var rightImageView: UIImageView!
+    @IBOutlet weak var favoritedFlag: UIImageView!
     
     var abbreviation: Abbreviation?
 
@@ -64,6 +65,13 @@ class AbbreviationCell: UITableViewCell {
         }
         else {
             self.secondaryLabel.text = abbreviation.longText;
+        }
+        
+        if AbbreviationCollection.sharedAbbreviationCollection.favorites.containsObject(abbreviation) {
+            self.favoritedFlag.hidden = false
+        }
+        else {
+            self.favoritedFlag.hidden = true
         }
     }
 }
