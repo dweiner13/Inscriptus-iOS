@@ -21,21 +21,7 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
     
     var isShowingFavorites: Bool = false {
         didSet {
-            let range = NSMakeRange(0, 2)
-            if self.isShowingFavorites {
-                self.tableView.reloadData()
-//                self.tableView.beginUpdates()
-//                self.tableView.deleteSections(NSIndexSet(indexesInRange: range), withRowAnimation: .Fade)
-//                self.tableView.insertSections(NSIndexSet(index: 0), withRowAnimation: .Fade)
-//                self.tableView.endUpdates()
-            }
-            else {
-                self.tableView.reloadData()
-//                self.tableView.beginUpdates()
-//                self.tableView.deleteSections(NSIndexSet(index: 0), withRowAnimation: .Fade)
-//                self.tableView.insertSections(NSIndexSet(indexesInRange: range), withRowAnimation: .Fade)
-//                self.tableView.endUpdates()
-            }
+            self.tableView.reloadData()
         }
     }
 
@@ -47,11 +33,14 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
         if self.isShowingFavorites {
             sender.setBackgroundImage(nil, forState: UIControlState.Normal, barMetrics: UIBarMetrics.Default)
             sender.tintColor = UIApplication.sharedApplication().delegate?.window??.tintColor
+            self.navigationItem.title = "All Abbreviations"
             self.isShowingFavorites = !self.isShowingFavorites
         }
         else {
             sender.setBackgroundImage(UIImage(named: "bookmarks-bg.png"), forState: UIControlState.Normal, barMetrics: UIBarMetrics.Default)
             sender.tintColor = UIColor.whiteColor()
+            self.navigationItem.title = "Favorites"
+            self.navigationItem.backBarButtonItem!.title = "Favorites"
             self.isShowingFavorites = !self.isShowingFavorites
         }
     }
@@ -130,11 +119,19 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
             if let indexPath = self.tableView.indexPathForSelectedRow() {
                 var abbreviation: Abbreviation
                 
-                if self.searchController!.active && count(self.searchController!.searchBar.text) != 0 {
+                if self.isShowingFavorites {
+                    abbreviation = self.abbreviations.favorites[indexPath.row] as! Abbreviation
+                }
+                else if self.searchController!.active && count(self.searchController!.searchBar.text) != 0 {
                     abbreviation = self.filteredAbbreviations[indexPath.row]
                 }
                 else {
-                    abbreviation = self.abbreviations.allAbbreviations[indexPath.row]
+                    if self.searchController!.active && count(self.searchController!.searchBar.text) != 0 {
+                        abbreviation = self.filteredAbbreviations[indexPath.row]
+                    }
+                    else {
+                        abbreviation = self.abbreviations.allAbbreviations[indexPath.row]
+                    }
                 }
                 
                 let controller = (segue.destinationViewController as! UINavigationController).topViewController as! DetailViewController
@@ -156,7 +153,12 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if self.isShowingFavorites {
-            return self.abbreviations.favorites.count
+            if self.searchController!.active && count(self.searchController!.searchBar.text) != 0 {
+                return self.filteredAbbreviations.count
+            }
+            else {
+                return self.abbreviations.favorites.count
+            }
         }
         if section == SPECIAL_ABBREVIATIONS_SECTION_INDEX {
             if !self.searchController!.active || count(self.searchController!.searchBar.text) == 0 {

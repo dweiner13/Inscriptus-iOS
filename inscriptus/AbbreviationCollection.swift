@@ -195,8 +195,10 @@ class AbbreviationCollection: NSObject {
         })
     }
     
+    
+    // Does not sort the results like the other search functions
     func searchFavoritesForString(searchString: String, scopeIndex: Int) -> [Abbreviation] {
-        var resultAbbreviations = Set<Abbreviation>()
+        var resultAbbreviations = [Abbreviation]()
         
         if scopeIndex == MasterViewController.searchScopeIndexAbbreviation {
             // Do a partial match too
@@ -206,7 +208,7 @@ class AbbreviationCollection: NSObject {
                 if let abbSearchableStrings = abb.searchStrings {
                     for str: String in abbSearchableStrings {
                         if str.rangeOfString(searchString.lowercaseString, options: .CaseInsensitiveSearch) != nil || str.rangeOfString(searchString.lowercaseString.stringByReplacingOccurrencesOfString(" ", withString: ""), options: .CaseInsensitiveSearch) != nil {
-                            resultAbbreviations.insert(abb)
+                            resultAbbreviations.append(abb)
                         }
                     }
                 }
@@ -216,25 +218,12 @@ class AbbreviationCollection: NSObject {
             for favorite: AnyObject in self.favorites {
                 let abbreviation = favorite as! Abbreviation
                 if abbreviation.longText.rangeOfString(searchString, options: .CaseInsensitiveSearch) != nil {
-                    resultAbbreviations.insert(abbreviation)
+                    resultAbbreviations.append(abbreviation)
                 }
             }
         }
         
-        return sorted(Array(resultAbbreviations), {
-            (a1: Abbreviation, a2: Abbreviation) in
-            let a1Text = a1.displayText != nil ? a1.displayText! : a1.longText
-            let a2Text = a2.displayText != nil ? a2.displayText! : a2.longText
-            let a1SearchPos = a1Text.rangeOfString(searchString, options: .CaseInsensitiveSearch)?.startIndex
-            let a2SearchPos = a2Text.rangeOfString(searchString, options: .CaseInsensitiveSearch)?.startIndex
-            if a1SearchPos == a1Text.startIndex && a2SearchPos != a2Text.startIndex {
-                return true
-            }
-            if a2SearchPos == a2Text.startIndex && a1SearchPos != a1Text.startIndex {
-                return false
-            }
-            return a1Text.compare(a2Text) == .OrderedAscending
-        })
+        return resultAbbreviations
     }
     
     func asyncSearchForString(searchString: String, scopeIndex: Int, onFinish: ([Abbreviation]) -> Void) -> Void {

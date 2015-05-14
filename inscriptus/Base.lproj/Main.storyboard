@@ -34,22 +34,6 @@
             </objects>
             <point key="canvasLocation" x="-856" y="-330"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="Xrk-sX-8At">
-            <objects>
-                <navigationController id="ufL-QO-ZLp" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ZFp-ca-H1h">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="fRj-gQ-BKZ" kind="relationship" relationship="rootViewController" id="1X0-gF-uOh"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="R7e-XP-f4h" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="706" y="-1337"/>
-        </scene>
         <!--Master-->
         <scene sceneID="smW-Zh-WAh">
             <objects>
@@ -65,7 +49,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="All Abbreviations" id="Zdf-7t-Un8">
-                        <barButtonItem key="backBarButtonItem" title="Abbreviations" id="Jr7-RY-G7L"/>
+                        <barButtonItem key="backBarButtonItem" title="All" id="Jr7-RY-G7L"/>
                     </navigationItem>
                     <connections>
                         <segue destination="vC3-pB-5Vb" kind="showDetail" identifier="showDetail" id="jXk-1v-irW"/>
@@ -75,30 +59,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rux-fX-hf1" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="713" y="-630"/>
-        </scene>
-        <!--Favorites-->
-        <scene sceneID="wgq-9X-NHd">
-            <objects>
-                <tableViewController id="fRj-gQ-BKZ" customClass="FavoritesViewController" customModule="inscriptus" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="JN7-Vm-x8P">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <connections>
-                            <outlet property="dataSource" destination="fRj-gQ-BKZ" id="Xr3-AT-IZA"/>
-                            <outlet property="delegate" destination="fRj-gQ-BKZ" id="GYV-3a-CSa"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Favorites" id="7l0-zz-CdT">
-                        <barButtonItem key="backBarButtonItem" title="Abbreviations" id="egl-ih-bTT"/>
-                    </navigationItem>
-                    <connections>
-                        <segue destination="vC3-pB-5Vb" kind="showDetail" identifier="showDetail" id="IGm-0a-oSG"/>
-                    </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="PY3-RS-pMS" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1464" y="-1337"/>
         </scene>
         <!--Special abbreviations-->
         <scene sceneID="lmi-CK-2ZE">
