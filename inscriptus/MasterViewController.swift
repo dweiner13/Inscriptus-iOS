@@ -28,7 +28,7 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
     }
 
     var detailViewController: DetailViewController? = nil
-    var searchController: UISearchController?
+    var searchController: UISearchController!
     var filteredAbbreviations = Array<Abbreviation>()
     
     func didPressBookmarksButton(sender: UIBarButtonItem) {
@@ -37,6 +37,7 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
             sender.tintColor = INSCRIPTUS_TINT_COLOR
             self.navigationItem.title = "All Abbreviations"
             self.navigationItem.leftBarButtonItem = nil
+            self.searchController.searchBar.placeholder = "Search all"
             self.isShowingFavorites = !self.isShowingFavorites
         }
         else {
@@ -45,6 +46,7 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
             self.navigationItem.title = "Favorites"
             self.navigationItem.backBarButtonItem!.title = "Favorites"
             self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: "didPressEditButton:")
+            self.searchController.searchBar.placeholder = "Search favorites"
             self.isShowingFavorites = !self.isShowingFavorites
         }
     }
@@ -101,6 +103,7 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
         self.searchController = UISearchController(searchResultsController: nil)
         if let searchController = self.searchController {
             var searchBar = searchController.searchBar
+            searchBar.placeholder = "Search all"
             searchBar.scopeButtonTitles = ["Abbreviation", "Full text"]
             searchBar.sizeToFit()
             searchBar.delegate = self
