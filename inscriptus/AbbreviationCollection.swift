@@ -85,7 +85,6 @@ class AbbreviationCollection: NSObject {
         let defaults = NSUserDefaults.standardUserDefaults()
         if let storedFavorites: AnyObject = defaults.objectForKey(favoritesKey) {
             for favorite: AnyObject in storedFavorites as! NSMutableArray {
-                println(favorite)
                 self.favorites.insertObject(abbreviationWithID(favorite as! NSInteger)!, atIndex: 0)
             }
         }

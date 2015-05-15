@@ -202,7 +202,8 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
                         abbreviation = self.filteredAbbreviations[indexPath.row]
                     }
                     else {
-                        abbreviation = self.abbreviations.allAbbreviations[indexPath.row]
+                        let letter = self.abbreviations.abbreviationsFirstLetters[indexPath.section - 1]
+                        abbreviation = self.abbreviations.abbreviationsGroupedByFirstLetter[letter]![indexPath.row]
                     }
                 }
                 
@@ -281,7 +282,8 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
                 abbreviation = self.filteredAbbreviations[indexPath.row]
             }
             else {
-                abbreviation = self.abbreviations.abbreviationsGroupedByFirstLetter[self.abbreviations.abbreviationsFirstLetters[indexPath.section - 1]]![indexPath.row]
+                let letter = self.abbreviations.abbreviationsFirstLetters[indexPath.section - 1]
+                abbreviation = self.abbreviations.abbreviationsGroupedByFirstLetter[letter]![indexPath.row]
             }
             
             cell.setAbbreviation(abbreviation, searchController: self.searchController!)

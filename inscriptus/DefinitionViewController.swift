@@ -40,16 +40,6 @@ class DefinitionViewController: UIViewController, UIGestureRecognizerDelegate {
         self.tableView.scrollIndicatorInsets  = UIEdgeInsets(top: topInset, left: 0, bottom: 44,  right: 0)
         self.errorTextView.textContainerInset = UIEdgeInsets(top: topInset, left: 8, bottom: 44, right: 8)
     }
-    
-    override func viewWillAppear(animated: Bool) {
-        UIDevice.currentDevice().beginGeneratingDeviceOrientationNotifications()
-        
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "orientationChanged:", name: UIDeviceOrientationDidChangeNotification, object: nil)
-    }
-    
-    override func viewDidDisappear(animated: Bool) {
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIDeviceOrientationDidChangeNotification, object: nil)
-    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

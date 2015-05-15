@@ -117,7 +117,7 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
             self.favoriteButton.setTitle("Remove from favorites", forState: UIControlState.Normal)
             self.favoriteButton.tintColor = UIColor.whiteColor()
             self.favoriteButtonBackgroundView.backgroundColor = INSCRIPTUS_TINT_COLOR
-            UIView.animateWithDuration(0.2, animations: {
+            UIView.animateWithDuration(0.05, animations: {
                 () -> Void in
                 self.favoriteButtonBackgroundView.backgroundColor = INSCRIPTUS_TINT_COLOR
                 self.favoriteButtonBackgroundView.transform = CGAffineTransformMakeScale(1.3, 1.3)

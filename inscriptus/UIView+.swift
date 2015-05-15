@@ -10,7 +10,8 @@ import UIKit
 
 extension UIView {
     func animateBounce(totalDuration: NSTimeInterval, minScale: CGFloat, maxScale: CGFloat) {
-        let dur = totalDuration / 3
+        let firstDur = totalDuration * 0.2
+        let dur = totalDuration * 0.4
         UIView.animateWithDuration(dur, animations: {
             () -> Void in
             self.transform = CGAffineTransformMakeScale(minScale, minScale)
