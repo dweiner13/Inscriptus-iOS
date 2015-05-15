@@ -215,7 +215,9 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
         if self.isShowingFavorites {
             return 1
         }
-        return 2
+        else {
+            return count(self.abbreviations.abbreviationsGroupedByFirstLetter) + 1
+        }
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -235,16 +237,14 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
                 return 0
             }
         }
-        if section == ALL_ABBREVIATIONS_SECTION_INDEX {
+        else {
             if self.searchController!.active && count(self.searchController!.searchBar.text) != 0 {
                 return self.filteredAbbreviations.count
             }
             else {
-                return self.abbreviations.allAbbreviations.count
+                return count(self.abbreviations.abbreviationsGroupedByFirstLetter[self.abbreviations.abbreviationsFirstLetters[section - 1]]!)
             }
         }
-        
-        return 0
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -277,7 +277,7 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
                 abbreviation = self.filteredAbbreviations[indexPath.row]
             }
             else {
-                abbreviation = self.abbreviations.allAbbreviations[indexPath.row]
+                abbreviation = self.abbreviations.abbreviationsGroupedByFirstLetter[self.abbreviations.abbreviationsFirstLetters[indexPath.section - 1]]![indexPath.row]
             }
             
             cell.setAbbreviation(abbreviation, searchController: self.searchController!)
@@ -293,7 +293,7 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
         else if indexPath.section == SPECIAL_ABBREVIATIONS_SECTION_INDEX {
             self.performSegueWithIdentifier("showUnsearchables", sender: self)
         }
-        else if indexPath.section == ALL_ABBREVIATIONS_SECTION_INDEX {
+        else {
             self.performSegueWithIdentifier("showDetail", sender: self)
         }
     }
@@ -317,6 +317,22 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
     
     override func tableView(tableView: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
         self.abbreviations.moveFavoriteFromIndex(sourceIndexPath.row, toIndex: destinationIndexPath.row)
+    }
+    
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == SPECIAL_ABBREVIATIONS_SECTION_INDEX {
+            return nil
+        }
+        return self.abbreviations.abbreviationsFirstLetters[section - 1]
+    }
+    
+    override func sectionIndexTitlesForTableView(tableView: UITableView) -> [AnyObject]! {
+        if self.isShowingFavorites {
+            return []
+        }
+        var sectionTitles = [""]
+        sectionTitles.extend(self.abbreviations.abbreviationsFirstLetters)
+        return sectionTitles
     }
     
     // MARK: - UISearchResultsUpdating

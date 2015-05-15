@@ -51,7 +51,8 @@ class AbbreviationCollection: NSObject {
     
     // Abbreviations in a dictionary by their search text
     var abbreviationsGrouped = [String: Array<Abbreviation>]()
-    
+    var abbreviationsGroupedByFirstLetter = [String: Array<Abbreviation>]()
+    var abbreviationsFirstLetters: [String]
     var specialAbbreviations = [Abbreviation]()
     var allAbbreviations = [Abbreviation]()
     
@@ -60,8 +61,6 @@ class AbbreviationCollection: NSObject {
     }
     
     override init() {
-        
-        
         // Load abbreviations arrays
         let combinedPath: String = NSBundle.mainBundle().pathForResource("abbs-combined", ofType: "json")!
         let combinedData = NSData(contentsOfFile: combinedPath)!
@@ -97,6 +96,26 @@ class AbbreviationCollection: NSObject {
                 }
             }
         }
+        
+        for abb in self.allAbbreviations {
+            if let searchStrs = abb.searchStrings {
+                for searchString in searchStrs {
+                    // Section title should be "#" if abb begins with a number or symbol
+                    let char = NSCharacterSet.letterCharacterSet().characterIsMember(searchString[0..<1].utf16[String.UTF16View.Index(0)]) ? searchString[0..<1] : "#"
+                    if self.abbreviationsGroupedByFirstLetter[char] != nil {
+                        self.abbreviationsGroupedByFirstLetter[char]!.append(abb)
+                    }
+                    else {
+                        self.abbreviationsGroupedByFirstLetter[char] = [abb]
+                    }
+                }
+            }
+        }
+        
+        self.abbreviationsFirstLetters = sorted(self.abbreviationsGroupedByFirstLetter.keys, {
+            (a: String, b: String) in
+            a.compare(b, options: .CaseInsensitiveSearch) == .OrderedAscending
+        })
         
         super.init()
         
