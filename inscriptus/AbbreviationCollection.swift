@@ -12,43 +12,6 @@ private let _SingletonSharedInstance = AbbreviationCollection()
 
 class AbbreviationCollection: NSObject {
     
-    let favoritesKey = "favorites"
-    var favorites = NSMutableArray()
-    
-    var noFavorites: Bool {
-        get {
-            return favorites.count == 0
-        }
-    }
-    
-    func addFavorite(item: Abbreviation) {
-        if !self.favorites.containsObject(item) {
-            self.favorites.insertObject(item, atIndex: 0)
-        }
-//        println(self.favorites)
-    }
-    
-    func removeFavorite(item: Abbreviation) {
-        self.favorites.removeObject(item)
-    }
-    
-    func saveFavorites() {
-        var favoritesIDs = NSMutableArray()
-        for favorite: AnyObject in favorites {
-            let abb = favorite as! Abbreviation
-            favoritesIDs.insertObject(abb.id, atIndex: 0)
-        }
-        let defaults = NSUserDefaults.standardUserDefaults()
-        defaults.setObject(favoritesIDs, forKey: favoritesKey)
-        defaults.synchronize()
-    }
-    
-    func moveFavoriteFromIndex(fromIndex: Int, toIndex: Int) {
-        let fav: AnyObject = self.favorites[fromIndex]
-        self.favorites.removeObjectAtIndex(fromIndex)
-        self.favorites.insertObject(fav, atIndex: toIndex)
-    }
-    
     // Abbreviations in a dictionary by their search text
     var abbreviationsGrouped = [String: Array<Abbreviation>]()
     var abbreviationsGroupedByFirstLetter = [String: Array<Abbreviation>]()
@@ -276,5 +239,44 @@ class AbbreviationCollection: NSObject {
                 onFinish(results)
             }
         }
+    }
+    
+    //MARK: - Favorites
+    
+    let favoritesKey = "favorites"
+    var favorites = NSMutableArray()
+    
+    var noFavorites: Bool {
+        get {
+            return favorites.count == 0
+        }
+    }
+    
+    func addFavorite(item: Abbreviation) {
+        if !self.favorites.containsObject(item) {
+            self.favorites.insertObject(item, atIndex: 0)
+        }
+        //        println(self.favorites)
+    }
+    
+    func removeFavorite(item: Abbreviation) {
+        self.favorites.removeObject(item)
+    }
+    
+    func saveFavorites() {
+        var favoritesIDs = NSMutableArray()
+        for favorite: AnyObject in favorites {
+            let abb = favorite as! Abbreviation
+            favoritesIDs.insertObject(abb.id, atIndex: 0)
+        }
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setObject(favoritesIDs, forKey: favoritesKey)
+        defaults.synchronize()
+    }
+    
+    func moveFavoriteFromIndex(fromIndex: Int, toIndex: Int) {
+        let fav: AnyObject = self.favorites[fromIndex]
+        self.favorites.removeObjectAtIndex(fromIndex)
+        self.favorites.insertObject(fav, atIndex: toIndex)
     }
 }

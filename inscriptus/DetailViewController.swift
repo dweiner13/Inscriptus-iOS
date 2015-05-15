@@ -29,66 +29,22 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
             }
         }
     }
-    
-    @IBAction func tappedAbbreviation(sender: AnyObject) {
-        var controller = UIMenuController.sharedMenuController()
-        if controller.menuVisible == false {
-            self.mostRecentViewTapped = self.abbreviationBackgroundView
-            controller.setTargetRect(self.abbreviationBackgroundView.frame, inView: self.view)
-            controller.setMenuVisible(true, animated: true)
-            self.abbreviationBackgroundView.animateBounce(0.3, minScale: 0.93, maxScale: 1.05)
-        }
-    }
 
-    @IBAction func tappedLongText(sender: AnyObject) {
-        var controller = UIMenuController.sharedMenuController()
-        if controller.menuVisible == false {
-            self.mostRecentViewTapped = self.longTextLabel
-            controller.setTargetRect(self.longTextLabel.frame, inView: self.view)
-            controller.setMenuVisible(true, animated: true)
-            self.longTextLabel.animateBounce(0.3, minScale: 0.93, maxScale: 1.05)
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.configureView()
+        if self.detailItem != nil {
+            self.whitakers.delegate = self
+            self.definesPresentationContext = true
+            self.abbreviationBackgroundView.layer.cornerRadius = 5
+            self.abbreviationBackgroundView.layer.borderColor = INSCRIPTUS_TINT_COLOR.CGColor
+            self.abbreviationBackgroundView.layer.borderWidth = 1
         }
     }
     
-    @IBAction func tappedFavoriteButton(sender: UIButton) {
-        if AbbreviationCollection.sharedAbbreviationCollection.favorites.containsObject(self.detailItem) {
-            AbbreviationCollection.sharedAbbreviationCollection.removeFavorite(self.detailItem)
-            self.favoriteButton.setTitle("Add back to favorites", forState: UIControlState.Normal)
-            self.favoriteButton.tintColor = INSCRIPTUS_TINT_COLOR
-            UIView.animateWithDuration(0.2, animations: {
-                () -> Void in
-                self.favoriteButtonBackgroundView.backgroundColor = UIColor.clearColor()
-                self.favoriteButtonBackgroundView.transform = CGAffineTransformMakeScale(0.05, 0.05)
-            },
-            completion: {
-                (b) -> Void in
-                self.favoriteButtonBackgroundView.transform = CGAffineTransformMakeScale(1, 1)
-            })
-        }
-        else {
-            AbbreviationCollection.sharedAbbreviationCollection.addFavorite(self.detailItem)
-            self.favoriteButton.setTitle("Remove from favorites", forState: UIControlState.Normal)
-            self.favoriteButton.tintColor = UIColor.whiteColor()
-            self.favoriteButtonBackgroundView.backgroundColor = INSCRIPTUS_TINT_COLOR
-            UIView.animateWithDuration(0.2, animations: {
-                () -> Void in
-                self.favoriteButtonBackgroundView.backgroundColor = INSCRIPTUS_TINT_COLOR
-                self.favoriteButtonBackgroundView.transform = CGAffineTransformMakeScale(1.3, 1.3)
-            },
-            completion: {
-                (b) -> Void in
-                UIView.animateWithDuration(0.12, animations: {
-                    self.favoriteButtonBackgroundView.transform = CGAffineTransformMakeScale(0.94, 0.94)
-                },
-                completion: {
-                    (b) -> Void in
-                    UIView.animateWithDuration(0.12, animations: {
-                        self.favoriteButtonBackgroundView.transform = CGAffineTransformMakeScale(1, 1)
-                    })
-                })
-            })
-        }
-    }
+    // MARK: - UI Stuff
+    
+    
     
     func configureView() {
         if self.detailItem == nil {
@@ -120,36 +76,64 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
             self.favoriteButtonBackgroundView.layer.cornerRadius = 7
         }
     }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.configureView()
-        if self.detailItem != nil {
-            self.whitakers.delegate = self
-            self.definesPresentationContext = true
-            self.abbreviationBackgroundView.layer.cornerRadius = 5
-            self.abbreviationBackgroundView.layer.borderColor = INSCRIPTUS_TINT_COLOR.CGColor
-            self.abbreviationBackgroundView.layer.borderWidth = 1
+    
+    @IBAction func tappedAbbreviation(sender: AnyObject) {
+        var controller = UIMenuController.sharedMenuController()
+        if controller.menuVisible == false {
+            self.mostRecentViewTapped = self.abbreviationBackgroundView
+            controller.setTargetRect(self.abbreviationBackgroundView.frame, inView: self.view)
+            controller.setMenuVisible(true, animated: true)
+            self.abbreviationBackgroundView.animateBounce(0.3, minScale: 0.93, maxScale: 1.05)
         }
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "showWords" {
-            let def = segue.destinationViewController as! DefinitionViewController
-            def.result = sender as! WhitakerResult
-            def.transitioningDelegate = self
-            def.modalPresentationStyle = .Custom
-            def.delegate = self
+    @IBAction func tappedLongText(sender: AnyObject) {
+        var controller = UIMenuController.sharedMenuController()
+        if controller.menuVisible == false {
+            self.mostRecentViewTapped = self.longTextLabel
+            controller.setTargetRect(self.longTextLabel.frame, inView: self.view)
+            controller.setMenuVisible(true, animated: true)
+            self.longTextLabel.animateBounce(0.3, minScale: 0.93, maxScale: 1.05)
         }
     }
     
-    override func shouldAutorotate() -> Bool {
-        println("Calling shouldAutorotate() in DetailViewController")
-        if self.presentedViewController != nil {
-            return false
+    @IBAction func tappedFavoriteButton(sender: UIButton) {
+        if AbbreviationCollection.sharedAbbreviationCollection.favorites.containsObject(self.detailItem) {
+            AbbreviationCollection.sharedAbbreviationCollection.removeFavorite(self.detailItem)
+            self.favoriteButton.setTitle("Add back to favorites", forState: UIControlState.Normal)
+            self.favoriteButton.tintColor = INSCRIPTUS_TINT_COLOR
+            UIView.animateWithDuration(0.2, animations: {
+                () -> Void in
+                self.favoriteButtonBackgroundView.backgroundColor = UIColor.clearColor()
+                self.favoriteButtonBackgroundView.transform = CGAffineTransformMakeScale(0.05, 0.05)
+                },
+                completion: {
+                    (b) -> Void in
+                    self.favoriteButtonBackgroundView.transform = CGAffineTransformMakeScale(1, 1)
+            })
         }
         else {
-            return true
+            AbbreviationCollection.sharedAbbreviationCollection.addFavorite(self.detailItem)
+            self.favoriteButton.setTitle("Remove from favorites", forState: UIControlState.Normal)
+            self.favoriteButton.tintColor = UIColor.whiteColor()
+            self.favoriteButtonBackgroundView.backgroundColor = INSCRIPTUS_TINT_COLOR
+            UIView.animateWithDuration(0.2, animations: {
+                () -> Void in
+                self.favoriteButtonBackgroundView.backgroundColor = INSCRIPTUS_TINT_COLOR
+                self.favoriteButtonBackgroundView.transform = CGAffineTransformMakeScale(1.3, 1.3)
+                },
+                completion: {
+                    (b) -> Void in
+                    UIView.animateWithDuration(0.12, animations: {
+                        self.favoriteButtonBackgroundView.transform = CGAffineTransformMakeScale(0.94, 0.94)
+                        },
+                        completion: {
+                            (b) -> Void in
+                            UIView.animateWithDuration(0.12, animations: {
+                                self.favoriteButtonBackgroundView.transform = CGAffineTransformMakeScale(1, 1)
+                            })
+                    })
+            })
         }
     }
     
@@ -161,6 +145,18 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
         self.whitakers.beginDefinitionRequestForWord(self.detailItem.longText, targetLanguage: .English)
         self.defineButton.hidden = true
         self.activityIndicator.startAnimating()
+    }
+    
+    // MARK: - Segues
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showWords" {
+            let def = segue.destinationViewController as! DefinitionViewController
+            def.result = sender as! WhitakerResult
+            def.transitioningDelegate = self
+            def.modalPresentationStyle = .Custom
+            def.delegate = self
+        }
     }
     
     //MARK: - UIMenuController

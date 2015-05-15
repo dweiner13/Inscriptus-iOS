@@ -68,51 +68,6 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
     var searchController: UISearchController!
     var filteredAbbreviations = Array<Abbreviation>()
     
-    func showDefaultView(showView: Bool) {
-        if showView {
-            var defaultView = NSBundle.mainBundle().loadNibNamed("DefaultFavoritesView", owner: self, options: nil)[0] as! UIView
-            defaultView.frame = self.view.bounds
-            self.tableView.backgroundView = defaultView
-            self.tableView.separatorStyle = .None
-            self.navigationItem.leftBarButtonItem = nil
-            self.tableView.tableHeaderView = nil
-        }
-        else {
-            self.defaultView?.removeFromSuperview()
-            self.tableView.separatorStyle = .SingleLine
-            self.tableView.backgroundView = nil
-            self.tableView.tableHeaderView = self.searchController.searchBar
-        }
-    }
-    
-    func showEditButton(showButton: Bool) {
-        if showButton {
-            self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: "didPressEditButton:")
-        }
-        else {
-            self.navigationItem.leftBarButtonItem = nil
-        }
-    }
-    
-    func didPressBookmarksButton(sender: UIBarButtonItem) {
-        self.isShowingFavorites = !self.isShowingFavorites
-    }
-    
-    func didPressEditButton(sender: UIBarButtonItem) {
-        if self.isShowingFavorites {
-            if self.tableView.editing {
-                self.tableView.setEditing(false, animated: true)
-                self.navigationItem.rightBarButtonItem = self.showFavoritesButton
-                self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: "didPressEditButton:")
-            }
-            else {
-                self.tableView.setEditing(true, animated: true)
-                self.navigationItem.rightBarButtonItem = nil
-                self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: "didPressEditButton:")
-            }
-        }
-    }
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
@@ -178,6 +133,55 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
         self.tableView.scrollIndicatorInsets = UIEdgeInsets(top: insets.top, left: insets.left, bottom: 0, right: insets.right)
         insets = self.tableView.contentInset
         self.tableView.contentInset = UIEdgeInsets(top: insets.top, left: insets.left, bottom: 0, right: insets.right)
+    }
+    
+    // MARK: - UI Stuff
+    
+    
+    
+    func showDefaultView(showView: Bool) {
+        if showView {
+            var defaultView = NSBundle.mainBundle().loadNibNamed("DefaultFavoritesView", owner: self, options: nil)[0] as! UIView
+            defaultView.frame = self.view.bounds
+            self.tableView.backgroundView = defaultView
+            self.tableView.separatorStyle = .None
+            self.navigationItem.leftBarButtonItem = nil
+            self.tableView.tableHeaderView = nil
+        }
+        else {
+            self.defaultView?.removeFromSuperview()
+            self.tableView.separatorStyle = .SingleLine
+            self.tableView.backgroundView = nil
+            self.tableView.tableHeaderView = self.searchController.searchBar
+        }
+    }
+    
+    func showEditButton(showButton: Bool) {
+        if showButton {
+            self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: "didPressEditButton:")
+        }
+        else {
+            self.navigationItem.leftBarButtonItem = nil
+        }
+    }
+    
+    func didPressBookmarksButton(sender: UIBarButtonItem) {
+        self.isShowingFavorites = !self.isShowingFavorites
+    }
+    
+    func didPressEditButton(sender: UIBarButtonItem) {
+        if self.isShowingFavorites {
+            if self.tableView.editing {
+                self.tableView.setEditing(false, animated: true)
+                self.navigationItem.rightBarButtonItem = self.showFavoritesButton
+                self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: "didPressEditButton:")
+            }
+            else {
+                self.tableView.setEditing(true, animated: true)
+                self.navigationItem.rightBarButtonItem = nil
+                self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: "didPressEditButton:")
+            }
+        }
     }
 
     // MARK: - Segues
