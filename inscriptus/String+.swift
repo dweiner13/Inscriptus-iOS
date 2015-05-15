@@ -18,6 +18,27 @@ extension String {
         }
     }
     
+    // Allow multiline strings
+    // see http://stackoverflow.com/questions/24091233/swift-split-string-over-multiple-lines
+    init(sep:String, _ lines:String...){
+        self = ""
+        for (idx, item) in enumerate(lines) {
+            self += "\(item)"
+            if idx < lines.count-1 {
+                self += sep
+            }
+        }
+    }
+    init(_ lines:String...){
+        self = ""
+        for (idx, item) in enumerate(lines) {
+            self += "\(item)"
+            if idx < lines.count-1 {
+                self += "\n"
+            }
+        }
+    }
+    
     func lastCharacterAsString() -> String {
         return self[count(self)-1..<count(self)]
     }

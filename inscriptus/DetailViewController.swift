@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import MessageUI
 
-class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewControllerTransitioningDelegate, DefinitionViewControllerDelegate {
+class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewControllerTransitioningDelegate, DefinitionViewControllerDelegate, MFMailComposeViewControllerDelegate {
     @IBOutlet weak var abbreviationLabel: UILabel!
     @IBOutlet weak var longTextLabel: UILabel!
     @IBOutlet weak var defineButton: UIButton!
@@ -18,6 +19,7 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
     @IBOutlet weak var favoriteButton: UIButton!
     @IBOutlet weak var favoriteButtonBackgroundView: UIView!
     @IBOutlet weak var favoriteButtonBackgroundViewWidthEqualToConstraint: NSLayoutConstraint!
+    @IBOutlet weak var shareButton: UIBarButtonItem!
     
     var mostRecentViewTapped: UIView?
     var whitakers = WhitakerScraper()
@@ -34,6 +36,9 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
         super.viewDidLoad()
         self.configureView()
         if self.detailItem != nil {
+            if !MFMailComposeViewController.canSendMail() {
+                self.navigationItem.rightBarButtonItem = nil
+            }
             self.whitakers.delegate = self
             self.definesPresentationContext = true
             self.abbreviationBackgroundView.layer.cornerRadius = 5
@@ -43,9 +48,7 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
     }
     
     // MARK: - UI Stuff
-    
-    
-    
+
     func configureView() {
         if self.detailItem == nil {
             var defaultView = NSBundle.mainBundle().loadNibNamed("DefaultDetailView", owner: self, options: nil)[0] as! UIView
@@ -137,6 +140,36 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
         }
     }
     
+    @IBAction func tappedShareButton(sender: UIBarButtonItem) {
+        if MFMailComposeViewController.canSendMail() {
+            let composer = MFMailComposeViewController()
+            composer.mailComposeDelegate = self
+            composer.setSubject("Check out this abbreviation")
+            composer.setMessageBody(makeHTML(), isHTML: true)
+            self.presentViewController(composer, animated: true, completion: nil)
+        }
+    }
+    
+    func makeHTML() -> String {
+        let displayStr: String
+        if let displayText = self.detailItem.displayText {
+            displayStr = "<span style=\"font-size: 200%\"><b>\(self.detailItem.displayText!)</b></span>"
+        }
+        else {
+            let imageData = NSData(contentsOfFile: NSBundle.mainBundle().pathForResource(self.detailItem.displayImage!, ofType: ".png")!)!
+            let base64String: String = imageData.base64EncodedStringWithOptions(nil)
+            displayStr = "<img height=\"30\" src=\"data:image/png;base64,\(base64String)\" />"
+            println(displayStr)
+        }
+        let appLink = "<span style=\"font-size: 80%; color: gray\">Sent from <a href=\"#\">Inscriptus</a> for iOS</span>"
+        return String("<br /><br />",
+            displayStr,
+            "<br />",
+            self.detailItem.longText,
+            "<br /><br />",
+            appLink)
+    }
+    
     @IBAction func defineButtonPressed(sender: UIButton) {
         self.lookupDefinitions(sender)
     }
@@ -157,6 +190,12 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
             def.modalPresentationStyle = .Custom
             def.delegate = self
         }
+    }
+    
+    //MARK: - MFMailComposeViewControllerDelegate
+    
+    func mailComposeController(controller: MFMailComposeViewController!, didFinishWithResult result: MFMailComposeResult, error: NSError!) {
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     //MARK: - UIMenuController

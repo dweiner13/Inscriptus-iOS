@@ -219,7 +219,13 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" id="pQt-qP-NAZ"/>
+                    <navigationItem key="navigationItem" id="pQt-qP-NAZ">
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="O9E-cV-Y6w">
+                            <connections>
+                                <action selector="tappedShareButton:" destination="8RS-BD-ibv" id="YPk-Tr-f52"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="600" height="1000"/>
                     <connections>
@@ -232,6 +238,7 @@
                         <outlet property="favoriteButtonBackgroundViewWidthEqualToConstraint" destination="byh-Vj-DZ3" id="B5z-3N-jbV"/>
                         <outlet property="imageView" destination="YIO-yc-Xcl" id="7cq-Qa-xcf"/>
                         <outlet property="longTextLabel" destination="0xi-rM-Ixa" id="4Il-5A-GCu"/>
+                        <outlet property="shareButton" destination="O9E-cV-Y6w" id="47b-RU-Mdp"/>
                         <segue destination="q4q-4u-9YR" kind="presentation" identifier="showWords" id="rDt-Bl-rSC"/>
                     </connections>
                 </viewController>

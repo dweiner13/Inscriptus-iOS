@@ -11,6 +11,7 @@
 		E01001D61B02ECB70049A3B9 /* ApplicationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01001D51B02ECB70049A3B9 /* ApplicationState.swift */; };
 		E01001DE1B0598D10049A3B9 /* DefaultFavoritesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E01001DD1B0598D10049A3B9 /* DefaultFavoritesView.xib */; };
 		E01001E01B05AACE0049A3B9 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01001DF1B05AACE0049A3B9 /* UIView+.swift */; };
+		E01001E61B068A3D0049A3B9 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E01001E51B068A3D0049A3B9 /* MessageUI.framework */; };
 		E01786AC1B0139ED0022F8E2 /* InscribedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E01786AB1B0139ED0022F8E2 /* InscribedCell.xib */; };
 		E01786AE1B0139F70022F8E2 /* InscribedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01786AD1B0139F70022F8E2 /* InscribedCell.swift */; };
 		E01D1D021B00503200ABB9DF /* foldOutAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01D1D011B00503200ABB9DF /* foldOutAnimator.swift */; };
@@ -122,6 +123,7 @@
 		E01001D51B02ECB70049A3B9 /* ApplicationState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationState.swift; sourceTree = "<group>"; };
 		E01001DD1B0598D10049A3B9 /* DefaultFavoritesView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DefaultFavoritesView.xib; sourceTree = "<group>"; };
 		E01001DF1B05AACE0049A3B9 /* UIView+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
+		E01001E51B068A3D0049A3B9 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		E01786AB1B0139ED0022F8E2 /* InscribedCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InscribedCell.xib; sourceTree = "<group>"; };
 		E01786AD1B0139F70022F8E2 /* InscribedCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InscribedCell.swift; sourceTree = "<group>"; };
 		E01D1D011B00503200ABB9DF /* foldOutAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = foldOutAnimator.swift; sourceTree = SOURCE_ROOT; };
@@ -232,6 +234,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E01001E61B068A3D0049A3B9 /* MessageUI.framework in Frameworks */,
 				E04B6F3F1AF95BAF00FA668F /* libxml2.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -365,6 +368,7 @@
 		E0FDFA0B1A9545CC00659871 = {
 			isa = PBXGroup;
 			children = (
+				E01001E51B068A3D0049A3B9 /* MessageUI.framework */,
 				E04B6F3E1AF95BAF00FA668F /* libxml2.dylib */,
 				E0FDFA161A9545CC00659871 /* inscriptus */,
 				E0FDFA2E1A9545CC00659871 /* inscriptusTests */,
