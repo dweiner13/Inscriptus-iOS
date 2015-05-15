@@ -25,9 +25,42 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
     let SPECIAL_ABBREVIATIONS_SECTION_INDEX = 0
     let ALL_ABBREVIATIONS_SECTION_INDEX = 1
     
+    var defaultView: UIView?
+    
     var isShowingFavorites: Bool = false {
         didSet {
             self.tableView.reloadData()
+            if self.isShowingFavorites {
+                self.showFavoritesButton.setBackgroundImage(UIImage(named: "bookmarks-bg.png"), forState: UIControlState.Normal, barMetrics: UIBarMetrics.Default)
+                self.showFavoritesButton.tintColor = UIColor.whiteColor()
+                self.navigationItem.title = "Favorites"
+                self.navigationItem.backBarButtonItem!.title = "Favorites"
+                self.searchController.searchBar.placeholder = "Search favorites"
+                self.allListOffset = self.tableView.contentOffset.y
+                if let offset = self.favoritesListOffset {
+                    self.tableView.contentOffset.y = offset
+                }
+                if abbreviations.noFavorites {
+                    self.showDefaultView(true)
+                    self.showEditButton(false)
+                }
+                else {
+                    self.showEditButton(true)
+                }
+            }
+            else {
+                self.showFavoritesButton.setBackgroundImage(nil, forState: UIControlState.Normal, barMetrics: UIBarMetrics.Default)
+                self.showFavoritesButton.tintColor = INSCRIPTUS_TINT_COLOR
+                self.navigationItem.title = "All Abbreviations"
+                self.navigationItem.backBarButtonItem!.title = "All"
+                self.searchController.searchBar.placeholder = "Search all"
+                self.favoritesListOffset = self.tableView.contentOffset.y
+                if let offset = self.allListOffset {
+                    self.tableView.contentOffset.y = offset
+                }
+                self.showEditButton(false)
+                self.showDefaultView(false)
+            }
         }
     }
 
@@ -35,32 +68,34 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
     var searchController: UISearchController!
     var filteredAbbreviations = Array<Abbreviation>()
     
-    func didPressBookmarksButton(sender: UIBarButtonItem) {
-        if self.isShowingFavorites {
-            sender.setBackgroundImage(nil, forState: UIControlState.Normal, barMetrics: UIBarMetrics.Default)
-            sender.tintColor = INSCRIPTUS_TINT_COLOR
-            self.navigationItem.title = "All Abbreviations"
+    func showDefaultView(showView: Bool) {
+        if showView {
+            var defaultView = NSBundle.mainBundle().loadNibNamed("DefaultFavoritesView", owner: self, options: nil)[0] as! UIView
+            defaultView.frame = self.view.bounds
+            self.tableView.backgroundView = defaultView
+            self.tableView.separatorStyle = .None
             self.navigationItem.leftBarButtonItem = nil
-            self.searchController.searchBar.placeholder = "Search all"
-            self.favoritesListOffset = self.tableView.contentOffset.y
-            if let offset = self.allListOffset {
-                self.tableView.contentOffset.y = offset
-            }
-            self.isShowingFavorites = !self.isShowingFavorites
+            self.tableView.tableHeaderView = nil
         }
         else {
-            sender.setBackgroundImage(UIImage(named: "bookmarks-bg.png"), forState: UIControlState.Normal, barMetrics: UIBarMetrics.Default)
-            sender.tintColor = UIColor.whiteColor()
-            self.navigationItem.title = "Favorites"
-            self.navigationItem.backBarButtonItem!.title = "Favorites"
-            self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: "didPressEditButton:")
-            self.searchController.searchBar.placeholder = "Search favorites"
-            self.allListOffset = self.tableView.contentOffset.y
-            if let offset = self.favoritesListOffset {
-                self.tableView.contentOffset.y = offset
-            }
-            self.isShowingFavorites = !self.isShowingFavorites
+            self.defaultView?.removeFromSuperview()
+            self.tableView.separatorStyle = .SingleLine
+            self.tableView.backgroundView = nil
+            self.tableView.tableHeaderView = self.searchController.searchBar
         }
+    }
+    
+    func showEditButton(showButton: Bool) {
+        if showButton {
+            self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: "didPressEditButton:")
+        }
+        else {
+            self.navigationItem.leftBarButtonItem = nil
+        }
+    }
+    
+    func didPressBookmarksButton(sender: UIBarButtonItem) {
+        self.isShowingFavorites = !self.isShowingFavorites
     }
     
     func didPressEditButton(sender: UIBarButtonItem) {
@@ -169,7 +204,6 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
                 
                 let controller = (segue.destinationViewController as! UINavigationController).topViewController as! DetailViewController
                 controller.detailItem = abbreviation
-                controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
                 controller.navigationItem.leftItemsSupplementBackButton = true
             }
         }
@@ -275,6 +309,9 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
         if self.isShowingFavorites && editingStyle == UITableViewCellEditingStyle.Delete {
             self.abbreviations.removeFavorite(self.abbreviations.favorites[indexPath.row] as! Abbreviation)
             self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+            if self.abbreviations.noFavorites {
+                showDefaultView(true)
+            }
         }
     }
     

@@ -36,6 +36,7 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
             self.mostRecentViewTapped = self.abbreviationBackgroundView
             controller.setTargetRect(self.abbreviationBackgroundView.frame, inView: self.view)
             controller.setMenuVisible(true, animated: true)
+            self.abbreviationBackgroundView.animateBounce(0.3, minScale: 0.93, maxScale: 1.05)
         }
     }
 
@@ -45,6 +46,7 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
             self.mostRecentViewTapped = self.longTextLabel
             controller.setTargetRect(self.longTextLabel.frame, inView: self.view)
             controller.setMenuVisible(true, animated: true)
+            self.longTextLabel.animateBounce(0.3, minScale: 0.93, maxScale: 1.05)
         }
     }
     
@@ -56,15 +58,34 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
             UIView.animateWithDuration(0.2, animations: {
                 () -> Void in
                 self.favoriteButtonBackgroundView.backgroundColor = UIColor.clearColor()
+                self.favoriteButtonBackgroundView.transform = CGAffineTransformMakeScale(0.05, 0.05)
+            },
+            completion: {
+                (b) -> Void in
+                self.favoriteButtonBackgroundView.transform = CGAffineTransformMakeScale(1, 1)
             })
         }
         else {
             AbbreviationCollection.sharedAbbreviationCollection.addFavorite(self.detailItem)
             self.favoriteButton.setTitle("Remove from favorites", forState: UIControlState.Normal)
             self.favoriteButton.tintColor = UIColor.whiteColor()
+            self.favoriteButtonBackgroundView.backgroundColor = INSCRIPTUS_TINT_COLOR
             UIView.animateWithDuration(0.2, animations: {
                 () -> Void in
                 self.favoriteButtonBackgroundView.backgroundColor = INSCRIPTUS_TINT_COLOR
+                self.favoriteButtonBackgroundView.transform = CGAffineTransformMakeScale(1.3, 1.3)
+            },
+            completion: {
+                (b) -> Void in
+                UIView.animateWithDuration(0.12, animations: {
+                    self.favoriteButtonBackgroundView.transform = CGAffineTransformMakeScale(0.94, 0.94)
+                },
+                completion: {
+                    (b) -> Void in
+                    UIView.animateWithDuration(0.12, animations: {
+                        self.favoriteButtonBackgroundView.transform = CGAffineTransformMakeScale(1, 1)
+                    })
+                })
             })
         }
     }
