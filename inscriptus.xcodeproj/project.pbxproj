@@ -12,6 +12,7 @@
 		E01001DE1B0598D10049A3B9 /* DefaultFavoritesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E01001DD1B0598D10049A3B9 /* DefaultFavoritesView.xib */; };
 		E01001E01B05AACE0049A3B9 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01001DF1B05AACE0049A3B9 /* UIView+.swift */; };
 		E01001E61B068A3D0049A3B9 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E01001E51B068A3D0049A3B9 /* MessageUI.framework */; };
+		E01001E81B0698F80049A3B9 /* cp-reversed.png in Resources */ = {isa = PBXBuildFile; fileRef = E01001E71B0698F80049A3B9 /* cp-reversed.png */; };
 		E01786AC1B0139ED0022F8E2 /* InscribedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E01786AB1B0139ED0022F8E2 /* InscribedCell.xib */; };
 		E01786AE1B0139F70022F8E2 /* InscribedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01786AD1B0139F70022F8E2 /* InscribedCell.swift */; };
 		E01D1D021B00503200ABB9DF /* foldOutAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01D1D011B00503200ABB9DF /* foldOutAnimator.swift */; };
@@ -124,6 +125,7 @@
 		E01001DD1B0598D10049A3B9 /* DefaultFavoritesView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DefaultFavoritesView.xib; sourceTree = "<group>"; };
 		E01001DF1B05AACE0049A3B9 /* UIView+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		E01001E51B068A3D0049A3B9 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		E01001E71B0698F80049A3B9 /* cp-reversed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cp-reversed.png"; sourceTree = "<group>"; };
 		E01786AB1B0139ED0022F8E2 /* InscribedCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InscribedCell.xib; sourceTree = "<group>"; };
 		E01786AD1B0139F70022F8E2 /* InscribedCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InscribedCell.swift; sourceTree = "<group>"; };
 		E01D1D011B00503200ABB9DF /* foldOutAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = foldOutAnimator.swift; sourceTree = SOURCE_ROOT; };
@@ -309,6 +311,7 @@
 				E0A49BDB1AC34AD5008DF28C /* c-reversed-strikethrough.png */,
 				E0A49BDC1AC34AD5008DF28C /* c-reversed.png */,
 				E0A49BDD1AC34AD5008DF28C /* c-tiny.png */,
+				E01001E71B0698F80049A3B9 /* cp-reversed.png */,
 				E0A49BDE1AC34AD5008DF28C /* cc-reversed.png */,
 				E0A49BDF1AC34AD5008DF28C /* ccc-reversed.png */,
 				E0A49BE01AC34AD5008DF28C /* cccc-overline.png */,
@@ -544,6 +547,7 @@
 				E0A49C1E1AC34AD5008DF28C /* cc-reversed.png in Resources */,
 				E0A49C3E1AC34AD5008DF28C /* ml-rotated.png in Resources */,
 				E0A49C231AC34AD5008DF28C /* chevron-right.png in Resources */,
+				E01001E81B0698F80049A3B9 /* cp-reversed.png in Resources */,
 				E0A49C161AC34AD5008DF28C /* bf-strikethrough 3.png in Resources */,
 				E0FDFA211A9545CC00659871 /* Main.storyboard in Resources */,
 				E0A49C221AC34AD5008DF28C /* ccl-reversed.png in Resources */,
