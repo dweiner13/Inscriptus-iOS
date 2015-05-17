@@ -21,8 +21,17 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
     @IBOutlet weak var favoriteButtonBackgroundViewWidthEqualToConstraint: NSLayoutConstraint!
     @IBOutlet weak var shareButton: UIBarButtonItem!
     
+    @IBOutlet weak var actionCoachBox: UIView!
+    @IBOutlet weak var actionCoachView: UIView!
+    @IBOutlet weak var lookupCoachBox: UIView!
+    @IBOutlet weak var lookupCoachArrow: UIView!
+    @IBOutlet weak var favoriteCoachBox: UIView!
+    @IBOutlet weak var favoriteCoachArrow: UIView!
+    
     var mostRecentViewTapped: UIView?
     var whitakers = WhitakerScraper()
+    
+    var coachTips: [(box: UIView!, arrow: UIView!)]?
     
     var detailItem: Abbreviation! {
         didSet {
@@ -44,7 +53,33 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
             self.abbreviationBackgroundView.layer.cornerRadius = 5
             self.abbreviationBackgroundView.layer.borderColor = INSCRIPTUS_TINT_COLOR.CGColor
             self.abbreviationBackgroundView.layer.borderWidth = 1
+            
+            self.coachTips = [
+                (box: self.actionCoachBox, arrow: self.actionCoachView),
+                (box: self.lookupCoachBox, arrow: self.lookupCoachArrow),
+                (box: self.favoriteCoachBox, arrow: self.favoriteCoachArrow)
+            ]
+            for coachTip in self.coachTips! {
+                coachTip.box.layer.cornerRadius = 5
+                coachTip.box.alpha = 0
+                coachTip.arrow.alpha = 0
+                coachTip.box.hidden = true
+                coachTip.arrow.hidden = true
+            }
         }
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        for coachTip in self.coachTips! {
+            coachTip.box.hidden = false
+            coachTip.arrow.hidden = false
+        }
+        UIView.animateWithDuration(0.5, animations: {
+            for coachTip in self.coachTips! {
+                coachTip.box.alpha = 1
+                coachTip.arrow.alpha = 1
+            }
+        })
     }
     
     // MARK: - UI Stuff
@@ -238,6 +273,7 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
     
     func whitakerScraper(scraper: WhitakerScraper, didFailWithError error: NSError) {
         self.activityIndicator.stopAnimating()
+        self.defineButton.hidden = false
         
         var alert = UIAlertController(title: "Oops!", message: error.description, preferredStyle: .Alert)
         let action = UIAlertAction(title: "OK", style: .Default, handler: nil)

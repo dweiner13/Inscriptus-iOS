@@ -18,6 +18,31 @@ class AbbreviationCollection: NSObject {
     var abbreviationsFirstLetters: [String]
     var specialAbbreviations = [Abbreviation]()
     var allAbbreviations = [Abbreviation]()
+    var abbreviationsUnsorted = [Abbreviation]()
+    
+    let abbreviationSortClosure: (Abbreviation, Abbreviation) -> Bool = {
+            (a1: Abbreviation, a2: Abbreviation) in
+            let a1Text = a1.displayText != nil ? a1.displayText! : a1.longText
+            let a2Text = a2.displayText != nil ? a2.displayText! : a2.longText
+            return a1Text.compare(a2Text) == .OrderedAscending
+    }
+    
+    func abbreviationSortClosureForSearchString(searchString: String) -> (Abbreviation, Abbreviation) -> Bool {
+        return {
+            (a1: Abbreviation, a2: Abbreviation) in
+            let a1Text = a1.displayText != nil ? a1.displayText! : a1.longText
+            let a2Text = a2.displayText != nil ? a2.displayText! : a2.longText
+            let a1SearchPos = a1Text.rangeOfString(searchString, options: .CaseInsensitiveSearch)?.startIndex
+            let a2SearchPos = a2Text.rangeOfString(searchString, options: .CaseInsensitiveSearch)?.startIndex
+            if a1SearchPos == a1Text.startIndex && a2SearchPos != a2Text.startIndex {
+                return true
+            }
+            if a2SearchPos == a2Text.startIndex && a1SearchPos != a1Text.startIndex {
+                return false
+            }
+            return a1Text.compare(a2Text) == .OrderedAscending
+        }
+    }
     
     class var sharedAbbreviationCollection: AbbreviationCollection {
         return _SingletonSharedInstance
@@ -35,7 +60,8 @@ class AbbreviationCollection: NSObject {
             abbreviations.append(Abbreviation(JSONDict: abbreviation as! NSDictionary))
         }
         
-        self.allAbbreviations = abbreviations
+        self.abbreviationsUnsorted = abbreviations
+        self.allAbbreviations = sorted(abbreviations, self.abbreviationSortClosure)
         
         // Special character abbreviations
         
@@ -91,10 +117,10 @@ class AbbreviationCollection: NSObject {
     }
     
     func abbreviationWithID(id: Int) -> Abbreviation? {
-        var abb = self.allAbbreviations[id]
+        var abb = self.abbreviationsUnsorted[id]
         var i = id
         while(abb.id != id) {
-            abb = self.allAbbreviations[--i]
+            abb = self.abbreviationsUnsorted[--i]
         }
         return abb
     }
@@ -126,20 +152,7 @@ class AbbreviationCollection: NSObject {
             }
         }
         
-        return sorted(Array(resultAbbreviations), {
-            (a1: Abbreviation, a2: Abbreviation) in
-            let a1Text = a1.displayText != nil ? a1.displayText! : a1.longText
-            let a2Text = a2.displayText != nil ? a2.displayText! : a2.longText
-            let a1SearchPos = a1Text.rangeOfString(searchString, options: .CaseInsensitiveSearch)?.startIndex
-            let a2SearchPos = a2Text.rangeOfString(searchString, options: .CaseInsensitiveSearch)?.startIndex
-            if a1SearchPos == a1Text.startIndex && a2SearchPos != a2Text.startIndex {
-                return true
-            }
-            if a2SearchPos == a2Text.startIndex && a1SearchPos != a1Text.startIndex {
-                return false
-            }
-            return a1Text.compare(a2Text) == .OrderedAscending
-        })
+        return sorted(Array(resultAbbreviations), self.abbreviationSortClosureForSearchString(searchString))
     }
     
     func searchSpecialsForString(searchString: String, scopeIndex: Int) -> [Abbreviation] {
@@ -166,20 +179,8 @@ class AbbreviationCollection: NSObject {
             }
         }
         
-        return sorted(Array(resultAbbreviations), {
-            (a1: Abbreviation, a2: Abbreviation) in
-            let a1Text = a1.displayText != nil ? a1.displayText! : a1.longText
-            let a2Text = a2.displayText != nil ? a2.displayText! : a2.longText
-            let a1SearchPos = a1Text.rangeOfString(searchString, options: .CaseInsensitiveSearch)?.startIndex
-            let a2SearchPos = a2Text.rangeOfString(searchString, options: .CaseInsensitiveSearch)?.startIndex
-            if a1SearchPos == a1Text.startIndex && a2SearchPos != a2Text.startIndex {
-                return true
-            }
-            if a2SearchPos == a2Text.startIndex && a1SearchPos != a1Text.startIndex {
-                return false
-            }
-            return a1Text.compare(a2Text) == .OrderedAscending
-        })
+        
+        return sorted(Array(resultAbbreviations), self.abbreviationSortClosureForSearchString(searchString))
     }
     
     
