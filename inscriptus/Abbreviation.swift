@@ -34,7 +34,6 @@ class Abbreviation: NSObject, Printable, DebugPrintable {
     
     override func isEqual(object: AnyObject?) -> Bool {
         if let object = object as? Abbreviation {
-//            println("abbreviation id \(self.id) is equal to id \(object.id)? \(self.uniqueString.compare(object.uniqueString) == .OrderedSame)")
             return self.uniqueString.compare(object.uniqueString) == .OrderedSame
         } else {
             return false

@@ -86,7 +86,7 @@ class WhitakerScraper: NSObject {
         
         var requestURL = NSURL(string: "\(baseURL)\(wordURLEncoded)")
         
-        var request = NSURLRequest(URL: requestURL!, cachePolicy: .UseProtocolCachePolicy, timeoutInterval: 20)
+        var request = NSURLRequest(URL: requestURL!, cachePolicy: .UseProtocolCachePolicy, timeoutInterval: 10)
         
         self.receivedData = NSMutableData()
         

@@ -150,7 +150,7 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
         }
         if self.holdCoachBox.hidden == false {
             ApplicationState.sharedApplicationState().holdCoachHidden = true
-            UIView.animateWithDuration(0.5, animations: {
+            UIView.animateWithDuration(0.5, delay: 0.5, options: nil, animations: {
                 self.holdCoachBox.alpha = 0
                 self.holdCoachArrow1.alpha = 0
                 self.holdCoachArrow2.alpha = 0
@@ -174,16 +174,16 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
         }
         if self.holdCoachBox.hidden == false {
             ApplicationState.sharedApplicationState().holdCoachHidden = true
-            UIView.animateWithDuration(0.5, animations: {
+            UIView.animateWithDuration(0.5, delay: 0.5, options: nil, animations: {
                 self.holdCoachBox.alpha = 0
                 self.holdCoachArrow1.alpha = 0
                 self.holdCoachArrow2.alpha = 0
-                },
-                completion: {
-                    (b) -> Void in
-                    self.holdCoachBox.hidden = true
-                    self.holdCoachArrow1.hidden = true
-                    self.holdCoachArrow2.hidden = true
+            },
+            completion: {
+                (b) -> Void in
+                self.holdCoachBox.hidden = true
+                self.holdCoachArrow1.hidden = true
+                self.holdCoachArrow2.hidden = true
             })
         }
     }
@@ -340,7 +340,11 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
         self.activityIndicator.stopAnimating()
         self.defineButton.hidden = false
         
-        var alert = UIAlertController(title: "Oops!", message: error.description, preferredStyle: .Alert)
+        var message = error.localizedDescription
+        if error.code == -1001 || error.code == -1004 {
+            message = "\(message)\n\nIf this keeps happening, Whitaker's Words may be offline. Try again later."
+        }
+        var alert = UIAlertController(title: "Could not load definitions", message: message, preferredStyle: .Alert)
         let action = UIAlertAction(title: "OK", style: .Default, handler: nil)
         alert.addAction(action)
         self.presentViewController(alert, animated: true, completion: nil)
