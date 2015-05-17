@@ -304,7 +304,7 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
         if self.isShowingFavorites {
             self.performSegueWithIdentifier("showDetail", sender: self)
         }
-        else if indexPath.section == 0 {
+        else if indexPath.section == 0 && !self.inSearchView {
             self.performSegueWithIdentifier("showUnsearchables", sender: self)
         }
         else {

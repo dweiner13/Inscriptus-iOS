@@ -31,6 +31,8 @@
 		E04B6F3F1AF95BAF00FA668F /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E04B6F3E1AF95BAF00FA668F /* libxml2.dylib */; };
 		E04B6F421AF95E9000FA668F /* DefinitionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04B6F411AF95E9000FA668F /* DefinitionViewController.swift */; };
 		E04B6F441AF95EA900FA668F /* DefinitionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04B6F431AF95EA900FA668F /* DefinitionCell.swift */; };
+		E0610DA61B0828D2006A4FBB /* smallModalAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0610DA51B0828D2006A4FBB /* smallModalAnimator.swift */; };
+		E0610DA81B082B78006A4FBB /* SpecialCoachController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0610DA71B082B78006A4FBB /* SpecialCoachController.swift */; };
 		E0846DB41AC6658F0004E1B0 /* AbbreviationCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0846DB31AC6658F0004E1B0 /* AbbreviationCollection.swift */; };
 		E096AFCC1AFABCAE002D6E5D /* BasicCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E096AFCB1AFABCAE002D6E5D /* BasicCell.xib */; };
 		E096AFCE1AFAC041002D6E5D /* WhitakerResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = E096AFCD1AFAC041002D6E5D /* WhitakerResult.swift */; };
@@ -149,6 +151,8 @@
 		E04B6F3E1AF95BAF00FA668F /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		E04B6F411AF95E9000FA668F /* DefinitionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefinitionViewController.swift; sourceTree = "<group>"; };
 		E04B6F431AF95EA900FA668F /* DefinitionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefinitionCell.swift; sourceTree = "<group>"; };
+		E0610DA51B0828D2006A4FBB /* smallModalAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = smallModalAnimator.swift; sourceTree = SOURCE_ROOT; };
+		E0610DA71B082B78006A4FBB /* SpecialCoachController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecialCoachController.swift; sourceTree = "<group>"; };
 		E0846DB31AC6658F0004E1B0 /* AbbreviationCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbbreviationCollection.swift; sourceTree = "<group>"; };
 		E096AFCB1AFABCAE002D6E5D /* BasicCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BasicCell.xib; sourceTree = "<group>"; };
 		E096AFCD1AFAC041002D6E5D /* WhitakerResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhitakerResult.swift; sourceTree = "<group>"; };
@@ -255,6 +259,7 @@
 			isa = PBXGroup;
 			children = (
 				E0FDFA1F1A9545CC00659871 /* Main.storyboard */,
+				E0610DA51B0828D2006A4FBB /* smallModalAnimator.swift */,
 				E01D1D011B00503200ABB9DF /* foldOutAnimator.swift */,
 				E0FDFA241A9545CC00659871 /* LaunchScreen.xib */,
 				E028AC4C1A99251D0058D9A1 /* AbbreviationCell.xib */,
@@ -400,6 +405,7 @@
 				E028AC4A1A99244A0058D9A1 /* UnsearchablesViewController.swift */,
 				E0FDFA1D1A9545CC00659871 /* DetailViewController.swift */,
 				E04B6F411AF95E9000FA668F /* DefinitionViewController.swift */,
+				E0610DA71B082B78006A4FBB /* SpecialCoachController.swift */,
 				E028AC411A98342C0058D9A1 /* Interface Files */,
 				E0FDFA221A9545CC00659871 /* Images.xcassets */,
 				E0A49BD21AC34AD5008DF28C /* specialchars */,
@@ -640,11 +646,13 @@
 				E04B6F391AF95B2100FA668F /* TFHppleElement.m in Sources */,
 				E028AC4B1A99244A0058D9A1 /* UnsearchablesViewController.swift in Sources */,
 				E0846DB41AC6658F0004E1B0 /* AbbreviationCollection.swift in Sources */,
+				E0610DA61B0828D2006A4FBB /* smallModalAnimator.swift in Sources */,
 				E01D1D021B00503200ABB9DF /* foldOutAnimator.swift in Sources */,
 				E04B6F381AF95B2100FA668F /* TFHpple.m in Sources */,
 				E028AC431A98344F0058D9A1 /* AbbreviationCell.swift in Sources */,
 				E01001D61B02ECB70049A3B9 /* ApplicationState.swift in Sources */,
 				E04B6F421AF95E9000FA668F /* DefinitionViewController.swift in Sources */,
+				E0610DA81B082B78006A4FBB /* SpecialCoachController.swift in Sources */,
 				E0FDFA3C1A9546D200659871 /* Abbreviation.swift in Sources */,
 				E04B6F2D1AF9558800FA668F /* String+.swift in Sources */,
 				E04B6F291AF9549900FA668F /* WhitakerScraper.swift in Sources */,

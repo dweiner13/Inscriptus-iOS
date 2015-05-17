@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UnsearchablesViewController: UITableViewController, UISearchBarDelegate, UISearchResultsUpdating {
+class UnsearchablesViewController: UITableViewController, UISearchBarDelegate, UISearchResultsUpdating, UIViewControllerTransitioningDelegate {
     
     static let searchScopeIndexAbbreviation = 0
     static let searchScopeIndexFulltext = 1
@@ -16,7 +16,6 @@ class UnsearchablesViewController: UITableViewController, UISearchBarDelegate, U
     var abbreviations = AbbreviationCollection.sharedAbbreviationCollection
     var filteredAbbreviations = Array<Abbreviation>()
     var searchController: UISearchController?
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,6 +48,12 @@ class UnsearchablesViewController: UITableViewController, UISearchBarDelegate, U
     override func viewWillAppear(animated: Bool) {
         if let selectedIndexPath = self.tableView.indexPathForSelectedRow() {
             self.tableView.deselectRowAtIndexPath(selectedIndexPath, animated: true)
+        }
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        if !ApplicationState.sharedApplicationState().specialCoachHidden {
+            self.performSegueWithIdentifier("ShowSpecialCoach", sender: self)
         }
     }
     
@@ -120,6 +125,11 @@ class UnsearchablesViewController: UITableViewController, UISearchBarDelegate, U
                 controller.navigationItem.leftItemsSupplementBackButton = true
             }
         }
+        else if segue.identifier == "ShowSpecialCoach" {
+            let coach = segue.destinationViewController as! SpecialCoachController
+            coach.transitioningDelegate = self
+            coach.modalPresentationStyle = .Custom
+        }
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -159,5 +169,16 @@ class UnsearchablesViewController: UITableViewController, UISearchBarDelegate, U
             var insets = self.tableView.scrollIndicatorInsets
             self.tableView.scrollIndicatorInsets = UIEdgeInsets(top: 20, left: insets.left, bottom: insets.bottom, right: insets.right)
         }
+    }
+    
+    //MARK: - Transitioning delegate
+    func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        var animator = smallModalAnimator(presenting: true)
+        return animator
+    }
+    
+    func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        var animator = smallModalAnimator(presenting: false)
+        return animator
     }
 }
