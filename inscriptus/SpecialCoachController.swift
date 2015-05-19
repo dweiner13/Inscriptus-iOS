@@ -25,6 +25,14 @@ class SpecialCoachController: UIViewController {
     
     @IBAction func tappedInView(sender: AnyObject) {
         self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+        
+        ApplicationState.sharedApplicationState().specialCoachHidden = true
+    }
+    
+    func tappedOutsideModal(sender: AnyObject) {
+        self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+        
+        ApplicationState.sharedApplicationState().specialCoachHidden = true
     }
 
     /*

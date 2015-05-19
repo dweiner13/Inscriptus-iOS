@@ -23,6 +23,8 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
     
     @IBOutlet weak var lookupCoachBox: UIView!
     @IBOutlet weak var lookupCoachArrow: UIView!
+    @IBOutlet weak var lookupCoachTip: UIImageView!
+    
     @IBOutlet weak var holdCoachBox: UIView!
     @IBOutlet weak var holdCoachArrow1: UIView!
     @IBOutlet weak var holdCoachArrow2: UIView!
@@ -57,7 +59,8 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
             
             self.coachTips = [
                 (box: self.lookupCoachBox, arrows: [
-                    self.lookupCoachArrow
+                    self.lookupCoachArrow,
+                    self.lookupCoachTip
                     ]),
                 (box: self.holdCoachBox, arrows: [
                     self.holdCoachArrow1,
@@ -76,25 +79,66 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
         }
     }
     
-    override func viewDidAppear(animated: Bool) {
-        let appState = ApplicationState.sharedApplicationState()
-        if !appState.lookupCoachHidden {
+    func showLookupCoach(showCoach: Bool, delay: Double) {
+        if showCoach {
             self.lookupCoachBox.hidden = false
             self.lookupCoachArrow.hidden = false
-            UIView.animateWithDuration(0.5, animations: {
+            self.lookupCoachTip.hidden = false
+            UIView.animateWithDuration(0.5, delay: delay, options: nil, animations: {
                 self.lookupCoachBox.alpha = 1
                 self.lookupCoachArrow.alpha = 1
+                self.lookupCoachTip.alpha = 1
+            },
+                completion: nil)
+        }
+        else {
+            UIView.animateWithDuration(0.5, delay: delay, options: nil, animations: {
+                self.lookupCoachBox.alpha = 0
+                self.lookupCoachArrow.alpha = 0
+                self.lookupCoachTip.alpha = 0
+                },
+                completion: {
+                    (b) -> Void in
+                    self.lookupCoachBox.hidden = true
+                    self.lookupCoachArrow.hidden = true
             })
         }
-        if !appState.holdCoachHidden {
+    }
+    
+    func showHoldCoach(showCoach: Bool, delay: Double) {
+        if showCoach {
             self.holdCoachBox.hidden = false
             self.holdCoachArrow1.hidden = false
             self.holdCoachArrow2.hidden = false
-            UIView.animateWithDuration(0.5, animations: {
+            UIView.animateWithDuration(0.5, delay: delay, options: nil, animations: {
                 self.holdCoachBox.alpha = 1
                 self.holdCoachArrow1.alpha = 1
                 self.holdCoachArrow2.alpha = 1
+            },
+                completion: nil)
+        }
+        else {
+            UIView.animateWithDuration(0.5, delay: delay, options: nil, animations: {
+                self.holdCoachBox.alpha = 0
+                self.holdCoachArrow1.alpha = 0
+                self.holdCoachArrow2.alpha = 0
+                },
+                completion: {
+                    (b) -> Void in
+                    self.holdCoachBox.hidden = true
+                    self.holdCoachArrow1.hidden = true
+                    self.holdCoachArrow2.hidden = true
             })
+        }
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        let appState = ApplicationState.sharedApplicationState()
+        if !appState.lookupCoachHidden {
+            showLookupCoach(true, delay: 0)
+        }
+        if !appState.holdCoachHidden {
+            showHoldCoach(true, delay: 0)
         }
     }
     
@@ -148,19 +192,10 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
             controller.setMenuVisible(true, animated: true)
             self.abbreviationBackgroundView.animateBounce(0.3, minScale: 0.93, maxScale: 1.05)
         }
-        if self.holdCoachBox.hidden == false {
+        
+        if ApplicationState.sharedApplicationState().holdCoachHidden == false {
             ApplicationState.sharedApplicationState().holdCoachHidden = true
-            UIView.animateWithDuration(0.5, delay: 0.5, options: nil, animations: {
-                self.holdCoachBox.alpha = 0
-                self.holdCoachArrow1.alpha = 0
-                self.holdCoachArrow2.alpha = 0
-            },
-            completion: {
-                (b) -> Void in
-                self.holdCoachBox.hidden = true
-                self.holdCoachArrow1.hidden = true
-                self.holdCoachArrow2.hidden = true
-            })
+            showHoldCoach(false, delay: 0.5)
         }
     }
     
@@ -172,19 +207,9 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
             controller.setMenuVisible(true, animated: true)
             self.longTextLabel.animateBounce(0.3, minScale: 0.93, maxScale: 1.05)
         }
-        if self.holdCoachBox.hidden == false {
+        if ApplicationState.sharedApplicationState().holdCoachHidden == false {
             ApplicationState.sharedApplicationState().holdCoachHidden = true
-            UIView.animateWithDuration(0.5, delay: 0.5, options: nil, animations: {
-                self.holdCoachBox.alpha = 0
-                self.holdCoachArrow1.alpha = 0
-                self.holdCoachArrow2.alpha = 0
-            },
-            completion: {
-                (b) -> Void in
-                self.holdCoachBox.hidden = true
-                self.holdCoachArrow1.hidden = true
-                self.holdCoachArrow2.hidden = true
-            })
+            showHoldCoach(false, delay: 0.5)
         }
     }
     
@@ -260,17 +285,9 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
     
     @IBAction func defineButtonPressed(sender: UIButton) {
         self.lookupDefinitions(sender)
-        if self.lookupCoachBox.hidden == false {
+        if ApplicationState.sharedApplicationState().lookupCoachHidden == false {
             ApplicationState.sharedApplicationState().lookupCoachHidden = true
-            UIView.animateWithDuration(0.5, animations: {
-                self.lookupCoachBox.alpha = 0
-                self.lookupCoachArrow.alpha = 0
-                },
-                completion: {
-                    (b) -> Void in
-                    self.lookupCoachBox.hidden = true
-                    self.lookupCoachArrow.hidden = true
-            })
+            showLookupCoach(false, delay: 0.5)
         }
     }
     
@@ -289,6 +306,7 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
             def.transitioningDelegate = self
             def.modalPresentationStyle = .Custom
             def.delegate = self
+            self.showHoldCoach(false, delay: 0)
         }
     }
     
@@ -366,6 +384,9 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
     //MARK: - DefinitionViewControllerDelegate
     
     func didDismissDefinitionViewController(viewController: DefinitionViewController) {
+        if !ApplicationState.sharedApplicationState().holdCoachHidden {
+            self.showHoldCoach(true, delay: 0)
+        }
         self.defineButton.hidden = false
     }
 }

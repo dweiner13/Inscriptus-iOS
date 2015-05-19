@@ -41,6 +41,9 @@ class smallModalAnimator: NSObject, UIViewControllerAnimatedTransitioning {
             dimmingView.backgroundColor = UIColor.blackColor()
             dimmingView.alpha = 0
             
+            var recognizer = UITapGestureRecognizer(target: presented, action: "tappedOutsideModal:")
+            dimmingView.addGestureRecognizer(recognizer)
+            
             let shadowPath = UIBezierPath(rect: presented.view.bounds)
             var layer = presented.view.layer
             layer.masksToBounds = false

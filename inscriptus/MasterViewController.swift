@@ -23,6 +23,8 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
     
     var defaultView: UIView?
     
+    var gearButton: UIBarButtonItem!
+    
     var isShowingFavorites: Bool = false {
         didSet {
             self.tableView.reloadData()
@@ -72,6 +74,8 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
         }
         self.showFavoritesButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Bookmarks, target: self, action: "didPressBookmarksButton:")
         self.navigationItem.rightBarButtonItem = self.showFavoritesButton
+        self.gearButton = UIBarButtonItem(title: "Reset", style: UIBarButtonItemStyle.Plain, target: self, action: "tappedGearButton:")
+        self.navigationItem.leftBarButtonItem = self.gearButton
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -133,7 +137,21 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
     
     // MARK: - UI Stuff
     
-    
+    func tappedGearButton(sender: AnyObject) {
+        var alert = UIAlertController(title: "Reset application state?", message: "This will reset any first-time help messages for debugging purposes.", preferredStyle: UIAlertControllerStyle.ActionSheet)
+        
+        alert.addAction(UIAlertAction(title: "Reset", style: UIAlertActionStyle.Destructive, handler: {
+            (a) in
+            ApplicationState.sharedApplicationState().resetApplicationState()
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: {
+            (a) in
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }))
+        
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
     
     func showDefaultView(showView: Bool) {
         if showView {
@@ -157,7 +175,7 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
             self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: "didPressEditButton:")
         }
         else {
-            self.navigationItem.leftBarButtonItem = nil
+            self.navigationItem.leftBarButtonItem = self.gearButton
         }
     }
     

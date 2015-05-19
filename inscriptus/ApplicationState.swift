@@ -48,4 +48,10 @@ class ApplicationState: NSObject {
         defaults.synchronize()
     }
     
+    func resetApplicationState() {
+        self.scopeIndex = 0
+        self.holdCoachHidden = false
+        self.lookupCoachHidden = false
+        self.specialCoachHidden = false
+    }
 }

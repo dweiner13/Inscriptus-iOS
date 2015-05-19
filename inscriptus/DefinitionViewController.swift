@@ -110,6 +110,13 @@ class DefinitionViewController: UIViewController, UIGestureRecognizerDelegate {
             delegate.didDismissDefinitionViewController(self)
         }
     }
+    
+    func tappedOutsideModal(sender: AnyObject?) {
+        self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+        if let delegate = self.delegate {
+            delegate.didDismissDefinitionViewController(self)
+        }
+    }
 }
 
 extension DefinitionViewController: UITableViewDataSource, UITableViewDelegate {

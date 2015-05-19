@@ -64,6 +64,15 @@ class foldOutAnimator: NSObject, UIViewControllerAnimatedTransitioning {
             layer.shadowPath = shadowPath.CGPath
             layer.shadowRadius = 5
             
+            // Recognizes a tap on the presenting view to dismiss the presented view
+            let tapView = UIView(frame: presenting.view.bounds)
+            tapView.backgroundColor = UIColor.clearColor()
+            tapView.addGestureRecognizer(UITapGestureRecognizer(target: presented, action: "tappedOutsideModal:"))
+            let swipeRec = UISwipeGestureRecognizer(target: presented, action: "tappedOutsideModal:")
+            swipeRec.direction = UISwipeGestureRecognizerDirection.Down
+            tapView.addGestureRecognizer(swipeRec)
+            
+            transitionContext.containerView().addSubview(tapView)
             transitionContext.containerView().addSubview(presented.view)
             transitionContext.containerView().addSubview(statusBarBackground)
             
@@ -82,7 +91,7 @@ class foldOutAnimator: NSObject, UIViewControllerAnimatedTransitioning {
             })
         }
         else {
-            statusBarBackground = transitionContext.containerView().subviews[1] as! UIView
+            statusBarBackground = transitionContext.containerView().subviews[2] as! UIView
             
             UIView.animateWithDuration(self.transitionDuration(transitionContext),
                 delay: 0,
