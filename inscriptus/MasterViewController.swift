@@ -83,6 +83,11 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
             self.tableView.deselectRowAtIndexPath(selectedIndexPath, animated: true)
         }
         self.tableView.reloadData()
+        
+        if self.isShowingFavorites && abbreviations.noFavorites {
+            self.showDefaultView(true)
+            self.showEditButton(false)
+        }
     }
 
     override func viewDidLoad() {
@@ -343,6 +348,8 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
             self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
             if self.abbreviations.noFavorites {
                 showDefaultView(true)
+                self.navigationItem.rightBarButtonItem = self.showFavoritesButton
+                self.tableView.setEditing(false, animated: true)
             }
         }
     }
