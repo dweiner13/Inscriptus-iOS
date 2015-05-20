@@ -17,6 +17,7 @@
 		E01786AE1B0139F70022F8E2 /* InscribedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01786AD1B0139F70022F8E2 /* InscribedCell.swift */; };
 		E01D1D021B00503200ABB9DF /* foldOutAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01D1D011B00503200ABB9DF /* foldOutAnimator.swift */; };
 		E023FBE81AE5AABF00E8DBAC /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E023FBE71AE5AABF00E8DBAC /* UIFont+.swift */; };
+		E02549C11B0C3D1000A329E9 /* WhitakerCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02549C01B0C3D1000A329E9 /* WhitakerCache.swift */; };
 		E028AC431A98344F0058D9A1 /* AbbreviationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E028AC421A98344F0058D9A1 /* AbbreviationCell.swift */; };
 		E028AC4B1A99244A0058D9A1 /* UnsearchablesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E028AC4A1A99244A0058D9A1 /* UnsearchablesViewController.swift */; };
 		E028AC4D1A99251D0058D9A1 /* AbbreviationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E028AC4C1A99251D0058D9A1 /* AbbreviationCell.xib */; };
@@ -132,6 +133,7 @@
 		E01786AD1B0139F70022F8E2 /* InscribedCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InscribedCell.swift; sourceTree = "<group>"; };
 		E01D1D011B00503200ABB9DF /* foldOutAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = foldOutAnimator.swift; sourceTree = SOURCE_ROOT; };
 		E023FBE71AE5AABF00E8DBAC /* UIFont+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+.swift"; sourceTree = "<group>"; };
+		E02549C01B0C3D1000A329E9 /* WhitakerCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhitakerCache.swift; sourceTree = "<group>"; };
 		E028AC421A98344F0058D9A1 /* AbbreviationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbbreviationCell.swift; sourceTree = "<group>"; };
 		E028AC4A1A99244A0058D9A1 /* UnsearchablesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UnsearchablesViewController.swift; path = ../UnsearchablesViewController.swift; sourceTree = "<group>"; };
 		E028AC4C1A99251D0058D9A1 /* AbbreviationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AbbreviationCell.xib; sourceTree = "<group>"; };
@@ -283,6 +285,7 @@
 				E04B6F251AF9549900FA668F /* WhitakerDefinition.swift */,
 				E096AFCD1AFAC041002D6E5D /* WhitakerResult.swift */,
 				E04B6F271AF9549900FA668F /* WhitakerScraperDelegate.swift */,
+				E02549C01B0C3D1000A329E9 /* WhitakerCache.swift */,
 			);
 			name = WhitakerScraper;
 			sourceTree = "<group>";
@@ -643,6 +646,7 @@
 				E04B6F281AF9549900FA668F /* WhitakerDefinition.swift in Sources */,
 				E0FDFA1C1A9545CC00659871 /* MasterViewController.swift in Sources */,
 				E0FDFA1A1A9545CC00659871 /* AppDelegate.swift in Sources */,
+				E02549C11B0C3D1000A329E9 /* WhitakerCache.swift in Sources */,
 				E04B6F391AF95B2100FA668F /* TFHppleElement.m in Sources */,
 				E028AC4B1A99244A0058D9A1 /* UnsearchablesViewController.swift in Sources */,
 				E0846DB41AC6658F0004E1B0 /* AbbreviationCollection.swift in Sources */,

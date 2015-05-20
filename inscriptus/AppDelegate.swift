@@ -37,6 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
         ApplicationState.sharedApplicationState().saveApplicationState()
         AbbreviationCollection.sharedAbbreviationCollection.saveFavorites()
+        WhitakerCache.sharedCache.saveCache()
     }
 
     func applicationWillEnterForeground(application: UIApplication) {

@@ -292,9 +292,9 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
     }
     
     func lookupDefinitions(button: UIButton) {
-        self.whitakers.beginDefinitionRequestForWord(self.detailItem.longText, targetLanguage: .English)
         self.defineButton.hidden = true
         self.activityIndicator.startAnimating()
+        self.whitakers.beginDefinitionRequestForWord(self.detailItem.longText, targetLanguage: .English)
     }
     
     // MARK: - Segues

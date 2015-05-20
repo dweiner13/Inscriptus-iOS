@@ -56,11 +56,18 @@ class WhitakerScraper: NSObject {
     var word: String?
     weak var delegate: WhitakerScraperDelegate?
     var targetLanguage: WhitakerScraper.TargetLanguage?
+    var cache = WhitakerCache.sharedCache
+    
     
     internal var receivedData: NSMutableData?
     internal var currentConnection: NSURLConnection?
     
     func beginDefinitionRequestForWord(word: String, targetLanguage: TargetLanguage) {
+        if cache.containsResultForWord(word) {
+            println("found cached result for word \(word)")
+            self.delegate?.whitakerScraper(self, didLoadResult: cache.resultForWord(word))
+            return
+        }
         
         if let connection = self.currentConnection {
             connection.cancel()
@@ -242,6 +249,8 @@ extension WhitakerScraper: NSURLConnectionDataDelegate {
         if let delegate = self.delegate {
             delegate.whitakerScraper(self, didLoadResult: result)
         }
+        
+        cache.addItem(result)
         
         self.receivedData = nil
         self.word = nil

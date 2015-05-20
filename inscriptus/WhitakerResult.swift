@@ -8,7 +8,12 @@
 
 import UIKit
 
-class WhitakerResult: NSObject {
+private let DEFAULTS_DEFINITIONS_KEY = "resultDefinition"
+private let DEFAULTS_TARGETLANGUAGE_KEY = "resultTargetLanguage"
+private let DEFAULTS_RAWRESULT_KEY = "resultRaw"
+private let DEFAULTS_WORD_KEY = "resultWord"
+
+class WhitakerResult: NSObject, NSCoding {
    
     let definitions: [WhitakerDefinition]
     let targetLanguage: WhitakerScraper.TargetLanguage
@@ -22,4 +27,19 @@ class WhitakerResult: NSObject {
         self.word = word
     }
     
+    func encodeWithCoder(aCoder: NSCoder) {
+        aCoder.encodeObject(self.definitions, forKey: DEFAULTS_DEFINITIONS_KEY)
+        aCoder.encodeInteger(self.targetLanguage.rawValue, forKey: DEFAULTS_TARGETLANGUAGE_KEY)
+        aCoder.encodeObject(self.rawResult, forKey: DEFAULTS_RAWRESULT_KEY)
+        aCoder.encodeObject(self.word, forKey: DEFAULTS_WORD_KEY)
+    }
+    
+    required init(coder aDecoder: NSCoder) {
+        self.definitions = aDecoder.decodeObjectForKey(DEFAULTS_DEFINITIONS_KEY) as! [WhitakerDefinition]
+        self.targetLanguage = WhitakerScraper.TargetLanguage(rawValue: aDecoder.decodeIntegerForKey(DEFAULTS_TARGETLANGUAGE_KEY))!
+        self.rawResult = aDecoder.decodeObjectForKey(DEFAULTS_RAWRESULT_KEY) as! String
+        self.word = aDecoder.decodeObjectForKey(DEFAULTS_WORD_KEY) as! String
+
+        super.init()
+    }
 }
