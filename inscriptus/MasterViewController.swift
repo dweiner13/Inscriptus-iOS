@@ -23,7 +23,7 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
     
     var defaultView: UIView?
     
-    var gearButton: UIBarButtonItem!
+    var resetButton: UIBarButtonItem!
     
     var isShowingFavorites: Bool = false {
         didSet {
@@ -74,8 +74,8 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
         }
         self.showFavoritesButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Bookmarks, target: self, action: "didPressBookmarksButton:")
         self.navigationItem.rightBarButtonItem = self.showFavoritesButton
-        self.gearButton = UIBarButtonItem(title: "Reset", style: UIBarButtonItemStyle.Plain, target: self, action: "tappedGearButton:")
-        self.navigationItem.leftBarButtonItem = self.gearButton
+        self.resetButton = UIBarButtonItem(title: "Reset", style: UIBarButtonItemStyle.Plain, target: self, action: "tappedResetButton:")
+        self.navigationItem.leftBarButtonItem = self.resetButton
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -142,7 +142,7 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
     
     // MARK: - UI Stuff
     
-    func tappedGearButton(sender: AnyObject) {
+    func tappedResetButton(sender: AnyObject) {
         var alert = UIAlertController(title: "Reset application state?", message: "This will reset any first-time help messages for debugging purposes.", preferredStyle: UIAlertControllerStyle.ActionSheet)
         
         alert.addAction(UIAlertAction(title: "Reset", style: UIAlertActionStyle.Destructive, handler: {
@@ -180,7 +180,7 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
             self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: "didPressEditButton:")
         }
         else {
-            self.navigationItem.leftBarButtonItem = self.gearButton
+            self.navigationItem.leftBarButtonItem = self.resetButton
         }
     }
     

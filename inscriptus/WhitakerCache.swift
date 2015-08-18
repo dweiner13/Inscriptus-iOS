@@ -20,7 +20,7 @@ class WhitakerCache {
         var storedCache: NSData? = defaults.objectForKey(DEFAULTS_CACHE_KEY) as! NSData?
         if let savedData = storedCache {
             self.items = NSKeyedUnarchiver.unarchiveObjectWithData(savedData) as! Set<WhitakerResult>
-            println("Found saved cache, dumping")
+            println("Found saved cache, logging:")
             println(self.items)
         }
         else {

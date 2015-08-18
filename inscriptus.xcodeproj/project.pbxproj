@@ -260,16 +260,13 @@
 		E028AC411A98342C0058D9A1 /* Interface Files */ = {
 			isa = PBXGroup;
 			children = (
+				E092DFCD1B82D4A2003ABB8A /* BasicCell */,
 				E0FDFA1F1A9545CC00659871 /* Main.storyboard */,
 				E0610DA51B0828D2006A4FBB /* smallModalAnimator.swift */,
 				E01D1D011B00503200ABB9DF /* foldOutAnimator.swift */,
 				E0FDFA241A9545CC00659871 /* LaunchScreen.xib */,
-				E028AC4C1A99251D0058D9A1 /* AbbreviationCell.xib */,
-				E028AC421A98344F0058D9A1 /* AbbreviationCell.swift */,
-				E096AFCB1AFABCAE002D6E5D /* BasicCell.xib */,
-				E03ADFED1AF6CD41002CFD5C /* BasicCell.swift */,
-				E01786AB1B0139ED0022F8E2 /* InscribedCell.xib */,
-				E01786AD1B0139F70022F8E2 /* InscribedCell.swift */,
+				E092DFCF1B82D4D0003ABB8A /* AbbreviationCell */,
+				E092DFCE1B82D4BB003ABB8A /* InscribedCell */,
 				E00CBAD01AF6C0FD00DAD03B /* DefaultDetailView.xib */,
 				E01001DD1B0598D10049A3B9 /* DefaultFavoritesView.xib */,
 				E04B6F431AF95EA900FA668F /* DefinitionCell.swift */,
@@ -303,6 +300,33 @@
 				E04B6F2F1AF95B2100FA668F /* inscriptus-Bridging-Header.h */,
 			);
 			name = TFHpple;
+			sourceTree = "<group>";
+		};
+		E092DFCD1B82D4A2003ABB8A /* BasicCell */ = {
+			isa = PBXGroup;
+			children = (
+				E096AFCB1AFABCAE002D6E5D /* BasicCell.xib */,
+				E03ADFED1AF6CD41002CFD5C /* BasicCell.swift */,
+			);
+			name = BasicCell;
+			sourceTree = "<group>";
+		};
+		E092DFCE1B82D4BB003ABB8A /* InscribedCell */ = {
+			isa = PBXGroup;
+			children = (
+				E01786AB1B0139ED0022F8E2 /* InscribedCell.xib */,
+				E01786AD1B0139F70022F8E2 /* InscribedCell.swift */,
+			);
+			name = InscribedCell;
+			sourceTree = "<group>";
+		};
+		E092DFCF1B82D4D0003ABB8A /* AbbreviationCell */ = {
+			isa = PBXGroup;
+			children = (
+				E028AC4C1A99251D0058D9A1 /* AbbreviationCell.xib */,
+				E028AC421A98344F0058D9A1 /* AbbreviationCell.swift */,
+			);
+			name = AbbreviationCell;
 			sourceTree = "<group>";
 		};
 		E0A49BD21AC34AD5008DF28C /* specialchars */ = {
