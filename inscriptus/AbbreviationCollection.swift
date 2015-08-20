@@ -12,6 +12,8 @@ private let _SingletonSharedInstance = AbbreviationCollection()
 
 class AbbreviationCollection: NSObject {
     
+    // MARK: - Properties
+    
     // Abbreviations in a dictionary by their search text
     var abbreviationsGrouped = [String: Array<Abbreviation>]()
     var abbreviationsGroupedByFirstLetter = [String: Array<Abbreviation>]()
@@ -20,6 +22,7 @@ class AbbreviationCollection: NSObject {
     var allAbbreviations = [Abbreviation]()
     var abbreviationsUnsorted = [Abbreviation]()
     
+    // Predicate closure used to sort a collection of abbreviations
     let abbreviationSortClosure: (Abbreviation, Abbreviation) -> Bool = {
             (a1: Abbreviation, a2: Abbreviation) in
             let a1Text = a1.displayText != nil ? a1.displayText! : a1.longText
@@ -27,6 +30,8 @@ class AbbreviationCollection: NSObject {
             return a1Text.compare(a2Text) == .OrderedAscending
     }
     
+    // Predicate closure to sort a collection of abbreviations ideally based on
+    // a user search
     func abbreviationSortClosureForSearchString(searchString: String) -> (Abbreviation, Abbreviation) -> Bool {
         return {
             (a1: Abbreviation, a2: Abbreviation) in
@@ -47,6 +52,8 @@ class AbbreviationCollection: NSObject {
     class var sharedAbbreviationCollection: AbbreviationCollection {
         return _SingletonSharedInstance
     }
+    
+    // MARK: - Methods
     
     override init() {
         // Load abbreviations arrays
@@ -72,7 +79,7 @@ class AbbreviationCollection: NSObject {
             self.specialAbbreviations.append(Abbreviation(JSONDict: abbreviation as! NSDictionary))
         }
         
-        // create dictionary of abbreviations grouped by search string
+        // Create dictionary of abbreviations grouped by search string
         for abb in self.allAbbreviations {
             if let searchStrs = abb.searchStrings {
                 for searchString in searchStrs {
@@ -86,6 +93,8 @@ class AbbreviationCollection: NSObject {
             }
         }
         
+        // Create dictionary of abbreviations grouped by first letter of search
+        // string (for table view index)
         for abb in self.allAbbreviations {
             if let searchStrs = abb.searchStrings {
                 for searchString in searchStrs {
@@ -101,6 +110,7 @@ class AbbreviationCollection: NSObject {
             }
         }
         
+        // Create array of first letters in abbreviations (for table view index)
         self.abbreviationsFirstLetters = sorted(self.abbreviationsGroupedByFirstLetter.keys, {
             (a: String, b: String) in
             a.compare(b, options: .CaseInsensitiveSearch) == .OrderedAscending
@@ -108,6 +118,7 @@ class AbbreviationCollection: NSObject {
         
         super.init()
         
+        // Restore favorites from user defaults (user defaults is list of IDs)
         let defaults = NSUserDefaults.standardUserDefaults()
         if let storedFavorites: AnyObject = defaults.objectForKey(favoritesKey) {
             for favorite: AnyObject in storedFavorites as! NSMutableArray {
@@ -116,6 +127,7 @@ class AbbreviationCollection: NSObject {
         }
     }
     
+    // Get the abbreviation for the given ID
     func abbreviationWithID(id: Int) -> Abbreviation? {
         var abb = self.abbreviationsUnsorted[id]
         var i = id
@@ -125,6 +137,9 @@ class AbbreviationCollection: NSObject {
         return abb
     }
     
+    // MARK: Searching
+    
+    // Search for a string in all abbreviations
     func searchForString(searchString: String, scopeIndex: Int) -> [Abbreviation] {
         var resultAbbreviations = Set<Abbreviation>()
         
@@ -155,6 +170,7 @@ class AbbreviationCollection: NSObject {
         return sorted(Array(resultAbbreviations), self.abbreviationSortClosureForSearchString(searchString))
     }
     
+    // Search for a string in special abbreviations
     func searchSpecialsForString(searchString: String, scopeIndex: Int) -> [Abbreviation] {
         var resultAbbreviations = Set<Abbreviation>()
         
@@ -214,6 +230,8 @@ class AbbreviationCollection: NSObject {
         return resultAbbreviations
     }
     
+    // Does an asynchronous search off the main thread, so the UI doesn't lock
+    // up while the user is typing
     func asyncSearchForString(searchString: String, scopeIndex: Int, onFinish: ([Abbreviation]) -> Void) -> Void {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
             let results = self.searchForString(searchString, scopeIndex: scopeIndex)
@@ -222,7 +240,6 @@ class AbbreviationCollection: NSObject {
             }
         }
     }
-    
     func asyncSearchSpecialsForString(searchString: String, scopeIndex: Int, onFinish: ([Abbreviation]) -> Void) -> Void {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
             let results = self.searchSpecialsForString(searchString, scopeIndex: scopeIndex)
@@ -231,7 +248,6 @@ class AbbreviationCollection: NSObject {
             }
         }
     }
-    
     func asyncSearchFavoritesForString(searchString: String, scopeIndex: Int, onFinish: ([Abbreviation]) -> Void) -> Void {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
             let results = self.searchFavoritesForString(searchString, scopeIndex: scopeIndex)
@@ -241,7 +257,7 @@ class AbbreviationCollection: NSObject {
         }
     }
     
-    //MARK: - Favorites
+    // MARK: - Favorites
     
     let favoritesKey = "favorites"
     var favorites = NSMutableArray()

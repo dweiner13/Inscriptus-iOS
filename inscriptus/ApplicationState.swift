@@ -12,19 +12,27 @@ private let _SingletonSharedInstance = ApplicationState()
 
 class ApplicationState: NSObject {
     
+    // MARK: - Properties
+    
     let NSDEFAULTS_KEY = "applicationState"
     
+    // The selected index of the scope button control for the search
     var scopeIndex: Int
     let scopeIndexKey = "allScopeIndex"
     
+    // Coach that tells the user to tap and hold to copy
     var holdCoachHidden: Bool
     let holdCoachHiddenKey = "holdCoachHidden"
     
+    // Coach that tells the user to click definition button
     var lookupCoachHidden: Bool
     let lookupCoachHiddenKey = "lookupCoachHidden"
     
+    // Coach that shows info about special chars screen
     var specialCoachHidden: Bool
     let specialCoachHiddenKey = "specialCoachHidden"
+    
+    // MARK: - Methods
     
     override init() {
         let defaults = NSUserDefaults.standardUserDefaults()

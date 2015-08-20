@@ -10,6 +10,8 @@ import UIKit
 
 class UnsearchablesViewController: UITableViewController, UISearchBarDelegate, UISearchResultsUpdating, UIViewControllerTransitioningDelegate {
     
+    // MARK: - Properties
+    
     static let searchScopeIndexAbbreviation = 0
     static let searchScopeIndexFulltext = 1
     
@@ -17,6 +19,8 @@ class UnsearchablesViewController: UITableViewController, UISearchBarDelegate, U
     var filteredAbbreviations = Array<Abbreviation>()
     var searchController: UISearchController?
 
+    // MARK: - Methods
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -74,7 +78,7 @@ class UnsearchablesViewController: UITableViewController, UISearchBarDelegate, U
         self.tableView.contentInset = UIEdgeInsets(top: insets.top, left: insets.left, bottom: 0, right: insets.right)
     }
 
-    // MARK: - Table view data source
+    // MARK: Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
@@ -111,7 +115,7 @@ class UnsearchablesViewController: UITableViewController, UISearchBarDelegate, U
         return cell
     }
 
-    // MARK: - Navigation
+    // MARK: Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -136,7 +140,7 @@ class UnsearchablesViewController: UITableViewController, UISearchBarDelegate, U
         self.performSegueWithIdentifier("showDetail", sender: self)
     }
     
-    // MARK: - UISearchResultsUpdating
+    // MARK: UISearchResultsUpdating
     
     func updateSearchResultsForSearchController(searchController: UISearchController) {
         var searchString = searchController.searchBar.text;
@@ -171,7 +175,7 @@ class UnsearchablesViewController: UITableViewController, UISearchBarDelegate, U
         }
     }
     
-    //MARK: - Transitioning delegate
+    //MARK: Transitioning delegate
     func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         var animator = smallModalAnimator(presenting: true)
         return animator

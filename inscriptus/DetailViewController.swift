@@ -10,6 +10,9 @@ import UIKit
 import MessageUI
 
 class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewControllerTransitioningDelegate, DefinitionViewControllerDelegate, MFMailComposeViewControllerDelegate {
+    
+    // MARK: - Properties
+    
     @IBOutlet weak var abbreviationLabel: UILabel!
     @IBOutlet weak var longTextLabel: UILabel!
     @IBOutlet weak var defineButton: UIButton!
@@ -44,6 +47,8 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
         }
     }
 
+    // MARK: - Methods
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configureView()
@@ -142,7 +147,7 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
         }
     }
     
-    // MARK: - UI Stuff
+    // MARK: UI Stuff
 
     func configureView() {
         if self.detailItem == nil {
@@ -297,7 +302,7 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
         self.whitakers.beginDefinitionRequestForWord(self.detailItem.longText, targetLanguage: .English)
     }
     
-    // MARK: - Segues
+    // MARK: Segues
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showWords" {
@@ -310,13 +315,13 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
         }
     }
     
-    //MARK: - MFMailComposeViewControllerDelegate
+    //MARK: MFMailComposeViewControllerDelegate
     
     func mailComposeController(controller: MFMailComposeViewController!, didFinishWithResult result: MFMailComposeResult, error: NSError!) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    //MARK: - UIMenuController
+    //MARK: UIMenuController
     
     override func copy(sender: AnyObject?) {
         if self.mostRecentViewTapped == self.abbreviationBackgroundView {
@@ -347,7 +352,7 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
         return true
     }
     
-    //MARK: - WhitakerScraperDelegate
+    //MARK: WhitakerScraperDelegate
     
     func whitakerScraper(scraper: WhitakerScraper, didLoadResult result: WhitakerResult) {
         self.activityIndicator.stopAnimating()
@@ -368,7 +373,7 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
         self.presentViewController(alert, animated: true, completion: nil)
     }
     
-    //MARK: - UIViewControllerTransitioningDelegate
+    //MARK: UIViewControllerTransitioningDelegate
     func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         let frame = self.longTextLabel!.frame
         let rect = CGRect(x: frame.origin.x, y: frame.origin.y - 8, width: frame.width, height: frame.height + 23)
@@ -381,7 +386,7 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
         return animator
     }
     
-    //MARK: - DefinitionViewControllerDelegate
+    //MARK: DefinitionViewControllerDelegate
     
     func didDismissDefinitionViewController(viewController: DefinitionViewController) {
         if !ApplicationState.sharedApplicationState().holdCoachHidden {

@@ -10,8 +10,11 @@ import UIKit
 
 class MasterViewController: UITableViewController, UISearchBarDelegate, UISearchResultsUpdating {
     
+    // MARK: - Properties
+    
     let abbreviations = AbbreviationCollection.sharedAbbreviationCollection
     
+    // The button to show favorites
     var showFavoritesButton: UIBarButtonItem!
     
     static let searchScopeIndexAbbreviation = 0
@@ -21,10 +24,13 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
     var allListOffset: CGFloat?
     var favoritesListOffset: CGFloat?
     
+    // The view to display when there are no favorites
     var defaultView: UIView?
     
+    // The debug button to reset coaches
     var resetButton: UIBarButtonItem!
     
+    // True to show user favorites, false to show all abbreviations
     var isShowingFavorites: Bool = false {
         didSet {
             self.tableView.reloadData()
@@ -64,7 +70,11 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
 
     var detailViewController: DetailViewController? = nil
     var searchController: UISearchController!
+    
+    // Abbreviations filtered based on the current user search string
     var filteredAbbreviations = Array<Abbreviation>()
+    
+    // MARK: - Methods
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -140,7 +150,7 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
         self.tableView.contentInset = UIEdgeInsets(top: insets.top, left: insets.left, bottom: 0, right: insets.right)
     }
     
-    // MARK: - UI Stuff
+    // MARK: UI Stuff
     
     func tappedResetButton(sender: AnyObject) {
         var alert = UIAlertController(title: "Reset application state?", message: "This will reset any first-time help messages for debugging purposes.", preferredStyle: UIAlertControllerStyle.ActionSheet)
@@ -209,7 +219,7 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
         }
     }
 
-    // MARK: - Segues
+    // MARK: Segues
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showDetail" {
@@ -239,7 +249,7 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
         }
     }
 
-    // MARK: - Table View Delegate
+    // MARK: Table View Delegate
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         if self.isShowingFavorites {
@@ -379,7 +389,7 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
         return sectionTitles
     }
     
-    // MARK: - UISearchResultsUpdating
+    // MARK: UISearchResultsUpdating
     
     func updateSearchResultsForSearchController(searchController: UISearchController) {
         var searchString = searchController.searchBar.text;
@@ -402,7 +412,8 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
         }
     }
     
-    // updateSearchResultsForSearchController() should be called when scope changed but isn't
+    // updateSearchResultsForSearchController() should be called when scope
+    // changed but isn't
     func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
         updateSearchResultsForSearchController(self.searchController!)
         ApplicationState.sharedApplicationState().scopeIndex = selectedScope

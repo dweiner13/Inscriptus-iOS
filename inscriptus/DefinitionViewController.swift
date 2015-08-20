@@ -14,6 +14,8 @@ protocol DefinitionViewControllerDelegate {
 
 class DefinitionViewController: UIViewController, UIGestureRecognizerDelegate {
     
+    // MARK: - Properties
+    
     private let cellIdentifier = "definitionCell"
     
     @IBOutlet weak var errorTextView: UITextView!
@@ -24,6 +26,8 @@ class DefinitionViewController: UIViewController, UIGestureRecognizerDelegate {
     var result: WhitakerResult!
     
     var delegate: DefinitionViewControllerDelegate?
+    
+    // MARK: - Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -29,24 +29,11 @@ class foldOutAnimator: NSObject, UIViewControllerAnimatedTransitioning {
         // Extra margin above the presented view
         let topMargin: CGFloat = 20
         
-//        let appFrame = UIScreen.mainScreen().applicationFrame
-//        let appWidth = appFrame.width
-//        let appHeight = appFrame.height
-//        
-        let screenFrame = UIScreen.mainScreen().bounds
-//        let screenWidth = screenFrame.width
-//        let screenHeight = screenFrame.height
-        
         let viewFrame = presenting.view.frame
         let viewWidth = viewFrame.width
         let viewHeight = viewFrame.height
         
         var startFrame = CGRect(x: 0, y: viewHeight, width: viewWidth, height: viewHeight - foldOutBelowRect.height - topMargin)
-        
-//        println("screenFrame\t\t \(screenFrame)")
-//        println("startFrame\t\t\t \(startFrame)")
-//        println("viewFrame\t\t\t \(viewFrame)")
-//        println("foldOutBelowRect\t \(foldOutBelowRect)")
         
         var statusBarBackground = UIView(frame: CGRect(x: 0, y: -20, width: viewWidth, height: 20))
         statusBarBackground.backgroundColor = UIColor.whiteColor()

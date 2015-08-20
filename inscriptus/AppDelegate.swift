@@ -8,6 +8,7 @@
 
 import UIKit
 
+// Dark purple tint
 public let INSCRIPTUS_TINT_COLOR = UIColor(red:0.581, green:0.128, blue:0.574, alpha:1)
 
 @UIApplicationMain

@@ -10,15 +10,28 @@ import UIKit
 
 class Abbreviation: NSObject, Printable, DebugPrintable {
     
+    // MARK: - Properties
+    
+    // The text to display (the abbreviation itself, e.g. SPQR). Null if image.
     let displayText: String?
+    
+    // The definition (the long version, e.g. senatus populusque romanus")
     let longText: String
+    
+    // The name of the image file to display if it exists
     let displayImage: String?
+    
+    // A set of plaintext, searchable representations of the abbreviation
+    // May not exist if the abbreviation, like SPQR, is already searchable
     let searchStrings: Set<String>?
+    
+    // True if it's a special character or image abbreviation
     let isSpecial: Bool
     
     // not really useful, in fact completely useless
     let id: Int
     
+    // Unique string used to compare abbreviations
     var uniqueString: String {
         get {
             var str: String = ""
@@ -32,6 +45,9 @@ class Abbreviation: NSObject, Printable, DebugPrintable {
         }
     }
     
+    // MARK: - Methods
+    
+    // TODO: can this just compare IDs? is the unique string necessary?
     override func isEqual(object: AnyObject?) -> Bool {
         if let object = object as? Abbreviation {
             return self.uniqueString.compare(object.uniqueString) == .OrderedSame
@@ -40,6 +56,7 @@ class Abbreviation: NSObject, Printable, DebugPrintable {
         }
     }
     
+    // Get a debug description of this object
     override var description: String {
         get {
             var outputString = "<"
@@ -100,6 +117,7 @@ class Abbreviation: NSObject, Printable, DebugPrintable {
         self.init(displayText: abbrDisplay as String?, id: id, longText: phrase as String, displayImageName: displayImage as String?, searchStrings: abbrSearchList as! Array<String>, isSpecial: isSpecial)
     }
     
+    // Turn the array of search strings into a UI-ready human-redable string
     func searchStringsAsReadableString() -> String? {
         if let searchStrs = self.searchStrings {
             var str = ""
@@ -114,62 +132,6 @@ class Abbreviation: NSObject, Printable, DebugPrintable {
                 i += 1
             }
             return str
-        }
-        else {
-            return nil
-        }
-    }
-    
-    // Returns the range in the display text that matches the given string, accounting
-    // for interpuncts and spaces.
-    // E.g. Will return the range in "S . P . Q . R" that matches, e.g. "SP" (0..<5)
-    //
-    // UNUSED because special characters make this very difficult to implement, maybe come
-    // up with a list of replacements for special characters to regular characters to solve
-    // the problem
-    func rangeOfDisplayTextMatchingSearchText(search: String) -> NSRange? {
-        if let str = self.displayText {
-            let searchString = search.uppercaseString
-            
-            var startIndex = 0
-            var endIndex = 0
-            
-            var searchStringIndex = 0
-            var inMatch = false
-            var i = 0
-            while (i < count(str)) {
-                if searchStringIndex == count(searchString) {
-                    break
-                }
-                if inMatch {
-                    if str[i...i] == searchString[searchStringIndex...searchStringIndex] {
-                        endIndex = i + 1
-                        searchStringIndex += 1
-                    }
-                    else if str[i...i] == " " || str[i...i] == "·" {
-                        endIndex = i + 1
-                    }
-                    else {
-                        endIndex = 0
-                        startIndex = 0
-                        searchStringIndex = 0
-                        inMatch = false
-                    }
-                }
-                else if str[i...i] == searchString[searchStringIndex...searchStringIndex] {
-                    startIndex = i
-                    searchStringIndex += 1
-                    inMatch = true
-                }
-                i += 1
-            }
-            
-            return NSMakeRange(startIndex, endIndex - startIndex)
-            
-//            let rangeStart = advance(str.startIndex, startIndex)
-//            let rangeEnd = advance(rangeStart, endIndex - startIndex + 1)
-//            
-//            return Range(start: rangeStart, end: rangeEnd)
         }
         else {
             return nil
