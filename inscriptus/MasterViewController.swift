@@ -20,9 +20,8 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
     static let searchScopeIndexAbbreviation = 0
     static let searchScopeIndexFulltext = 1
     
-    // Saves the scroll offset while in favorites list
-    var allListOffset: CGFloat?
-    var favoritesListOffset: CGFloat?
+    // Saves the scroll offset when transitioning to/from favorites list
+    var savedScrollOffset: CGPoint?
     
     // The view to display when there are no favorites
     var defaultView: UIView?
@@ -33,17 +32,25 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
     // True to show user favorites, false to show all abbreviations
     var isShowingFavorites: Bool = false {
         didSet {
+            // Save scroll position
+            var scrollOffset = self.tableView.contentOffset
+            
             self.tableView.reloadData()
+            
+            // Restore scroll position
+            if let savedOffset = self.savedScrollOffset {
+                self.tableView.contentOffset = savedOffset
+            }
+            
+            self.savedScrollOffset = scrollOffset
+            
             if self.isShowingFavorites {
                 self.showFavoritesButton.setBackgroundImage(UIImage(named: "bookmarks-bg.png"), forState: UIControlState.Normal, barMetrics: UIBarMetrics.Default)
                 self.showFavoritesButton.tintColor = UIColor.whiteColor()
                 self.navigationItem.title = "Favorites"
                 self.navigationItem.backBarButtonItem!.title = "Favorites"
                 self.searchController.searchBar.placeholder = "Search favorites"
-                self.allListOffset = self.tableView.contentOffset.y
-                if let offset = self.favoritesListOffset {
-                    self.tableView.contentOffset.y = offset
-                }
+                
                 if abbreviations.noFavorites {
                     self.showDefaultView(true)
                     self.showEditButton(false)
@@ -58,10 +65,7 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
                 self.navigationItem.title = "All Abbreviations"
                 self.navigationItem.backBarButtonItem!.title = "All"
                 self.searchController.searchBar.placeholder = "Search all"
-                self.favoritesListOffset = self.tableView.contentOffset.y
-                if let offset = self.allListOffset {
-                    self.tableView.contentOffset.y = offset
-                }
+                
                 self.showEditButton(false)
                 self.showDefaultView(false)
             }
