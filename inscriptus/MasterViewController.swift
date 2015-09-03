@@ -368,10 +368,6 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
         }
     }
     
-    override func tableView(tableView: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
-        self.abbreviations.moveFavoriteFromIndex(sourceIndexPath.row, toIndex: destinationIndexPath.row)
-    }
-    
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if self.isShowingFavorites || self.inSearchView {
             return nil
