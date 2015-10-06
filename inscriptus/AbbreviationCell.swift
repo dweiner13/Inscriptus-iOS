@@ -32,7 +32,7 @@ class AbbreviationCell: UITableViewCell {
     func setAbbreviation(abbreviation: Abbreviation, searchController: UISearchController?) {
         var inSearch = false
         if searchController != nil {
-            inSearch = searchController!.active && count(searchController!.searchBar.text) != 0
+            inSearch = searchController!.active && searchController!.searchBar.text.characters.count != 0
         }
         if let displayText = abbreviation.displayText {
             self.primaryLabel.text = displayText

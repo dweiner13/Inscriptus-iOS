@@ -60,7 +60,7 @@ class AbbreviationCollection: NSObject {
         let combinedPath: String = NSBundle.mainBundle().pathForResource("abbs-combined", ofType: "json")!
         let combinedData = NSData(contentsOfFile: combinedPath)!
         var err: NSError?
-        let combinedAbbreviations: NSArray = NSJSONSerialization.JSONObjectWithData(combinedData, options: .allZeros, error: &err) as! NSArray
+        let combinedAbbreviations: NSArray = (try! NSJSONSerialization.JSONObjectWithData(combinedData, options: [])) as! NSArray
         
         var abbreviations = [Abbreviation]()
         for abbreviation in combinedAbbreviations {
@@ -68,13 +68,13 @@ class AbbreviationCollection: NSObject {
         }
         
         self.abbreviationsUnsorted = abbreviations
-        self.allAbbreviations = sorted(abbreviations, self.abbreviationSortClosure)
+        self.allAbbreviations = abbreviations.sort(self.abbreviationSortClosure)
         
         // Special character abbreviations
         
         let specialcharsPath: String = NSBundle.mainBundle().pathForResource("abbs-specialchars", ofType: "json")!
         let specialcharData = NSData(contentsOfFile: specialcharsPath)!
-        let specialcharAbbreviations: NSArray = NSJSONSerialization.JSONObjectWithData(specialcharData, options: .allZeros, error: &err) as! NSArray
+        let specialcharAbbreviations: NSArray = (try! NSJSONSerialization.JSONObjectWithData(specialcharData, options: [])) as! NSArray
         for abbreviation in specialcharAbbreviations {
             self.specialAbbreviations.append(Abbreviation(JSONDict: abbreviation as! NSDictionary))
         }
@@ -99,7 +99,7 @@ class AbbreviationCollection: NSObject {
             if let searchStrs = abb.searchStrings {
                 for searchString in searchStrs {
                     // Section title should be "#" if abb begins with a number or symbol
-                    let char = NSCharacterSet.letterCharacterSet().characterIsMember(searchString[0..<1].utf16[String.UTF16View.Index(0)]) ? searchString[0..<1] : "#"
+                    let char = NSCharacterSet.letterCharacterSet().characterIsMember(searchString[0..<1].utf16[String.UTF16View.Index(_offset: 0)]) ? searchString[0..<1] : "#"
                     if self.abbreviationsGroupedByFirstLetter[char] != nil {
                         self.abbreviationsGroupedByFirstLetter[char]!.append(abb)
                     }
@@ -111,7 +111,7 @@ class AbbreviationCollection: NSObject {
         }
         
         // Create array of first letters in abbreviations (for table view index)
-        self.abbreviationsFirstLetters = sorted(self.abbreviationsGroupedByFirstLetter.keys, {
+        self.abbreviationsFirstLetters = self.abbreviationsGroupedByFirstLetter.keys.sort({
             (a: String, b: String) in
             a.compare(b, options: .CaseInsensitiveSearch) == .OrderedAscending
         })
@@ -167,7 +167,7 @@ class AbbreviationCollection: NSObject {
             }
         }
         
-        return sorted(Array(resultAbbreviations), self.abbreviationSortClosureForSearchString(searchString))
+        return Array(resultAbbreviations).sort(self.abbreviationSortClosureForSearchString(searchString))
     }
     
     // Search for a string in special abbreviations
@@ -196,7 +196,7 @@ class AbbreviationCollection: NSObject {
         }
         
         
-        return sorted(Array(resultAbbreviations), self.abbreviationSortClosureForSearchString(searchString))
+        return Array(resultAbbreviations).sort(self.abbreviationSortClosureForSearchString(searchString))
     }
     
     
@@ -280,7 +280,7 @@ class AbbreviationCollection: NSObject {
     }
     
     func saveFavorites() {
-        var favoritesIDs = NSMutableArray()
+        let favoritesIDs = NSMutableArray()
         for favorite: AnyObject in favorites {
             let abb = favorite as! Abbreviation
             favoritesIDs.insertObject(abb.id, atIndex: 0)

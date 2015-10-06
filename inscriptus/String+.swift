@@ -11,8 +11,8 @@ import UIKit
 extension String {
     subscript (r: Range<Int>) -> String {
         get {
-            let startIndex = advance(self.startIndex, r.startIndex)
-            let endIndex = advance(startIndex, r.endIndex - r.startIndex)
+            let startIndex = self.startIndex.advancedBy(r.startIndex)
+            let endIndex = startIndex.advancedBy(r.endIndex - r.startIndex)
             
             return self[Range(start: startIndex, end: endIndex)]
         }
@@ -22,7 +22,7 @@ extension String {
     // see http://stackoverflow.com/questions/24091233/swift-split-string-over-multiple-lines
     init(sep:String, _ lines:String...){
         self = ""
-        for (idx, item) in enumerate(lines) {
+        for (idx, item) in lines.enumerate() {
             self += "\(item)"
             if idx < lines.count-1 {
                 self += sep
@@ -31,7 +31,7 @@ extension String {
     }
     init(_ lines:String...){
         self = ""
-        for (idx, item) in enumerate(lines) {
+        for (idx, item) in lines.enumerate() {
             self += "\(item)"
             if idx < lines.count-1 {
                 self += "\n"
@@ -40,20 +40,20 @@ extension String {
     }
     
     func lastCharacterAsString() -> String {
-        return self[count(self)-1..<count(self)]
+        return self[self.characters.count-1..<self.characters.count]
     }
     
     func numberOfOccurrencesOfString(str: String) -> Int {
-        let strCount = count(str)
+        let strCount = str.characters.count
         var totalCount = 0
         
-        if(strCount > count(self) || strCount == 0) {
+        if(strCount > self.characters.count || strCount == 0) {
             return 0
         }
         
-        for i in 0...count(self)-strCount {
-            let startIndex = advance(self.startIndex, i)
-            let endIndex = advance(startIndex, strCount)
+        for i in 0...self.characters.count-strCount {
+            let startIndex = self.startIndex.advancedBy(i)
+            let endIndex = startIndex.advancedBy(strCount)
             let substr: String = self.substringWithRange(Range(start: startIndex, end: endIndex))
             
             if substr == str {

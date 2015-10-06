@@ -31,7 +31,7 @@ class UnsearchablesViewController: UITableViewController, UISearchBarDelegate, U
         
         self.searchController = UISearchController(searchResultsController: nil)
         if let searchController = self.searchController {
-            var searchBar = searchController.searchBar
+            let searchBar = searchController.searchBar
             searchBar.scopeButtonTitles = ["Abbreviation", "Full text"]
             searchBar.sizeToFit()
             searchBar.delegate = self
@@ -50,7 +50,7 @@ class UnsearchablesViewController: UITableViewController, UISearchBarDelegate, U
     }
     
     override func viewWillAppear(animated: Bool) {
-        if let selectedIndexPath = self.tableView.indexPathForSelectedRow() {
+        if let selectedIndexPath = self.tableView.indexPathForSelectedRow {
             self.tableView.deselectRowAtIndexPath(selectedIndexPath, animated: true)
         }
     }
@@ -64,7 +64,7 @@ class UnsearchablesViewController: UITableViewController, UISearchBarDelegate, U
     // Handle scroll bar insets when search bar is active
     func keyboardDidShow(sender: NSNotification) {
         let dict: NSDictionary = sender.userInfo! as NSDictionary
-        let height: CGFloat = dict.objectForKey(UIKeyboardFrameEndUserInfoKey)!.CGRectValue().height
+        let height: CGFloat = dict.objectForKey(UIKeyboardFrameEndUserInfoKey)!.CGRectValue.height
         
         var insets = self.tableView.scrollIndicatorInsets
         self.tableView.scrollIndicatorInsets = UIEdgeInsets(top: insets.top, left: insets.left, bottom: height, right: insets.right)
@@ -86,11 +86,11 @@ class UnsearchablesViewController: UITableViewController, UISearchBarDelegate, U
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            if !self.searchController!.active || count(self.searchController!.searchBar.text) == 0 {
-                return count(self.abbreviations.specialAbbreviations)
+            if !self.searchController!.active || self.searchController!.searchBar.text.characters.count == 0 {
+                return self.abbreviations.specialAbbreviations.count
             }
             else {
-                return count(self.filteredAbbreviations)
+                return self.filteredAbbreviations.count
             }
         }
         else {
@@ -103,7 +103,7 @@ class UnsearchablesViewController: UITableViewController, UISearchBarDelegate, U
         
         let abbreviation: Abbreviation
         
-        if self.searchController!.active && count(self.searchController!.searchBar.text) != 0 {
+        if self.searchController!.active && self.searchController!.searchBar.text.characters.count != 0 {
             abbreviation = self.filteredAbbreviations[indexPath.row]
         }
         else {
@@ -120,8 +120,8 @@ class UnsearchablesViewController: UITableViewController, UISearchBarDelegate, U
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showDetail" {
-            if let indexPath = self.tableView.indexPathForSelectedRow() {
-                var abbreviation = self.abbreviations.specialAbbreviations[indexPath.row]
+            if let indexPath = self.tableView.indexPathForSelectedRow {
+                let abbreviation = self.abbreviations.specialAbbreviations[indexPath.row]
                 
                 let controller = (segue.destinationViewController as! UINavigationController).topViewController as! DetailViewController
                 controller.detailItem = abbreviation
@@ -163,26 +163,26 @@ class UnsearchablesViewController: UITableViewController, UISearchBarDelegate, U
     
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
         if !self.searchController!.active {
-            var insets = self.tableView.scrollIndicatorInsets
+            let insets = self.tableView.scrollIndicatorInsets
             self.tableView.scrollIndicatorInsets = UIEdgeInsets(top: insets.top + 88, left: insets.left, bottom: insets.bottom, right: insets.right)
         }
     }
     
     func searchBarTextDidEndEditing(searchBar: UISearchBar) {
         if self.searchController!.active {
-            var insets = self.tableView.scrollIndicatorInsets
+            let insets = self.tableView.scrollIndicatorInsets
             self.tableView.scrollIndicatorInsets = UIEdgeInsets(top: 20, left: insets.left, bottom: insets.bottom, right: insets.right)
         }
     }
     
     //MARK: Transitioning delegate
     func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        var animator = smallModalAnimator(presenting: true)
+        let animator = smallModalAnimator(presenting: true)
         return animator
     }
     
     func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        var animator = smallModalAnimator(presenting: false)
+        let animator = smallModalAnimator(presenting: false)
         return animator
     }
 }

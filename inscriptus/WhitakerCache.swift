@@ -16,8 +16,8 @@ class WhitakerCache {
     var items: Set<WhitakerResult>
     
     init() {
-        var defaults = NSUserDefaults.standardUserDefaults()
-        var storedCache: NSData? = defaults.objectForKey(DEFAULTS_CACHE_KEY) as! NSData?
+        let defaults = NSUserDefaults.standardUserDefaults()
+        let storedCache: NSData? = defaults.objectForKey(DEFAULTS_CACHE_KEY) as! NSData?
         if let savedData = storedCache {
             self.items = NSKeyedUnarchiver.unarchiveObjectWithData(savedData) as! Set<WhitakerResult>
         }
@@ -31,7 +31,7 @@ class WhitakerCache {
     }
     
     func saveCache() {
-        var defaults = NSUserDefaults.standardUserDefaults()
+        let defaults = NSUserDefaults.standardUserDefaults()
         defaults.setObject(NSKeyedArchiver.archivedDataWithRootObject(self.items), forKey: DEFAULTS_CACHE_KEY)
         defaults.synchronize()
     }

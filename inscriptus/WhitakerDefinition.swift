@@ -118,7 +118,7 @@ class WhitakerDefinition: NSObject, NSCoding {
         self.init(word: word, text: text, meanings: meanings, textWithoutMeanings: textWithoutMeanings, partOfSpeech: partOfSpeech, isAlternateSpelling: false)
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         self.word = aDecoder.decodeObjectForKey(DEFAULTS_WORD_KEY) as! String
         self.text = aDecoder.decodeObjectForKey(DEFAULTS_TEXT_KEY) as! String
         self.meanings = aDecoder.decodeObjectForKey(DEFAULTS_MEANINGS_KEY) as! String?

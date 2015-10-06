@@ -34,7 +34,7 @@ class WhitakerResult: NSObject, NSCoding {
         aCoder.encodeObject(self.word, forKey: DEFAULTS_WORD_KEY)
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         self.definitions = aDecoder.decodeObjectForKey(DEFAULTS_DEFINITIONS_KEY) as! [WhitakerDefinition]
         self.targetLanguage = WhitakerScraper.TargetLanguage(rawValue: aDecoder.decodeIntegerForKey(DEFAULTS_TARGETLANGUAGE_KEY))!
         self.rawResult = aDecoder.decodeObjectForKey(DEFAULTS_RAWRESULT_KEY) as! String

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Abbreviation: NSObject, Printable, DebugPrintable {
+class Abbreviation: NSObject, CustomStringConvertible, CustomDebugStringConvertible {
     
     // MARK: - Properties
     
@@ -106,7 +106,7 @@ class Abbreviation: NSObject, Printable, DebugPrintable {
             abbrDisplay = JSONDict["abbrDisplay"] as? NSString
         }
         
-        let id = (JSONDict["id"] as! String?)!.toInt()!
+        let id = Int((JSONDict["id"] as! String?)!)!
         let phrase = JSONDict["phrase"] as! NSString
         let displayImage = JSONDict["abbrDisplayImage"] as! NSString?
         let isSpecial = JSONDict["isSpecial"] as! Bool
@@ -123,7 +123,7 @@ class Abbreviation: NSObject, Printable, DebugPrintable {
             var str = ""
             var i = 0
             for searchString in searchStrs {
-                if i == count(searchStrs) - 1 {
+                if i == searchStrs.count - 1 {
                     str += searchString
                 }
                 else {

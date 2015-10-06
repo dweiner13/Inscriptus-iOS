@@ -89,7 +89,7 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
             self.lookupCoachBox.hidden = false
             self.lookupCoachArrow.hidden = false
             self.lookupCoachTip.hidden = false
-            UIView.animateWithDuration(0.5, delay: delay, options: nil, animations: {
+            UIView.animateWithDuration(0.5, delay: delay, options: [], animations: {
                 self.lookupCoachBox.alpha = 1
                 self.lookupCoachArrow.alpha = 1
                 self.lookupCoachTip.alpha = 1
@@ -97,7 +97,7 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
                 completion: nil)
         }
         else {
-            UIView.animateWithDuration(0.5, delay: delay, options: nil, animations: {
+            UIView.animateWithDuration(0.5, delay: delay, options: [], animations: {
                 self.lookupCoachBox.alpha = 0
                 self.lookupCoachArrow.alpha = 0
                 self.lookupCoachTip.alpha = 0
@@ -115,7 +115,7 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
             self.holdCoachBox.hidden = false
             self.holdCoachArrow1.hidden = false
             self.holdCoachArrow2.hidden = false
-            UIView.animateWithDuration(0.5, delay: delay, options: nil, animations: {
+            UIView.animateWithDuration(0.5, delay: delay, options: [], animations: {
                 self.holdCoachBox.alpha = 1
                 self.holdCoachArrow1.alpha = 1
                 self.holdCoachArrow2.alpha = 1
@@ -123,7 +123,7 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
                 completion: nil)
         }
         else {
-            UIView.animateWithDuration(0.5, delay: delay, options: nil, animations: {
+            UIView.animateWithDuration(0.5, delay: delay, options: [], animations: {
                 self.holdCoachBox.alpha = 0
                 self.holdCoachArrow1.alpha = 0
                 self.holdCoachArrow2.alpha = 0
@@ -151,7 +151,7 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
 
     func configureView() {
         if self.detailItem == nil {
-            var defaultView = NSBundle.mainBundle().loadNibNamed("DefaultDetailView", owner: self, options: nil)[0] as! UIView
+            let defaultView = NSBundle.mainBundle().loadNibNamed("DefaultDetailView", owner: self, options: nil)[0] as! UIView
             self.view = defaultView
         }
         else {
@@ -190,7 +190,7 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
     }
     
     @IBAction func tappedAbbreviation(sender: AnyObject) {
-        var controller = UIMenuController.sharedMenuController()
+        let controller = UIMenuController.sharedMenuController()
         if controller.menuVisible == false {
             self.mostRecentViewTapped = self.abbreviationBackgroundView
             controller.setTargetRect(self.abbreviationBackgroundView.frame, inView: self.view)
@@ -205,7 +205,7 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
     }
     
     @IBAction func tappedLongText(sender: AnyObject) {
-        var controller = UIMenuController.sharedMenuController()
+        let controller = UIMenuController.sharedMenuController()
         if controller.menuVisible == false {
             self.mostRecentViewTapped = self.longTextLabel
             controller.setTargetRect(self.longTextLabel.frame, inView: self.view)
@@ -275,9 +275,9 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
         }
         else {
             let imageData = NSData(contentsOfFile: NSBundle.mainBundle().pathForResource(self.detailItem.displayImage!, ofType: ".png")!)!
-            let base64String: String = imageData.base64EncodedStringWithOptions(nil)
+            let base64String: String = imageData.base64EncodedStringWithOptions([])
             displayStr = "<img height=\"30\" src=\"data:image/png;base64,\(base64String)\" />"
-            println(displayStr)
+            print(displayStr)
         }
         let appLink = "<span style=\"font-size: 80%; color: gray\">Sent from <a href=\"#\">Inscriptus</a> for iOS</span>"
         return String("<br /><br />",
@@ -317,7 +317,7 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
     
     //MARK: MFMailComposeViewControllerDelegate
     
-    func mailComposeController(controller: MFMailComposeViewController!, didFinishWithResult result: MFMailComposeResult, error: NSError!) {
+    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -325,7 +325,7 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
     
     override func copy(sender: AnyObject?) {
         if self.mostRecentViewTapped == self.abbreviationBackgroundView {
-            var pasteboard = UIPasteboard.generalPasteboard()
+            let pasteboard = UIPasteboard.generalPasteboard()
             if let displayText = self.detailItem.displayText {
                 pasteboard.string = self.detailItem.displayText
             }
@@ -334,7 +334,7 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
             }
         }
         else if self.mostRecentViewTapped == self.longTextLabel {
-            var pasteboard = UIPasteboard.generalPasteboard()
+            let pasteboard = UIPasteboard.generalPasteboard()
             pasteboard.string = self.detailItem.longText
         }
     }
@@ -367,7 +367,7 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
         if error.code == -1001 || error.code == -1004 {
             message = "\(message)\n\nIf this keeps happening, Whitaker's Words may be offline. Try again later."
         }
-        var alert = UIAlertController(title: "Could not load definitions", message: message, preferredStyle: .Alert)
+        let alert = UIAlertController(title: "Could not load definitions", message: message, preferredStyle: .Alert)
         let action = UIAlertAction(title: "OK", style: .Default, handler: nil)
         alert.addAction(action)
         self.presentViewController(alert, animated: true, completion: nil)
@@ -377,12 +377,12 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
     func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         let frame = self.longTextLabel!.frame
         let rect = CGRect(x: frame.origin.x, y: frame.origin.y - 8, width: frame.width, height: frame.height + 23)
-        var animator = foldOutAnimator(presenting: true, foldOutBelowRect: rect)
+        let animator = foldOutAnimator(presenting: true, foldOutBelowRect: rect)
         return animator
     }
     
     func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        var animator = foldOutAnimator(presenting: false, foldOutBelowRect: self.longTextLabel.frame)
+        let animator = foldOutAnimator(presenting: false, foldOutBelowRect: self.longTextLabel.frame)
         return animator
     }
     

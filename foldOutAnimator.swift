@@ -18,7 +18,7 @@ class foldOutAnimator: NSObject, UIViewControllerAnimatedTransitioning {
         self.foldOutBelowRect = rect
     }
    
-    func transitionDuration(transitionContext: UIViewControllerContextTransitioning) -> NSTimeInterval {
+    func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval {
         return 0.3
     }
     

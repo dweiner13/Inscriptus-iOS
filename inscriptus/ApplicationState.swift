@@ -48,7 +48,7 @@ class ApplicationState: NSObject {
     }
     
     func saveApplicationState() {
-        var defaults = NSUserDefaults.standardUserDefaults()
+        let defaults = NSUserDefaults.standardUserDefaults()
         defaults.setInteger(self.scopeIndex, forKey: self.scopeIndexKey)
         defaults.setBool(self.holdCoachHidden, forKey: self.holdCoachHiddenKey)
         defaults.setBool(self.lookupCoachHidden, forKey: self.lookupCoachHiddenKey)

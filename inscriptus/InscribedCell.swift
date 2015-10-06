@@ -21,7 +21,7 @@ class InscribedCell: UITableViewCell {
 //        self.centerBackgroundView.layer.borderColor = UIColor(red:0.78, green:0.769, blue:0.769, alpha:1).CGColor
         //        self.centerBackgroundView.layer.borderWidth = 2
         
-        var gradient = CAGradientLayer()
+        let gradient = CAGradientLayer()
         gradient.frame = self.centerBackgroundView.bounds
         gradient.colors = [
             UIColor.whiteColor().CGColor,

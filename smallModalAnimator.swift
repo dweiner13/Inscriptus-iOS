@@ -16,7 +16,7 @@ class smallModalAnimator: NSObject, UIViewControllerAnimatedTransitioning {
         self.presenting = presenting
     }
    
-    func transitionDuration(transitionContext: UIViewControllerContextTransitioning) -> NSTimeInterval {
+    func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval {
         return 0.2
     }
     

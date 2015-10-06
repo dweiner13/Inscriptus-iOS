@@ -33,7 +33,7 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
     var isShowingFavorites: Bool = false {
         didSet {
             // Save scroll position
-            var scrollOffset = self.tableView.contentOffset
+            let scrollOffset = self.tableView.contentOffset
             
             self.tableView.reloadData()
             
@@ -93,7 +93,7 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
     }
     
     override func viewWillAppear(animated: Bool) {
-        if let selectedIndexPath = self.tableView.indexPathForSelectedRow() {
+        if let selectedIndexPath = self.tableView.indexPathForSelectedRow {
             self.tableView.deselectRowAtIndexPath(selectedIndexPath, animated: true)
         }
         self.tableView.reloadData()
@@ -139,7 +139,7 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
     
     func keyboardDidShow(sender: NSNotification) {
         let dict: NSDictionary = sender.userInfo! as NSDictionary
-        let height: CGFloat = dict.objectForKey(UIKeyboardFrameEndUserInfoKey)!.CGRectValue().height
+        let height: CGFloat = dict.objectForKey(UIKeyboardFrameEndUserInfoKey)!.CGRectValue.height
         
         var insets = self.tableView.scrollIndicatorInsets
         self.tableView.scrollIndicatorInsets = UIEdgeInsets(top: insets.top, left: insets.left, bottom: height, right: insets.right)
@@ -157,7 +157,7 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
     // MARK: UI Stuff
     
     func tappedResetButton(sender: AnyObject) {
-        var alert = UIAlertController(title: "Reset application state?", message: "This will reset any first-time help messages for debugging purposes.", preferredStyle: UIAlertControllerStyle.ActionSheet)
+        let alert = UIAlertController(title: "Reset application state?", message: "This will reset any first-time help messages for debugging purposes.", preferredStyle: UIAlertControllerStyle.ActionSheet)
         
         alert.addAction(UIAlertAction(title: "Reset", style: UIAlertActionStyle.Destructive, handler: {
             (a) in
@@ -174,7 +174,7 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
     
     func showDefaultView(showView: Bool) {
         if showView {
-            var defaultView = NSBundle.mainBundle().loadNibNamed("DefaultFavoritesView", owner: self, options: nil)[0] as! UIView
+            let defaultView = NSBundle.mainBundle().loadNibNamed("DefaultFavoritesView", owner: self, options: nil)[0] as! UIView
             defaultView.frame = self.view.bounds
             self.tableView.backgroundView = defaultView
             self.tableView.separatorStyle = .None
@@ -219,7 +219,7 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
     
     var inSearchView: Bool {
         get {
-            return self.searchController!.active && count(self.searchController!.searchBar.text) != 0
+            return self.searchController!.active && self.searchController!.searchBar.text.characters.count != 0
         }
     }
 
@@ -227,7 +227,7 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showDetail" {
-            if let indexPath = self.tableView.indexPathForSelectedRow() {
+            if let indexPath = self.tableView.indexPathForSelectedRow {
                 var abbreviation: Abbreviation
                 
                 if self.isShowingFavorites {
@@ -263,7 +263,7 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
             return 1
         }
         else {
-            return count(self.abbreviations.abbreviationsGroupedByFirstLetter) + 1
+            return self.abbreviations.abbreviationsGroupedByFirstLetter.count + 1
         }
     }
 
@@ -288,7 +288,7 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
                 }
             }
             else {
-                return count(self.abbreviations.abbreviationsGroupedByFirstLetter[self.abbreviations.abbreviationsFirstLetters[section - 1]]!)
+                return (self.abbreviations.abbreviationsGroupedByFirstLetter[self.abbreviations.abbreviationsFirstLetters[section - 1]]!).count
             }
         }
         
@@ -380,12 +380,12 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
         }
     }
     
-    override func sectionIndexTitlesForTableView(tableView: UITableView) -> [AnyObject]! {
+    override func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]! {
         if self.isShowingFavorites || self.inSearchView {
             return []
         }
         var sectionTitles = [""]
-        sectionTitles.extend(self.abbreviations.abbreviationsFirstLetters)
+        sectionTitles.appendContentsOf(self.abbreviations.abbreviationsFirstLetters)
         return sectionTitles
     }
     
@@ -421,14 +421,14 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
     
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
         if !self.searchController!.active {
-            var insets = self.tableView.scrollIndicatorInsets
+            let insets = self.tableView.scrollIndicatorInsets
             self.tableView.scrollIndicatorInsets = UIEdgeInsets(top: insets.top + 88, left: insets.left, bottom: insets.bottom, right: insets.right)
         }
     }
     
     func searchBarTextDidEndEditing(searchBar: UISearchBar) {
         if self.searchController!.active {
-            var insets = self.tableView.scrollIndicatorInsets
+            let insets = self.tableView.scrollIndicatorInsets
             self.tableView.scrollIndicatorInsets = UIEdgeInsets(top: 20, left: insets.left, bottom: insets.bottom, right: insets.right)
         }
     }

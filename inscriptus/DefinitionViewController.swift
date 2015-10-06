@@ -39,7 +39,7 @@ class DefinitionViewController: UIViewController, UIGestureRecognizerDelegate {
             updateResult(self.result)
         }
         
-        var topInset = CGFloat(-12)
+        let topInset = CGFloat(-12)
         self.tableView.contentInset           = UIEdgeInsets(top: topInset, left: 0, bottom: 44, right:0);
         self.tableView.scrollIndicatorInsets  = UIEdgeInsets(top: topInset, left: 0, bottom: 44,  right: 0)
         self.errorTextView.textContainerInset = UIEdgeInsets(top: topInset, left: 8, bottom: 44, right: 8)
@@ -65,9 +65,9 @@ class DefinitionViewController: UIViewController, UIGestureRecognizerDelegate {
         self.errorTextView.hidden = false;
         self.tableView.hidden = true;
         
-        var asciiError = "  _    _ _                _     _ \n | |  | | |              | |   | |\n | |  | | |__ ______ ___ | |__ | |\n | |  | | '_ \\______/ _ \\| '_ \\| |\n | |__| | | | |    | (_) | | | |_|\n  \\____/|_| |_|     \\___/|_| |_(_)";
+        let asciiError = "  _    _ _                _     _ \n | |  | | |              | |   | |\n | |  | | |__ ______ ___ | |__ | |\n | |  | | '_ \\______/ _ \\| '_ \\| |\n | |__| | | | |    | (_) | | | |_|\n  \\____/|_| |_|     \\___/|_| |_(_)";
         
-        var additionalHelpText = "You can still look up words in your history list."
+        let additionalHelpText = "You can still look up words in your history list."
         
         self.errorTextView.text = "\(asciiError)\n\n\(error.localizedDescription)\n\n\(additionalHelpText)"
     }
@@ -130,9 +130,9 @@ extension DefinitionViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell: DefinitionCell = self.tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! DefinitionCell
+        let cell: DefinitionCell = self.tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! DefinitionCell
         
-        var definition = self.result.definitions[indexPath.row]
+        let definition = self.result.definitions[indexPath.row]
         
         cell.definitionTextView!.text = definition.textWithoutMeanings
         
