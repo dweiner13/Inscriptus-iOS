@@ -23,8 +23,8 @@ class foldOutAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     }
     
     func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
-        var presenting: UIViewController = self.presenting ? transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)! : transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)!
-        var presented: UIViewController = self.presenting ? transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)! : transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)!
+        let presenting: UIViewController = self.presenting ? transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)! : transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)!
+        let presented: UIViewController = self.presenting ? transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)! : transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)!
         
         // Extra margin above the presented view
         let topMargin: CGFloat = 20
@@ -33,7 +33,7 @@ class foldOutAnimator: NSObject, UIViewControllerAnimatedTransitioning {
         let viewWidth = viewFrame.width
         let viewHeight = viewFrame.height
         
-        var startFrame = CGRect(x: 0, y: viewHeight, width: viewWidth, height: viewHeight - foldOutBelowRect.height - topMargin)
+        let startFrame = CGRect(x: 0, y: viewHeight, width: viewWidth, height: viewHeight - foldOutBelowRect.height - topMargin)
         
         var statusBarBackground = UIView(frame: CGRect(x: 0, y: -20, width: viewWidth, height: 20))
         statusBarBackground.backgroundColor = UIColor.whiteColor()
@@ -43,7 +43,7 @@ class foldOutAnimator: NSObject, UIViewControllerAnimatedTransitioning {
             presented.view.frame = startFrame
             
             let shadowPath = UIBezierPath(rect: presented.view.bounds)
-            var layer = presented.view.layer
+            let layer = presented.view.layer
             layer.masksToBounds = false
             layer.shadowColor = UIColor.blackColor().CGColor
             layer.shadowOffset = CGSize(width: 0, height: 0)
@@ -59,9 +59,9 @@ class foldOutAnimator: NSObject, UIViewControllerAnimatedTransitioning {
             swipeRec.direction = UISwipeGestureRecognizerDirection.Down
             tapView.addGestureRecognizer(swipeRec)
             
-            transitionContext.containerView().addSubview(tapView)
-            transitionContext.containerView().addSubview(presented.view)
-            transitionContext.containerView().addSubview(statusBarBackground)
+            transitionContext.containerView()!.addSubview(tapView)
+            transitionContext.containerView()!.addSubview(presented.view)
+            transitionContext.containerView()!.addSubview(statusBarBackground)
             
             UIView.animateWithDuration(self.transitionDuration(transitionContext),
                 delay: 0,
@@ -78,7 +78,7 @@ class foldOutAnimator: NSObject, UIViewControllerAnimatedTransitioning {
             })
         }
         else {
-            statusBarBackground = transitionContext.containerView().subviews[2] as! UIView
+            statusBarBackground = transitionContext.containerView()!.subviews[2] 
             
             UIView.animateWithDuration(self.transitionDuration(transitionContext),
                 delay: 0,

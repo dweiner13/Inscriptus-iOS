@@ -39,6 +39,8 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
     
     let shouldShowCoachTips = true
     
+    let coachDelay: NSTimeInterval = 0.5
+    
     var detailItem: Abbreviation! {
         didSet {
             if oldValue != nil {
@@ -89,7 +91,7 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
             self.lookupCoachBox.hidden = false
             self.lookupCoachArrow.hidden = false
             self.lookupCoachTip.hidden = false
-            UIView.animateWithDuration(0.5, delay: delay, options: [], animations: {
+            UIView.animateWithDuration(coachDelay, delay: delay, options: [], animations: {
                 self.lookupCoachBox.alpha = 1
                 self.lookupCoachArrow.alpha = 1
                 self.lookupCoachTip.alpha = 1
@@ -97,7 +99,7 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
                 completion: nil)
         }
         else {
-            UIView.animateWithDuration(0.5, delay: delay, options: [], animations: {
+            UIView.animateWithDuration(coachDelay, delay: delay, options: [], animations: {
                 self.lookupCoachBox.alpha = 0
                 self.lookupCoachArrow.alpha = 0
                 self.lookupCoachTip.alpha = 0
@@ -115,7 +117,7 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
             self.holdCoachBox.hidden = false
             self.holdCoachArrow1.hidden = false
             self.holdCoachArrow2.hidden = false
-            UIView.animateWithDuration(0.5, delay: delay, options: [], animations: {
+            UIView.animateWithDuration(coachDelay, delay: delay, options: [], animations: {
                 self.holdCoachBox.alpha = 1
                 self.holdCoachArrow1.alpha = 1
                 self.holdCoachArrow2.alpha = 1
@@ -123,7 +125,7 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
                 completion: nil)
         }
         else {
-            UIView.animateWithDuration(0.5, delay: delay, options: [], animations: {
+            UIView.animateWithDuration(coachDelay, delay: delay, options: [], animations: {
                 self.holdCoachBox.alpha = 0
                 self.holdCoachArrow1.alpha = 0
                 self.holdCoachArrow2.alpha = 0
@@ -147,7 +149,7 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
         }
     }
     
-    // MARK: UI Stuff
+    // MARK: - UI Stuff
 
     func configureView() {
         if self.detailItem == nil {
@@ -271,7 +273,7 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
     func makeHTML() -> String {
         let displayStr: String
         if let displayText = self.detailItem.displayText {
-            displayStr = "<span style=\"font-size: 200%\"><b>\(self.detailItem.displayText!)</b></span>"
+            displayStr = "<span style=\"font-size: 200%\"><b>\(displayText)</b></span>"
         }
         else {
             let imageData = NSData(contentsOfFile: NSBundle.mainBundle().pathForResource(self.detailItem.displayImage!, ofType: ".png")!)!
@@ -302,7 +304,7 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
         self.whitakers.beginDefinitionRequestForWord(self.detailItem.longText, targetLanguage: .English)
     }
     
-    // MARK: Segues
+    // MARK: - Segues
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showWords" {
@@ -315,21 +317,21 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
         }
     }
     
-    //MARK: MFMailComposeViewControllerDelegate
+    //MARK: - MFMailComposeViewControllerDelegate
     
     func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    //MARK: UIMenuController
+    //MARK: - UIMenuController
     
     override func copy(sender: AnyObject?) {
         if self.mostRecentViewTapped == self.abbreviationBackgroundView {
             let pasteboard = UIPasteboard.generalPasteboard()
             if let displayText = self.detailItem.displayText {
-                pasteboard.string = self.detailItem.displayText
+                pasteboard.string = displayText
             }
-            else if let displayImage = self.detailItem.displayImage {
+            else if let _ = self.detailItem.displayImage {
                 pasteboard.image = self.imageView.image
             }
         }
@@ -352,7 +354,7 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
         return true
     }
     
-    //MARK: WhitakerScraperDelegate
+    //MARK: - WhitakerScraperDelegate
     
     func whitakerScraper(scraper: WhitakerScraper, didLoadResult result: WhitakerResult) {
         self.activityIndicator.stopAnimating()
@@ -373,7 +375,7 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
         self.presentViewController(alert, animated: true, completion: nil)
     }
     
-    //MARK: UIViewControllerTransitioningDelegate
+    //MARK: - UIViewControllerTransitioningDelegate
     func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         let frame = self.longTextLabel!.frame
         let rect = CGRect(x: frame.origin.x, y: frame.origin.y - 8, width: frame.width, height: frame.height + 23)
@@ -386,7 +388,7 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
         return animator
     }
     
-    //MARK: DefinitionViewControllerDelegate
+    //MARK: - DefinitionViewControllerDelegate
     
     func didDismissDefinitionViewController(viewController: DefinitionViewController) {
         if !ApplicationState.sharedApplicationState().holdCoachHidden {

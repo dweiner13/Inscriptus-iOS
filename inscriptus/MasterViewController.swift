@@ -109,7 +109,8 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
 
         if let split = self.splitViewController {
             let controllers = split.viewControllers
-            self.detailViewController = controllers[controllers.count-1].topViewController as? DetailViewController
+            let navController = controllers[controllers.count - 1] as! UINavigationController
+            self.detailViewController = navController.topViewController as? DetailViewController
         }
         
         self.definesPresentationContext = true
@@ -123,7 +124,7 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
         // Set up search controller
         self.searchController = UISearchController(searchResultsController: nil)
         if let searchController = self.searchController {
-            var searchBar = searchController.searchBar
+            let searchBar = searchController.searchBar
             searchBar.placeholder = "Search all"
             searchBar.scopeButtonTitles = ["Abbreviation", "Full text"]
             searchBar.sizeToFit()
@@ -219,7 +220,7 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
     
     var inSearchView: Bool {
         get {
-            return self.searchController!.active && self.searchController!.searchBar.text.characters.count != 0
+            return self.searchController!.active && self.searchController!.searchBar.text!.characters.count != 0
         }
     }
 
@@ -380,7 +381,7 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
         }
     }
     
-    override func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]! {
+    override func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]? {
         if self.isShowingFavorites || self.inSearchView {
             return []
         }
@@ -392,19 +393,19 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
     // MARK: UISearchResultsUpdating
     
     func updateSearchResultsForSearchController(searchController: UISearchController) {
-        var searchString = searchController.searchBar.text;
+        let searchString = searchController.searchBar.text;
         
-        var scopeIndex = searchController.searchBar.selectedScopeButtonIndex;
+        let scopeIndex = searchController.searchBar.selectedScopeButtonIndex;
         
         if self.isShowingFavorites {
-            self.abbreviations.asyncSearchFavoritesForString(searchString, scopeIndex: scopeIndex, onFinish: {
+            self.abbreviations.asyncSearchFavoritesForString(searchString!, scopeIndex: scopeIndex, onFinish: {
                 results in
                 self.filteredAbbreviations = results
                 self.tableView.reloadData()
             })
         }
         else {
-            self.abbreviations.asyncSearchForString(searchString, scopeIndex: scopeIndex, onFinish: {
+            self.abbreviations.asyncSearchForString(searchString!, scopeIndex: scopeIndex, onFinish: {
                 results in
                 self.filteredAbbreviations = results
                 self.tableView.reloadData()

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Abbreviation: NSObject, CustomStringConvertible, CustomDebugStringConvertible {
+class Abbreviation: NSObject, CustomDebugStringConvertible {
     
     // MARK: - Properties
     

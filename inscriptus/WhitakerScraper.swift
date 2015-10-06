@@ -99,7 +99,7 @@ class WhitakerScraper: NSObject {
         
         self.currentConnection = NSURLConnection(request: request, delegate: self)
         
-        if let connection = self.currentConnection {
+        if let _ = self.currentConnection {
         }
         else {
             NSLog("connection nil after creation")

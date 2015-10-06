@@ -59,7 +59,6 @@ class AbbreviationCollection: NSObject {
         // Load abbreviations arrays
         let combinedPath: String = NSBundle.mainBundle().pathForResource("abbs-combined", ofType: "json")!
         let combinedData = NSData(contentsOfFile: combinedPath)!
-        var err: NSError?
         let combinedAbbreviations: NSArray = (try! NSJSONSerialization.JSONObjectWithData(combinedData, options: [])) as! NSArray
         
         var abbreviations = [Abbreviation]()
@@ -150,7 +149,6 @@ class AbbreviationCollection: NSObject {
             }
             
             // Do a partial match too
-            var i = 0
             for key: String in self.abbreviationsGrouped.keys {
                 if key.rangeOfString(searchString.lowercaseString, options: .CaseInsensitiveSearch) != nil || key.rangeOfString(searchString.lowercaseString.stringByReplacingOccurrencesOfString(" ", withString: ""), options: .CaseInsensitiveSearch) != nil {
                     if let matchingAbbreviations: [Abbreviation] = self.abbreviationsGrouped[key] {
@@ -176,7 +174,6 @@ class AbbreviationCollection: NSObject {
         
         if scopeIndex == MasterViewController.searchScopeIndexAbbreviation {
             // Do a partial match too
-            var i = 0
             for abb: Abbreviation in self.specialAbbreviations {
                 if let abbSearchableStrings = abb.searchStrings {
                     for str: String in abbSearchableStrings {
@@ -206,7 +203,6 @@ class AbbreviationCollection: NSObject {
         
         if scopeIndex == MasterViewController.searchScopeIndexAbbreviation {
             // Do a partial match too
-            var i = 0
             for favorite: AnyObject in self.favorites {
                 let abb = favorite as! Abbreviation
                 if let abbSearchableStrings = abb.searchStrings {

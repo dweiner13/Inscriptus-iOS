@@ -21,8 +21,8 @@ class smallModalAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     }
     
     func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
-        var presenting: UIViewController = self.presenting ? transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)! : transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)!
-        var presented: UIViewController = self.presenting ? transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)! : transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)!
+        let presenting: UIViewController = self.presenting ? transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)! : transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)!
+        let presented: UIViewController = self.presenting ? transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)! : transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)!
         
         let viewFrame = presenting.view.frame
         let viewWidth = viewFrame.width
@@ -30,22 +30,22 @@ class smallModalAnimator: NSObject, UIViewControllerAnimatedTransitioning {
         
         let presentedHeight: CGFloat = 160
         let presentedMargin: CGFloat = 20
-        var startFrame = CGRect(x: presentedMargin, y: (viewHeight / 2) - (presentedHeight / 2), width: viewWidth - presentedMargin * 2, height:presentedHeight)
+        let startFrame = CGRect(x: presentedMargin, y: (viewHeight / 2) - (presentedHeight / 2), width: viewWidth - presentedMargin * 2, height:presentedHeight)
         
         if (self.presenting) {
             presented.view.alpha = 0
             presented.view.frame = startFrame
             presented.view.transform = CGAffineTransformMakeScale(0.85, 0.85)
             
-            var dimmingView = UIView(frame: presenting.view.bounds)
+            let dimmingView = UIView(frame: presenting.view.bounds)
             dimmingView.backgroundColor = UIColor.blackColor()
             dimmingView.alpha = 0
             
-            var recognizer = UITapGestureRecognizer(target: presented, action: "tappedOutsideModal:")
+            let recognizer = UITapGestureRecognizer(target: presented, action: "tappedOutsideModal:")
             dimmingView.addGestureRecognizer(recognizer)
             
             let shadowPath = UIBezierPath(rect: presented.view.bounds)
-            var layer = presented.view.layer
+            let layer = presented.view.layer
             layer.masksToBounds = false
             layer.shadowColor = UIColor.blackColor().CGColor
             layer.shadowOffset = CGSize(width: 0, height: 0)
@@ -53,8 +53,8 @@ class smallModalAnimator: NSObject, UIViewControllerAnimatedTransitioning {
             layer.shadowPath = shadowPath.CGPath
             layer.shadowRadius = 5
             
-            transitionContext.containerView().addSubview(dimmingView)
-            transitionContext.containerView().addSubview(presented.view)
+            transitionContext.containerView()!.addSubview(dimmingView)
+            transitionContext.containerView()!.addSubview(presented.view)
             
             UIView.animateWithDuration(self.transitionDuration(transitionContext),
                 delay: 0,
@@ -71,7 +71,7 @@ class smallModalAnimator: NSObject, UIViewControllerAnimatedTransitioning {
             })
         }
         else {
-            let dimmingView = transitionContext.containerView().subviews[0] as! UIView
+            let dimmingView = transitionContext.containerView()!.subviews[0] 
             
             UIView.animateWithDuration(self.transitionDuration(transitionContext),
                 delay: 0,

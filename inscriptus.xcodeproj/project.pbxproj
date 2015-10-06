@@ -100,6 +100,7 @@
 		E0A49C501AC34AD5008DF28C /* wavy-vertical-line.png in Resources */ = {isa = PBXBuildFile; fileRef = E0A49C101AC34AD5008DF28C /* wavy-vertical-line.png */; };
 		E0A49C511AC34AD5008DF28C /* xv-overline.png in Resources */ = {isa = PBXBuildFile; fileRef = E0A49C111AC34AD5008DF28C /* xv-overline.png */; };
 		E0A49C521AC34AD5008DF28C /* z-strikethrough.png in Resources */ = {isa = PBXBuildFile; fileRef = E0A49C121AC34AD5008DF28C /* z-strikethrough.png */; };
+		E0CAC0961BC465E4000790C0 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E0CAC0951BC465E4000790C0 /* Default-568h@2x.png */; settings = {ASSET_TAGS = (); }; };
 		E0F031581AFC07C700BC32BA /* abbs-combined.json in Resources */ = {isa = PBXBuildFile; fileRef = E0F031561AFC07C700BC32BA /* abbs-combined.json */; };
 		E0F031591AFC07C700BC32BA /* abbs-specialchars.json in Resources */ = {isa = PBXBuildFile; fileRef = E0F031571AFC07C700BC32BA /* abbs-specialchars.json */; };
 		E0FDFA1A1A9545CC00659871 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0FDFA191A9545CC00659871 /* AppDelegate.swift */; };
@@ -221,6 +222,7 @@
 		E0A49C101AC34AD5008DF28C /* wavy-vertical-line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wavy-vertical-line.png"; sourceTree = "<group>"; };
 		E0A49C111AC34AD5008DF28C /* xv-overline.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xv-overline.png"; sourceTree = "<group>"; };
 		E0A49C121AC34AD5008DF28C /* z-strikethrough.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "z-strikethrough.png"; sourceTree = "<group>"; };
+		E0CAC0951BC465E4000790C0 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		E0F031561AFC07C700BC32BA /* abbs-combined.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "abbs-combined.json"; sourceTree = "<group>"; };
 		E0F031571AFC07C700BC32BA /* abbs-specialchars.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "abbs-specialchars.json"; sourceTree = "<group>"; };
 		E0FDFA141A9545CC00659871 /* inscriptus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = inscriptus.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -403,6 +405,7 @@
 		E0FDFA0B1A9545CC00659871 = {
 			isa = PBXGroup;
 			children = (
+				E0CAC0951BC465E4000790C0 /* Default-568h@2x.png */,
 				E01001E51B068A3D0049A3B9 /* MessageUI.framework */,
 				E04B6F3E1AF95BAF00FA668F /* libxml2.dylib */,
 				E0FDFA161A9545CC00659871 /* inscriptus */,
@@ -517,7 +520,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftMigration = 0700;
-				LastUpgradeCheck = 0610;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Daniel Weiner";
 				TargetAttributes = {
 					E0FDFA131A9545CC00659871 = {
@@ -578,6 +581,7 @@
 				E0A49C501AC34AD5008DF28C /* wavy-vertical-line.png in Resources */,
 				E0A49C141AC34AD5008DF28C /* bb-strikethrough.png in Resources */,
 				E0A49C301AC34AD5008DF28C /* iiiiii-vir-aug.png in Resources */,
+				E0CAC0961BC465E4000790C0 /* Default-568h@2x.png in Resources */,
 				E0A49C1E1AC34AD5008DF28C /* cc-reversed.png in Resources */,
 				E0A49C3E1AC34AD5008DF28C /* ml-rotated.png in Resources */,
 				E0A49C231AC34AD5008DF28C /* chevron-right.png in Resources */,
@@ -749,6 +753,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -824,6 +829,7 @@
 				INFOPLIST_FILE = inscriptus/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.danielweiner.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "inscriptus/inscriptus-Bridging-Header.h";
@@ -848,6 +854,7 @@
 				INFOPLIST_FILE = inscriptus/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.danielweiner.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "inscriptus/inscriptus-Bridging-Header.h";
@@ -871,6 +878,7 @@
 				);
 				INFOPLIST_FILE = inscriptusTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.danielweiner.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/inscriptus.app/inscriptus";
@@ -889,6 +897,7 @@
 				);
 				INFOPLIST_FILE = inscriptusTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.danielweiner.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/inscriptus.app/inscriptus";

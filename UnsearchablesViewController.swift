@@ -86,7 +86,7 @@ class UnsearchablesViewController: UITableViewController, UISearchBarDelegate, U
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            if !self.searchController!.active || self.searchController!.searchBar.text.characters.count == 0 {
+            if !self.searchController!.active || self.searchController!.searchBar.text!.characters.count == 0 {
                 return self.abbreviations.specialAbbreviations.count
             }
             else {
@@ -103,7 +103,7 @@ class UnsearchablesViewController: UITableViewController, UISearchBarDelegate, U
         
         let abbreviation: Abbreviation
         
-        if self.searchController!.active && self.searchController!.searchBar.text.characters.count != 0 {
+        if self.searchController!.active && self.searchController!.searchBar.text!.characters.count != 0 {
             abbreviation = self.filteredAbbreviations[indexPath.row]
         }
         else {
@@ -143,11 +143,11 @@ class UnsearchablesViewController: UITableViewController, UISearchBarDelegate, U
     // MARK: UISearchResultsUpdating
     
     func updateSearchResultsForSearchController(searchController: UISearchController) {
-        var searchString = searchController.searchBar.text;
+        let searchString = searchController.searchBar.text;
         
-        var scopeIndex = searchController.searchBar.selectedScopeButtonIndex;
+        let scopeIndex = searchController.searchBar.selectedScopeButtonIndex;
         
-        self.abbreviations.asyncSearchSpecialsForString(searchString, scopeIndex: scopeIndex, onFinish: {
+        self.abbreviations.asyncSearchSpecialsForString(searchString!, scopeIndex: scopeIndex, onFinish: {
             results in
             self.filteredAbbreviations = results
             self.tableView.reloadData()
