@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E17e" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15A279b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
@@ -11,19 +12,23 @@
             <rect key="frame" x="0.0" y="0.0" width="321" height="69"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2nV-3J-NgX" id="UL2-OA-bah">
+                <rect key="frame" x="0.0" y="0.0" width="321" height="68.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4aR-C8-fot">
                         <rect key="frame" x="10" y="0.0" width="301" height="68"/>
+                        <animations/>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Test" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g5K-IJ-mNA">
                         <rect key="frame" x="8" y="20" width="305" height="29"/>
+                        <animations/>
                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="30"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a7u-hP-VHz">
                         <rect key="frame" x="70" y="14" width="180" height="42"/>
+                        <animations/>
                         <constraints>
                             <constraint firstAttribute="height" constant="25" id="K7I-Kk-Fx3"/>
                             <constraint firstAttribute="width" constant="305" id="pX9-lA-5P9"/>
@@ -35,6 +40,7 @@
                         </variation>
                     </imageView>
                 </subviews>
+                <animations/>
                 <constraints>
                     <constraint firstItem="g5K-IJ-mNA" firstAttribute="top" secondItem="UL2-OA-bah" secondAttribute="topMargin" constant="4" id="4OR-qr-n5w"/>
                     <constraint firstItem="g5K-IJ-mNA" firstAttribute="leading" secondItem="UL2-OA-bah" secondAttribute="leadingMargin" id="6BX-tB-KCu"/>
@@ -82,6 +88,7 @@
                     </mask>
                 </variation>
             </tableViewCellContentView>
+            <animations/>
             <connections>
                 <outlet property="centerBackgroundView" destination="4aR-C8-fot" id="2RT-mN-sF7"/>
                 <outlet property="centerImageView" destination="a7u-hP-VHz" id="rv8-fU-fIu"/>

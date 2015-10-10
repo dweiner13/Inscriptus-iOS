@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8173.3" systemVersion="15A263e" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15A279b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8142"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -70,7 +70,7 @@
                         </variation>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bookmarked-flag-flat" translatesAutoresizingMaskIntoConstraints="NO" id="g1y-cy-aq5">
-                        <rect key="frame" x="555" y="24" width="12" height="12"/>
+                        <rect key="frame" x="547" y="24" width="12" height="12"/>
                         <animations/>
                         <constraints>
                             <constraint firstAttribute="width" constant="12" id="4ce-Dv-wLr"/>
@@ -82,6 +82,8 @@
                 <constraints>
                     <constraint firstAttribute="trailingMargin" secondItem="OSI-Iq-9Ds" secondAttribute="trailing" id="01A-di-eHN"/>
                     <constraint firstItem="OSI-Iq-9Ds" firstAttribute="top" secondItem="2gd-UO-Szn" secondAttribute="topMargin" id="1bR-xh-MX5"/>
+                    <constraint firstAttribute="trailing" secondItem="g1y-cy-aq5" secondAttribute="trailing" constant="8" id="1sq-uc-iON"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="g1y-cy-aq5" secondAttribute="trailing" id="2X7-Cg-q2l"/>
                     <constraint firstItem="OSI-Iq-9Ds" firstAttribute="top" secondItem="2gd-UO-Szn" secondAttribute="topMargin" id="3jU-i4-xdD"/>
                     <constraint firstItem="Xfg-xv-Thn" firstAttribute="leading" secondItem="2gd-UO-Szn" secondAttribute="leadingMargin" id="5NB-yj-yXE"/>
                     <constraint firstItem="OSI-Iq-9Ds" firstAttribute="bottom" secondItem="2gd-UO-Szn" secondAttribute="bottomMargin" id="GLo-fZ-Wd5"/>
@@ -112,12 +114,22 @@
                         <exclude reference="TM8-cg-R92"/>
                         <exclude reference="Uz7-OK-Jzd"/>
                         <exclude reference="5NB-yj-yXE"/>
+                        <exclude reference="2X7-Cg-q2l"/>
+                        <exclude reference="TAr-Fe-wIi"/>
                         <exclude reference="cNe-qK-mZB"/>
                     </mask>
                 </variation>
             </tableViewCellContentView>
             <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="g1y-cy-aq5" secondAttribute="trailing" constant="33" id="EkF-tm-7YF"/>
+            </constraints>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="EkF-tm-7YF"/>
+                </mask>
+            </variation>
             <connections>
                 <outlet property="favoritedFlag" destination="g1y-cy-aq5" id="Ms5-kg-s0B"/>
                 <outlet property="primaryLabel" destination="fXF-LG-SW3" id="rwY-jq-kzI"/>
