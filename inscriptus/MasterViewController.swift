@@ -26,8 +26,8 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
     // The view to display when there are no favorites
     var defaultView: UIView?
     
-    // The debug button to reset coaches
-    var resetButton: UIBarButtonItem!
+    // The button to show the about screen
+    var aboutButton: UIBarButtonItem!
     
     // True to show user favorites, false to show all abbreviations
     var isShowingFavorites: Bool = false {
@@ -88,8 +88,8 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
         }
         self.showFavoritesButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Bookmarks, target: self, action: "didPressBookmarksButton:")
         self.navigationItem.rightBarButtonItem = self.showFavoritesButton
-        self.resetButton = UIBarButtonItem(title: "Reset", style: UIBarButtonItemStyle.Plain, target: self, action: "tappedResetButton:")
-        self.navigationItem.leftBarButtonItem = self.resetButton
+        self.aboutButton = UIBarButtonItem(title: "About", style: UIBarButtonItemStyle.Plain, target: self, action: "tappedAboutButton:")
+        self.navigationItem.leftBarButtonItem = self.aboutButton
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -157,20 +157,11 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
     
     // MARK: UI Stuff
     
-    func tappedResetButton(sender: AnyObject) {
-        let alert = UIAlertController(title: "Reset application state?", message: "This will reset any first-time help messages for debugging purposes.", preferredStyle: UIAlertControllerStyle.ActionSheet)
+    func tappedAboutButton(sender: AnyObject) {
+        let aboutViewController = ModalWebViewController(HTMLFileName: "about", title: "About Inscriptus", modalPresentationStyle: UIModalPresentationStyle.FormSheet);
         
-        alert.addAction(UIAlertAction(title: "Reset", style: UIAlertActionStyle.Destructive, handler: {
-            (a) in
-            ApplicationState.sharedApplicationState().resetApplicationState()
-        }))
-        
-        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: {
-            (a) in
-            self.dismissViewControllerAnimated(true, completion: nil)
-        }))
-        
-        self.presentViewController(alert, animated: true, completion: nil)
+        aboutViewController.allowScrolling = false;
+        self.presentViewController(aboutViewController, animated: true, completion: nil);
     }
     
     func showDefaultView(showView: Bool) {
@@ -195,7 +186,7 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
             self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: "didPressEditButton:")
         }
         else {
-            self.navigationItem.leftBarButtonItem = self.resetButton
+            self.navigationItem.leftBarButtonItem = self.aboutButton
         }
     }
     

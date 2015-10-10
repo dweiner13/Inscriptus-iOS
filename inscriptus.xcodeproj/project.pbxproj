@@ -22,6 +22,10 @@
 		E028AC4B1A99244A0058D9A1 /* UnsearchablesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E028AC4A1A99244A0058D9A1 /* UnsearchablesViewController.swift */; };
 		E028AC4D1A99251D0058D9A1 /* AbbreviationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E028AC4C1A99251D0058D9A1 /* AbbreviationCell.xib */; };
 		E03ADFEE1AF6CD41002CFD5C /* BasicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E03ADFED1AF6CD41002CFD5C /* BasicCell.swift */; };
+		E048416C1BC46B9300B6F06F /* ModalWebView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E048416B1BC46B9300B6F06F /* ModalWebView.xib */; settings = {ASSET_TAGS = (); }; };
+		E04841701BC46BBB00B6F06F /* ModalWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E048416F1BC46BBB00B6F06F /* ModalWebViewController.m */; settings = {ASSET_TAGS = (); }; };
+		E04841731BC46C0C00B6F06F /* bootstrap.css in Resources */ = {isa = PBXBuildFile; fileRef = E04841711BC46C0C00B6F06F /* bootstrap.css */; settings = {ASSET_TAGS = (); }; };
+		E04841741BC46C0C00B6F06F /* about.html in Resources */ = {isa = PBXBuildFile; fileRef = E04841721BC46C0C00B6F06F /* about.html */; settings = {ASSET_TAGS = (); }; };
 		E04B6F281AF9549900FA668F /* WhitakerDefinition.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04B6F251AF9549900FA668F /* WhitakerDefinition.swift */; };
 		E04B6F291AF9549900FA668F /* WhitakerScraper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04B6F261AF9549900FA668F /* WhitakerScraper.swift */; };
 		E04B6F2A1AF9549900FA668F /* WhitakerScraperDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04B6F271AF9549900FA668F /* WhitakerScraperDelegate.swift */; };
@@ -139,6 +143,11 @@
 		E028AC4A1A99244A0058D9A1 /* UnsearchablesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UnsearchablesViewController.swift; path = ../UnsearchablesViewController.swift; sourceTree = "<group>"; };
 		E028AC4C1A99251D0058D9A1 /* AbbreviationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AbbreviationCell.xib; sourceTree = "<group>"; };
 		E03ADFED1AF6CD41002CFD5C /* BasicCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicCell.swift; sourceTree = "<group>"; };
+		E048416B1BC46B9300B6F06F /* ModalWebView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ModalWebView.xib; sourceTree = "<group>"; };
+		E048416E1BC46BBB00B6F06F /* ModalWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModalWebViewController.h; sourceTree = "<group>"; };
+		E048416F1BC46BBB00B6F06F /* ModalWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModalWebViewController.m; sourceTree = "<group>"; };
+		E04841711BC46C0C00B6F06F /* bootstrap.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = bootstrap.css; sourceTree = "<group>"; };
+		E04841721BC46C0C00B6F06F /* about.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = about.html; sourceTree = "<group>"; };
 		E04B6F251AF9549900FA668F /* WhitakerDefinition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhitakerDefinition.swift; sourceTree = "<group>"; };
 		E04B6F261AF9549900FA668F /* WhitakerScraper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhitakerScraper.swift; sourceTree = "<group>"; };
 		E04B6F271AF9549900FA668F /* WhitakerScraperDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhitakerScraperDelegate.swift; sourceTree = "<group>"; };
@@ -276,6 +285,18 @@
 			name = "Interface Files";
 			sourceTree = "<group>";
 		};
+		E048416D1BC46BAE00B6F06F /* ModalWebView */ = {
+			isa = PBXGroup;
+			children = (
+				E04841711BC46C0C00B6F06F /* bootstrap.css */,
+				E04841721BC46C0C00B6F06F /* about.html */,
+				E048416E1BC46BBB00B6F06F /* ModalWebViewController.h */,
+				E048416F1BC46BBB00B6F06F /* ModalWebViewController.m */,
+				E048416B1BC46B9300B6F06F /* ModalWebView.xib */,
+			);
+			name = ModalWebView;
+			sourceTree = "<group>";
+		};
 		E04B6F2B1AF954A700FA668F /* WhitakerScraper */ = {
 			isa = PBXGroup;
 			children = (
@@ -292,7 +313,6 @@
 		E04B6F2E1AF95B1300FA668F /* TFHpple */ = {
 			isa = PBXGroup;
 			children = (
-				E04B6F3B1AF95B6400FA668F /* inscriptus-Bridging-Header.h */,
 				E04B6F321AF95B2100FA668F /* TFHpple.h */,
 				E04B6F331AF95B2100FA668F /* TFHppleElement.h */,
 				E04B6F341AF95B2100FA668F /* XPathQuery.h */,
@@ -426,6 +446,8 @@
 		E0FDFA161A9545CC00659871 /* inscriptus */ = {
 			isa = PBXGroup;
 			children = (
+				E04B6F3B1AF95B6400FA668F /* inscriptus-Bridging-Header.h */,
+				E048416D1BC46BAE00B6F06F /* ModalWebView */,
 				E0FDFA191A9545CC00659871 /* AppDelegate.swift */,
 				E01001D51B02ECB70049A3B9 /* ApplicationState.swift */,
 				E04B6F2B1AF954A700FA668F /* WhitakerScraper */,
@@ -564,6 +586,7 @@
 				E0A49C1A1AC34AD5008DF28C /* c-reversed-double-vertical.png in Resources */,
 				E0A49C281AC34AD5008DF28C /* csc-reversed.png in Resources */,
 				E0A49C1C1AC34AD5008DF28C /* c-reversed.png in Resources */,
+				E04841741BC46C0C00B6F06F /* about.html in Resources */,
 				E0A49C2E1AC34AD5008DF28C /* ii-overline.png in Resources */,
 				E0A49C411AC34AD5008DF28C /* n-overline.png in Resources */,
 				E00CBAD11AF6C0FD00DAD03B /* DefaultDetailView.xib in Resources */,
@@ -627,8 +650,10 @@
 				E0A49C311AC34AD5008DF28C /* iiiiii-vir.png in Resources */,
 				E0A49C4C1AC34AD5008DF28C /* s-strikethrough.png in Resources */,
 				E01001DE1B0598D10049A3B9 /* DefaultFavoritesView.xib in Resources */,
+				E04841731BC46C0C00B6F06F /* bootstrap.css in Resources */,
 				E0FDFA231A9545CC00659871 /* Images.xcassets in Resources */,
 				E028AC4D1A99251D0058D9A1 /* AbbreviationCell.xib in Resources */,
+				E048416C1BC46B9300B6F06F /* ModalWebView.xib in Resources */,
 				E0A49C241AC34AD5008DF28C /* circle-dotted.png in Resources */,
 				E0A49C391AC34AD5008DF28C /* lc-reversed.png in Resources */,
 				E0A49C441AC34AD5008DF28C /* np-ligature 2.png in Resources */,
@@ -685,6 +710,7 @@
 				E028AC431A98344F0058D9A1 /* AbbreviationCell.swift in Sources */,
 				E01001D61B02ECB70049A3B9 /* ApplicationState.swift in Sources */,
 				E04B6F421AF95E9000FA668F /* DefinitionViewController.swift in Sources */,
+				E04841701BC46BBB00B6F06F /* ModalWebViewController.m in Sources */,
 				E0610DA81B082B78006A4FBB /* SpecialCoachController.swift in Sources */,
 				E0FDFA3C1A9546D200659871 /* Abbreviation.swift in Sources */,
 				E04B6F2D1AF9558800FA668F /* String+.swift in Sources */,

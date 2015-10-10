@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15A279b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ModalWebViewController">
+            <connections>
+                <outlet property="navigationBar" destination="HKy-Yj-mnD" id="JBO-ph-Pgi"/>
+                <outlet property="navigationBarHeightConstraint" destination="0sh-2z-y4k" id="HD7-8L-bai"/>
+                <outlet property="view" destination="urP-Nd-aRL" id="C7V-OJ-9KJ"/>
+                <outlet property="webView" destination="WpV-YH-Luw" id="kLO-K0-Jlb"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="urP-Nd-aRL">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WpV-YH-Luw">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <animations/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <dataDetectorType key="dataDetectorTypes"/>
+                </webView>
+                <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HKy-Yj-mnD">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="64"/>
+                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="64" id="0sh-2z-y4k"/>
+                    </constraints>
+                    <items>
+                        <navigationItem title="Title" id="NAI-Ls-YHm"/>
+                    </items>
+                </navigationBar>
+            </subviews>
+            <animations/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="HKy-Yj-mnD" firstAttribute="top" secondItem="urP-Nd-aRL" secondAttribute="top" id="4wE-gT-b7y"/>
+                <constraint firstAttribute="bottom" secondItem="WpV-YH-Luw" secondAttribute="bottom" id="ACh-C9-9tJ"/>
+                <constraint firstItem="WpV-YH-Luw" firstAttribute="top" secondItem="urP-Nd-aRL" secondAttribute="top" id="Cj8-T2-3Be"/>
+                <constraint firstItem="WpV-YH-Luw" firstAttribute="leading" secondItem="urP-Nd-aRL" secondAttribute="leading" id="ID6-R9-C9U"/>
+                <constraint firstAttribute="trailing" secondItem="HKy-Yj-mnD" secondAttribute="trailing" id="MKG-Rd-3cb"/>
+                <constraint firstItem="HKy-Yj-mnD" firstAttribute="leading" secondItem="urP-Nd-aRL" secondAttribute="leading" id="NAh-xb-3bo"/>
+                <constraint firstAttribute="trailing" secondItem="WpV-YH-Luw" secondAttribute="trailing" id="U6B-sc-bx4"/>
+            </constraints>
+        </view>
+    </objects>
+</document>
