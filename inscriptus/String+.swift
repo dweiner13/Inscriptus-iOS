@@ -11,10 +11,10 @@ import UIKit
 extension String {
     subscript (r: Range<Int>) -> String {
         get {
-            let startIndex = self.startIndex.advancedBy(r.startIndex)
-            let endIndex = startIndex.advancedBy(r.endIndex - r.startIndex)
+            let startIndex = self.characters.index(self.startIndex, offsetBy: r.lowerBound)
+            let endIndex = self.characters.index(startIndex, offsetBy: r.upperBound - r.lowerBound)
             
-            return self[Range(start: startIndex, end: endIndex)]
+            return self[(startIndex ..< endIndex)]
         }
     }
     
@@ -22,7 +22,7 @@ extension String {
     // see http://stackoverflow.com/questions/24091233/swift-split-string-over-multiple-lines
     init(sep:String, _ lines:String...){
         self = ""
-        for (idx, item) in lines.enumerate() {
+        for (idx, item) in lines.enumerated() {
             self += "\(item)"
             if idx < lines.count-1 {
                 self += sep
@@ -31,7 +31,7 @@ extension String {
     }
     init(_ lines:String...){
         self = ""
-        for (idx, item) in lines.enumerate() {
+        for (idx, item) in lines.enumerated() {
             self += "\(item)"
             if idx < lines.count-1 {
                 self += "\n"
@@ -43,7 +43,7 @@ extension String {
         return self[self.characters.count-1..<self.characters.count]
     }
     
-    func numberOfOccurrencesOfString(str: String) -> Int {
+    func numberOfOccurrencesOfString(_ str: String) -> Int {
         let strCount = str.characters.count
         var totalCount = 0
         
@@ -52,9 +52,9 @@ extension String {
         }
         
         for i in 0...self.characters.count-strCount {
-            let startIndex = self.startIndex.advancedBy(i)
-            let endIndex = startIndex.advancedBy(strCount)
-            let substr: String = self.substringWithRange(Range(start: startIndex, end: endIndex))
+            let startIndex = self.characters.index(self.startIndex, offsetBy: i)
+            let endIndex = self.characters.index(startIndex, offsetBy: strCount)
+            let substr: String = self.substring(with: (startIndex ..< endIndex))
             
             if substr == str {
                 totalCount += 1

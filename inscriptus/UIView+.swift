@@ -9,19 +9,19 @@
 import UIKit
 
 extension UIView {
-    func animateBounce(totalDuration: NSTimeInterval, minScale: CGFloat, maxScale: CGFloat) {
+    func animateBounce(_ totalDuration: TimeInterval, minScale: CGFloat, maxScale: CGFloat) {
         let dur = totalDuration * 0.4
-        UIView.animateWithDuration(dur, animations: {
+        UIView.animate(withDuration: dur, animations: {
             () -> Void in
-            self.transform = CGAffineTransformMakeScale(minScale, minScale)
+            self.transform = CGAffineTransform(scaleX: minScale, y: minScale)
         }, completion: {
             (b) -> Void in
-            UIView.animateWithDuration(dur, animations: {
-                self.transform = CGAffineTransformMakeScale(maxScale, maxScale)
+            UIView.animate(withDuration: dur, animations: {
+                self.transform = CGAffineTransform(scaleX: maxScale, y: maxScale)
             }, completion: {
                 (b) -> Void in
-                UIView.animateWithDuration(dur, animations: {
-                    self.transform = CGAffineTransformMakeScale(1, 1)
+                UIView.animate(withDuration: dur, animations: {
+                    self.transform = CGAffineTransform(scaleX: 1, y: 1)
                 })
             })
         })

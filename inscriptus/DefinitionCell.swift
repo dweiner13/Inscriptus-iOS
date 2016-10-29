@@ -32,7 +32,7 @@ class DefinitionCell: UITableViewCell {
         meaningsTextView.textContainerInset = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
 

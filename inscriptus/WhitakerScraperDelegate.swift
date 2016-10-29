@@ -10,8 +10,8 @@ import Foundation
 
 protocol WhitakerScraperDelegate: class {
     
-    func whitakerScraper(scraper: WhitakerScraper, didLoadResult: WhitakerResult)
+    func whitakerScraper(_ scraper: WhitakerScraper, didLoadResult: WhitakerResult)
     
-    func whitakerScraper(scraper: WhitakerScraper, didFailWithError error: NSError)
+    func whitakerScraper(_ scraper: WhitakerScraper, didFailWithError error: NSError)
     
 }

@@ -24,12 +24,12 @@ class InscribedCell: UITableViewCell {
         let gradient = CAGradientLayer()
         gradient.frame = self.centerBackgroundView.bounds
         gradient.colors = [
-            UIColor.whiteColor().CGColor,
-            UIColor.grayColor().CGColor
+            UIColor.white.cgColor,
+            UIColor.gray.cgColor
         ]
         gradient.cornerRadius = 5
         gradient.masksToBounds = true
-        self.centerBackgroundView.layer.insertSublayer(gradient, atIndex: 0)
+        self.centerBackgroundView.layer.insertSublayer(gradient, at: 0)
         self.gradientLayer = gradient
     }
     
@@ -37,7 +37,7 @@ class InscribedCell: UITableViewCell {
         self.gradientLayer.frame = self.centerBackgroundView.bounds
     }
     
-    override func setHighlighted(highlighted: Bool, animated: Bool) {
+    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
         if highlighted {
             self.gradientLayer.frame = self.centerBackgroundView.bounds
         }

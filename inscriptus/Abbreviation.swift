@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Abbreviation: NSObject, CustomDebugStringConvertible {
+class Abbreviation: NSObject {
     
     // MARK: - Properties
     
@@ -48,9 +48,9 @@ class Abbreviation: NSObject, CustomDebugStringConvertible {
     // MARK: - Methods
     
     // TODO: can this just compare IDs? is the unique string necessary?
-    override func isEqual(object: AnyObject?) -> Bool {
+    override func isEqual(_ object: Any?) -> Bool {
         if let object = object as? Abbreviation {
-            return self.uniqueString.compare(object.uniqueString) == .OrderedSame
+            return self.uniqueString.compare(object.uniqueString) == .orderedSame
         } else {
             return false
         }
@@ -87,7 +87,7 @@ class Abbreviation: NSObject, CustomDebugStringConvertible {
             self.displayImage = nil
         }
         
-        if !(searchStrings[0].compare("") == .OrderedSame) {
+        if !(searchStrings[0].compare("") == .orderedSame) {
             self.searchStrings = Set(searchStrings)
         }
         else {

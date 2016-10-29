@@ -22,10 +22,10 @@
 		E028AC4B1A99244A0058D9A1 /* UnsearchablesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E028AC4A1A99244A0058D9A1 /* UnsearchablesViewController.swift */; };
 		E028AC4D1A99251D0058D9A1 /* AbbreviationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E028AC4C1A99251D0058D9A1 /* AbbreviationCell.xib */; };
 		E03ADFEE1AF6CD41002CFD5C /* BasicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E03ADFED1AF6CD41002CFD5C /* BasicCell.swift */; };
-		E048416C1BC46B9300B6F06F /* ModalWebView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E048416B1BC46B9300B6F06F /* ModalWebView.xib */; settings = {ASSET_TAGS = (); }; };
-		E04841701BC46BBB00B6F06F /* ModalWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E048416F1BC46BBB00B6F06F /* ModalWebViewController.m */; settings = {ASSET_TAGS = (); }; };
-		E04841731BC46C0C00B6F06F /* bootstrap.css in Resources */ = {isa = PBXBuildFile; fileRef = E04841711BC46C0C00B6F06F /* bootstrap.css */; settings = {ASSET_TAGS = (); }; };
-		E04841741BC46C0C00B6F06F /* about.html in Resources */ = {isa = PBXBuildFile; fileRef = E04841721BC46C0C00B6F06F /* about.html */; settings = {ASSET_TAGS = (); }; };
+		E048416C1BC46B9300B6F06F /* ModalWebView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E048416B1BC46B9300B6F06F /* ModalWebView.xib */; };
+		E04841701BC46BBB00B6F06F /* ModalWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E048416F1BC46BBB00B6F06F /* ModalWebViewController.m */; };
+		E04841731BC46C0C00B6F06F /* bootstrap.css in Resources */ = {isa = PBXBuildFile; fileRef = E04841711BC46C0C00B6F06F /* bootstrap.css */; };
+		E04841741BC46C0C00B6F06F /* about.html in Resources */ = {isa = PBXBuildFile; fileRef = E04841721BC46C0C00B6F06F /* about.html */; };
 		E04B6F281AF9549900FA668F /* WhitakerDefinition.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04B6F251AF9549900FA668F /* WhitakerDefinition.swift */; };
 		E04B6F291AF9549900FA668F /* WhitakerScraper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04B6F261AF9549900FA668F /* WhitakerScraper.swift */; };
 		E04B6F2A1AF9549900FA668F /* WhitakerScraperDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04B6F271AF9549900FA668F /* WhitakerScraperDelegate.swift */; };
@@ -104,7 +104,7 @@
 		E0A49C501AC34AD5008DF28C /* wavy-vertical-line.png in Resources */ = {isa = PBXBuildFile; fileRef = E0A49C101AC34AD5008DF28C /* wavy-vertical-line.png */; };
 		E0A49C511AC34AD5008DF28C /* xv-overline.png in Resources */ = {isa = PBXBuildFile; fileRef = E0A49C111AC34AD5008DF28C /* xv-overline.png */; };
 		E0A49C521AC34AD5008DF28C /* z-strikethrough.png in Resources */ = {isa = PBXBuildFile; fileRef = E0A49C121AC34AD5008DF28C /* z-strikethrough.png */; };
-		E0CAC0961BC465E4000790C0 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E0CAC0951BC465E4000790C0 /* Default-568h@2x.png */; settings = {ASSET_TAGS = (); }; };
+		E0CAC0961BC465E4000790C0 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E0CAC0951BC465E4000790C0 /* Default-568h@2x.png */; };
 		E0F031581AFC07C700BC32BA /* abbs-combined.json in Resources */ = {isa = PBXBuildFile; fileRef = E0F031561AFC07C700BC32BA /* abbs-combined.json */; };
 		E0F031591AFC07C700BC32BA /* abbs-specialchars.json in Resources */ = {isa = PBXBuildFile; fileRef = E0F031571AFC07C700BC32BA /* abbs-specialchars.json */; };
 		E0FDFA1A1A9545CC00659871 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0FDFA191A9545CC00659871 /* AppDelegate.swift */; };
@@ -542,16 +542,18 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftMigration = 0700;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = "Daniel Weiner";
 				TargetAttributes = {
 					E0FDFA131A9545CC00659871 = {
 						CreatedOnToolsVersion = 6.1.1;
 						DevelopmentTeam = 5TSNJUMDQY;
+						LastSwiftMigration = 0810;
 					};
 					E0FDFA2A1A9545CC00659871 = {
 						CreatedOnToolsVersion = 6.1.1;
 						DevelopmentTeam = 5TSNJUMDQY;
+						LastSwiftMigration = 0810;
 						TestTargetID = E0FDFA131A9545CC00659871;
 					};
 				};
@@ -772,8 +774,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -782,6 +786,7 @@
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -816,8 +821,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -825,6 +832,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -834,6 +842,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -860,6 +869,7 @@
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "inscriptus/inscriptus-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -884,6 +894,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "inscriptus/inscriptus-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
@@ -907,6 +918,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.danielweiner.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/inscriptus.app/inscriptus";
 			};
 			name = Debug;
@@ -926,6 +938,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.danielweiner.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/inscriptus.app/inscriptus";
 			};
 			name = Release;

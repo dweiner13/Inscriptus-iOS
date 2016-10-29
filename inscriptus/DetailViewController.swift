@@ -35,11 +35,11 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
     var mostRecentViewTapped: UIView?
     var whitakers = WhitakerScraper()
     
-    var coachTips: [(box: UIView!, arrows: [UIView!])]?
+    var coachTips: [(box: UIView?, arrows: [UIView?])]?
     
     let shouldShowCoachTips = true
     
-    let coachDelay: NSTimeInterval = 0.5
+    let coachDelay: TimeInterval = 0.5
     
     var detailItem: Abbreviation! {
         didSet {
@@ -61,7 +61,7 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
             self.whitakers.delegate = self
             self.definesPresentationContext = true
             self.abbreviationBackgroundView.layer.cornerRadius = 5
-            self.abbreviationBackgroundView.layer.borderColor = INSCRIPTUS_TINT_COLOR.CGColor
+            self.abbreviationBackgroundView.layer.borderColor = INSCRIPTUS_TINT_COLOR.cgColor
             self.abbreviationBackgroundView.layer.borderWidth = 1
             
             self.coachTips = [
@@ -75,23 +75,23 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
                     ])
             ]
             for coachTip in self.coachTips! {
-                coachTip.box.layer.cornerRadius = 5
-                coachTip.box.alpha = 0
-                coachTip.box.hidden = true
+                coachTip.box?.layer.cornerRadius = 5
+                coachTip.box?.alpha = 0
+                coachTip.box?.isHidden = true
                 for arrow in coachTip.arrows {
-                    arrow.hidden = true
-                    arrow.alpha = 0
+                    arrow?.isHidden = true
+                    arrow?.alpha = 0
                 }
             }
         }
     }
     
-    func showLookupCoach(showCoach: Bool, delay: Double) {
+    func showLookupCoach(_ showCoach: Bool, delay: Double) {
         if showCoach {
-            self.lookupCoachBox.hidden = false
-            self.lookupCoachArrow.hidden = false
-            self.lookupCoachTip.hidden = false
-            UIView.animateWithDuration(coachDelay, delay: delay, options: [], animations: {
+            self.lookupCoachBox.isHidden = false
+            self.lookupCoachArrow.isHidden = false
+            self.lookupCoachTip.isHidden = false
+            UIView.animate(withDuration: coachDelay, delay: delay, options: [], animations: {
                 self.lookupCoachBox.alpha = 1
                 self.lookupCoachArrow.alpha = 1
                 self.lookupCoachTip.alpha = 1
@@ -99,25 +99,25 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
                 completion: nil)
         }
         else {
-            UIView.animateWithDuration(coachDelay, delay: delay, options: [], animations: {
+            UIView.animate(withDuration: coachDelay, delay: delay, options: [], animations: {
                 self.lookupCoachBox.alpha = 0
                 self.lookupCoachArrow.alpha = 0
                 self.lookupCoachTip.alpha = 0
                 },
                 completion: {
                     (b) -> Void in
-                    self.lookupCoachBox.hidden = true
-                    self.lookupCoachArrow.hidden = true
+                    self.lookupCoachBox.isHidden = true
+                    self.lookupCoachArrow.isHidden = true
             })
         }
     }
     
-    func showHoldCoach(showCoach: Bool, delay: Double) {
+    func showHoldCoach(_ showCoach: Bool, delay: Double) {
         if showCoach {
-            self.holdCoachBox.hidden = false
-            self.holdCoachArrow1.hidden = false
-            self.holdCoachArrow2.hidden = false
-            UIView.animateWithDuration(coachDelay, delay: delay, options: [], animations: {
+            self.holdCoachBox.isHidden = false
+            self.holdCoachArrow1.isHidden = false
+            self.holdCoachArrow2.isHidden = false
+            UIView.animate(withDuration: coachDelay, delay: delay, options: [], animations: {
                 self.holdCoachBox.alpha = 1
                 self.holdCoachArrow1.alpha = 1
                 self.holdCoachArrow2.alpha = 1
@@ -125,21 +125,21 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
                 completion: nil)
         }
         else {
-            UIView.animateWithDuration(coachDelay, delay: delay, options: [], animations: {
+            UIView.animate(withDuration: coachDelay, delay: delay, options: [], animations: {
                 self.holdCoachBox.alpha = 0
                 self.holdCoachArrow1.alpha = 0
                 self.holdCoachArrow2.alpha = 0
                 },
                 completion: {
                     (b) -> Void in
-                    self.holdCoachBox.hidden = true
-                    self.holdCoachArrow1.hidden = true
-                    self.holdCoachArrow2.hidden = true
+                    self.holdCoachBox.isHidden = true
+                    self.holdCoachArrow1.isHidden = true
+                    self.holdCoachArrow2.isHidden = true
             })
         }
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         let appState = ApplicationState.sharedApplicationState()
         if !appState.lookupCoachHidden {
             showLookupCoach(true, delay: 0)
@@ -153,49 +153,49 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
 
     func configureView() {
         if self.detailItem == nil {
-            let defaultView = NSBundle.mainBundle().loadNibNamed("DefaultDetailView", owner: self, options: nil)[0] as! UIView
+            let defaultView = Bundle.main.loadNibNamed("DefaultDetailView", owner: self, options: nil)?[0] as! UIView
             self.view = defaultView
         }
         else {
             if let displayText = self.detailItem.displayText {
-                self.imageView.hidden = true
-                self.abbreviationLabel.text = displayText.stringByReplacingOccurrencesOfString("·", withString: "")
-                self.abbreviationLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody, scaleFactor: 1.9)
+                self.imageView.isHidden = true
+                self.abbreviationLabel.text = displayText.replacingOccurrences(of: "·", with: "")
+                self.abbreviationLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyle.body.rawValue, scaleFactor: 1.9)
             }
             else if let displayImage = self.detailItem.displayImage {
-                self.abbreviationLabel.hidden = true
-                self.imageView.image = UIImage(contentsOfFile: NSBundle.mainBundle().pathForResource(displayImage, ofType: ".png")!)!
-                self.imageView.contentMode = UIViewContentMode.ScaleAspectFit
+                self.abbreviationLabel.isHidden = true
+                self.imageView.image = UIImage(contentsOfFile: Bundle.main.path(forResource: displayImage, ofType: ".png")!)!
+                self.imageView.contentMode = UIViewContentMode.scaleAspectFit
             }
             self.longTextLabel.text = self.detailItem.longText
-            self.longTextLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody, scaleFactor: 1.2)
-            if AbbreviationCollection.sharedAbbreviationCollection.favorites.containsObject(self.detailItem) {
-                self.favoriteButton.setTitle("Remove from favorites", forState: UIControlState.Normal)
-                self.favoriteButton.tintColor = UIColor.whiteColor()
+            self.longTextLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyle.body.rawValue, scaleFactor: 1.2)
+            if AbbreviationCollection.sharedAbbreviationCollection.favorites.contains(self.detailItem) {
+                self.favoriteButton.setTitle("Remove from favorites", for: UIControlState())
+                self.favoriteButton.tintColor = UIColor.white
                 self.favoriteButtonBackgroundView.backgroundColor = INSCRIPTUS_TINT_COLOR
             }
             else {
-                self.favoriteButton.setTitle("Add to favorites", forState: UIControlState.Normal)
-                self.favoriteButtonBackgroundView.backgroundColor = UIColor.clearColor()
+                self.favoriteButton.setTitle("Add to favorites", for: UIControlState())
+                self.favoriteButtonBackgroundView.backgroundColor = UIColor.clear
             }
             self.favoriteButtonBackgroundView.layer.cornerRadius = 7
         }
     }
     
-    @IBAction func tappedHoldCoachBox(sender: AnyObject) {
+    @IBAction func tappedHoldCoachBox(_ sender: AnyObject) {
         self.abbreviationBackgroundView.animateBounce(0.4, minScale: 0.9, maxScale: 1.3)
         self.longTextLabel.animateBounce(0.4, minScale: 0.9, maxScale: 1.3)
     }
     
-    @IBAction func tappedLookupCoachBox(sender: AnyObject) {
+    @IBAction func tappedLookupCoachBox(_ sender: AnyObject) {
         self.defineButton.animateBounce(0.4, minScale: 0.9, maxScale: 1.8)
     }
     
-    @IBAction func tappedAbbreviation(sender: AnyObject) {
-        let controller = UIMenuController.sharedMenuController()
-        if controller.menuVisible == false {
+    @IBAction func tappedAbbreviation(_ sender: AnyObject) {
+        let controller = UIMenuController.shared
+        if controller.isMenuVisible == false {
             self.mostRecentViewTapped = self.abbreviationBackgroundView
-            controller.setTargetRect(self.abbreviationBackgroundView.frame, inView: self.view)
+            controller.setTargetRect(self.abbreviationBackgroundView.frame, in: self.view)
             controller.setMenuVisible(true, animated: true)
             self.abbreviationBackgroundView.animateBounce(0.3, minScale: 0.93, maxScale: 1.05)
         }
@@ -206,11 +206,11 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
         }
     }
     
-    @IBAction func tappedLongText(sender: AnyObject) {
-        let controller = UIMenuController.sharedMenuController()
-        if controller.menuVisible == false {
+    @IBAction func tappedLongText(_ sender: AnyObject) {
+        let controller = UIMenuController.shared
+        if controller.isMenuVisible == false {
             self.mostRecentViewTapped = self.longTextLabel
-            controller.setTargetRect(self.longTextLabel.frame, inView: self.view)
+            controller.setTargetRect(self.longTextLabel.frame, in: self.view)
             controller.setMenuVisible(true, animated: true)
             self.longTextLabel.animateBounce(0.3, minScale: 0.93, maxScale: 1.05)
         }
@@ -220,53 +220,53 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
         }
     }
     
-    @IBAction func tappedFavoriteButton(sender: UIButton) {
-        if AbbreviationCollection.sharedAbbreviationCollection.favorites.containsObject(self.detailItem) {
+    @IBAction func tappedFavoriteButton(_ sender: UIButton) {
+        if AbbreviationCollection.sharedAbbreviationCollection.favorites.contains(self.detailItem) {
             AbbreviationCollection.sharedAbbreviationCollection.removeFavorite(self.detailItem)
-            self.favoriteButton.setTitle("Add back to favorites", forState: UIControlState.Normal)
+            self.favoriteButton.setTitle("Add back to favorites", for: UIControlState())
             self.favoriteButton.tintColor = INSCRIPTUS_TINT_COLOR
-            UIView.animateWithDuration(0.2, animations: {
+            UIView.animate(withDuration: 0.2, animations: {
                 () -> Void in
-                self.favoriteButtonBackgroundView.backgroundColor = UIColor.clearColor()
-                self.favoriteButtonBackgroundView.transform = CGAffineTransformMakeScale(0.05, 0.05)
+                self.favoriteButtonBackgroundView.backgroundColor = UIColor.clear
+                self.favoriteButtonBackgroundView.transform = CGAffineTransform(scaleX: 0.05, y: 0.05)
                 },
                 completion: {
                     (b) -> Void in
-                    self.favoriteButtonBackgroundView.transform = CGAffineTransformMakeScale(1, 1)
+                    self.favoriteButtonBackgroundView.transform = CGAffineTransform(scaleX: 1, y: 1)
             })
         }
         else {
             AbbreviationCollection.sharedAbbreviationCollection.addFavorite(self.detailItem)
-            self.favoriteButton.setTitle("Remove from favorites", forState: UIControlState.Normal)
-            self.favoriteButton.tintColor = UIColor.whiteColor()
+            self.favoriteButton.setTitle("Remove from favorites", for: UIControlState())
+            self.favoriteButton.tintColor = UIColor.white
             self.favoriteButtonBackgroundView.backgroundColor = INSCRIPTUS_TINT_COLOR
-            UIView.animateWithDuration(0.05, animations: {
+            UIView.animate(withDuration: 0.05, animations: {
                 () -> Void in
                 self.favoriteButtonBackgroundView.backgroundColor = INSCRIPTUS_TINT_COLOR
-                self.favoriteButtonBackgroundView.transform = CGAffineTransformMakeScale(1.3, 1.3)
+                self.favoriteButtonBackgroundView.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
                 },
                 completion: {
                     (b) -> Void in
-                    UIView.animateWithDuration(0.12, animations: {
-                        self.favoriteButtonBackgroundView.transform = CGAffineTransformMakeScale(0.94, 0.94)
+                    UIView.animate(withDuration: 0.12, animations: {
+                        self.favoriteButtonBackgroundView.transform = CGAffineTransform(scaleX: 0.94, y: 0.94)
                         },
                         completion: {
                             (b) -> Void in
-                            UIView.animateWithDuration(0.12, animations: {
-                                self.favoriteButtonBackgroundView.transform = CGAffineTransformMakeScale(1, 1)
+                            UIView.animate(withDuration: 0.12, animations: {
+                                self.favoriteButtonBackgroundView.transform = CGAffineTransform(scaleX: 1, y: 1)
                             })
                     })
             })
         }
     }
     
-    @IBAction func tappedShareButton(sender: UIBarButtonItem) {
+    @IBAction func tappedShareButton(_ sender: UIBarButtonItem) {
         if MFMailComposeViewController.canSendMail() {
             let composer = MFMailComposeViewController()
             composer.mailComposeDelegate = self
             composer.setSubject("Check out this abbreviation")
             composer.setMessageBody(makeHTML(), isHTML: true)
-            self.presentViewController(composer, animated: true, completion: nil)
+            self.present(composer, animated: true, completion: nil)
         }
     }
     
@@ -276,8 +276,8 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
             displayStr = "<span style=\"font-size: 200%\"><b>\(displayText)</b></span>"
         }
         else {
-            let imageData = NSData(contentsOfFile: NSBundle.mainBundle().pathForResource(self.detailItem.displayImage!, ofType: ".png")!)!
-            let base64String: String = imageData.base64EncodedStringWithOptions([])
+            let imageData = try! Data(contentsOf: URL(fileURLWithPath: Bundle.main.path(forResource: self.detailItem.displayImage!, ofType: ".png")!))
+            let base64String: String = imageData.base64EncodedString(options: [])
             displayStr = "<img height=\"30\" src=\"data:image/png;base64,\(base64String)\" />"
             print(displayStr)
         }
@@ -290,7 +290,7 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
             appLink)
     }
     
-    @IBAction func defineButtonPressed(sender: UIButton) {
+    @IBAction func defineButtonPressed(_ sender: UIButton) {
         self.lookupDefinitions(sender)
         if ApplicationState.sharedApplicationState().lookupCoachHidden == false {
             ApplicationState.sharedApplicationState().lookupCoachHidden = true
@@ -298,20 +298,20 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
         }
     }
     
-    func lookupDefinitions(button: UIButton) {
-        self.defineButton.hidden = true
+    func lookupDefinitions(_ button: UIButton) {
+        self.defineButton.isHidden = true
         self.activityIndicator.startAnimating()
-        self.whitakers.beginDefinitionRequestForWord(self.detailItem.longText, targetLanguage: .English)
+        self.whitakers.beginDefinitionRequestForWord(self.detailItem.longText, targetLanguage: .english)
     }
     
     // MARK: - Segues
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showWords" {
-            let def = segue.destinationViewController as! DefinitionViewController
+            let def = segue.destination as! DefinitionViewController
             def.result = sender as! WhitakerResult
             def.transitioningDelegate = self
-            def.modalPresentationStyle = .Custom
+            def.modalPresentationStyle = .custom
             def.delegate = self
             self.showHoldCoach(false, delay: 0)
         }
@@ -319,15 +319,15 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
     
     //MARK: - MFMailComposeViewControllerDelegate
     
-    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        self.dismiss(animated: true, completion: nil)
     }
     
     //MARK: - UIMenuController
     
-    override func copy(sender: AnyObject?) {
+    override func copy(_ sender: Any?) {
         if self.mostRecentViewTapped == self.abbreviationBackgroundView {
-            let pasteboard = UIPasteboard.generalPasteboard()
+            let pasteboard = UIPasteboard.general
             if let displayText = self.detailItem.displayText {
                 pasteboard.string = displayText
             }
@@ -336,13 +336,13 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
             }
         }
         else if self.mostRecentViewTapped == self.longTextLabel {
-            let pasteboard = UIPasteboard.generalPasteboard()
+            let pasteboard = UIPasteboard.general
             pasteboard.string = self.detailItem.longText
         }
     }
     
-    override func canPerformAction(action: Selector, withSender sender: AnyObject?) -> Bool {
-        if action == "copy:" {
+    override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
+        if action == #selector(UIResponderStandardEditActions.copy(_:)) {
             return true
         }
         else {
@@ -350,50 +350,50 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
         }
     }
     
-    override func canBecomeFirstResponder() -> Bool {
+    override var canBecomeFirstResponder : Bool {
         return true
     }
     
     //MARK: - WhitakerScraperDelegate
     
-    func whitakerScraper(scraper: WhitakerScraper, didLoadResult result: WhitakerResult) {
+    func whitakerScraper(_ scraper: WhitakerScraper, didLoadResult result: WhitakerResult) {
         self.activityIndicator.stopAnimating()
-        self.performSegueWithIdentifier("showWords", sender: result)
+        self.performSegue(withIdentifier: "showWords", sender: result)
     }
     
-    func whitakerScraper(scraper: WhitakerScraper, didFailWithError error: NSError) {
+    func whitakerScraper(_ scraper: WhitakerScraper, didFailWithError error: NSError) {
         self.activityIndicator.stopAnimating()
-        self.defineButton.hidden = false
+        self.defineButton.isHidden = false
         
         var message = error.localizedDescription
         if error.code == -1001 || error.code == -1004 {
             message = "\(message)\n\nIf this keeps happening, Whitaker's Words may be offline. Try again later."
         }
-        let alert = UIAlertController(title: "Could not load definitions", message: message, preferredStyle: .Alert)
-        let action = UIAlertAction(title: "OK", style: .Default, handler: nil)
+        let alert = UIAlertController(title: "Could not load definitions", message: message, preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .default, handler: nil)
         alert.addAction(action)
-        self.presentViewController(alert, animated: true, completion: nil)
+        self.present(alert, animated: true, completion: nil)
     }
     
     //MARK: - UIViewControllerTransitioningDelegate
-    func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         let frame = self.longTextLabel!.frame
         let rect = CGRect(x: frame.origin.x, y: frame.origin.y - 8, width: frame.width, height: frame.height + 23)
         let animator = foldOutAnimator(presenting: true, foldOutBelowRect: rect)
         return animator
     }
     
-    func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         let animator = foldOutAnimator(presenting: false, foldOutBelowRect: self.longTextLabel.frame)
         return animator
     }
     
     //MARK: - DefinitionViewControllerDelegate
     
-    func didDismissDefinitionViewController(viewController: DefinitionViewController) {
+    func didDismissDefinitionViewController(_ viewController: DefinitionViewController) {
         if !ApplicationState.sharedApplicationState().holdCoachHidden {
             self.showHoldCoach(true, delay: 0)
         }
-        self.defineButton.hidden = false
+        self.defineButton.isHidden = false
     }
 }

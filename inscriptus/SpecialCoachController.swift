@@ -23,14 +23,14 @@ class SpecialCoachController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func tappedInView(sender: AnyObject) {
-        self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func tappedInView(_ sender: AnyObject) {
+        self.presentingViewController?.dismiss(animated: true, completion: nil)
         
         ApplicationState.sharedApplicationState().specialCoachHidden = true
     }
     
-    func tappedOutsideModal(sender: AnyObject) {
-        self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+    func tappedOutsideModal(_ sender: AnyObject) {
+        self.presentingViewController?.dismiss(animated: true, completion: nil)
         
         ApplicationState.sharedApplicationState().specialCoachHidden = true
     }

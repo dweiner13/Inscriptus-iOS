@@ -16,10 +16,10 @@ class WhitakerCache {
     var items: Set<WhitakerResult>
     
     init() {
-        let defaults = NSUserDefaults.standardUserDefaults()
-        let storedCache: NSData? = defaults.objectForKey(DEFAULTS_CACHE_KEY) as! NSData?
+        let defaults = UserDefaults.standard
+        let storedCache: Data? = defaults.object(forKey: DEFAULTS_CACHE_KEY) as! Data?
         if let savedData = storedCache {
-            self.items = NSKeyedUnarchiver.unarchiveObjectWithData(savedData) as! Set<WhitakerResult>
+            self.items = NSKeyedUnarchiver.unarchiveObject(with: savedData) as! Set<WhitakerResult>
         }
         else {
             self.items = Set<WhitakerResult>()
@@ -31,20 +31,20 @@ class WhitakerCache {
     }
     
     func saveCache() {
-        let defaults = NSUserDefaults.standardUserDefaults()
-        defaults.setObject(NSKeyedArchiver.archivedDataWithRootObject(self.items), forKey: DEFAULTS_CACHE_KEY)
+        let defaults = UserDefaults.standard
+        defaults.set(NSKeyedArchiver.archivedData(withRootObject: self.items), forKey: DEFAULTS_CACHE_KEY)
         defaults.synchronize()
     }
     
-    func addItem(item: WhitakerResult) {
+    func addItem(_ item: WhitakerResult) {
         self.items.insert(item)
     }
     
     func clear() {
-        self.items.removeAll(keepCapacity: false)
+        self.items.removeAll(keepingCapacity: false)
     }
     
-    func containsResultForWord(word: String) -> Bool {
+    func containsResultForWord(_ word: String) -> Bool {
         for item: WhitakerResult in self.items {
             if item.word == word {
                 return true
@@ -53,7 +53,7 @@ class WhitakerCache {
         return false
     }
     
-    func resultForWord(word: String) -> WhitakerResult! {
+    func resultForWord(_ word: String) -> WhitakerResult! {
         for item: WhitakerResult in self.items {
             if item.word == word {
                 return item

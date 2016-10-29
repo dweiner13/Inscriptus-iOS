@@ -35,11 +35,11 @@ class ApplicationState: NSObject {
     // MARK: - Methods
     
     override init() {
-        let defaults = NSUserDefaults.standardUserDefaults()
-        self.scopeIndex = defaults.integerForKey(scopeIndexKey)
-        self.holdCoachHidden = defaults.boolForKey(holdCoachHiddenKey)
-        self.lookupCoachHidden = defaults.boolForKey(lookupCoachHiddenKey)
-        self.specialCoachHidden = defaults.boolForKey(specialCoachHiddenKey)
+        let defaults = UserDefaults.standard
+        self.scopeIndex = defaults.integer(forKey: scopeIndexKey)
+        self.holdCoachHidden = defaults.bool(forKey: holdCoachHiddenKey)
+        self.lookupCoachHidden = defaults.bool(forKey: lookupCoachHiddenKey)
+        self.specialCoachHidden = defaults.bool(forKey: specialCoachHiddenKey)
         super.init()
     }
     
@@ -48,11 +48,11 @@ class ApplicationState: NSObject {
     }
     
     func saveApplicationState() {
-        let defaults = NSUserDefaults.standardUserDefaults()
-        defaults.setInteger(self.scopeIndex, forKey: self.scopeIndexKey)
-        defaults.setBool(self.holdCoachHidden, forKey: self.holdCoachHiddenKey)
-        defaults.setBool(self.lookupCoachHidden, forKey: self.lookupCoachHiddenKey)
-        defaults.setBool(self.specialCoachHidden, forKey: self.specialCoachHiddenKey)
+        let defaults = UserDefaults.standard
+        defaults.set(self.scopeIndex, forKey: self.scopeIndexKey)
+        defaults.set(self.holdCoachHidden, forKey: self.holdCoachHiddenKey)
+        defaults.set(self.lookupCoachHidden, forKey: self.lookupCoachHiddenKey)
+        defaults.set(self.specialCoachHidden, forKey: self.specialCoachHiddenKey)
         defaults.synchronize()
     }
     

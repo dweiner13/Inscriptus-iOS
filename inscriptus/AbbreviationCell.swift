@@ -25,14 +25,14 @@ class AbbreviationCell: UITableViewCell {
         super.awakeFromNib()
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
     
-    func setAbbreviation(abbreviation: Abbreviation, searchController: UISearchController?) {
+    func setAbbreviation(_ abbreviation: Abbreviation, searchController: UISearchController?) {
         var inSearch = false
         if searchController != nil {
-            inSearch = searchController!.active && searchController!.searchBar.text!.characters.count != 0
+            inSearch = searchController!.isActive && searchController!.searchBar.text!.characters.count != 0
         }
         if let displayText = abbreviation.displayText {
             self.primaryLabel.text = displayText
@@ -41,7 +41,7 @@ class AbbreviationCell: UITableViewCell {
         else {
             self.primaryLabel.text = nil
             if let displayImage = abbreviation.displayImage {
-                let image = UIImage(contentsOfFile: NSBundle.mainBundle().pathForResource(displayImage, ofType: ".png")!)!
+                let image = UIImage(contentsOfFile: Bundle.main.path(forResource: displayImage, ofType: ".png")!)!
                 let scalingFactor = self.rightImageView.frame.height / image.size.height
                 self.rightImageViewWidthConstraint.constant = image.size.width * scalingFactor
                 self.rightImageView.image = image
@@ -51,12 +51,12 @@ class AbbreviationCell: UITableViewCell {
         if inSearch && searchController!.searchBar.selectedScopeButtonIndex == MasterViewController.searchScopeIndexFulltext {
             // Done to get an NSRange instead of Swift Range. Attributed strings need NSRange.
             let longTextNS = abbreviation.longText as NSString
-            let matchedRange = longTextNS.rangeOfString(searchController!.searchBar.text!, options: .CaseInsensitiveSearch)
+            let matchedRange = longTextNS.range(of: searchController!.searchBar.text!, options: .caseInsensitive)
             
             let attrString = NSMutableAttributedString(string: abbreviation.longText)
             let attrs: [String: AnyObject] = [
                 NSBackgroundColorAttributeName: searchMatchBackgroundColor,
-                NSUnderlineStyleAttributeName:  NSUnderlineStyle.StyleThick.rawValue,
+                NSUnderlineStyleAttributeName:  NSUnderlineStyle.styleThick.rawValue as AnyObject,
                 NSUnderlineColorAttributeName:  searchMatchUnderlineColor,
             ]
             attrString.addAttributes(attrs, range: matchedRange)
@@ -67,11 +67,11 @@ class AbbreviationCell: UITableViewCell {
             self.secondaryLabel.text = abbreviation.longText;
         }
         
-        if AbbreviationCollection.sharedAbbreviationCollection.favorites.containsObject(abbreviation) {
-            self.favoritedFlag.hidden = false
+        if AbbreviationCollection.sharedAbbreviationCollection.favorites.contains(abbreviation) {
+            self.favoritedFlag.isHidden = false
         }
         else {
-            self.favoritedFlag.hidden = true
+            self.favoritedFlag.isHidden = true
         }
     }
 }

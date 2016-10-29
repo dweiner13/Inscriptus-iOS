@@ -38,33 +38,33 @@ class WhitakerDefinition: NSObject, NSCoding {
     var lightColor: UIColor {
         get {
             switch partOfSpeech {
-            case .Noun:
+            case .noun:
                 //red
                 return UIColor(red: 1.000, green: 0.893, blue: 0.890, alpha: 1.000)
-            case .Pronoun:
+            case .pronoun:
                 // orange
                 return UIColor(red: 1.000, green: 0.935, blue: 0.866, alpha: 1.000)
-            case .Adjective:
+            case .adjective:
                 // purple
                 return UIColor(red: 1.000, green: 0.888, blue: 0.980, alpha: 1.000)
-            case .Verb:
+            case .verb:
                 // blue
                 return UIColor(red: 0.863, green: 0.891, blue: 1.000, alpha: 1.000)
-            case .Adverb:
+            case .adverb:
                 // green
                 return UIColor(red: 0.909, green: 1.000, blue: 0.936, alpha: 1.000)
-            case .Preposition:
+            case .preposition:
                 // yellow
                 return UIColor(red: 1.000, green: 0.984, blue: 0.883, alpha: 1.000)
-            case .Conjunction:
+            case .conjunction:
                 // teal
                 return UIColor(red: 0.873, green: 1.000, blue: 0.963, alpha: 1.000)
-            case .Interjection:
+            case .interjection:
                 // brown
                 return UIColor(red: 1.000, green: 0.912, blue: 0.828, alpha: 1.000)
             default:
                 // white
-                return UIColor.whiteColor()
+                return UIColor.white
             }
         }
     }
@@ -72,28 +72,28 @@ class WhitakerDefinition: NSObject, NSCoding {
     var darkColor: UIColor {
         get {
             switch partOfSpeech {
-            case .Noun:
+            case .noun:
                 //red
                 return UIColor(red: 1.000, green: 0.80, blue: 0.80, alpha: 1.000)
-            case .Pronoun:
+            case .pronoun:
                 // orange
                 return UIColor(red: 1.000, green: 0.88, blue: 0.71, alpha: 1.000)
-            case .Adjective:
+            case .adjective:
                 // purple
                 return UIColor(red: 1.000, green: 0.79, blue: 0.96, alpha: 1.000)
-            case .Verb:
+            case .verb:
                 // blue
                 return UIColor(red: 0.72, green: 0.80, blue: 1.000, alpha: 1.000)
-            case .Adverb:
+            case .adverb:
                 // green
                 return UIColor(red: 0.80, green: 1.00, blue: 0.85, alpha: 1.000)
-            case .Preposition:
+            case .preposition:
                 // yellow
                 return UIColor(red: 1.000, green: 0.97, blue: 0.76, alpha: 1.000)
-            case .Conjunction:
+            case .conjunction:
                 // teal
                 return UIColor(red: 0.74, green: 1.000, blue: 0.92, alpha: 1.000)
-            case .Interjection:
+            case .interjection:
                 // brown
                 return UIColor(red: 1.000, green: 0.82, blue: 0.66, alpha: 1.000)
             default:
@@ -119,20 +119,20 @@ class WhitakerDefinition: NSObject, NSCoding {
     }
     
     required init?(coder aDecoder: NSCoder) {
-        self.word = aDecoder.decodeObjectForKey(DEFAULTS_WORD_KEY) as! String
-        self.text = aDecoder.decodeObjectForKey(DEFAULTS_TEXT_KEY) as! String
-        self.meanings = aDecoder.decodeObjectForKey(DEFAULTS_MEANINGS_KEY) as! String?
-        self.textWithoutMeanings = aDecoder.decodeObjectForKey(DEFAULTS_TEXTWITHOUTMEANINGS_KEY) as! String
-        self.isAlternateSpelling = aDecoder.decodeBoolForKey(DEFAULTS_ISALTERNATESPELLING_KEY)
-        self.partOfSpeech = WhitakerScraper.PartOfSpeech(rawValue: aDecoder.decodeIntegerForKey(DEFAULTS_PARTOFSPEECH_KEY))!
+        self.word = aDecoder.decodeObject(forKey: DEFAULTS_WORD_KEY) as! String
+        self.text = aDecoder.decodeObject(forKey: DEFAULTS_TEXT_KEY) as! String
+        self.meanings = aDecoder.decodeObject(forKey: DEFAULTS_MEANINGS_KEY) as! String?
+        self.textWithoutMeanings = aDecoder.decodeObject(forKey: DEFAULTS_TEXTWITHOUTMEANINGS_KEY) as! String
+        self.isAlternateSpelling = aDecoder.decodeBool(forKey: DEFAULTS_ISALTERNATESPELLING_KEY)
+        self.partOfSpeech = WhitakerScraper.PartOfSpeech(rawValue: aDecoder.decodeInteger(forKey: DEFAULTS_PARTOFSPEECH_KEY))!
     }
     
-    func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeObject(self.word, forKey: DEFAULTS_WORD_KEY)
-        aCoder.encodeObject(self.text, forKey: DEFAULTS_TEXT_KEY)
-        aCoder.encodeObject(self.meanings, forKey: DEFAULTS_MEANINGS_KEY)
-        aCoder.encodeObject(self.textWithoutMeanings, forKey: DEFAULTS_TEXTWITHOUTMEANINGS_KEY)
-        aCoder.encodeBool(self.isAlternateSpelling, forKey: DEFAULTS_ISALTERNATESPELLING_KEY)
-        aCoder.encodeInteger(self.partOfSpeech.rawValue, forKey: DEFAULTS_PARTOFSPEECH_KEY)
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(self.word, forKey: DEFAULTS_WORD_KEY)
+        aCoder.encode(self.text, forKey: DEFAULTS_TEXT_KEY)
+        aCoder.encode(self.meanings, forKey: DEFAULTS_MEANINGS_KEY)
+        aCoder.encode(self.textWithoutMeanings, forKey: DEFAULTS_TEXTWITHOUTMEANINGS_KEY)
+        aCoder.encode(self.isAlternateSpelling, forKey: DEFAULTS_ISALTERNATESPELLING_KEY)
+        aCoder.encode(self.partOfSpeech.rawValue, forKey: DEFAULTS_PARTOFSPEECH_KEY)
     }
 }

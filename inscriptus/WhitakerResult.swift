@@ -27,18 +27,18 @@ class WhitakerResult: NSObject, NSCoding {
         self.word = word
     }
     
-    func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeObject(self.definitions, forKey: DEFAULTS_DEFINITIONS_KEY)
-        aCoder.encodeInteger(self.targetLanguage.rawValue, forKey: DEFAULTS_TARGETLANGUAGE_KEY)
-        aCoder.encodeObject(self.rawResult, forKey: DEFAULTS_RAWRESULT_KEY)
-        aCoder.encodeObject(self.word, forKey: DEFAULTS_WORD_KEY)
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(self.definitions, forKey: DEFAULTS_DEFINITIONS_KEY)
+        aCoder.encode(self.targetLanguage.rawValue, forKey: DEFAULTS_TARGETLANGUAGE_KEY)
+        aCoder.encode(self.rawResult, forKey: DEFAULTS_RAWRESULT_KEY)
+        aCoder.encode(self.word, forKey: DEFAULTS_WORD_KEY)
     }
     
     required init?(coder aDecoder: NSCoder) {
-        self.definitions = aDecoder.decodeObjectForKey(DEFAULTS_DEFINITIONS_KEY) as! [WhitakerDefinition]
-        self.targetLanguage = WhitakerScraper.TargetLanguage(rawValue: aDecoder.decodeIntegerForKey(DEFAULTS_TARGETLANGUAGE_KEY))!
-        self.rawResult = aDecoder.decodeObjectForKey(DEFAULTS_RAWRESULT_KEY) as! String
-        self.word = aDecoder.decodeObjectForKey(DEFAULTS_WORD_KEY) as! String
+        self.definitions = aDecoder.decodeObject(forKey: DEFAULTS_DEFINITIONS_KEY) as! [WhitakerDefinition]
+        self.targetLanguage = WhitakerScraper.TargetLanguage(rawValue: aDecoder.decodeInteger(forKey: DEFAULTS_TARGETLANGUAGE_KEY))!
+        self.rawResult = aDecoder.decodeObject(forKey: DEFAULTS_RAWRESULT_KEY) as! String
+        self.word = aDecoder.decodeObject(forKey: DEFAULTS_WORD_KEY) as! String
 
         super.init()
     }

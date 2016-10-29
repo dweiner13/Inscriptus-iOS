@@ -11,43 +11,43 @@ import Foundation
 class WhitakerScraper: NSObject {
     
     enum TargetLanguage: Int {
-        case English = 0
-        case Latin = 1
+        case english = 0
+        case latin = 1
     }
     
     enum PartOfSpeech: Int {
-        case Noun
-        case Pronoun
-        case Adjective
-        case Verb
-        case Adverb
-        case Preposition
-        case Conjunction
-        case Interjection
-        case Enclitic
-        case Unknown
+        case noun
+        case pronoun
+        case adjective
+        case verb
+        case adverb
+        case preposition
+        case conjunction
+        case interjection
+        case enclitic
+        case unknown
         
         func description() -> String {
             switch self {
-            case Noun:
+            case .noun:
                 return "Noun"
-            case Pronoun:
+            case .pronoun:
                 return "Pronoun"
-            case Adjective:
+            case .adjective:
                 return "Adjective"
-            case Verb:
+            case .verb:
                 return "Verb"
-            case Adverb:
+            case .adverb:
                 return "Adverb"
-            case Preposition:
+            case .preposition:
                 return "Preposition"
-            case Conjunction:
+            case .conjunction:
                 return "Conjunction"
-            case Interjection:
+            case .interjection:
                 return "Interjection"
-            case Enclitic:
+            case .enclitic:
                 return "Enclitic"
-            case Unknown:
+            case .unknown:
                 return "Unknown"
             }
         }
@@ -62,7 +62,7 @@ class WhitakerScraper: NSObject {
     internal var receivedData: NSMutableData?
     internal var currentConnection: NSURLConnection?
     
-    func beginDefinitionRequestForWord(word: String, targetLanguage: TargetLanguage) {
+    func beginDefinitionRequestForWord(_ word: String, targetLanguage: TargetLanguage) {
         if cache.containsResultForWord(word) {
             print("found cached result for word \(word)")
             self.delegate?.whitakerScraper(self, didLoadResult: cache.resultForWord(word))
@@ -80,20 +80,20 @@ class WhitakerScraper: NSObject {
         self.word = word;
         self.targetLanguage = targetLanguage
         
-        let wordURLEncoded = word.stringByAddingPercentEncodingWithAllowedCharacters(.URLHostAllowedCharacterSet())!
+        let wordURLEncoded = word.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
         
         var baseURL = String()
         
-        if targetLanguage==TargetLanguage.English {
+        if targetLanguage==TargetLanguage.english {
             baseURL = "http://www.archives.nd.edu/cgi-bin/wordz.pl?keyword="
         }
         else {
             baseURL = "http://www.archives.nd.edu/cgi-bin/wordz.pl?english="
         }
         
-        let requestURL = NSURL(string: "\(baseURL)\(wordURLEncoded)")
+        let requestURL = URL(string: "\(baseURL)\(wordURLEncoded)")
         
-        let request = NSURLRequest(URL: requestURL!, cachePolicy: .UseProtocolCachePolicy, timeoutInterval: 10)
+        let request = URLRequest(url: requestURL!, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10)
         
         self.receivedData = NSMutableData()
         
@@ -113,43 +113,47 @@ class WhitakerScraper: NSObject {
     
     class func findPartOfSpeech(forDefinition definition: String) -> PartOfSpeech {
         if definition.characters.count <= 26 {
-            return PartOfSpeech.Unknown
+            return PartOfSpeech.unknown
         }
         
-        let posAbbreviation = definition[21...26]
+        let start = definition.index(definition.startIndex, offsetBy: 21);
+        let end = definition.index(definition.startIndex, offsetBy: 27);
+        let range = start..<end;
+        
+        let posAbbreviation = definition.substring(with: range);
         
         return partOfSpeechForAbbreviation(posAbbreviation)
     }
     
-    class func partOfSpeechForAbbreviation(abbreviation: String) -> PartOfSpeech {
+    class func partOfSpeechForAbbreviation(_ abbreviation: String) -> PartOfSpeech {
         switch abbreviation {
         case "N     ":
-            return .Noun
+            return .noun
         case "PRON  ":
-            return .Pronoun
+            return .pronoun
         case "ADJ   ":
-            return .Adjective
+            return .adjective
         case "V     ":
-            return .Verb
+            return .verb
         case "VPAR  ":
-            return .Verb
+            return .verb
         case "ADV   ":
-            return .Adverb
+            return .adverb
         case "PREP  ":
-            return .Preposition
+            return .preposition
         case "CONJ  ":
-            return .Conjunction
+            return .conjunction
         case "INTERJ":
-            return .Interjection
+            return .interjection
         case "TACKON":
-            return .Enclitic
+            return .enclitic
         default:
-            return .Unknown
+            return .unknown
         }
     }
     
-    class func definitionsInResult(result: String, forWord word: String) -> [WhitakerDefinition] {
-        var lines = result.componentsSeparatedByCharactersInSet(NSCharacterSet.newlineCharacterSet())
+    class func definitionsInResult(_ result: String, forWord word: String) -> [WhitakerDefinition] {
+        var lines = result.components(separatedBy: CharacterSet.newlines)
         
         var definitionStrings = [""]
         var meaningStrings = [""]
@@ -158,15 +162,15 @@ class WhitakerScraper: NSObject {
         
         // pull out definition strings
         for line in lines {
-            if line.stringByTrimmingCharactersInSet(.whitespaceCharacterSet()) == "*" {
-                i++
+            if line.trimmingCharacters(in: .whitespaces) == "*" {
+                i += 1
                 continue
             }
-            else if line.rangeOfString(";") != nil {
+            else if line.range(of: ";") != nil {
                 definitionStrings[definitionStrings.count - 1] += "\(line)\n"
                 meaningStrings[meaningStrings.count - 1] += "\(line)\n"
                 
-                if i != lines.count - 1 && lines[i+1].rangeOfString(";") == nil {
+                if i != lines.count - 1 && lines[i+1].range(of: ";") == nil {
                     meaningStrings.append(String())
                     definitionStrings.append(String())
                     definitionStringsWithoutMeanings.append(String())
@@ -176,26 +180,26 @@ class WhitakerScraper: NSObject {
                 definitionStrings[definitionStrings.count - 1] += "\(line)\n"
                 definitionStringsWithoutMeanings[definitionStringsWithoutMeanings.count - 1] += "\(line)\n"
             }
-            i++
+            i += 1
         }
         
         // combine those strings into definition objects
         var definitions = [WhitakerDefinition]()
         for index in 0..<definitionStrings.count {
-            let definition = definitionStrings[index].stringByTrimmingCharactersInSet(.newlineCharacterSet())
-            var meanings: String? = meaningStrings[index].stringByTrimmingCharactersInSet(.newlineCharacterSet())
+            let definition = definitionStrings[index].trimmingCharacters(in: .newlines)
+            var meanings: String? = meaningStrings[index].trimmingCharacters(in: .newlines)
             
             if definition=="" {
                 continue
             }
-            let textWithoutMeanings = definitionStringsWithoutMeanings[index].stringByTrimmingCharactersInSet(.newlineCharacterSet())
+            let textWithoutMeanings = definitionStringsWithoutMeanings[index].trimmingCharacters(in: .newlines)
             if meanings=="" {
                 meanings = nil
             }
             
             var partOfSpeech = findPartOfSpeech(forDefinition: definition)
             let isAlternateSpelling = false;
-            if partOfSpeech == .Unknown && index > 0 {
+            if partOfSpeech == .unknown && index > 0 {
                 partOfSpeech = definitions[index-1].partOfSpeech
             }
             
@@ -206,28 +210,28 @@ class WhitakerScraper: NSObject {
         return definitions
     }
     
-    class func combinedStringForDefinitions(definitions: [WhitakerDefinition]) -> String {
+    class func combinedStringForDefinitions(_ definitions: [WhitakerDefinition]) -> String {
         var combinedString = ""
         for definition in definitions {
             combinedString += "\(definition.text)\n\n"
         }
-        return combinedString.stringByTrimmingCharactersInSet(NSCharacterSet.newlineCharacterSet())
+        return combinedString.trimmingCharacters(in: CharacterSet.newlines)
     }
 }
 
 
 extension WhitakerScraper: NSURLConnectionDataDelegate {
-    func connection(connection: NSURLConnection, didReceiveResponse response: NSURLResponse) {
+    func connection(_ connection: NSURLConnection, didReceive response: URLResponse) {
         self.receivedData!.length = 0
     }
     
-    func connection(connection: NSURLConnection, didReceiveData data: NSData) {
-        self.receivedData!.appendData(data)
+    func connection(_ connection: NSURLConnection, didReceive data: Data) {
+        self.receivedData!.append(data)
     }
     
-    func connection(connection: NSURLConnection, didFailWithError error: NSError) {
+    func connection(_ connection: NSURLConnection, didFailWithError error: Error) {
         if let delegate = self.delegate {
-            delegate.whitakerScraper(self, didFailWithError: error)
+            delegate.whitakerScraper(self, didFailWithError: error as NSError)
         }
         
         self.receivedData = nil
@@ -236,12 +240,12 @@ extension WhitakerScraper: NSURLConnectionDataDelegate {
         self.targetLanguage = nil
     }
     
-    func connectionDidFinishLoading(connection: NSURLConnection) {
-        let resultParser = TFHpple(HTMLData: self.receivedData!)
+    func connectionDidFinishLoading(_ connection: NSURLConnection) {
+        let resultParser = TFHpple(htmlData: self.receivedData! as Data!)
         let resultXpathQueryString = "//pre"
-        let resultNodes = resultParser.searchWithXPathQuery(resultXpathQueryString)
-        let resultElement: TFHppleElement = resultNodes.first! as! TFHppleElement
-        let rawResult = resultElement.content.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        let resultNodes = resultParser?.search(withXPathQuery: resultXpathQueryString)
+        let resultElement: TFHppleElement = resultNodes!.first! as! TFHppleElement
+        let rawResult = resultElement.content.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
 
         let definitions = WhitakerScraper.definitionsInResult(rawResult, forWord: self.word!)
         let result = WhitakerResult(definitions: definitions, targetLanguage: self.targetLanguage!, rawResult: rawResult, word: self.word!)

@@ -45,8 +45,8 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
             self.savedScrollOffset = scrollOffset
             
             if self.isShowingFavorites {
-                self.showFavoritesButton.setBackgroundImage(UIImage(named: "bookmarks-bg.png"), forState: UIControlState.Normal, barMetrics: UIBarMetrics.Default)
-                self.showFavoritesButton.tintColor = UIColor.whiteColor()
+                self.showFavoritesButton.setBackgroundImage(UIImage(named: "bookmarks-bg.png"), for: UIControlState(), barMetrics: UIBarMetrics.default)
+                self.showFavoritesButton.tintColor = UIColor.white
                 self.navigationItem.title = "Favorites"
                 self.navigationItem.backBarButtonItem!.title = "Favorites"
                 self.searchController.searchBar.placeholder = "Search favorites"
@@ -60,7 +60,7 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
                 }
             }
             else {
-                self.showFavoritesButton.setBackgroundImage(nil, forState: UIControlState.Normal, barMetrics: UIBarMetrics.Default)
+                self.showFavoritesButton.setBackgroundImage(nil, for: UIControlState(), barMetrics: UIBarMetrics.default)
                 self.showFavoritesButton.tintColor = INSCRIPTUS_TINT_COLOR
                 self.navigationItem.title = "All Abbreviations"
                 self.navigationItem.backBarButtonItem!.title = "All"
@@ -82,19 +82,19 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
+        if UIDevice.current.userInterfaceIdiom == .pad {
             self.clearsSelectionOnViewWillAppear = false
             self.preferredContentSize = CGSize(width: 320.0, height: 600.0)
         }
-        self.showFavoritesButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Bookmarks, target: self, action: "didPressBookmarksButton:")
+        self.showFavoritesButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.bookmarks, target: self, action: #selector(MasterViewController.didPressBookmarksButton(_:)))
         self.navigationItem.rightBarButtonItem = self.showFavoritesButton
-        self.aboutButton = UIBarButtonItem(title: "About", style: UIBarButtonItemStyle.Plain, target: self, action: "tappedAboutButton:")
+        self.aboutButton = UIBarButtonItem(title: "About", style: UIBarButtonItemStyle.plain, target: self, action: #selector(MasterViewController.tappedAboutButton(_:)))
         self.navigationItem.leftBarButtonItem = self.aboutButton
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         if let selectedIndexPath = self.tableView.indexPathForSelectedRow {
-            self.tableView.deselectRowAtIndexPath(selectedIndexPath, animated: true)
+            self.tableView.deselectRow(at: selectedIndexPath, animated: true)
         }
         self.tableView.reloadData()
         
@@ -116,10 +116,10 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
         self.definesPresentationContext = true
         self.tableView.rowHeight = 60
         
-        self.tableView.registerNib(UINib(nibName: "AbbreviationCell", bundle: nil), forCellReuseIdentifier: "AbbreviationCell")
+        self.tableView.register(UINib(nibName: "AbbreviationCell", bundle: nil), forCellReuseIdentifier: "AbbreviationCell")
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardDidShow:", name: UIKeyboardDidShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardDidHide:", name: UIKeyboardDidHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(MasterViewController.keyboardDidShow(_:)), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(MasterViewController.keyboardDidHide(_:)), name: NSNotification.Name.UIKeyboardDidHide, object: nil)
         
         // Set up search controller
         self.searchController = UISearchController(searchResultsController: nil)
@@ -131,16 +131,16 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
             searchBar.delegate = self
             self.tableView.tableHeaderView = searchBar
             searchController.searchResultsUpdater = self
-            searchBar.searchBarStyle = .Default
+            searchBar.searchBarStyle = .default
             searchController.dimsBackgroundDuringPresentation = false
             
             searchBar.selectedScopeButtonIndex = ApplicationState.sharedApplicationState().scopeIndex
         }
     }
     
-    func keyboardDidShow(sender: NSNotification) {
+    func keyboardDidShow(_ sender: Notification) {
         let dict: NSDictionary = sender.userInfo! as NSDictionary
-        let height: CGFloat = dict.objectForKey(UIKeyboardFrameEndUserInfoKey)!.CGRectValue.height
+        let height: CGFloat = (dict.object(forKey: UIKeyboardFrameEndUserInfoKey)! as AnyObject).cgRectValue.height
         
         var insets = self.tableView.scrollIndicatorInsets
         self.tableView.scrollIndicatorInsets = UIEdgeInsets(top: insets.top, left: insets.left, bottom: height, right: insets.right)
@@ -148,7 +148,7 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
         self.tableView.contentInset = UIEdgeInsets(top: insets.top, left: insets.left, bottom: height, right: insets.right)
     }
     
-    func keyboardDidHide(sender: NSNotification) {
+    func keyboardDidHide(_ sender: Notification) {
         var insets = self.tableView.scrollIndicatorInsets
         self.tableView.scrollIndicatorInsets = UIEdgeInsets(top: insets.top, left: insets.left, bottom: 0, right: insets.right)
         insets = self.tableView.contentInset
@@ -157,67 +157,67 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
     
     // MARK: UI Stuff
     
-    func tappedAboutButton(sender: AnyObject) {
-        let aboutViewController = ModalWebViewController(HTMLFileName: "about", title: "About Inscriptus", modalPresentationStyle: UIModalPresentationStyle.FormSheet);
+    func tappedAboutButton(_ sender: AnyObject) {
+        let aboutViewController = ModalWebViewController(htmlFileName: "about", title: "About Inscriptus", modalPresentationStyle: UIModalPresentationStyle.formSheet);
         
-        aboutViewController.allowScrolling = false;
-        self.presentViewController(aboutViewController, animated: true, completion: nil);
+        aboutViewController?.allowScrolling = false;
+        self.present(aboutViewController!, animated: true, completion: nil);
     }
     
-    func showDefaultView(showView: Bool) {
+    func showDefaultView(_ showView: Bool) {
         if showView {
-            let defaultView = NSBundle.mainBundle().loadNibNamed("DefaultFavoritesView", owner: self, options: nil)[0] as! UIView
+            let defaultView = Bundle.main.loadNibNamed("DefaultFavoritesView", owner: self, options: nil)?[0] as! UIView
             defaultView.frame = self.view.bounds
             self.tableView.backgroundView = defaultView
-            self.tableView.separatorStyle = .None
+            self.tableView.separatorStyle = .none
             self.navigationItem.leftBarButtonItem = nil
             self.tableView.tableHeaderView = nil
         }
         else {
             self.defaultView?.removeFromSuperview()
-            self.tableView.separatorStyle = .SingleLine
+            self.tableView.separatorStyle = .singleLine
             self.tableView.backgroundView = nil
             self.tableView.tableHeaderView = self.searchController.searchBar
         }
     }
     
-    func showEditButton(showButton: Bool) {
+    func showEditButton(_ showButton: Bool) {
         if showButton {
-            self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: "didPressEditButton:")
+            self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(MasterViewController.didPressEditButton(_:)))
         }
         else {
             self.navigationItem.leftBarButtonItem = self.aboutButton
         }
     }
     
-    func didPressBookmarksButton(sender: UIBarButtonItem) {
+    func didPressBookmarksButton(_ sender: UIBarButtonItem) {
         self.isShowingFavorites = !self.isShowingFavorites
     }
     
-    func didPressEditButton(sender: UIBarButtonItem) {
+    func didPressEditButton(_ sender: UIBarButtonItem) {
         if self.isShowingFavorites {
-            if self.tableView.editing {
+            if self.tableView.isEditing {
                 self.tableView.setEditing(false, animated: true)
                 self.navigationItem.rightBarButtonItem = self.showFavoritesButton
-                self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: "didPressEditButton:")
+                self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(MasterViewController.didPressEditButton(_:)))
             }
             else {
                 self.tableView.setEditing(true, animated: true)
                 self.navigationItem.rightBarButtonItem = nil
-                self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: "didPressEditButton:")
+                self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(MasterViewController.didPressEditButton(_:)))
             }
         }
     }
     
     var inSearchView: Bool {
         get {
-            return self.searchController!.active && self.searchController!.searchBar.text!.characters.count != 0
+            return self.searchController!.isActive && self.searchController!.searchBar.text!.characters.count != 0
         }
     }
 
     // MARK: Segues
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetail" {
             if let indexPath = self.tableView.indexPathForSelectedRow {
                 var abbreviation: Abbreviation
@@ -238,7 +238,7 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
                     }
                 }
                 
-                let controller = (segue.destinationViewController as! UINavigationController).topViewController as! DetailViewController
+                let controller = (segue.destination as! UINavigationController).topViewController as! DetailViewController
                 controller.detailItem = abbreviation
                 controller.navigationItem.leftItemsSupplementBackButton = true
             }
@@ -247,7 +247,7 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
 
     // MARK: Table View Delegate
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         if self.isShowingFavorites {
             return 1
         }
@@ -259,7 +259,7 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
         }
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if self.isShowingFavorites {
             if section == 0 {
                 if self.inSearchView {
@@ -287,9 +287,9 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
         return 0
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if self.isShowingFavorites && indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCellWithIdentifier("AbbreviationCell", forIndexPath: indexPath) as! AbbreviationCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "AbbreviationCell", for: indexPath) as! AbbreviationCell
             
             var abbreviation: Abbreviation
             if self.inSearchView {
@@ -305,13 +305,13 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
         }
         else {
             if indexPath.section == 0 && !self.inSearchView {
-                let cell = UITableViewCell(style: .Default, reuseIdentifier: "DefaultCell")
+                let cell = UITableViewCell(style: .default, reuseIdentifier: "DefaultCell")
                 cell.textLabel?.text = "Special character abbreviations"
-                cell.accessoryType = .DisclosureIndicator
+                cell.accessoryType = .disclosureIndicator
                 return cell
             }
             else {
-                let cell = tableView.dequeueReusableCellWithIdentifier("AbbreviationCell", forIndexPath: indexPath) as! AbbreviationCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: "AbbreviationCell", for: indexPath) as! AbbreviationCell
                 
                 var abbreviation: Abbreviation
                 if self.inSearchView {
@@ -329,29 +329,29 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
         }
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if self.isShowingFavorites {
-            self.performSegueWithIdentifier("showDetail", sender: self)
+            self.performSegue(withIdentifier: "showDetail", sender: self)
         }
         else if indexPath.section == 0 && !self.inSearchView {
-            self.performSegueWithIdentifier("showUnsearchables", sender: self)
+            self.performSegue(withIdentifier: "showUnsearchables", sender: self)
         }
         else {
-            self.performSegueWithIdentifier("showDetail", sender: self)
+            self.performSegue(withIdentifier: "showDetail", sender: self)
         }
     }
     
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         if self.isShowingFavorites {
             return true
         }
         return false
     }
     
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if self.isShowingFavorites && editingStyle == UITableViewCellEditingStyle.Delete {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if self.isShowingFavorites && editingStyle == UITableViewCellEditingStyle.delete {
             self.abbreviations.removeFavorite(self.abbreviations.favorites[indexPath.row] as! Abbreviation)
-            self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+            self.tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
             if self.abbreviations.noFavorites {
                 showDefaultView(true)
                 self.navigationItem.rightBarButtonItem = self.showFavoritesButton
@@ -360,7 +360,7 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
         }
     }
     
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if self.isShowingFavorites || self.inSearchView {
             return nil
         }
@@ -372,18 +372,18 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
         }
     }
     
-    override func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]? {
+    override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
         if self.isShowingFavorites || self.inSearchView {
             return []
         }
         var sectionTitles = [""]
-        sectionTitles.appendContentsOf(self.abbreviations.abbreviationsFirstLetters)
+        sectionTitles.append(contentsOf: self.abbreviations.abbreviationsFirstLetters)
         return sectionTitles
     }
     
     // MARK: UISearchResultsUpdating
     
-    func updateSearchResultsForSearchController(searchController: UISearchController) {
+    func updateSearchResults(for searchController: UISearchController) {
         let searchString = searchController.searchBar.text;
         
         let scopeIndex = searchController.searchBar.selectedScopeButtonIndex;
@@ -406,20 +406,20 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
     
     // updateSearchResultsForSearchController() should be called when scope
     // changed but isn't
-    func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-        updateSearchResultsForSearchController(self.searchController!)
+    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        updateSearchResults(for: self.searchController!)
         ApplicationState.sharedApplicationState().scopeIndex = selectedScope
     }
     
-    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
-        if !self.searchController!.active {
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        if !self.searchController!.isActive {
             let insets = self.tableView.scrollIndicatorInsets
             self.tableView.scrollIndicatorInsets = UIEdgeInsets(top: insets.top + 88, left: insets.left, bottom: insets.bottom, right: insets.right)
         }
     }
     
-    func searchBarTextDidEndEditing(searchBar: UISearchBar) {
-        if self.searchController!.active {
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        if self.searchController!.isActive {
             let insets = self.tableView.scrollIndicatorInsets
             self.tableView.scrollIndicatorInsets = UIEdgeInsets(top: 20, left: insets.left, bottom: insets.bottom, right: insets.right)
         }

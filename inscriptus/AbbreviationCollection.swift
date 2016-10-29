@@ -27,25 +27,25 @@ class AbbreviationCollection: NSObject {
             (a1: Abbreviation, a2: Abbreviation) in
             let a1Text = a1.displayText != nil ? a1.displayText! : a1.longText
             let a2Text = a2.displayText != nil ? a2.displayText! : a2.longText
-            return a1Text.compare(a2Text) == .OrderedAscending
+            return a1Text.compare(a2Text) == .orderedAscending
     }
     
     // Predicate closure to sort a collection of abbreviations ideally based on
     // a user search
-    func abbreviationSortClosureForSearchString(searchString: String) -> (Abbreviation, Abbreviation) -> Bool {
+    func abbreviationSortClosureForSearchString(_ searchString: String) -> (Abbreviation, Abbreviation) -> Bool {
         return {
             (a1: Abbreviation, a2: Abbreviation) in
             let a1Text = a1.displayText != nil ? a1.displayText! : a1.longText
             let a2Text = a2.displayText != nil ? a2.displayText! : a2.longText
-            let a1SearchPos = a1Text.rangeOfString(searchString, options: .CaseInsensitiveSearch)?.startIndex
-            let a2SearchPos = a2Text.rangeOfString(searchString, options: .CaseInsensitiveSearch)?.startIndex
+            let a1SearchPos = a1Text.range(of: searchString, options: .caseInsensitive)?.lowerBound
+            let a2SearchPos = a2Text.range(of: searchString, options: .caseInsensitive)?.lowerBound
             if a1SearchPos == a1Text.startIndex && a2SearchPos != a2Text.startIndex {
                 return true
             }
             if a2SearchPos == a2Text.startIndex && a1SearchPos != a1Text.startIndex {
                 return false
             }
-            return a1Text.compare(a2Text) == .OrderedAscending
+            return a1Text.compare(a2Text) == .orderedAscending
         }
     }
     
@@ -57,9 +57,9 @@ class AbbreviationCollection: NSObject {
     
     override init() {
         // Load abbreviations arrays
-        let combinedPath: String = NSBundle.mainBundle().pathForResource("abbs-combined", ofType: "json")!
-        let combinedData = NSData(contentsOfFile: combinedPath)!
-        let combinedAbbreviations: NSArray = (try! NSJSONSerialization.JSONObjectWithData(combinedData, options: [])) as! NSArray
+        let combinedPath: String = Bundle.main.path(forResource: "abbs-combined", ofType: "json")!
+        let combinedData = try! Data(contentsOf: URL(fileURLWithPath: combinedPath))
+        let combinedAbbreviations: NSArray = (try! JSONSerialization.jsonObject(with: combinedData, options: [])) as! NSArray
         
         var abbreviations = [Abbreviation]()
         for abbreviation in combinedAbbreviations {
@@ -67,13 +67,13 @@ class AbbreviationCollection: NSObject {
         }
         
         self.abbreviationsUnsorted = abbreviations
-        self.allAbbreviations = abbreviations.sort(self.abbreviationSortClosure)
+        self.allAbbreviations = abbreviations.sorted(by: self.abbreviationSortClosure)
         
         // Special character abbreviations
         
-        let specialcharsPath: String = NSBundle.mainBundle().pathForResource("abbs-specialchars", ofType: "json")!
-        let specialcharData = NSData(contentsOfFile: specialcharsPath)!
-        let specialcharAbbreviations: NSArray = (try! NSJSONSerialization.JSONObjectWithData(specialcharData, options: [])) as! NSArray
+        let specialcharsPath: String = Bundle.main.path(forResource: "abbs-specialchars", ofType: "json")!
+        let specialcharData = try! Data(contentsOf: URL(fileURLWithPath: specialcharsPath))
+        let specialcharAbbreviations: NSArray = (try! JSONSerialization.jsonObject(with: specialcharData, options: [])) as! NSArray
         for abbreviation in specialcharAbbreviations {
             self.specialAbbreviations.append(Abbreviation(JSONDict: abbreviation as! NSDictionary))
         }
@@ -98,7 +98,7 @@ class AbbreviationCollection: NSObject {
             if let searchStrs = abb.searchStrings {
                 for searchString in searchStrs {
                     // Section title should be "#" if abb begins with a number or symbol
-                    let char = NSCharacterSet.letterCharacterSet().characterIsMember(searchString[0..<1].utf16[String.UTF16View.Index(_offset: 0)]) ? searchString[0..<1] : "#"
+                    let char = CharacterSet.letters.contains(UnicodeScalar(searchString[0..<1].utf16[String.UTF16View.Index(_offset: 0)])!) ? searchString[0..<1] : "#"
                     if self.abbreviationsGroupedByFirstLetter[char] != nil {
                         self.abbreviationsGroupedByFirstLetter[char]!.append(abb)
                     }
@@ -110,28 +110,29 @@ class AbbreviationCollection: NSObject {
         }
         
         // Create array of first letters in abbreviations (for table view index)
-        self.abbreviationsFirstLetters = self.abbreviationsGroupedByFirstLetter.keys.sort({
+        self.abbreviationsFirstLetters = self.abbreviationsGroupedByFirstLetter.keys.sorted(by: {
             (a: String, b: String) in
-            a.compare(b, options: .CaseInsensitiveSearch) == .OrderedAscending
+            a.compare(b, options: .caseInsensitive) == .orderedAscending
         })
         
         super.init()
         
         // Restore favorites from user defaults (user defaults is list of IDs)
-        let defaults = NSUserDefaults.standardUserDefaults()
-        if let storedFavorites: AnyObject = defaults.objectForKey(favoritesKey) {
-            for favorite: AnyObject in storedFavorites as! NSMutableArray {
-                self.favorites.insertObject(abbreviationWithID(favorite as! NSInteger)!, atIndex: 0)
+        let defaults = UserDefaults.standard
+        if let storedFavorites: AnyObject = defaults.object(forKey: favoritesKey) as AnyObject? {
+            for favorite: Any in storedFavorites as! NSMutableArray {
+                self.favorites.insert(abbreviationWithID(favorite as! NSInteger)!, at: 0)
             }
         }
     }
     
     // Get the abbreviation for the given ID
-    func abbreviationWithID(id: Int) -> Abbreviation? {
+    func abbreviationWithID(_ id: Int) -> Abbreviation? {
         var abb = self.abbreviationsUnsorted[id]
         var i = id
         while(abb.id != id) {
-            abb = self.abbreviationsUnsorted[--i]
+            i = i - 1
+            abb = self.abbreviationsUnsorted[i]
         }
         return abb
     }
@@ -139,37 +140,37 @@ class AbbreviationCollection: NSObject {
     // MARK: Searching
     
     // Search for a string in all abbreviations
-    func searchForString(searchString: String, scopeIndex: Int) -> [Abbreviation] {
+    func searchForString(_ searchString: String, scopeIndex: Int) -> [Abbreviation] {
         var resultAbbreviations = Set<Abbreviation>()
         
         if scopeIndex == MasterViewController.searchScopeIndexAbbreviation {
             // Try to do an exact match
-            if let matchingAbbreviations = self.abbreviationsGrouped[searchString.uppercaseString] {
+            if let matchingAbbreviations = self.abbreviationsGrouped[searchString.uppercased()] {
                 resultAbbreviations = Set(matchingAbbreviations)
             }
             
             // Do a partial match too
             for key: String in self.abbreviationsGrouped.keys {
-                if key.rangeOfString(searchString.lowercaseString, options: .CaseInsensitiveSearch) != nil || key.rangeOfString(searchString.lowercaseString.stringByReplacingOccurrencesOfString(" ", withString: ""), options: .CaseInsensitiveSearch) != nil {
+                if key.range(of: searchString.lowercased(), options: .caseInsensitive) != nil || key.range(of: searchString.lowercased().replacingOccurrences(of: " ", with: ""), options: .caseInsensitive) != nil {
                     if let matchingAbbreviations: [Abbreviation] = self.abbreviationsGrouped[key] {
-                        resultAbbreviations.unionInPlace(matchingAbbreviations)
+                        resultAbbreviations.formUnion(matchingAbbreviations)
                     }
                 }
             }
         }
         else if scopeIndex == MasterViewController.searchScopeIndexFulltext {
             for abbreviation: Abbreviation in allAbbreviations {
-                if abbreviation.longText.rangeOfString(searchString, options: .CaseInsensitiveSearch) != nil {
+                if abbreviation.longText.range(of: searchString, options: .caseInsensitive) != nil {
                     resultAbbreviations.insert(abbreviation)
                 }
             }
         }
         
-        return Array(resultAbbreviations).sort(self.abbreviationSortClosureForSearchString(searchString))
+        return Array(resultAbbreviations).sorted(by: self.abbreviationSortClosureForSearchString(searchString))
     }
     
     // Search for a string in special abbreviations
-    func searchSpecialsForString(searchString: String, scopeIndex: Int) -> [Abbreviation] {
+    func searchSpecialsForString(_ searchString: String, scopeIndex: Int) -> [Abbreviation] {
         var resultAbbreviations = Set<Abbreviation>()
         
         if scopeIndex == MasterViewController.searchScopeIndexAbbreviation {
@@ -177,7 +178,7 @@ class AbbreviationCollection: NSObject {
             for abb: Abbreviation in self.specialAbbreviations {
                 if let abbSearchableStrings = abb.searchStrings {
                     for str: String in abbSearchableStrings {
-                        if str.rangeOfString(searchString.lowercaseString, options: .CaseInsensitiveSearch) != nil || str.rangeOfString(searchString.lowercaseString.stringByReplacingOccurrencesOfString(" ", withString: ""), options: .CaseInsensitiveSearch) != nil {
+                        if str.range(of: searchString.lowercased(), options: .caseInsensitive) != nil || str.range(of: searchString.lowercased().replacingOccurrences(of: " ", with: ""), options: .caseInsensitive) != nil {
                             resultAbbreviations.insert(abb)
                         }
                     }
@@ -186,28 +187,28 @@ class AbbreviationCollection: NSObject {
         }
         else if scopeIndex == MasterViewController.searchScopeIndexFulltext {
             for abbreviation: Abbreviation in self.specialAbbreviations {
-                if abbreviation.longText.rangeOfString(searchString, options: .CaseInsensitiveSearch) != nil {
+                if abbreviation.longText.range(of: searchString, options: .caseInsensitive) != nil {
                     resultAbbreviations.insert(abbreviation)
                 }
             }
         }
         
         
-        return Array(resultAbbreviations).sort(self.abbreviationSortClosureForSearchString(searchString))
+        return Array(resultAbbreviations).sorted(by: self.abbreviationSortClosureForSearchString(searchString))
     }
     
     
     // Does not sort the results like the other search functions
-    func searchFavoritesForString(searchString: String, scopeIndex: Int) -> [Abbreviation] {
+    func searchFavoritesForString(_ searchString: String, scopeIndex: Int) -> [Abbreviation] {
         var resultAbbreviations = [Abbreviation]()
         
         if scopeIndex == MasterViewController.searchScopeIndexAbbreviation {
             // Do a partial match too
-            for favorite: AnyObject in self.favorites {
+            for favorite: Any in self.favorites {
                 let abb = favorite as! Abbreviation
                 if let abbSearchableStrings = abb.searchStrings {
                     for str: String in abbSearchableStrings {
-                        if str.rangeOfString(searchString.lowercaseString, options: .CaseInsensitiveSearch) != nil || str.rangeOfString(searchString.lowercaseString.stringByReplacingOccurrencesOfString(" ", withString: ""), options: .CaseInsensitiveSearch) != nil {
+                        if str.range(of: searchString.lowercased(), options: .caseInsensitive) != nil || str.range(of: searchString.lowercased().replacingOccurrences(of: " ", with: ""), options: .caseInsensitive) != nil {
                             resultAbbreviations.append(abb)
                         }
                     }
@@ -215,9 +216,9 @@ class AbbreviationCollection: NSObject {
             }
         }
         else if scopeIndex == MasterViewController.searchScopeIndexFulltext {
-            for favorite: AnyObject in self.favorites {
+            for favorite: Any in self.favorites {
                 let abbreviation = favorite as! Abbreviation
-                if abbreviation.longText.rangeOfString(searchString, options: .CaseInsensitiveSearch) != nil {
+                if abbreviation.longText.range(of: searchString, options: .caseInsensitive) != nil {
                     resultAbbreviations.append(abbreviation)
                 }
             }
@@ -228,26 +229,26 @@ class AbbreviationCollection: NSObject {
     
     // Does an asynchronous search off the main thread, so the UI doesn't lock
     // up while the user is typing
-    func asyncSearchForString(searchString: String, scopeIndex: Int, onFinish: ([Abbreviation]) -> Void) -> Void {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+    func asyncSearchForString(_ searchString: String, scopeIndex: Int, onFinish: @escaping ([Abbreviation]) -> Void) -> Void {
+        DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async {
             let results = self.searchForString(searchString, scopeIndex: scopeIndex)
-            dispatch_async(dispatch_get_main_queue()) {
+            DispatchQueue.main.async {
                 onFinish(results)
             }
         }
     }
-    func asyncSearchSpecialsForString(searchString: String, scopeIndex: Int, onFinish: ([Abbreviation]) -> Void) -> Void {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+    func asyncSearchSpecialsForString(_ searchString: String, scopeIndex: Int, onFinish: @escaping ([Abbreviation]) -> Void) -> Void {
+        DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async {
             let results = self.searchSpecialsForString(searchString, scopeIndex: scopeIndex)
-            dispatch_async(dispatch_get_main_queue()) {
+            DispatchQueue.main.async {
                 onFinish(results)
             }
         }
     }
-    func asyncSearchFavoritesForString(searchString: String, scopeIndex: Int, onFinish: ([Abbreviation]) -> Void) -> Void {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+    func asyncSearchFavoritesForString(_ searchString: String, scopeIndex: Int, onFinish: @escaping ([Abbreviation]) -> Void) -> Void {
+        DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async {
             let results = self.searchFavoritesForString(searchString, scopeIndex: scopeIndex)
-            dispatch_async(dispatch_get_main_queue()) {
+            DispatchQueue.main.async {
                 onFinish(results)
             }
         }
@@ -264,31 +265,31 @@ class AbbreviationCollection: NSObject {
         }
     }
     
-    func addFavorite(item: Abbreviation) {
-        if !self.favorites.containsObject(item) {
-            self.favorites.insertObject(item, atIndex: 0)
+    func addFavorite(_ item: Abbreviation) {
+        if !self.favorites.contains(item) {
+            self.favorites.insert(item, at: 0)
         }
         //        println(self.favorites)
     }
     
-    func removeFavorite(item: Abbreviation) {
-        self.favorites.removeObject(item)
+    func removeFavorite(_ item: Abbreviation) {
+        self.favorites.remove(item)
     }
     
     func saveFavorites() {
         let favoritesIDs = NSMutableArray()
-        for favorite: AnyObject in favorites {
+        for favorite: Any in favorites {
             let abb = favorite as! Abbreviation
-            favoritesIDs.insertObject(abb.id, atIndex: 0)
+            favoritesIDs.insert(abb.id, at: 0)
         }
-        let defaults = NSUserDefaults.standardUserDefaults()
-        defaults.setObject(favoritesIDs, forKey: favoritesKey)
+        let defaults = UserDefaults.standard
+        defaults.set(favoritesIDs, forKey: favoritesKey)
         defaults.synchronize()
     }
     
-    func moveFavoriteFromIndex(fromIndex: Int, toIndex: Int) {
-        let fav: AnyObject = self.favorites[fromIndex]
-        self.favorites.removeObjectAtIndex(fromIndex)
-        self.favorites.insertObject(fav, atIndex: toIndex)
+    func moveFavoriteFromIndex(_ fromIndex: Int, toIndex: Int) {
+        let fav: AnyObject = self.favorites[fromIndex] as AnyObject
+        self.favorites.removeObject(at: fromIndex)
+        self.favorites.insert(fav, at: toIndex)
     }
 }
