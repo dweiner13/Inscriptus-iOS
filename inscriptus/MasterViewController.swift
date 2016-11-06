@@ -136,6 +136,8 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
             
             searchBar.selectedScopeButtonIndex = ApplicationState.sharedApplicationState().scopeIndex
         }
+        
+        registerForPreviewing(with: self, sourceView: view)
     }
     
     func keyboardDidShow(_ sender: Notification) {
