@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MasterViewController: UITableViewController, UISearchBarDelegate, UISearchResultsUpdating {
+class MasterViewController: UITableViewController, UISearchBarDelegate, UISearchResultsUpdating, UIViewControllerPreviewingDelegate {
     
     // MARK: - Properties
     
@@ -155,6 +155,28 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
         self.tableView.contentInset = UIEdgeInsets(top: insets.top, left: insets.left, bottom: 0, right: insets.right)
     }
     
+    func getAbbreviation(indexPath: IndexPath) -> Abbreviation {
+        var abbreviation: Abbreviation
+        
+        if self.isShowingFavorites {
+            abbreviation = self.abbreviations.favorites[indexPath.row] as! Abbreviation
+        }
+        else if self.inSearchView {
+            abbreviation = self.filteredAbbreviations[indexPath.row]
+        }
+        else {
+            if self.inSearchView {
+                abbreviation = self.filteredAbbreviations[indexPath.row]
+            }
+            else {
+                let letter = self.abbreviations.abbreviationsFirstLetters[indexPath.section - 1]
+                abbreviation = self.abbreviations.abbreviationsGroupedByFirstLetter[letter]![indexPath.row]
+            }
+        }
+        
+        return abbreviation;
+    }
+    
     // MARK: UI Stuff
     
     func tappedAboutButton(_ sender: AnyObject) {
@@ -220,23 +242,7 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetail" {
             if let indexPath = self.tableView.indexPathForSelectedRow {
-                var abbreviation: Abbreviation
-                
-                if self.isShowingFavorites {
-                    abbreviation = self.abbreviations.favorites[indexPath.row] as! Abbreviation
-                }
-                else if self.inSearchView {
-                    abbreviation = self.filteredAbbreviations[indexPath.row]
-                }
-                else {
-                    if self.inSearchView {
-                        abbreviation = self.filteredAbbreviations[indexPath.row]
-                    }
-                    else {
-                        let letter = self.abbreviations.abbreviationsFirstLetters[indexPath.section - 1]
-                        abbreviation = self.abbreviations.abbreviationsGroupedByFirstLetter[letter]![indexPath.row]
-                    }
-                }
+                let abbreviation = self.getAbbreviation(indexPath: indexPath);
                 
                 let controller = (segue.destination as! UINavigationController).topViewController as! DetailViewController
                 controller.detailItem = abbreviation
@@ -423,6 +429,28 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
             let insets = self.tableView.scrollIndicatorInsets
             self.tableView.scrollIndicatorInsets = UIEdgeInsets(top: 20, left: insets.left, bottom: insets.bottom, right: insets.right)
         }
+    }
+    
+    // MARK: - UIViewControllerPreviewingDelegate
+    
+    // Peek
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        guard let indexPath = self.tableView.indexPathForRow(at: location),
+              let cell = tableView.cellForRow(at: indexPath) else { return nil }
+        
+        guard let detailViewController = storyboard?.instantiateViewController(withIdentifier: "detailViewController") as? DetailViewController else { return nil }
+        
+        detailViewController.detailItem = self.getAbbreviation(indexPath: indexPath);
+        
+        previewingContext.sourceRect = cell.frame;
+        
+        return detailViewController;
+    }
+    
+    // Pop
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        // Reuse the "peek" view controller for presentation
+        show(viewControllerToCommit, sender: self);
     }
 }
 
