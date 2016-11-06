@@ -13,8 +13,34 @@ public let INSCRIPTUS_TINT_COLOR = UIColor(red:0.581, green:0.128, blue:0.574, a
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate {
+    
+    // MARK:  - Types
+    
+    enum ShortcutIdentifier: String {
+        case openfavorites
+        
+        // MARK: - Initializers
+        
+        init?(fullType: String) {
+            guard let last = fullType.components(separatedBy: ".").last else { return nil }
+            
+            self.init(rawValue: last)
+        }
+        
+        // MARK: - Properties
+        
+        var type: String {
+            return Bundle.main.bundleIdentifier! + ".\(self.rawValue)"
+        }
+    }
 
+    // MARK:  - Properties
+    
     var window: UIWindow?
+    
+    var launchedShortcutItem: UIApplicationShortcutItem?
+    
+    // MARK: - AppDelegate
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -47,6 +73,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        guard let shortcut = launchedShortcutItem else { return }
+        
+        // ignore result so we don't get a compiler warning for not using result
+        _ = handleShortcutItem(shortcutItem: shortcut);
+        
+        launchedShortcutItem = nil;
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
@@ -79,5 +111,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         return false
     }
 
+    // MARK: - Shortcut Items
+    
+    func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+        let handledShortcutItem = handleShortcutItem(shortcutItem: shortcutItem);
+        
+        completionHandler(handledShortcutItem);
+    }
+    
+    func handleShortcutItem(shortcutItem: UIApplicationShortcutItem) -> Bool {
+        print("Handling shortcut item \(shortcutItem.type)");
+        
+        return true;
+    }
 }
 
