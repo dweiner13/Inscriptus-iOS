@@ -43,6 +43,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
     // MARK: - AppDelegate
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        var shouldPerformAdditionalDelegateHandling = true
+        
         // Override point for customization after application launch.
         let splitViewController = self.window!.rootViewController as! UISplitViewController
         let navigationController = splitViewController.viewControllers[splitViewController.viewControllers.count-1] as! UINavigationController
@@ -51,7 +53,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         
         self.window?.tintColor = INSCRIPTUS_TINT_COLOR
         
-        return true
+        if let shortcutItem = launchOptions?[UIApplicationLaunchOptionsKey.shortcutItem] as? UIApplicationShortcutItem {
+            launchedShortcutItem = shortcutItem
+            
+            shouldPerformAdditionalDelegateHandling = false
+        }
+        
+        return shouldPerformAdditionalDelegateHandling
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
@@ -120,9 +128,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
     }
     
     func handleShortcutItem(shortcutItem: UIApplicationShortcutItem) -> Bool {
-        print("Handling shortcut item \(shortcutItem.type)");
+        var handled = false
         
-        return true;
+        // Verify that the provided `shortcutItem`'s `type` is one handled by the application.
+        guard ShortcutIdentifier(fullType: shortcutItem.type) != nil else { return false }
+        
+        guard let shortcutType = shortcutItem.type as String? else { return false }
+        
+        switch (shortcutType) {
+            case ShortcutIdentifier.openfavorites.type:
+                let splitViewController = self.window!.rootViewController as! UISplitViewController
+                let navigationController = splitViewController.viewControllers[splitViewController.viewControllers.count-1] as! UINavigationController
+                let masterViewController = navigationController.topViewController as! MasterViewController
+                if let visibleVC = navigationController.visibleViewController {
+                    if (visibleVC == masterViewController) {
+                        navigationController.popToViewController(masterViewController, animated: true)
+                    }
+                }
+                masterViewController.isShowingFavorites = true;
+                handled = true
+            default:
+                break
+        }
+        
+        return handled;
     }
 }
 
