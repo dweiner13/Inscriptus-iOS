@@ -47,7 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         
         // Override point for customization after application launch.
         let splitViewController = self.window!.rootViewController as! UISplitViewController
-        let navigationController = splitViewController.viewControllers[splitViewController.viewControllers.count-1] as! UINavigationController
+        let navigationController = splitViewController.viewControllers.last as! UINavigationController
         navigationController.topViewController!.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem
         splitViewController.delegate = self
         
@@ -81,7 +81,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-        guard let shortcut = launchedShortcutItem else { return }
+//        guard let shortcut = launchedShortcutItem else { return }
+        
+        let shortcut = UIApplicationShortcutItem(type: "com.danielweiner.inscriptus.openfavorites", localizedTitle: "Open Shortcut")
         
         // ignore result so we don't get a compiler warning for not using result
         _ = handleShortcutItem(shortcutItem: shortcut);
@@ -128,6 +130,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
     }
     
     func handleShortcutItem(shortcutItem: UIApplicationShortcutItem) -> Bool {
+        print("handling shortcut item")
+        
         var handled = false
         
         // Verify that the provided `shortcutItem`'s `type` is one handled by the application.
@@ -138,14 +142,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         switch (shortcutType) {
             case ShortcutIdentifier.openfavorites.type:
                 let splitViewController = self.window!.rootViewController as! UISplitViewController
-                let navigationController = splitViewController.viewControllers[splitViewController.viewControllers.count-1] as! UINavigationController
-                let masterViewController = navigationController.topViewController as! MasterViewController
-                if let visibleVC = navigationController.visibleViewController {
-                    if (visibleVC == masterViewController) {
-                        navigationController.popToViewController(masterViewController, animated: true)
-                    }
+                
+                // UISplitViewController has either 1 (when collapsed) or 2 (when expanded) view controllers. First is always master.
+                let masterNavController = splitViewController.viewControllers.first as! UINavigationController
+                
+                // If the master view controller is the active visible controller
+                if let masterViewController = masterNavController.topViewController as? MasterViewController {
+                    masterViewController.isShowingFavorites = true;
+                    break
                 }
-                masterViewController.isShowingFavorites = true;
+                
+                // otherwise the navigation controller's top item will be another nav controller, the detail nav controller.
+                // i.e.: - SplitViewController
+                //           - Master NavController
+                //              - Detail NavController (top)
+                //                  - DetailViewController
+                //              - MasterViewController (bottom)
+                // So we need to pop the Master NavController to get to MasterViewController. No idea how this works on iPad.
+                else if let detailNavController = masterNavController.topViewController as? UINavigationController,
+                        let _ = detailNavController.topViewController as? DetailViewController {
+                    let masterViewController = masterNavController.viewControllers.first as! MasterViewController
+                    masterNavController.popToRootViewController(animated: false)
+                    masterViewController.isShowingFavorites = true;
+                }
                 handled = true
             default:
                 break
