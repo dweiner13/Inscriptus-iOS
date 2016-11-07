@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UnsearchablesViewController: UITableViewController, UISearchBarDelegate, UISearchResultsUpdating, UIViewControllerTransitioningDelegate {
+class UnsearchablesViewController: UITableViewController, UISearchBarDelegate, UISearchResultsUpdating, UIViewControllerTransitioningDelegate, UIViewControllerPreviewingDelegate {
     
     // MARK: - Properties
     
@@ -42,6 +42,8 @@ class UnsearchablesViewController: UITableViewController, UISearchBarDelegate, U
             
             searchBar.selectedScopeButtonIndex = ApplicationState.sharedApplicationState().scopeIndex
         }
+        
+        self.registerForPreviewing(with: self, sourceView: view);
     }
 
     override func didReceiveMemoryWarning() {
@@ -101,18 +103,20 @@ class UnsearchablesViewController: UITableViewController, UISearchBarDelegate, U
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "AbbreviationCell", for: indexPath) as! AbbreviationCell
         
-        let abbreviation: Abbreviation
-        
-        if self.searchController!.isActive && self.searchController!.searchBar.text!.characters.count != 0 {
-            abbreviation = self.filteredAbbreviations[indexPath.row]
-        }
-        else {
-            abbreviation = self.abbreviations.specialAbbreviations[indexPath.row]
-        }
+        let abbreviation = self.getAbbreviation(indexPath: indexPath)
         
         cell.setAbbreviation(abbreviation, searchController: self.searchController)
         
         return cell
+    }
+    
+    func getAbbreviation(indexPath: IndexPath) -> Abbreviation {
+        if self.searchController!.isActive && self.searchController!.searchBar.text!.characters.count != 0 {
+            return self.filteredAbbreviations[indexPath.row]
+        }
+        else {
+            return self.abbreviations.specialAbbreviations[indexPath.row]
+        }
     }
 
     // MARK: Navigation
@@ -184,5 +188,23 @@ class UnsearchablesViewController: UITableViewController, UISearchBarDelegate, U
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         let animator = smallModalAnimator(presenting: false)
         return animator
+    }
+    
+    //MARK: - UIViewControllerPreviewingDelegate
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        guard let indexPath = self.tableView.indexPathForRow(at: location),
+              let cell = tableView.cellForRow(at: indexPath) else { return nil };
+        
+        guard let detailViewController = self.storyboard?.instantiateViewController(withIdentifier: "detailViewController") as? DetailViewController else { return nil }
+        
+        detailViewController.detailItem = self.getAbbreviation(indexPath: indexPath)
+        
+        previewingContext.sourceRect = cell.frame;
+        
+        return detailViewController;
+    }
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        show(viewControllerToCommit, sender: self)
     }
 }
