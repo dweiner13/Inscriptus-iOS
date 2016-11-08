@@ -148,65 +148,57 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         
         switch (shortcutType) {
         case ShortcutIdentifier.openfavorites.type:
-            let splitViewController = self.window!.rootViewController as! UISplitViewController
-            
-            // UISplitViewController has either 1 (when collapsed) or 2 (when expanded) view controllers. First is always master.
-            let masterNavController = splitViewController.viewControllers.first as! UINavigationController
-            
-            // If the master view controller is the active visible controller
-            if let masterViewController = masterNavController.topViewController as? MasterViewController {
-                masterViewController.isShowingFavorites = true;
-                break
+            if let masterVC = navigateToMasterViewController() {
+                masterVC.isShowingFavorites = true
+                handled = true
+            } else {
+                handled = false
+                print("Could not navigate to master view controller while attempting to handle shortcut \(shortcutType)")
             }
-            
-            // otherwise the navigation controller's top item will be another nav controller, the detail nav controller.
-            // i.e.: - SplitViewController
-            //           - Master NavController
-            //              - Detail NavController (top)
-            //                  - DetailViewController
-            //              - MasterViewController (bottom)
-            // So we need to pop the Master NavController to get to MasterViewController. No idea how this works on iPad.
-            else if let detailNavController = masterNavController.topViewController as? UINavigationController,
-                    let _ = detailNavController.topViewController as? DetailViewController {
-                let masterViewController = masterNavController.viewControllers.first as! MasterViewController
-                masterNavController.popToRootViewController(animated: false)
-                masterViewController.isShowingFavorites = true;
-            }
-            handled = true
             break
         case ShortcutIdentifier.openrecentlyviewed.type:
             let index = shortcutItem.userInfo!["recentlyViewedIndex"] as! Int
-            
-            let splitViewController = self.window!.rootViewController as! UISplitViewController
-        
-            // UISplitViewController has either 1 (when collapsed) or 2 (when expanded) view controllers. First is always mater.
-            let masterNavController = splitViewController.viewControllers.first as! UINavigationController
-            
-            // If the master view controller is the active visible controller
-            if let masterViewController = masterNavController.topViewController as? MasterViewController {
-                masterViewController.performSegue(withIdentifier: "showDetail", sender: AbbreviationCollection.sharedAbbreviationCollection.getRecentlyViewedIndex(index: index))
+            if let masterVC = navigateToMasterViewController() {
+                masterVC.performSegue(withIdentifier: "showDetail", sender: AbbreviationCollection.sharedAbbreviationCollection.getRecentlyViewedIndex(index: index))
+                handled = true
+            } else {
+                print("Could not navigate to master view controller while attempting to handle shortcut \(shortcutType)")
+                handled = false
             }
-            
-            // otherwise the navigation controller's top item will be another nav controller, the detail nav controller.
-            // i.e.: - SplitViewController
-            //           - Master NavController
-            //              - Detail NavController (top)
-            //                  - DetailViewController
-            //              - MasterViewController (bottom)
-            // So we need to pop the Master NavController to get to MasterViewController. No idea how this works on iPad.
-            else if let detailNavController = masterNavController.topViewController as? UINavigationController,
-                    let _ = detailNavController.topViewController as? DetailViewController {
-                let masterViewController = masterNavController.viewControllers.first as! MasterViewController
-                masterNavController.popToRootViewController(animated: false)
-                masterViewController.performSegue(withIdentifier: "showDetail", sender: AbbreviationCollection.sharedAbbreviationCollection.getRecentlyViewedIndex(index: index))
-            }
-            handled = true
             break
         default:
-                break
+            break
         }
         
         return handled;
+    }
+    
+    // Navigates to and returns the MasterViewController
+    private func navigateToMasterViewController() -> MasterViewController? {
+        let splitViewController = self.window!.rootViewController as! UISplitViewController
+        
+        // UISplitViewController has either 1 (when collapsed) or 2 (when expanded) view controllers. First is always master.
+        let masterNavController = splitViewController.viewControllers.first as! UINavigationController
+        
+        // If the master view controller is the active visible controller
+        if let masterViewController = masterNavController.topViewController as? MasterViewController {
+            return masterViewController;
+        }
+            
+        // otherwise the navigation controller's top item will be another nav controller, the detail nav controller.
+        // i.e.: - SplitViewController
+        //           - Master NavController
+        //              - Detail NavController (top)
+        //                  - DetailViewController
+        //              - MasterViewController (bottom)
+        // So we need to pop the Master NavController to get to MasterViewController. No idea how this works on iPad.
+        else if let detailNavController = masterNavController.topViewController as? UINavigationController,
+            let _ = detailNavController.topViewController as? DetailViewController {
+            let masterViewController = masterNavController.viewControllers.first as! MasterViewController
+            masterNavController.popToRootViewController(animated: false)
+            return masterViewController;
+        }
+        return nil;
     }
 }
 
