@@ -18,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
     
     enum ShortcutIdentifier: String {
         case openfavorites
+        case openrecentlyviewed
         
         // MARK: - Initializers
         
@@ -53,6 +54,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         
         self.window?.tintColor = INSCRIPTUS_TINT_COLOR
         
+        // If a shortcut was launched, take the appropriate action
         if let shortcutItem = launchOptions?[UIApplicationLaunchOptionsKey.shortcutItem] as? UIApplicationShortcutItem {
             launchedShortcutItem = shortcutItem
             
@@ -72,6 +74,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
         ApplicationState.sharedApplicationState().saveApplicationState()
         AbbreviationCollection.sharedAbbreviationCollection.saveFavorites()
+        AbbreviationCollection.sharedAbbreviationCollection.saveRecentlyViewed()
         WhitakerCache.sharedCache.saveCache()
     }
 
@@ -81,9 +84,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-//        guard let shortcut = launchedShortcutItem else { return }
+        guard let shortcut = launchedShortcutItem else { return }
         
-        let shortcut = UIApplicationShortcutItem(type: "com.danielweiner.inscriptus.openfavorites", localizedTitle: "Open Shortcut")
+//        let shortcut = UIApplicationShortcutItem(type: ShortcutIdentifier.openrecentlyviewed.type,
+//                                                 localizedTitle: "First one",
+//                                                 localizedSubtitle: "Recently viewed",
+//                                                 icon: UIApplicationShortcutIcon(type: .time),
+//                                                 userInfo: ["recentlyViewedIndex": 0])
         
         // ignore result so we don't get a compiler warning for not using result
         _ = handleShortcutItem(shortcutItem: shortcut);
@@ -140,33 +147,62 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         guard let shortcutType = shortcutItem.type as String? else { return false }
         
         switch (shortcutType) {
-            case ShortcutIdentifier.openfavorites.type:
-                let splitViewController = self.window!.rootViewController as! UISplitViewController
-                
-                // UISplitViewController has either 1 (when collapsed) or 2 (when expanded) view controllers. First is always master.
-                let masterNavController = splitViewController.viewControllers.first as! UINavigationController
-                
-                // If the master view controller is the active visible controller
-                if let masterViewController = masterNavController.topViewController as? MasterViewController {
-                    masterViewController.isShowingFavorites = true;
-                    break
-                }
-                
-                // otherwise the navigation controller's top item will be another nav controller, the detail nav controller.
-                // i.e.: - SplitViewController
-                //           - Master NavController
-                //              - Detail NavController (top)
-                //                  - DetailViewController
-                //              - MasterViewController (bottom)
-                // So we need to pop the Master NavController to get to MasterViewController. No idea how this works on iPad.
-                else if let detailNavController = masterNavController.topViewController as? UINavigationController,
-                        let _ = detailNavController.topViewController as? DetailViewController {
-                    let masterViewController = masterNavController.viewControllers.first as! MasterViewController
-                    masterNavController.popToRootViewController(animated: false)
-                    masterViewController.isShowingFavorites = true;
-                }
-                handled = true
-            default:
+        case ShortcutIdentifier.openfavorites.type:
+            let splitViewController = self.window!.rootViewController as! UISplitViewController
+            
+            // UISplitViewController has either 1 (when collapsed) or 2 (when expanded) view controllers. First is always master.
+            let masterNavController = splitViewController.viewControllers.first as! UINavigationController
+            
+            // If the master view controller is the active visible controller
+            if let masterViewController = masterNavController.topViewController as? MasterViewController {
+                masterViewController.isShowingFavorites = true;
+                break
+            }
+            
+            // otherwise the navigation controller's top item will be another nav controller, the detail nav controller.
+            // i.e.: - SplitViewController
+            //           - Master NavController
+            //              - Detail NavController (top)
+            //                  - DetailViewController
+            //              - MasterViewController (bottom)
+            // So we need to pop the Master NavController to get to MasterViewController. No idea how this works on iPad.
+            else if let detailNavController = masterNavController.topViewController as? UINavigationController,
+                    let _ = detailNavController.topViewController as? DetailViewController {
+                let masterViewController = masterNavController.viewControllers.first as! MasterViewController
+                masterNavController.popToRootViewController(animated: false)
+                masterViewController.isShowingFavorites = true;
+            }
+            handled = true
+            break
+        case ShortcutIdentifier.openrecentlyviewed.type:
+            let index = shortcutItem.userInfo!["recentlyViewedIndex"] as! Int
+            
+            let splitViewController = self.window!.rootViewController as! UISplitViewController
+        
+            // UISplitViewController has either 1 (when collapsed) or 2 (when expanded) view controllers. First is always mater.
+            let masterNavController = splitViewController.viewControllers.first as! UINavigationController
+            
+            // If the master view controller is the active visible controller
+            if let masterViewController = masterNavController.topViewController as? MasterViewController {
+                masterViewController.performSegue(withIdentifier: "showDetail", sender: AbbreviationCollection.sharedAbbreviationCollection.getRecentlyViewedIndex(index: index))
+            }
+            
+            // otherwise the navigation controller's top item will be another nav controller, the detail nav controller.
+            // i.e.: - SplitViewController
+            //           - Master NavController
+            //              - Detail NavController (top)
+            //                  - DetailViewController
+            //              - MasterViewController (bottom)
+            // So we need to pop the Master NavController to get to MasterViewController. No idea how this works on iPad.
+            else if let detailNavController = masterNavController.topViewController as? UINavigationController,
+                    let _ = detailNavController.topViewController as? DetailViewController {
+                let masterViewController = masterNavController.viewControllers.first as! MasterViewController
+                masterNavController.popToRootViewController(animated: false)
+                masterViewController.performSegue(withIdentifier: "showDetail", sender: AbbreviationCollection.sharedAbbreviationCollection.getRecentlyViewedIndex(index: index))
+            }
+            handled = true
+            break
+        default:
                 break
         }
         

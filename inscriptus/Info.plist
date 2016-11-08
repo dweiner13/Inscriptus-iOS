@@ -19,7 +19,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1526</string>
+	<string>1533</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -49,7 +49,7 @@
 			<key>UIApplicationShortcutItemUserInfo</key>
 			<dict>
 				<key>version</key>
-				<string>1.1</string>
+				<string>$(PRODUCT_VERSION)</string>
 			</dict>
 		</dict>
 	</array>

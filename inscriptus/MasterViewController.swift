@@ -243,13 +243,12 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetail" {
-            if let indexPath = self.tableView.indexPathForSelectedRow {
-                let abbreviation = self.getAbbreviation(indexPath: indexPath);
-                
-                let controller = (segue.destination as! UINavigationController).topViewController as! DetailViewController
-                controller.detailItem = abbreviation
-                controller.navigationItem.leftItemsSupplementBackButton = true
-            }
+            let abbreviation = sender as! Abbreviation
+            let controller = (segue.destination as! UINavigationController).topViewController as! DetailViewController
+            controller.detailItem = abbreviation
+            controller.navigationItem.leftItemsSupplementBackButton = true
+            
+            AbbreviationCollection.sharedAbbreviationCollection.pushViewed(abbreviation: abbreviation)
         }
     }
 
@@ -339,13 +338,13 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if self.isShowingFavorites {
-            self.performSegue(withIdentifier: "showDetail", sender: self)
+            self.performSegue(withIdentifier: "showDetail", sender: self.getAbbreviation(indexPath: indexPath))
         }
         else if indexPath.section == 0 && !self.inSearchView {
             self.performSegue(withIdentifier: "showUnsearchables", sender: self)
         }
         else {
-            self.performSegue(withIdentifier: "showDetail", sender: self)
+            self.performSegue(withIdentifier: "showDetail", sender: self.getAbbreviation(indexPath: indexPath))
         }
     }
     

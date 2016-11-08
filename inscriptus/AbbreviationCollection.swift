@@ -124,6 +124,13 @@ class AbbreviationCollection: NSObject {
                 self.favorites.insert(abbreviationWithID(favorite as! NSInteger)!, at: 0)
             }
         }
+        
+        // Restore recently viewed from user defaults (user defaults is list of IDs)
+        if let storedRecentlyViewed: AnyObject = defaults.object(forKey: recentlyViewedKey) as AnyObject? {
+            for recentlyViewed: Any in storedRecentlyViewed as! NSMutableArray {
+                self.recentlyViewed.insert(abbreviationWithID(recentlyViewed as! NSInteger)!, at: 0)
+            }
+        }
     }
     
     // Get the abbreviation for the given ID
@@ -291,5 +298,73 @@ class AbbreviationCollection: NSObject {
         let fav: AnyObject = self.favorites[fromIndex] as AnyObject
         self.favorites.removeObject(at: fromIndex)
         self.favorites.insert(fav, at: toIndex)
+    }
+    
+    // MARK: - Most Recently Viewed
+    
+    let recentlyViewedKey = "recentlyViewed"
+    
+    // Holds last 3 items viewed. Last item in array is the most recent item
+    var recentlyViewed = NSMutableArray()
+    
+    let recentlyViewedCount = 2
+    
+    func pushViewed(abbreviation: Abbreviation) {
+        if !recentlyViewed.contains(abbreviation) {
+            if (recentlyViewed.count >= recentlyViewedCount) {
+                self.recentlyViewed.removeObject(at: 0)
+            }
+            recentlyViewed.add(abbreviation)
+        } else {
+            recentlyViewed.remove(abbreviation)
+            recentlyViewed.add(abbreviation)
+        }
+        print(recentlyViewed)
+        updateShortcutItems()
+    }
+    
+    func saveRecentlyViewed() {
+        let recentlyViewedIDs = NSMutableArray()
+        for recentlyViewed: Any in recentlyViewed {
+            let abb = recentlyViewed as! Abbreviation
+            recentlyViewedIDs.insert(abb.id, at: 0)
+        }
+        let defaults = UserDefaults.standard
+        defaults.set(recentlyViewedIDs, forKey: recentlyViewedKey)
+        defaults.synchronize()
+    }
+    
+    private func updateShortcutItems() {
+        if let shortcutItems = UIApplication.shared.shortcutItems, shortcutItems.isEmpty {
+            var newShortcutItems: [UIMutableApplicationShortcutItem] = []
+            let shortcutType = AppDelegate.ShortcutIdentifier.openrecentlyviewed.type
+            for i in 0..<recentlyViewed.count {
+                let abbreviation = recentlyViewed[recentlyViewed.count - 1 - i] as! Abbreviation
+                var shortcutTitle = "(image)"
+                if let displayText = abbreviation.displayText {
+                    shortcutTitle = displayText
+                }
+                newShortcutItems.append(UIMutableApplicationShortcutItem(
+                    type: shortcutType,
+                    localizedTitle: shortcutTitle,
+                    localizedSubtitle: "Recently viewed",
+                    icon: UIApplicationShortcutIcon(type: .time),
+                    userInfo: [
+                        "version": Bundle.main.infoDictionary!["CFBundleShortVersionString"]!,
+                        "recentlyViewedIndex": i
+                    ]
+                ))
+            }
+            UIApplication.shared.shortcutItems = newShortcutItems;
+        }
+    }
+    
+    // 0 is most recently viewed, 1 is second most recently viewed, etc.
+    func getRecentlyViewedIndex(index: Int) -> Abbreviation? {
+        if recentlyViewed.count > index {
+            return recentlyViewed[recentlyViewed.count - 1 - index] as? Abbreviation
+        } else {
+            return nil
+        }
     }
 }

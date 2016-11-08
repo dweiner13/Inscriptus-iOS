@@ -131,6 +131,8 @@ class UnsearchablesViewController: UITableViewController, UISearchBarDelegate, U
                 controller.detailItem = abbreviation
                 controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem
                 controller.navigationItem.leftItemsSupplementBackButton = true
+                
+                AbbreviationCollection.sharedAbbreviationCollection.pushViewed(abbreviation: abbreviation)
             }
         }
         else if segue.identifier == "ShowSpecialCoach" {
