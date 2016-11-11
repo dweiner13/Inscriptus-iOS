@@ -319,7 +319,6 @@ class AbbreviationCollection: NSObject {
             recentlyViewed.remove(abbreviation)
             recentlyViewed.add(abbreviation)
         }
-        print(recentlyViewed)
         updateShortcutItems()
     }
     
@@ -335,14 +334,16 @@ class AbbreviationCollection: NSObject {
     }
     
     private func updateShortcutItems() {
-        if let shortcutItems = UIApplication.shared.shortcutItems, shortcutItems.isEmpty {
+        if let _ = UIApplication.shared.shortcutItems {
             var newShortcutItems: [UIMutableApplicationShortcutItem] = []
             let shortcutType = AppDelegate.ShortcutIdentifier.openrecentlyviewed.type
             for i in 0..<recentlyViewed.count {
                 let abbreviation = recentlyViewed[recentlyViewed.count - 1 - i] as! Abbreviation
-                var shortcutTitle = "(image)"
+                var shortcutTitle: String
                 if let displayText = abbreviation.displayText {
                     shortcutTitle = displayText
+                } else {
+                    shortcutTitle = abbreviation.longText
                 }
                 newShortcutItems.append(UIMutableApplicationShortcutItem(
                     type: shortcutType,
@@ -355,6 +356,7 @@ class AbbreviationCollection: NSObject {
                     ]
                 ))
             }
+            print("updating shortcutItems with \(newShortcutItems)")
             UIApplication.shared.shortcutItems = newShortcutItems;
         }
     }

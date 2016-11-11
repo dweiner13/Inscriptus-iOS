@@ -19,7 +19,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1533</string>
+	<string>1562</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -39,6 +39,19 @@
 	</dict>
 	<key>UIApplicationShortcutItems</key>
 	<array>
+		<dict>
+			<key>UIApplicationShortcutItemIconType</key>
+			<string>UIApplicationShortcutIconTypeSearch</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>Search</string>
+			<key>UIApplicationShortcutItemType</key>
+			<string>com.danielweiner.inscriptus.opensearch</string>
+			<key>UIApplicationShortcutItemUserInfo</key>
+			<dict>
+				<key>version</key>
+				<string>$(PRODUCT_VERSION)</string>
+			</dict>
+		</dict>
 		<dict>
 			<key>UIApplicationShortcutItemIconType</key>
 			<string>UIApplicationShortcutIconTypeFavorite</string>

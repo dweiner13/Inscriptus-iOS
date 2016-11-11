@@ -140,6 +140,7 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        print("viewDidAppear")
         let appState = ApplicationState.sharedApplicationState()
         if !appState.lookupCoachHidden {
             showLookupCoach(true, delay: 0)
@@ -261,13 +262,14 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
     }
     
     @IBAction func tappedShareButton(_ sender: UIBarButtonItem) {
-        if MFMailComposeViewController.canSendMail() {
-            let composer = MFMailComposeViewController()
-            composer.mailComposeDelegate = self
-            composer.setSubject("Check out this abbreviation")
-            composer.setMessageBody(makeHTML(), isHTML: true)
-            self.present(composer, animated: true, completion: nil)
+        guard MFMailComposeViewController.canSendMail() else {
+            return
         }
+        let composer = MFMailComposeViewController()
+        composer.mailComposeDelegate = self
+        composer.setSubject("Check out this abbreviation")
+        composer.setMessageBody(makeHTML(), isHTML: true)
+        self.present(composer, animated: true, completion: nil)
     }
     
     func makeHTML() -> String {

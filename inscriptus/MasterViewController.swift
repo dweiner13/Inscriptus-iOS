@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MasterViewController: UITableViewController, UISearchBarDelegate, UISearchResultsUpdating, UIViewControllerPreviewingDelegate {
+class MasterViewController: UITableViewController, UISearchBarDelegate, UISearchResultsUpdating, UIViewControllerPreviewingDelegate, UISearchControllerDelegate {
     
     // MARK: - Properties
     
@@ -28,6 +28,13 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
     
     // The button to show the about screen
     var aboutButton: UIBarButtonItem!
+    
+    var focusSearchBar = false {
+        didSet {
+            searchController.isActive = true
+            searchController.searchBar.becomeFirstResponder()
+        }
+    }
     
     // True to show user favorites, false to show all abbreviations
     var isShowingFavorites: Bool = false {
@@ -103,6 +110,15 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
             self.showEditButton(false)
         }
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        print("view did appear")
+        if (focusSearchBar) {
+            print("focusSearchBar so setting searchController to active")
+            self.searchController.isActive = true
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -131,6 +147,7 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
             searchBar.delegate = self
             self.tableView.tableHeaderView = searchBar
             searchController.searchResultsUpdater = self
+            searchController.delegate = self
             searchBar.searchBarStyle = .default
             searchController.dimsBackgroundDuringPresentation = false
             
@@ -177,6 +194,14 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
         }
         
         return abbreviation;
+    }
+    
+    func didPresentSearchController(_ searchController: UISearchController) {
+        print("did present searchController")
+        if (focusSearchBar) {
+            searchController.searchBar.becomeFirstResponder()
+            focusSearchBar = false
+        }
     }
     
     // MARK: UI Stuff
@@ -243,6 +268,7 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetail" {
+            print("showDetail segue")
             let abbreviation = sender as! Abbreviation
             let controller = (segue.destination as! UINavigationController).topViewController as! DetailViewController
             controller.detailItem = abbreviation

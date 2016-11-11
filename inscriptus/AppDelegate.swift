@@ -17,6 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
     // MARK:  - Types
     
     enum ShortcutIdentifier: String {
+        case opensearch
         case openfavorites
         case openrecentlyviewed
         
@@ -146,6 +147,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         
         guard let shortcutType = shortcutItem.type as String? else { return false }
         
+        let visibleViewController = getVisibleViewController()
+        
         switch (shortcutType) {
         case ShortcutIdentifier.openfavorites.type:
             if let masterVC = navigateToMasterViewController() {
@@ -156,10 +159,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
                 print("Could not navigate to master view controller while attempting to handle shortcut \(shortcutType)")
             }
             break
+        case ShortcutIdentifier.opensearch.type:
+            if let masterVC = navigateToMasterViewController() {
+                masterVC.isShowingFavorites = false
+                masterVC.focusSearchBar = true
+                handled = true
+            } else {
+                handled = false
+                print("Could not navigate to master view controller while attempting to handle shortcut \(shortcutType)")
+            }
         case ShortcutIdentifier.openrecentlyviewed.type:
             let index = shortcutItem.userInfo!["recentlyViewedIndex"] as! Int
-            if let masterVC = navigateToMasterViewController() {
-                masterVC.performSegue(withIdentifier: "showDetail", sender: AbbreviationCollection.sharedAbbreviationCollection.getRecentlyViewedIndex(index: index))
+            let abbreviation = AbbreviationCollection.sharedAbbreviationCollection.getRecentlyViewedIndex(index: index)
+            
+            // If already showing detail view, just replace detail item. Otherwise pop to master and perform segue
+            if let topViewController = visibleViewController as? DetailViewController {
+                topViewController.detailItem = abbreviation
+            } else if let masterVC = navigateToMasterViewController() {
+                masterVC.performSegue(withIdentifier: "showDetail", sender: abbreviation)
                 handled = true
             } else {
                 print("Could not navigate to master view controller while attempting to handle shortcut \(shortcutType)")
@@ -173,6 +190,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         return handled;
     }
     
+    // TODO: not sure what happens if you're in the unsearchables view
     // Navigates to and returns the MasterViewController
     private func navigateToMasterViewController() -> MasterViewController? {
         let splitViewController = self.window!.rootViewController as! UISplitViewController
@@ -185,20 +203,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
             return masterViewController;
         }
             
-        // otherwise the navigation controller's top item will be another nav controller, the detail nav controller.
-        // i.e.: - SplitViewController
-        //           - Master NavController
-        //              - Detail NavController (top)
-        //                  - DetailViewController
-        //              - MasterViewController (bottom)
-        // So we need to pop the Master NavController to get to MasterViewController. No idea how this works on iPad.
-        else if let detailNavController = masterNavController.topViewController as? UINavigationController,
-            let _ = detailNavController.topViewController as? DetailViewController {
+        // Otherwise, pop to it
+        else {
             let masterViewController = masterNavController.viewControllers.first as! MasterViewController
             masterNavController.popToRootViewController(animated: false)
             return masterViewController;
         }
-        return nil;
+    }
+    
+    private func getVisibleViewController() -> UIViewController {
+        let splitViewController = self.window!.rootViewController as! UISplitViewController
+        
+        let masterNavController = splitViewController.viewControllers.first! as! UINavigationController
+        
+        if let detailNavController = masterNavController.topViewController as? UINavigationController {
+            return detailNavController.topViewController!
+        } else {
+            return masterNavController.topViewController!
+        }
     }
 }
 
