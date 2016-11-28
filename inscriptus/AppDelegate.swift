@@ -200,11 +200,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         
         // If the master view controller is the active visible controller
         if let masterViewController = masterNavController.topViewController as? MasterViewController {
+            masterViewController.dismiss(animated: false, completion: nil)
             return masterViewController;
         }
             
         // Otherwise, pop to it
         else {
+            masterNavController.topViewController?.dismiss(animated: false, completion: nil)
             let masterViewController = masterNavController.viewControllers.first as! MasterViewController
             masterNavController.popToRootViewController(animated: false)
             return masterViewController;

@@ -378,6 +378,7 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
     }
     
     //MARK: - UIViewControllerTransitioningDelegate
+    
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         let frame = self.longTextLabel!.frame
         let rect = CGRect(x: frame.origin.x, y: frame.origin.y - 8, width: frame.width, height: frame.height + 23)
@@ -386,6 +387,7 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
     }
     
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        print("animationController:forDismissed")
         let animator = foldOutAnimator(presenting: false, foldOutBelowRect: self.longTextLabel.frame)
         return animator
     }
@@ -393,9 +395,15 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
     //MARK: - DefinitionViewControllerDelegate
     
     func didDismissDefinitionViewController(_ viewController: DefinitionViewController) {
+        print("did dismiss definitoin view controller")
         if !ApplicationState.sharedApplicationState().holdCoachHidden {
             self.showHoldCoach(true, delay: 0)
         }
         self.defineButton.isHidden = false
+        
+        let statusBarBackground = UIView(frame: CGRect(x: 0, y: -20, width: view.frame.width, height: 20))
+        statusBarBackground.transform = CGAffineTransform(translationX: 0, y: 0)
+        statusBarBackground.alpha = 0
+        view.transform = CGAffineTransform(translationX: 0, y: 0)
     }
 }

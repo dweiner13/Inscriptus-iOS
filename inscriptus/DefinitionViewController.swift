@@ -106,20 +106,23 @@ class DefinitionViewController: UIViewController, UIGestureRecognizerDelegate {
         if let PC = self.popoverController {
             PC.contentSize = CGSize(width: 400.0, height: self.tableView.rect(forSection: 0).size.height)
         }
+        super.viewDidAppear(animated)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        print("view will disappear")
+        if let delegate = self.delegate {
+            delegate.didDismissDefinitionViewController(self)
+        }
+        super.viewWillDisappear(animated)
     }
     
     @IBAction func doneButtonPressed(_ sender: UIBarButtonItem) {
         self.presentingViewController?.dismiss(animated: true, completion: nil)
-        if let delegate = self.delegate {
-            delegate.didDismissDefinitionViewController(self)
-        }
     }
     
     func tappedOutsideModal(_ sender: AnyObject?) {
         self.presentingViewController?.dismiss(animated: true, completion: nil)
-        if let delegate = self.delegate {
-            delegate.didDismissDefinitionViewController(self)
-        }
     }
 }
 
