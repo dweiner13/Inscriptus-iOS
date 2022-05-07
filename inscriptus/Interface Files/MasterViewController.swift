@@ -48,12 +48,17 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
             if let savedOffset = self.savedScrollOffset {
                 self.tableView.contentOffset = savedOffset
             }
+
+            if #available(iOS 15.0, *) {
+                showFavoritesButton.isSelected = isShowingFavorites
+            }
+            showFavoritesButton.image = isShowingFavorites ? UIImage(systemName: "star.fill") : UIImage(systemName: "star")
             
             self.savedScrollOffset = scrollOffset
             
             if self.isShowingFavorites {
-                self.showFavoritesButton.setBackgroundImage(UIImage(named: "bookmarks-bg.png"), for: UIControl.State(), barMetrics: UIBarMetrics.default)
-                self.showFavoritesButton.tintColor = UIColor.white
+//                self.showFavoritesButton.setBackgroundImage(UIImage(named: "bookmarks-bg.png"), for: UIControl.State(), barMetrics: UIBarMetrics.default)
+//                self.showFavoritesButton.tintColor = UIColor.white
                 self.navigationItem.title = "Favorites"
                 self.navigationItem.backBarButtonItem!.title = "Favorites"
                 self.searchController.searchBar.placeholder = "Search favorites"
@@ -67,8 +72,8 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
                 }
             }
             else {
-                self.showFavoritesButton.setBackgroundImage(nil, for: UIControl.State(), barMetrics: UIBarMetrics.default)
-                self.showFavoritesButton.tintColor = INSCRIPTUS_TINT_COLOR
+//                self.showFavoritesButton.setBackgroundImage(nil, for: UIControl.State(), barMetrics: UIBarMetrics.default)
+//                self.showFavoritesButton.tintColor = INSCRIPTUS_TINT_COLOR
                 self.navigationItem.title = "All Abbreviations"
                 self.navigationItem.backBarButtonItem!.title = "All"
                 self.searchController.searchBar.placeholder = "Search all"
@@ -93,7 +98,10 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
             self.clearsSelectionOnViewWillAppear = false
             self.preferredContentSize = CGSize(width: 320.0, height: 600.0)
         }
-        self.showFavoritesButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.bookmarks, target: self, action: #selector(MasterViewController.didPressBookmarksButton(_:)))
+        self.showFavoritesButton = UIBarButtonItem(image: UIImage(systemName: "star"),
+                                                   style: .plain,
+                                                   target: self,
+                                                   action: #selector(didPressBookmarksButton(_:)))
         self.navigationItem.rightBarButtonItem = self.showFavoritesButton
         self.aboutButton = UIBarButtonItem(title: "About", style: UIBarButtonItem.Style.plain, target: self, action: #selector(MasterViewController.tappedAboutButton(_:)))
         self.navigationItem.leftBarButtonItem = self.aboutButton

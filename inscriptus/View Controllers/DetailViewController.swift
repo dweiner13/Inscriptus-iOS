@@ -381,7 +381,10 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
     
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         let frame = self.longTextLabel!.frame
-        let rect = CGRect(x: frame.origin.x, y: frame.origin.y - 8, width: frame.width, height: frame.height + 23)
+        let rect = CGRect(x: frame.origin.x,
+                          y: frame.origin.y - 8,
+                          width: frame.width,
+                          height: frame.height + 23)
         let animator = foldOutAnimator(presenting: true, foldOutBelowRect: rect)
         return animator
     }

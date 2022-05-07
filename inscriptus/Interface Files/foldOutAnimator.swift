@@ -27,7 +27,7 @@ class foldOutAnimator: NSObject, UIViewControllerAnimatedTransitioning {
         let presented: UIViewController = self.presenting ? transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to)! : transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from)!
         
         // Extra margin above the presented view
-        let topMargin: CGFloat = 20
+        let topMargin: CGFloat = 20 + presenting.view.safeAreaInsets.top
         
         let viewFrame = presenting.view.frame
         let viewWidth = viewFrame.width
