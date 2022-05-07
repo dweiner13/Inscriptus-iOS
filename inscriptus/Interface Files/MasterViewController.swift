@@ -57,8 +57,6 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
             self.savedScrollOffset = scrollOffset
             
             if self.isShowingFavorites {
-//                self.showFavoritesButton.setBackgroundImage(UIImage(named: "bookmarks-bg.png"), for: UIControl.State(), barMetrics: UIBarMetrics.default)
-//                self.showFavoritesButton.tintColor = UIColor.white
                 self.navigationItem.title = "Favorites"
                 self.navigationItem.backBarButtonItem!.title = "Favorites"
                 self.searchController.searchBar.placeholder = "Search favorites"
@@ -72,8 +70,6 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
                 }
             }
             else {
-//                self.showFavoritesButton.setBackgroundImage(nil, for: UIControl.State(), barMetrics: UIBarMetrics.default)
-//                self.showFavoritesButton.tintColor = INSCRIPTUS_TINT_COLOR
                 self.navigationItem.title = "All Abbreviations"
                 self.navigationItem.backBarButtonItem!.title = "All"
                 self.searchController.searchBar.placeholder = "Search all"
@@ -153,11 +149,11 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
             searchBar.scopeButtonTitles = ["Abbreviation", "Full text"]
             searchBar.sizeToFit()
             searchBar.delegate = self
-            self.tableView.tableHeaderView = searchBar
             searchController.searchResultsUpdater = self
             searchController.delegate = self
             searchBar.searchBarStyle = .default
-            searchController.dimsBackgroundDuringPresentation = false
+
+            navigationItem.searchController = searchController
             
             searchBar.selectedScopeButtonIndex = ApplicationState.sharedApplicationState().scopeIndex
         }
@@ -229,13 +225,11 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
             self.tableView.backgroundView = defaultView
             self.tableView.separatorStyle = .none
             self.navigationItem.leftBarButtonItem = nil
-            self.tableView.tableHeaderView = nil
         }
         else {
             self.defaultView?.removeFromSuperview()
             self.tableView.separatorStyle = .singleLine
             self.tableView.backgroundView = nil
-            self.tableView.tableHeaderView = self.searchController.searchBar
         }
     }
     
