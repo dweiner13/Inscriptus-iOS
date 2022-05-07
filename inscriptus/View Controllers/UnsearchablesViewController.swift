@@ -66,7 +66,7 @@ class UnsearchablesViewController: UITableViewController, UISearchBarDelegate, U
     // Handle scroll bar insets when search bar is active
     func keyboardDidShow(_ sender: Notification) {
         let dict: NSDictionary = sender.userInfo! as NSDictionary
-        let height: CGFloat = (dict.object(forKey: UIKeyboardFrameEndUserInfoKey)! as AnyObject).cgRectValue.height
+        let height: CGFloat = (dict.object(forKey: UIResponder.keyboardFrameEndUserInfoKey)! as AnyObject).cgRectValue.height
         
         var insets = self.tableView.scrollIndicatorInsets
         self.tableView.scrollIndicatorInsets = UIEdgeInsets(top: insets.top, left: insets.left, bottom: height, right: insets.right)
@@ -88,7 +88,7 @@ class UnsearchablesViewController: UITableViewController, UISearchBarDelegate, U
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            if !self.searchController!.isActive || self.searchController!.searchBar.text!.characters.count == 0 {
+            if !self.searchController!.isActive || self.searchController!.searchBar.text!.count == 0 {
                 return self.abbreviations.specialAbbreviations.count
             }
             else {
@@ -111,7 +111,7 @@ class UnsearchablesViewController: UITableViewController, UISearchBarDelegate, U
     }
     
     func getAbbreviation(indexPath: IndexPath) -> Abbreviation {
-        if self.searchController!.isActive && self.searchController!.searchBar.text!.characters.count != 0 {
+        if self.searchController!.isActive && self.searchController!.searchBar.text!.count != 0 {
             return self.filteredAbbreviations[indexPath.row]
         }
         else {

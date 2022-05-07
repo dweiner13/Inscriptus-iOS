@@ -112,7 +112,7 @@ class WhitakerScraper: NSObject {
     }
     
     class func findPartOfSpeech(forDefinition definition: String) -> PartOfSpeech {
-        if definition.characters.count <= 26 {
+        if definition.count <= 26 {
             return PartOfSpeech.unknown
         }
         
@@ -241,7 +241,7 @@ extension WhitakerScraper: NSURLConnectionDataDelegate {
     }
     
     func connectionDidFinishLoading(_ connection: NSURLConnection) {
-        let resultParser = TFHpple(htmlData: self.receivedData! as Data!)
+        let resultParser = TFHpple(htmlData: self.receivedData! as Data)
         let resultXpathQueryString = "//pre"
         let resultNodes = resultParser?.search(withXPathQuery: resultXpathQueryString)
         let resultElement: TFHppleElement = resultNodes!.first! as! TFHppleElement

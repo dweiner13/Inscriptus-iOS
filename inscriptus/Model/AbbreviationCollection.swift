@@ -98,7 +98,9 @@ class AbbreviationCollection: NSObject {
             if let searchStrs = abb.searchStrings {
                 for searchString in searchStrs {
                     // Section title should be "#" if abb begins with a number or symbol
-                    let char = CharacterSet.letters.contains(UnicodeScalar(searchString[0..<1].utf16[String.UTF16View.Index(_offset: 0)])!) ? searchString[0..<1] : "#"
+                    let char = searchString[searchString.startIndex].isLetter
+                        ? String(searchString.prefix(1))
+                        : "#"
                     if self.abbreviationsGroupedByFirstLetter[char] != nil {
                         self.abbreviationsGroupedByFirstLetter[char]!.append(abb)
                     }
@@ -345,16 +347,17 @@ class AbbreviationCollection: NSObject {
                 } else {
                     shortcutTitle = abbreviation.longText
                 }
-                newShortcutItems.append(UIMutableApplicationShortcutItem(
+                let item = UIMutableApplicationShortcutItem(
                     type: shortcutType,
                     localizedTitle: shortcutTitle,
                     localizedSubtitle: "Recently viewed",
                     icon: UIApplicationShortcutIcon(type: .time),
                     userInfo: [
-                        "version": Bundle.main.infoDictionary!["CFBundleShortVersionString"]!,
-                        "recentlyViewedIndex": i
+                        "version": Bundle.main.infoDictionary!["CFBundleShortVersionString"]! as! String as NSSecureCoding,
+                        "recentlyViewedIndex": i as NSSecureCoding
                     ]
-                ))
+                )
+                newShortcutItems.append(item)
             }
             print("updating shortcutItems with \(newShortcutItems)")
             UIApplication.shared.shortcutItems = newShortcutItems;

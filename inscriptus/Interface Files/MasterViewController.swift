@@ -52,7 +52,7 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
             self.savedScrollOffset = scrollOffset
             
             if self.isShowingFavorites {
-                self.showFavoritesButton.setBackgroundImage(UIImage(named: "bookmarks-bg.png"), for: UIControlState(), barMetrics: UIBarMetrics.default)
+                self.showFavoritesButton.setBackgroundImage(UIImage(named: "bookmarks-bg.png"), for: UIControl.State(), barMetrics: UIBarMetrics.default)
                 self.showFavoritesButton.tintColor = UIColor.white
                 self.navigationItem.title = "Favorites"
                 self.navigationItem.backBarButtonItem!.title = "Favorites"
@@ -67,7 +67,7 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
                 }
             }
             else {
-                self.showFavoritesButton.setBackgroundImage(nil, for: UIControlState(), barMetrics: UIBarMetrics.default)
+                self.showFavoritesButton.setBackgroundImage(nil, for: UIControl.State(), barMetrics: UIBarMetrics.default)
                 self.showFavoritesButton.tintColor = INSCRIPTUS_TINT_COLOR
                 self.navigationItem.title = "All Abbreviations"
                 self.navigationItem.backBarButtonItem!.title = "All"
@@ -93,9 +93,9 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
             self.clearsSelectionOnViewWillAppear = false
             self.preferredContentSize = CGSize(width: 320.0, height: 600.0)
         }
-        self.showFavoritesButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.bookmarks, target: self, action: #selector(MasterViewController.didPressBookmarksButton(_:)))
+        self.showFavoritesButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.bookmarks, target: self, action: #selector(MasterViewController.didPressBookmarksButton(_:)))
         self.navigationItem.rightBarButtonItem = self.showFavoritesButton
-        self.aboutButton = UIBarButtonItem(title: "About", style: UIBarButtonItemStyle.plain, target: self, action: #selector(MasterViewController.tappedAboutButton(_:)))
+        self.aboutButton = UIBarButtonItem(title: "About", style: UIBarButtonItem.Style.plain, target: self, action: #selector(MasterViewController.tappedAboutButton(_:)))
         self.navigationItem.leftBarButtonItem = self.aboutButton
     }
     
@@ -134,8 +134,8 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
         
         self.tableView.register(UINib(nibName: "AbbreviationCell", bundle: nil), forCellReuseIdentifier: "AbbreviationCell")
         
-        NotificationCenter.default.addObserver(self, selector: #selector(MasterViewController.keyboardDidShow(_:)), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(MasterViewController.keyboardDidHide(_:)), name: NSNotification.Name.UIKeyboardDidHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(MasterViewController.keyboardDidShow(_:)), name: UIResponder.keyboardDidShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(MasterViewController.keyboardDidHide(_:)), name: UIResponder.keyboardDidHideNotification, object: nil)
         
         // Set up search controller
         self.searchController = UISearchController(searchResultsController: nil)
@@ -157,9 +157,9 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
         registerForPreviewing(with: self, sourceView: view)
     }
     
-    func keyboardDidShow(_ sender: Notification) {
+    @objc func keyboardDidShow(_ sender: Notification) {
         let dict: NSDictionary = sender.userInfo! as NSDictionary
-        let height: CGFloat = (dict.object(forKey: UIKeyboardFrameEndUserInfoKey)! as AnyObject).cgRectValue.height
+        let height: CGFloat = (dict.object(forKey: UIResponder.keyboardFrameEndUserInfoKey)! as AnyObject).cgRectValue.height
         
         var insets = self.tableView.scrollIndicatorInsets
         self.tableView.scrollIndicatorInsets = UIEdgeInsets(top: insets.top, left: insets.left, bottom: height, right: insets.right)
@@ -167,7 +167,7 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
         self.tableView.contentInset = UIEdgeInsets(top: insets.top, left: insets.left, bottom: height, right: insets.right)
     }
     
-    func keyboardDidHide(_ sender: Notification) {
+    @objc func keyboardDidHide(_ sender: Notification) {
         var insets = self.tableView.scrollIndicatorInsets
         self.tableView.scrollIndicatorInsets = UIEdgeInsets(top: insets.top, left: insets.left, bottom: 0, right: insets.right)
         insets = self.tableView.contentInset
@@ -205,7 +205,8 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
     }
     
     // MARK: UI Stuff
-    
+
+    @objc
     func tappedAboutButton(_ sender: AnyObject) {
         let aboutViewController = ModalWebViewController(htmlFileName: "about", title: "About Inscriptus", modalPresentationStyle: UIModalPresentationStyle.formSheet);
         
@@ -238,12 +239,13 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
             self.navigationItem.leftBarButtonItem = self.aboutButton
         }
     }
-    
+
+    @objc
     func didPressBookmarksButton(_ sender: UIBarButtonItem) {
         self.isShowingFavorites = !self.isShowingFavorites
     }
     
-    func didPressEditButton(_ sender: UIBarButtonItem) {
+    @objc func didPressEditButton(_ sender: UIBarButtonItem) {
         if self.isShowingFavorites {
             if self.tableView.isEditing {
                 self.tableView.setEditing(false, animated: true)
@@ -260,7 +262,7 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
     
     var inSearchView: Bool {
         get {
-            return self.searchController!.isActive && self.searchController!.searchBar.text!.characters.count != 0
+            return self.searchController!.isActive && self.searchController!.searchBar.text!.count != 0
         }
     }
 
@@ -381,10 +383,10 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
         return false
     }
     
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if self.isShowingFavorites && editingStyle == UITableViewCellEditingStyle.delete {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if self.isShowingFavorites && editingStyle == UITableViewCell.EditingStyle.delete {
             self.abbreviations.removeFavorite(self.abbreviations.favorites[indexPath.row] as! Abbreviation)
-            self.tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
+            self.tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
             if self.abbreviations.noFavorites {
                 showDefaultView(true)
                 self.navigationItem.rightBarButtonItem = self.showFavoritesButton

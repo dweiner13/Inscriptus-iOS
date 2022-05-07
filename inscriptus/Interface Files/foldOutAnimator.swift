@@ -56,7 +56,7 @@ class foldOutAnimator: NSObject, UIViewControllerAnimatedTransitioning {
             tapView.backgroundColor = UIColor.clear
             tapView.addGestureRecognizer(UITapGestureRecognizer(target: presented, action: "tappedOutsideModal:"))
             let swipeRec = UISwipeGestureRecognizer(target: presented, action: "tappedOutsideModal:")
-            swipeRec.direction = UISwipeGestureRecognizerDirection.down
+            swipeRec.direction = UISwipeGestureRecognizer.Direction.down
             tapView.addGestureRecognizer(swipeRec)
             
             transitionContext.containerView.addSubview(tapView)

@@ -161,22 +161,22 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
             if let displayText = self.detailItem.displayText {
                 self.imageView.isHidden = true
                 self.abbreviationLabel.text = displayText.replacingOccurrences(of: "·", with: "")
-                self.abbreviationLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyle.body.rawValue, scaleFactor: 1.9)
+                self.abbreviationLabel.font = UIFont.preferredFontForTextStyle(UIFont.TextStyle.body.rawValue, scaleFactor: 1.9)
             }
             else if let displayImage = self.detailItem.displayImage {
                 self.abbreviationLabel.isHidden = true
                 self.imageView.image = UIImage(contentsOfFile: Bundle.main.path(forResource: displayImage, ofType: ".png")!)!
-                self.imageView.contentMode = UIViewContentMode.scaleAspectFit
+                self.imageView.contentMode = UIView.ContentMode.scaleAspectFit
             }
             self.longTextLabel.text = self.detailItem.longText
-            self.longTextLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyle.body.rawValue, scaleFactor: 1.2)
+            self.longTextLabel.font = UIFont.preferredFontForTextStyle(UIFont.TextStyle.body.rawValue, scaleFactor: 1.2)
             if AbbreviationCollection.sharedAbbreviationCollection.favorites.contains(self.detailItem) {
-                self.favoriteButton.setTitle("Remove from favorites", for: UIControlState())
+                self.favoriteButton.setTitle("Remove from favorites", for: UIControl.State())
                 self.favoriteButton.tintColor = UIColor.white
                 self.favoriteButtonBackgroundView.backgroundColor = INSCRIPTUS_TINT_COLOR
             }
             else {
-                self.favoriteButton.setTitle("Add to favorites", for: UIControlState())
+                self.favoriteButton.setTitle("Add to favorites", for: UIControl.State())
                 self.favoriteButtonBackgroundView.backgroundColor = UIColor.clear
             }
             self.favoriteButtonBackgroundView.layer.cornerRadius = 7
@@ -224,7 +224,7 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
     @IBAction func tappedFavoriteButton(_ sender: UIButton) {
         if AbbreviationCollection.sharedAbbreviationCollection.favorites.contains(self.detailItem) {
             AbbreviationCollection.sharedAbbreviationCollection.removeFavorite(self.detailItem)
-            self.favoriteButton.setTitle("Add back to favorites", for: UIControlState())
+            self.favoriteButton.setTitle("Add back to favorites", for: UIControl.State())
             self.favoriteButton.tintColor = INSCRIPTUS_TINT_COLOR
             UIView.animate(withDuration: 0.2, animations: {
                 () -> Void in
@@ -238,7 +238,7 @@ class DetailViewController: UIViewController, WhitakerScraperDelegate, UIViewCon
         }
         else {
             AbbreviationCollection.sharedAbbreviationCollection.addFavorite(self.detailItem)
-            self.favoriteButton.setTitle("Remove from favorites", for: UIControlState())
+            self.favoriteButton.setTitle("Remove from favorites", for: UIControl.State())
             self.favoriteButton.tintColor = UIColor.white
             self.favoriteButtonBackgroundView.backgroundColor = INSCRIPTUS_TINT_COLOR
             UIView.animate(withDuration: 0.05, animations: {

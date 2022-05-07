@@ -32,7 +32,7 @@ class DefinitionViewController: UIViewController, UIGestureRecognizerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.tableView.rowHeight = UITableViewAutomaticDimension;
+        self.tableView.rowHeight = UITableView.automaticDimension;
         self.tableView.estimatedRowHeight = 130.0; // set to whatever your "average" cell height is
         
         if self.result != nil {
@@ -75,7 +75,7 @@ class DefinitionViewController: UIViewController, UIGestureRecognizerDelegate {
     func keyboardDidShow(_ notification: Notification) {
         // Adjust table view content insets to compensate for keyboard
         if let dict: NSDictionary = notification.userInfo as NSDictionary? {
-            let s: NSValue = dict.value(forKey: UIKeyboardFrameEndUserInfoKey) as! NSValue;
+            let s: NSValue = dict.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as! NSValue;
             let rect: CGRect = s.cgRectValue
             
             self.tableView.contentInset          = UIEdgeInsets(top: 0, left: 0, bottom: rect.height + 12, right: 0)
@@ -85,13 +85,13 @@ class DefinitionViewController: UIViewController, UIGestureRecognizerDelegate {
     
     func keyboardWillHide(_ notification: Notification) {
         if let dict: NSDictionary = notification.userInfo as NSDictionary? {
-            let s: NSValue = dict.value(forKey: UIKeyboardAnimationDurationUserInfoKey) as! NSValue;
+            let s: NSValue = dict.value(forKey: UIResponder.keyboardAnimationDurationUserInfoKey) as! NSValue;
             let duration: NSNumber = s as! NSNumber
             
             
-            UIView.animate(withDuration: duration as TimeInterval,
+            UIView.animate(withDuration: duration as! TimeInterval,
                 delay: 0.0,
-                options: UIViewAnimationOptions.curveEaseIn,
+                options: UIView.AnimationOptions.curveEaseIn,
                 animations: {
                     self.tableView.contentInset          = UIEdgeInsets(top: 0, left: 0, bottom: 12, right:0);
                     self.tableView.scrollIndicatorInsets = UIEdgeInsets.zero
