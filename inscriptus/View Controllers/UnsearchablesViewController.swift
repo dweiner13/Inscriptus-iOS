@@ -35,10 +35,12 @@ class UnsearchablesViewController: UITableViewController, UISearchBarDelegate, U
             searchBar.scopeButtonTitles = ["Abbreviation", "Full text"]
             searchBar.sizeToFit()
             searchBar.delegate = self
-            self.tableView.tableHeaderView = searchBar
+            navigationItem.searchController = searchController
             searchController.searchResultsUpdater = self
             searchBar.searchBarStyle = .default
             searchController.dimsBackgroundDuringPresentation = false
+
+            navigationItem.hidesSearchBarWhenScrolling = false
             
             searchBar.selectedScopeButtonIndex = ApplicationState.sharedApplicationState().scopeIndex
         }

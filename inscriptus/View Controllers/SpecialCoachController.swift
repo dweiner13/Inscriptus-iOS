@@ -28,7 +28,8 @@ class SpecialCoachController: UIViewController {
         
         ApplicationState.sharedApplicationState().specialCoachHidden = true
     }
-    
+
+    @objc
     func tappedOutsideModal(_ sender: AnyObject) {
         self.presentingViewController?.dismiss(animated: true, completion: nil)
         

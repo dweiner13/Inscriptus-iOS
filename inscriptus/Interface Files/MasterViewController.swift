@@ -153,6 +153,8 @@ class MasterViewController: UITableViewController, UISearchBarDelegate, UISearch
             searchController.delegate = self
             searchBar.searchBarStyle = .default
 
+            navigationItem.hidesSearchBarWhenScrolling = false
+
             navigationItem.searchController = searchController
             
             searchBar.selectedScopeButtonIndex = ApplicationState.sharedApplicationState().scopeIndex
